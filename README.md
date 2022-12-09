@@ -7,3 +7,5 @@ For help in getting started with additional project configuration, see [`getting
 We recommend that the developer(s) replace the heading and body of this file with the name and summary of their project.
 
 Introduction: You are now currently enrolled as a student of TLG Learning facility. You will be greeted by Jeanette in the lobby to get you into the building. You will have to go through different levels of coding class in order to graduate from the program. Get ready to learn and soak up your mind to become a real software engineer!
+
+We'll add script later today!
