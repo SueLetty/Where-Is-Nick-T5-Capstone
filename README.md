@@ -8,8 +8,9 @@ We recommend that the developer(s) replace the heading and body of this file wit
 
 Introduction: You are now currently enrolled as a student of TLG Learning facility. You will be greeted by Jeanette in the lobby to get you into the building. You will have to go through different levels of coding class in order to graduate from the program. Get ready to learn and soak up your mind to become a real software engineer!
 
-<<<<<<< HEAD
+
 We'll add script later today!
-=======
 Edit from James.
->>>>>>> a714f696f436b1705ec5da40f4160d1603b25742
+Edit from Suchit Khadge.
+
+
