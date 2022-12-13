@@ -53,7 +53,7 @@ public class Game {
     return userInput;
   }
 
-
+  //Display game introduction/ scenario
   public void introduction(){
     System.out.println("Introduction: You are now currently enrolled as a student of TLG Learning facility.\n"
         + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
