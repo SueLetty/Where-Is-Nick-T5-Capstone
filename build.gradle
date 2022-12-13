@@ -1,6 +1,7 @@
 /*
  * Copyright 2022 Nicholas Bennett. See LICENSE for software license terms.
  */
+
 plugins {
     id 'application'
 }
@@ -14,6 +15,8 @@ java {
 application {
     mainClass = 'com.game.whereisnick'
 }
+group 'com.game.whereisnick'
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
