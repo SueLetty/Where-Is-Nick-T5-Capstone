@@ -1,6 +1,14 @@
 package com.game.whereisnick.view;
 
+import com.game.whereisnick.model.Direction;
+import com.game.whereisnick.model.School;
+import com.game.whereisnick.model.Student;
+
 public class Game {
+  private Student student;
+  private School school;
+
+
 
   public void showGameSplash(){
     System.out.println("  __      __.__                           .___          _______  .__        __     ._.\n"
