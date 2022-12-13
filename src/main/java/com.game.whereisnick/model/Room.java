@@ -5,16 +5,22 @@ import java.util.ArrayList;
 public class Room {
   private String name;
   private String description;
-  private ArrayList<Room> path;
+  private Room nRoom;
+  private Room sRoom;
+  private Room wRoom;
+  private Room eRoom;
   private Instructor instructor;
   private Item key;
   private Exam exam;
 
-  public Room(String name, String description,
-      ArrayList<Room> path) {
+  public Room(String name, String description, Room nRoom, Room sRoom,
+      Room wRoom, Room eRoom) {
     this.name = name;
     this.description = description;
-    this.path = path;
+    this.nRoom = nRoom;
+    this.sRoom = sRoom;
+    this.wRoom = wRoom;
+    this.eRoom = eRoom;
   }
 
   public String welcome(){
@@ -29,6 +35,29 @@ public class Room {
     return "On no. You got it wrong. But don't worry, I'll give you a second chance and try you best this time!";
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public Room getnRoom() {
+    return nRoom;
+  }
+
+  public Room getsRoom() {
+    return sRoom;
+  }
+
+  public Room getwRoom() {
+    return wRoom;
+  }
+
+  public Room geteRoom() {
+    return eRoom;
+  }
 
   public Instructor getInstructor() {
     return instructor;
