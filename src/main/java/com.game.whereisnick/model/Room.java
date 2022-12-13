@@ -13,14 +13,9 @@ public class Room {
   private Item key;
   private Exam exam;
 
-  public Room(String name, String description, Room nRoom, Room sRoom,
-      Room wRoom, Room eRoom) {
+  public Room(String name, String description) {
     this.name = name;
     this.description = description;
-    this.nRoom = nRoom;
-    this.sRoom = sRoom;
-    this.wRoom = wRoom;
-    this.eRoom = eRoom;
   }
 
   public String welcome(){
@@ -47,16 +42,32 @@ public class Room {
     return nRoom;
   }
 
+  public void setnRoom(Room nRoom) {
+    this.nRoom = nRoom;
+  }
+
   public Room getsRoom() {
     return sRoom;
+  }
+
+  public void setsRoom(Room sRoom) {
+    this.sRoom = sRoom;
   }
 
   public Room getwRoom() {
     return wRoom;
   }
 
+  public void setwRoom(Room wRoom) {
+    this.wRoom = wRoom;
+  }
+
   public Room geteRoom() {
     return eRoom;
+  }
+
+  public void seteRoom(Room eRoom) {
+    this.eRoom = eRoom;
   }
 
   public Instructor getInstructor() {
