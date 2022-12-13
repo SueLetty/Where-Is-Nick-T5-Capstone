@@ -1,23 +1,22 @@
 package com.game.whereisnick.view;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.Scanner;
 import java.util.Arrays;
 
 public class Game {
-  Scanner inputScan;
-  String quitSynonymns[] = {"no", "n", "quit"};
+  BufferedReader inputBuffer;
+  String quitSynonymns[] = {"no", "n", "quit", "q"};
   String yesSynonymns[] = {"yes", "y", "play"};
 
-  public Game() {
-    run();
-  }
-
-
-
-  public void run() {
+  //Game constructor
+  public Game() throws IOException {
     showGameSplash();
     askToBeginGame();
+
   }
 
   // Shows the splash screen during start of the game.
@@ -31,14 +30,14 @@ public class Game {
     );
 
   }
-
-  private void askToBeginGame() {
+  // Ask whether the user wants to continue or quit the game. Options are "Yes/y/play and No/n/quit/q"
+  private void askToBeginGame() throws IOException {
     System.out.println("\n\n******Press Yes/y OR No/n to continue!************************");
-    inputScan = new Scanner(System.in);
-    String userInput = inputScan.next().toLowerCase();
+    String userInput = getUserChoice();
     if (Arrays.asList(yesSynonymns).contains(userInput)){
     clearScreen();
     System.out.println("Starting Game............");
+    introduction();
     }else if (Arrays.asList(quitSynonymns).contains(userInput)){
       System.out.println("Quitting game..........");
     }else {
@@ -46,7 +45,23 @@ public class Game {
       askToBeginGame();
     }
   }
+  //Get user choice and return whether user wants to play or not
+  private String getUserChoice() throws IOException {
+    inputBuffer = new BufferedReader (new InputStreamReader (System.in));
+    String inputScan = inputBuffer.readLine();
+    String userInput = inputScan.toString().toLowerCase();
+    return userInput;
+  }
 
+
+  public void introduction(){
+    System.out.println("Introduction: You are now currently enrolled as a student of TLG Learning facility.\n"
+        + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
+        + " Upon completion of orientation, you'll now be navigate through different levels of coding classes in order to graduate\n"
+        + " from the program. Get ready to learn and soak up your mind to become a real software engineer! ");
+  }
+
+  //Clear the screen before displaying it in console
   public static void clearScreen(){
     //Clears Screen in java
     try {
