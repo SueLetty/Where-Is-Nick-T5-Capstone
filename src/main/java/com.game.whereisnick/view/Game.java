@@ -10,6 +10,9 @@ import java.util.Arrays;
 
 public class Game {
 
+ String userInput = "";
+
+
   BufferedReader inputBuffer;
   String quitSynonymns[] = {"no", "n", "quit", "q"};
   String yesSynonymns[] = {"yes", "y", "play"};
@@ -69,14 +72,16 @@ public class Game {
   }
 
   // create command list method
-  public void commandList() {
+  public void commandList() throws IOException {
 // create local variables
     String[] commands = {"North, East, South, West"};
-    String userInput = "";
     String text = "help";
+    System.out.println("type help if you need further instructions: ");
 
-    if (userInput == text) {
-      System.out.println(commands);
+    userInput = getUserChoice();
+
+    if (userInput.equals(text)) {
+      System.out.println(Arrays.toString(commands));
     }
 
     //Clear the screen before displaying it in console
