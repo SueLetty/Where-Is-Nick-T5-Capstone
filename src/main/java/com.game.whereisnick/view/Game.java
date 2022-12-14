@@ -27,7 +27,7 @@ public class Game {
   public void setUpInstances() throws IOException {
     //    create instances
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    System.out.println("Enter your name: ");
+    System.out.println("\nEnter your name: ");
     String name = reader.readLine();
     student = new Student(name, "student");
     TLGSchool = new School();
