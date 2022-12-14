@@ -26,8 +26,9 @@ public class Game {
   public Game() throws IOException {
     showGameSplash();
     askToBeginGame();
-    commandList();
     setUpInstances();
+    //greetings()
+    commandList();
     checkWhereCanGo();
     moveTo(Direction.NORTH);
     checkWhereCanGo();
@@ -135,7 +136,7 @@ public class Game {
     String userInput = getUserChoice();
     if (Arrays.asList(yesSynonymns).contains(userInput)) {
       //clearScreen();
-      System.out.println("Starting Game............");
+      System.out.println("Starting Game............\n");
       introduction();
     } else if (Arrays.asList(quitSynonymns).contains(userInput)) {
       System.out.println("Quitting game..........");
@@ -156,23 +157,25 @@ public class Game {
   //Display game introduction/ scenario
   public void introduction() {
     System.out.println(
-        "Introduction: You are now currently enrolled as a student of TLG Learning facility.\n"
+        "Introduction: You are now currently enrolled as a student of TLG Learning Facility.\n"
             + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
-            + " Upon completion of orientation, you'll now be navigate through different levels of coding classes in order to graduate\n"
-            + " from the program. Get ready to learn and soak up your mind to become a real software engineer! ");
+            + " Upon completion of your orientation, you'll now navigate your way through different levels of coding classes in order to graduate\n"
+            + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n");
   }
 
   // create command list method
   public void commandList() throws IOException {
-// create local variables
-    String[] commands = {"North, East, South, West"};
     String text = "help";
-    System.out.println("type help if you need further instructions: ");
 
+    System.out.println("\n\ntype help if you need further instructions: ");
     userInput = getUserChoice();
 
     if (userInput.equals(text)) {
-      System.out.println(Arrays.toString(commands));
+      System.out.println("Please select from the following commands : \n");
+      System.out.println("You can type go/run/move to directions north/east/south/west\n"
+          + "to navigate through this game!\n\n"
+          + "Please type yes/no when being asked a question.\n\n"
+          + "You can type grab/receive/get to access your key/diploma.");
     }
 
     //Clear the screen before displaying it in console
