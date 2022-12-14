@@ -1,12 +1,76 @@
 package com.game.whereisnick.view;
 
 import com.game.whereisnick.model.Direction;
+import com.game.whereisnick.model.Room;
 import com.game.whereisnick.model.School;
 import com.game.whereisnick.model.Student;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Game {
   private Student student;
-  private School school;
+  private School TLGSchool;
+
+
+
+  public Game() {
+    showGameSplash();
+    introduction();
+    setUpInstances();
+    checkWhereCanGo();
+
+
+  }
+
+  public void setUpInstances(){
+    //    create instances
+    student = new Student("new Student", "first user");
+    TLGSchool = new School();
+    Room lobby = new Room("Lobby");
+    Room htmlRoom = new Room("HTML Room");
+    Room javaRoom = new Room("Java Room");
+    Room jsRoom = new Room("JavaScript Room");
+    Room pythonRoom = new Room("Python Room");
+    Room study = new Room("study Room");
+    lobby.setnRoom(htmlRoom);
+    htmlRoom.setnRoom(jsRoom);
+    htmlRoom.seteRoom(javaRoom);
+    jsRoom.seteRoom(pythonRoom);
+    pythonRoom.setwRoom(jsRoom);
+    pythonRoom.setsRoom(javaRoom);
+    pythonRoom.seteRoom(study);
+    study.setwRoom(pythonRoom);
+    javaRoom.setwRoom(htmlRoom);
+    javaRoom.setnRoom(pythonRoom);
+    student.setLocation(lobby);
+
+  }
+
+  private void checkWhereCanGo(){
+    Room currentLocation = student.getLocation();
+    ArrayList<String> exit = new ArrayList<>();
+
+    if(currentLocation.getnRoom()!=null){
+      exit.add(Direction.NORTH.toString());
+    }
+
+    if(currentLocation.getsRoom()!=null){
+      exit.add(Direction.SOUTH.toString());
+    }
+    if(currentLocation.getwRoom()!=null){
+      exit.add(Direction.WEST.toString());
+    }
+    if(currentLocation.geteRoom()!=null){
+      exit.add(Direction.EAST.toString());
+    }
+
+    System.out.println("=============================================");
+    System.out.println("Current Room: " + currentLocation.getName());
+    System.out.printf("Student can go %s from current location",exit);
+    System.out.println("\n=============================================");
+
+  }
+
 
 
 
@@ -22,8 +86,26 @@ public class Game {
 
 
 
+public void introduction(){
+  System.out.println("Introduction: You are now currently enrolled as a student of TLG Learning facility.\n"
+      + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
+      + " Upon completion of orientation, you'll now be navigate through different levels of coding classes in order to graduate\n"
+      + " from the program. Get ready to learn and soak up your mind to become a real software engineer! ");
+}
 
+  public Student getStudent() {
+    return student;
+  }
 
+  public void setStudent(Student student) {
+    this.student = student;
+  }
 
+  public School getSchool() {
+    return TLGSchool;
+  }
 
+  public void setSchool(School school) {
+    this.TLGSchool = school;
+  }
 }

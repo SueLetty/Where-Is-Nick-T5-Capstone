@@ -34,4 +34,6 @@ public class Student extends Character{
   public void setPoints(int points) {
     this.points = points;
   }
+
+
 }
