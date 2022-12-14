@@ -24,6 +24,11 @@ public class Game {
     askToBeginGame();
     setUpInstances();
     checkWhereCanGo();
+    moveTo(Direction.NORTH);
+    checkWhereCanGo();
+    moveTo(Direction.EAST);
+    checkWhereCanGo();
+    moveTo(Direction.EAST);
 
   }
 
@@ -78,6 +83,32 @@ public class Game {
     System.out.println("\n=============================================");
 
   }
+
+  private void moveTo(Direction dir){
+    Room currentLocation = student.getLocation();
+    Room exit = null;
+    if(dir==Direction.NORTH){
+      exit = currentLocation.getnRoom();
+    }
+    if(dir==Direction.SOUTH){
+      exit = currentLocation.getsRoom();
+    }
+    if(dir==Direction.WEST){
+      exit = currentLocation.getwRoom();
+    }
+    if(dir==Direction.EAST){
+      exit = currentLocation.geteRoom();
+    }
+
+    if(exit!=null){
+      student.setLocation(exit);
+    }else{
+      System.out.println("No exit! Choose another direction.");
+    }
+
+  }
+
+
 
 
 
