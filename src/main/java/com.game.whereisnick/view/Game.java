@@ -4,6 +4,9 @@ import com.game.whereisnick.model.Direction;
 import com.game.whereisnick.model.Room;
 import com.game.whereisnick.model.School;
 import com.game.whereisnick.model.Student;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -13,18 +16,20 @@ public class Game {
 
 
 
-  public Game() {
+  public Game() throws IOException {
     showGameSplash();
     introduction();
     setUpInstances();
     checkWhereCanGo();
 
-
   }
 
-  public void setUpInstances(){
+  public void setUpInstances() throws IOException {
     //    create instances
-    student = new Student("new Student", "first user");
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    System.out.println("Enter your name: ");
+    String name = reader.readLine();
+    student = new Student(name, "student");
     TLGSchool = new School();
     Room lobby = new Room("Lobby");
     Room htmlRoom = new Room("HTML Room");
@@ -64,9 +69,9 @@ public class Game {
       exit.add(Direction.EAST.toString());
     }
 
-    System.out.println("=============================================");
+    System.out.println("\n=============================================");
     System.out.println("Current Room: " + currentLocation.getName());
-    System.out.printf("Student can go %s from current location",exit);
+    System.out.printf("%s can go %s from current location.",student.getName(),exit);
     System.out.println("\n=============================================");
 
   }
