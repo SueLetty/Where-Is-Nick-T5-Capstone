@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 public class Game {
 
+
   String userInput = "";
   String lobbyGreeting = " I hope you had your coffee this morning,\n"
       + " because your going to have a very good, but long day,\n"
@@ -26,9 +27,12 @@ public class Game {
   private Instructor Jeanette;
 
 
+
+
+  private static BufferedReader inputBuffer;
+ String userInput = "";
   private Student student;
   private School TLGSchool;
-  BufferedReader inputBuffer;
   String quitSynonymns[] = {"no", "n", "quit", "q"};
   String yesSynonymns[] = {"yes", "y", "play"};
 
@@ -42,6 +46,7 @@ public class Game {
     checkWhereCanGo();
     moveTo(Direction.NORTH);
     checkWhereCanGo();
+    getMap();
     moveTo(Direction.EAST);
     checkWhereCanGo();
     moveTo(Direction.EAST);
@@ -155,8 +160,10 @@ public class Game {
   }
 
   //Get user choice and return whether user wants to play or not
-  private String getUserChoice() throws IOException {
-    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
+
+  public static String getUserChoice() throws IOException {
+    inputBuffer = new BufferedReader (new InputStreamReader (System.in));
+
     String inputScan = inputBuffer.readLine();
     String userInput = inputScan.toString().toLowerCase();
     return userInput;
@@ -170,6 +177,34 @@ public class Game {
             + " Upon completion of your orientation, you'll now navigate your way through different levels of coding classes in order to graduate\n"
             + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n");
   }
+
+
+  private void getMap(){
+    System.out.println(" \n"
+
+        + "  |JAVASCRIPT|----------|PYTHON|--------|STUDYROOM|\n"
+        + "      |                   |                       \n"
+        + "      |                   |                       \n"
+        + "      |                   |                       \n"
+        + "   |HTML|______________ |JAVA|                    \n"
+        + "      |                   |                       \n"
+        + "      |                   |                       \n"
+        + "      |                   |                       \n"
+        + "   |LOBBY|              |EXIT|                    \n"
+    );
+  }
+
+  //Clear the screen before displaying it in console
+  public static void clearScreen(){
+    //Clears Screen in java
+    try {
+      if (System.getProperty("os.name").contains("Windows")) {
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+      }
+      else {
+        System.out.print("\033\143");
+      }
+    } catch (IOException | InterruptedException ex) {}
 
   // create command list method
   public void commandList() throws IOException {
@@ -186,6 +221,7 @@ public class Game {
           + "You can type grab/receive/get to access your key/diploma.");
     }
 
+
     //Clear the screen before displaying it in console
 //    public static void clearScreen() {
 //      //Clears Screen in java
@@ -198,6 +234,8 @@ public class Game {
 //      } catch (IOException | InterruptedException ex) {
 //      }
 //    }
+
+
 
   }
 
