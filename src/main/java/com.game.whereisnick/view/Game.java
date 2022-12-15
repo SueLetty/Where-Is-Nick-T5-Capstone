@@ -1,7 +1,6 @@
 package com.game.whereisnick.view;
 
 import com.game.whereisnick.model.Direction;
-import com.game.whereisnick.model.Item;
 import com.game.whereisnick.model.Room;
 import com.game.whereisnick.model.School;
 import com.game.whereisnick.model.Student;
@@ -16,7 +15,7 @@ public class Game {
 
 
   private static BufferedReader inputBuffer;
- String userInput = "";
+//  String userInput = "";
   private Student student;
   private School TLGSchool;
   String quitSynonymns[] = {"no", "n", "quit", "q"};
@@ -26,20 +25,12 @@ public class Game {
 
 
 
-
   public Game() throws IOException {
     showGameSplash();
     askToBeginGame();
     setUpInstances();
-    askToBeginGame();
-    commandList();
-    checkWhereCanGo();
-    moveTo(Direction.NORTH);
-    checkWhereCanGo();
-    getMap();
-    moveTo(Direction.EAST);
-    checkWhereCanGo();
-    moveTo(Direction.EAST);
+//    commandList();
+//    checkWhereCanGo();
 
   }
 
@@ -100,11 +91,8 @@ public class Game {
   }
 
   //Get user choice and return whether user wants to play or not
-  public String getUserChoice() throws IOException {
-
   public static String getUserChoice() throws IOException {
-    inputBuffer = new BufferedReader (new InputStreamReader (System.in));
-
+    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
     String inputScan = inputBuffer.readLine();
     String userInput = inputScan.toString().toLowerCase();
     return userInput;
@@ -145,25 +133,28 @@ public class Game {
       else {
         System.out.print("\033\143");
       }
-    } catch (IOException | InterruptedException ex) {}
+    } catch (IOException | InterruptedException ex) {
+//      empty
+    }
+  }
 
   // create command list method
   public void commandList() throws IOException {
-    String text = "help";
-
-    System.out.println("\n\ntype help if you need further instructions: ");
-    userInput = getUserChoice();
-
-    if (userInput.equals(text)) {
+//    String text = "help";
+//
+//    System.out.println("\n\ntype help if you need further instructions: ");
+//    String userInput = getUserChoice();
+//
+//    if (userInput.equals(text)) {
       System.out.println("Please select from the following commands : \n");
       System.out.println("You can type go/run/move to directions north/east/south/west\n"
           + "to navigate through this game!\n\n"
           + "Please type yes/no when being asked a question.\n\n"
           + "You can type grab/receive/get to access your key/diploma.");
-    }
+//    }
   }
 
-  private void checklocation(){
+  public void checklocation(){
     Room currentLocation = student.getLocation();
     System.out.println("\n=============================================");
     System.out.println("Current Room: " + currentLocation.getName());
@@ -220,14 +211,25 @@ public class Game {
     checklocation();
   }
 
-  public String executeCommand() throws IOException {
-    String input = getUserChoice();
+  public String executeCommand(String input) throws IOException {
+//    String input = getUserChoice();
     String result = "";
-    if(input==null || input.isEmpty()){
+    if(input.equals("q") || input.equals("quit")){
+
+      result = "Quiting the game...";
+
+    }
+    else if(input==null || input.isEmpty()){
       result = "You can't leave it blank. You must enter a command!";
     }
     else if(input.equals("hint")){
       checkWhereCanGo();
+    }
+    else if(input.equals("map")){
+      getMap();
+    }
+    else if(input.equals("help")){
+      commandList();
     }
     // TODO: 12/15/22  check whether the input is q or help after updated the methods from remote dev
 

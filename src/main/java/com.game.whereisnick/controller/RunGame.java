@@ -9,11 +9,19 @@ public class RunGame {
 
   public static void main(String[] args) throws IOException {
     Game newGame = new Game();
-    String input = newGame.getUserChoice();
-    while(input!="q" || input!="quit"){
 
-      System.out.println(newGame.executeCommand());
-    }
+    String input = "";
+
+    do{
+      System.out.println("type your command: ");
+      input = Game.getUserChoice();
+      System.out.println(newGame.executeCommand(input));
+      if(input.equals("q")){
+        break;
+      }
+    }while(true);
+
+    System.out.println("bye");
 
   }
 
