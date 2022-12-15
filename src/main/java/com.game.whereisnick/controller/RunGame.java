@@ -16,7 +16,7 @@ public class RunGame {
       System.out.println("type your command: ");
       input = Game.getUserChoice();
       System.out.println(newGame.executeCommand(input));
-      if(input.equals("q")){
+      if(input.equals("q") || input.equals("quit")){
         break;
       }
     }while(true);
