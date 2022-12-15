@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class Game {
   private Student student;
   private School TLGSchool;
-  BufferedReader inputBuffer;AB3204
+  BufferedReader inputBuffer;
   String quitSynonymns[] = {"no", "n", "quit", "q"};
   String yesSynonymns[] = {"yes", "y", "play"};
   String[] directionCommands = {"go", "run", "move", "walk"};
@@ -28,10 +28,10 @@ public class Game {
     showGameSplash();
     setUpInstances();
     askToBeginGame();
-    checkWhereCanGo();
-    System.out.println("type your command: \n");
-    String input = getUserChoice();
-    System.out.println(executeCommand(input));
+//    checklocation();
+//
+//    System.out.println("type your command: \n");
+//    System.out.println(executeCommand());
 
 
   }
@@ -89,7 +89,7 @@ public class Game {
     }
   }
   //Get user choice and return whether user wants to play or not
-  private String getUserChoice() throws IOException {
+  public String getUserChoice() throws IOException {
     inputBuffer = new BufferedReader (new InputStreamReader (System.in));
     String inputScan = inputBuffer.readLine();
     String userInput = inputScan.toString().toLowerCase();
@@ -117,6 +117,14 @@ public class Game {
     } catch (IOException | InterruptedException ex) {}
   }
 
+  private void checklocation(){
+    Room currentLocation = student.getLocation();
+    System.out.println("\n=============================================");
+    System.out.println("Current Room: " + currentLocation.getName());
+    System.out.println("\n=============================================");
+
+  }
+
   private void checkWhereCanGo(){
     Room currentLocation = student.getLocation();
     ArrayList<String> exit = new ArrayList<>();
@@ -136,10 +144,7 @@ public class Game {
     }
 
     System.out.println("\n=============================================");
-    System.out.println("Current Room: " + currentLocation.getName());
-    System.out.printf("%s can go %s from current location.",student.getName(),exit);
-    System.out.println("\n=============================================");
-
+    System.out.printf("%s can go %s from current location.\n",student.getName(),exit);
   }
 
 
@@ -166,13 +171,17 @@ public class Game {
     }else{
       System.out.println("No exit! Choose another direction.");
     }
-    checkWhereCanGo();
+    checklocation();
   }
 
-  public String executeCommand(String input){
+  public String executeCommand() throws IOException {
+    String input = getUserChoice();
     String result = "";
     if(input==null || input.isEmpty()){
       result = "You can't leave it blank. You must enter a command!";
+    }
+    else if(input.equals("hint")){
+      checkWhereCanGo();
     }
     // TODO: 12/15/22  check whether the input is q or help after updated the methods from remote dev
 
@@ -190,7 +199,7 @@ public class Game {
 
   }
 
-  private String parseCommand(String[] arr){
+  private String parseCommand(String[] arr) throws IOException {
     String result = "";
     String firstWord = arr[0];
 
@@ -217,12 +226,11 @@ public class Game {
       }
     }else if(!Arrays.asList(directionCommands).contains(firstWord)){
       result = firstWord +" is not a valid word.";
-      // TODO: 12/15/22 add get command later for another ticket 
+      // TODO: 12/15/22 add get command later for another ticket
 
     }else{
       result = "You can only type 2 words as command.";
     }
-
 
     return result;
   }
