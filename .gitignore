@@ -1,15 +1,8 @@
 ### IntelliJ IDEA/Android Studio ###
 
 # - metadata
-.idea/*
-!.idea/artifacts/
-!.idea/libraries/
-!.idea/modules.xml
+.idea/
 
-# IMPORTANT: Comment out the line below this comment if JDK names configured in
-#   IntelliJ can't be made consistent across team members' machines; otherwise,
-#   including misc.xml in Git will result in needless merge conflicts.
-!.idea/misc.xml
 
 # - temporary files
 /captures/

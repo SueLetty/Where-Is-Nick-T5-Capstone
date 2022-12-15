@@ -15,7 +15,7 @@ public class Game {
 
 
   private static BufferedReader inputBuffer;
-//  String userInput = "";
+  private static String userInput;
   private Student student;
   private School TLGSchool;
   String quitSynonymns[] = {"no", "n", "quit", "q"};
@@ -94,7 +94,7 @@ public class Game {
   public static String getUserChoice() throws IOException {
     inputBuffer = new BufferedReader(new InputStreamReader(System.in));
     String inputScan = inputBuffer.readLine();
-    String userInput = inputScan.toString().toLowerCase();
+    userInput = inputScan.toString().toLowerCase();
     return userInput;
   }
 
