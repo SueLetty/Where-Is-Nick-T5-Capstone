@@ -11,9 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Game {
+
+  private static BufferedReader inputBuffer;
   private Student student;
   private School TLGSchool;
-  BufferedReader inputBuffer;
   String quitSynonymns[] = {"no", "n", "quit", "q"};
   String yesSynonymns[] = {"yes", "y", "play"};
 
@@ -24,6 +25,8 @@ public class Game {
     askToBeginGame();
     setUpInstances();
     checkWhereCanGo();
+    getMap();
+
 
   }
 
@@ -107,7 +110,7 @@ public class Game {
     }
   }
   //Get user choice and return whether user wants to play or not
-  private String getUserChoice() throws IOException {
+  public static String getUserChoice() throws IOException {
     inputBuffer = new BufferedReader (new InputStreamReader (System.in));
     String inputScan = inputBuffer.readLine();
     String userInput = inputScan.toString().toLowerCase();
@@ -120,6 +123,21 @@ public class Game {
         + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
         + " Upon completion of orientation, you'll now be navigate through different levels of coding classes in order to graduate\n"
         + " from the program. Get ready to learn and soak up your mind to become a real software engineer! ");
+  }
+
+  private void getMap(){
+    System.out.println(" \n"
+
+        + "  |JAVASCRIPT|----------|PYTHON|--------|STUDYROOM|\n"
+        + "      |                   |                       \n"
+        + "      |                   |                       \n"
+        + "      |                   |                       \n"
+        + "   |HTML|______________ |JAVA|                    \n"
+        + "      |                   |                       \n"
+        + "      |                   |                       \n"
+        + "      |                   |                       \n"
+        + "   |LOBBY|              |EXIT|                    \n"
+    );
   }
 
   //Clear the screen before displaying it in console
