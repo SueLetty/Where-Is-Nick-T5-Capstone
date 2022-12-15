@@ -1,6 +1,7 @@
 package com.game.whereisnick.view;
 
 import com.game.whereisnick.model.Direction;
+import com.game.whereisnick.model.Instructor;
 import com.game.whereisnick.model.Room;
 import com.game.whereisnick.model.School;
 import com.game.whereisnick.model.Student;
@@ -13,6 +14,21 @@ import java.util.Arrays;
 public class Game {
 
 
+  String userInput = "";
+  String lobbyGreeting = " I hope you had your coffee this morning,\n"
+      + " because your going to have a very good, but long day,\n"
+      + " ..but I promise you, it's going to be great!..\n"
+      + " with that being said, I would  like to welcome you to TLG!\n\n"
+      + " You are about to meet with your first instructor,\n"
+      + " You will have to go to the HTML room, which is North of the this lobby.\n"
+      + " Be careful, don't venture to other areas of the building else you will be kicked out.\n"
+      + " Have a good day! ";
+
+  private Instructor Jeanette;
+
+
+
+
   private static BufferedReader inputBuffer;
  String userInput = "";
   private Student student;
@@ -21,12 +37,11 @@ public class Game {
   String yesSynonymns[] = {"yes", "y", "play"};
 
 
-
   public Game() throws IOException {
     showGameSplash();
     askToBeginGame();
     setUpInstances();
-    //greetings()
+    System.out.println(Jeanette.greeting() + lobbyGreeting);
     commandList();
     checkWhereCanGo();
     moveTo(Direction.NORTH);
@@ -51,6 +66,7 @@ public class Game {
     Room jsRoom = new Room("JavaScript Room");
     Room pythonRoom = new Room("Python Room");
     Room study = new Room("study Room");
+    Jeanette = new Instructor("Jeanette", "TLG orientation instructor");
     lobby.setnRoom(htmlRoom);
     htmlRoom.setnRoom(jsRoom);
     htmlRoom.seteRoom(javaRoom);
@@ -65,57 +81,54 @@ public class Game {
 
   }
 
-  private void checkWhereCanGo(){
+  private void checkWhereCanGo() {
     Room currentLocation = student.getLocation();
     ArrayList<String> exit = new ArrayList<>();
 
-    if(currentLocation.getnRoom()!=null){
+    if (currentLocation.getnRoom() != null) {
       exit.add(Direction.NORTH.toString());
     }
 
-    if(currentLocation.getsRoom()!=null){
+    if (currentLocation.getsRoom() != null) {
       exit.add(Direction.SOUTH.toString());
     }
-    if(currentLocation.getwRoom()!=null){
+    if (currentLocation.getwRoom() != null) {
       exit.add(Direction.WEST.toString());
     }
-    if(currentLocation.geteRoom()!=null){
+    if (currentLocation.geteRoom() != null) {
       exit.add(Direction.EAST.toString());
     }
 
     System.out.println("\n=============================================");
     System.out.println("Current Room: " + currentLocation.getName());
-    System.out.printf("%s can go %s from current location.",student.getName(),exit);
+    System.out.printf("%s can go %s from current location.", student.getName(), exit);
     System.out.println("\n=============================================");
 
   }
 
-  private void moveTo(Direction dir){
+  private void moveTo(Direction dir) {
     Room currentLocation = student.getLocation();
     Room exit = null;
-    if(dir==Direction.NORTH){
+    if (dir == Direction.NORTH) {
       exit = currentLocation.getnRoom();
     }
-    if(dir==Direction.SOUTH){
+    if (dir == Direction.SOUTH) {
       exit = currentLocation.getsRoom();
     }
-    if(dir==Direction.WEST){
+    if (dir == Direction.WEST) {
       exit = currentLocation.getwRoom();
     }
-    if(dir==Direction.EAST){
+    if (dir == Direction.EAST) {
       exit = currentLocation.geteRoom();
     }
 
-    if(exit!=null){
+    if (exit != null) {
       student.setLocation(exit);
-    }else{
+    } else {
       System.out.println("No exit! Choose another direction.");
     }
 
   }
-
-
-
 
 
   // Shows the splash screen during start of the game.
@@ -159,7 +172,7 @@ public class Game {
   //Display game introduction/ scenario
   public void introduction() {
     System.out.println(
-        "Introduction: You are now currently enrolled as a student of TLG Learning Facility.\n"
+        " Introduction: You are now currently enrolled as a student of TLG Learning Facility.\n"
             + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
             + " Upon completion of your orientation, you'll now navigate your way through different levels of coding classes in order to graduate\n"
             + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n");
@@ -207,6 +220,23 @@ public class Game {
           + "Please type yes/no when being asked a question.\n\n"
           + "You can type grab/receive/get to access your key/diploma.");
     }
+
+
+    //Clear the screen before displaying it in console
+//    public static void clearScreen() {
+//      //Clears Screen in java
+//      try {
+//        if (System.getProperty("os.name").contains("Windows")) {
+//          new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+//        } else {
+//          System.out.print("\033\143");
+//        }
+//      } catch (IOException | InterruptedException ex) {
+//      }
+//    }
+
+
+
   }
 
   public Student getStudent() {
