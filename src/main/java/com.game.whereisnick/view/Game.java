@@ -19,6 +19,10 @@ public class Game {
   private static String userInput;
 //  String userInput = "";
   private Instructor Jeanette;
+  private Instructor Donte;
+  private Instructor Nelly;
+  private Instructor Chad;
+  private Instructor Nick;
   private static BufferedReader inputBuffer;
   private Student student;
   private School TLGSchool;
@@ -34,7 +38,25 @@ public class Game {
     askToBeginGame();
     setUpInstances();
     checklocation();
+    studentName();
     greetingFromJeanette();
+
+    greetingFromDonte();
+    greetingFromNelly();
+    greetingFromChad();
+    greetingFromNick();
+    graduationGreeting();
+    greetingWhereIsNick();
+  }
+
+  public void studentName(){
+    System.out.println(" Hello " + student.getName() + "!");
+  }
+
+  public void graduationGreeting(){
+    System.out.println(" Congratulations! " + student.getName() + "you've graduated from TLG!");
+
+
 
   }
 
@@ -50,6 +72,48 @@ public class Game {
     System.out.println(Jeanette.greeting() + lobbyGreeting);
   }
 
+
+  public void greetingFromDonte(){
+    String htmlGreeting = " I'm here to teach you web development in HTML.\n"
+        + " Get ready to have your mind blown....\n"
+        + " Now.. you need to pass the exam in order to get to the next round.\n"
+        + " It's all up to you!.. Good luck!";
+    System.out.println(Donte.greeting() + htmlGreeting);
+  }
+
+  public void greetingFromNelly(){
+    String javaScriptGreeting = " You are in my Javascript class for web development! Merry Christmas!\n"
+        + " Lets get started! Beware, there is going to be pain in this learning,\n"
+        + " you will sweat but it's worth it. I am telling you, life is not easy and you have to work hard for it\n"
+        + " let's get started.......\n"
+        + " Ok now you'll have to pass the exam for this class in order to move forward in the boot camp.\n"
+        + " Good luck!";
+    System.out.println(Nelly.greeting() + javaScriptGreeting);
+  }
+
+  public void greetingFromChad(){
+    String pythonGreeting = " Welcome! Sorry about the loud music.\n"
+        + " Let's learn Python! One important principle in software design,\n"
+        + " you have to keep in mind \"Users are very stupid!\" -In radio personality voice.\n"
+        + " jk .. but it is very important to have efficient code!\n"
+        + "Ok, now you'll have to pass the exam for this class in order to move forward in the boot camp.\n"
+        + " Good luck!... ";
+    System.out.println(Chad.greeting() + pythonGreeting);
+  }
+
+  public void greetingFromNick(){
+    String javaGreeting = "How may I be of help?";
+    System.out.println(Nick.greeting() + javaGreeting);
+  }
+
+  public void greetingWhereIsNick(){
+    System.out.println("WHERE IS NICK!?");
+  }
+
+
+
+
+
   public void setUpInstances() throws IOException {
     //    create instances
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -64,6 +128,10 @@ public class Game {
     Room pythonRoom = new Room("Python Room");
     Room study = new Room("study Room");
     Jeanette = new Instructor("Jeanette", "TLG orientation instructor");
+    Donte = new Instructor("Donte", "HTML instructor");
+    Nelly = new Instructor("Nelly", "JavaScript instructor");
+    Chad = new Instructor("Chad","Python instructor");
+    Nick = new Instructor("Nick","Java instructor");
     lobby.setnRoom(htmlRoom);
     htmlRoom.setnRoom(jsRoom);
     htmlRoom.seteRoom(javaRoom);

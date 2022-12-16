@@ -9,7 +9,7 @@ public class Instructor extends Character{
   }
 
   public String greeting(){
-    return ("\n Hello!.. My name is " + super.getName() + ", and I'm your " + super.getDescription() + ".\n");
+    return ("\n My name is " + super.getName() + ", and I'm your " + super.getDescription() + ".\n");
 
   }
 
