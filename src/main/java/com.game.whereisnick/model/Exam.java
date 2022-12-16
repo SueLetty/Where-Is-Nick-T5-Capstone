@@ -21,7 +21,7 @@ public class Exam {
   public static void startQuiz(String quizType) throws IOException, ParseException {
     String filePath;
     switch (quizType){
-      case "html":
+      case "HTML Room":
         filePath = HTMLFILENAME;
         break;
       case"js":

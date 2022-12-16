@@ -12,12 +12,12 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.json.simple.parser.ParseException;
 
 public class Game {
 
 
   private static String userInput;
-//  String userInput = "";
   private Instructor Jeanette;
   private Instructor Donte;
   private Instructor Nelly;
@@ -32,21 +32,14 @@ public class Game {
 
 
 
-
   public Game() throws IOException {
     showGameSplash();
     askToBeginGame();
     setUpInstances();
-    checklocation();
+    checkLocation();
+//    student.getLocation();
     studentName();
-    greetingFromJeanette();
 
-    greetingFromDonte();
-    greetingFromNelly();
-    greetingFromChad();
-    greetingFromNick();
-    graduationGreeting();
-    greetingWhereIsNick();
   }
 
   public void studentName(){
@@ -55,8 +48,6 @@ public class Game {
 
   public void graduationGreeting(){
     System.out.println(" Congratulations! " + student.getName() + "you've graduated from TLG!");
-
-
 
   }
 
@@ -115,10 +106,9 @@ public class Game {
 
 
   public void setUpInstances() throws IOException {
-    //    create instances
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
     System.out.println("\nEnter your name: ");
-    String name = reader.readLine();
+    String name = getUserChoice();
     student = new Student(name, "student");
     TLGSchool = new School();
     Room lobby = new Room("Lobby");
@@ -126,7 +116,7 @@ public class Game {
     Room javaRoom = new Room("Java Room");
     Room jsRoom = new Room("JavaScript Room");
     Room pythonRoom = new Room("Python Room");
-    Room study = new Room("study Room");
+    Room studyRoom = new Room("studyRoom Room");
     Jeanette = new Instructor("Jeanette", "TLG orientation instructor");
     Donte = new Instructor("Donte", "HTML instructor");
     Nelly = new Instructor("Nelly", "JavaScript instructor");
@@ -138,11 +128,13 @@ public class Game {
     jsRoom.seteRoom(pythonRoom);
     pythonRoom.setwRoom(jsRoom);
     pythonRoom.setsRoom(javaRoom);
-    pythonRoom.seteRoom(study);
-    study.setwRoom(pythonRoom);
+    pythonRoom.seteRoom(studyRoom);
+    studyRoom.setwRoom(pythonRoom);
     javaRoom.setwRoom(htmlRoom);
     javaRoom.setnRoom(pythonRoom);
     student.setLocation(lobby);
+    TLGSchool.addRooms(lobby, htmlRoom,jsRoom,pythonRoom,studyRoom,javaRoom);
+
 
   }
 
@@ -240,7 +232,7 @@ public class Game {
       }
     }
 
-  public void checklocation(){
+  public void checkLocation(){
     Room currentLocation = student.getLocation();
     System.out.println("\n=============================================");
     System.out.println("Current Room: " + currentLocation.getName());
@@ -273,7 +265,7 @@ public class Game {
   }
 
 
-  private void moveTo(Direction dir){
+  private void moveTo(Direction dir) throws IOException, ParseException {
     Room currentLocation = student.getLocation();
     Room exit = null;
     if(dir==Direction.NORTH){
@@ -292,13 +284,32 @@ public class Game {
 
     if(exit!=null){
       student.setLocation(exit);
+      Room location = student.getLocation();
+      showGreeting(location);
+      Exam.startQuiz(location.getName());
+
     }else{
       System.out.println("No exit! Choose another direction.");
     }
-    checklocation();
+    checkLocation();
   }
 
-  public String executeCommand(String input) throws IOException {
+  private void showGreeting(Room room){
+    if(room.equals(TLGSchool.getRooms().get(0))){
+      greetingFromJeanette();
+    }else if(room.equals(TLGSchool.getRooms().get(1))){
+      greetingFromDonte();
+    }else if(room.equals(TLGSchool.getRooms().get(2))){
+      greetingFromNelly();
+    }else if(room.equals(TLGSchool.getRooms().get(3))){
+      greetingFromChad();
+    }else if(room.equals(TLGSchool.getRooms().get(4))){
+      greetingFromNick();
+    }
+
+  }
+
+  public String executeCommand(String input) throws IOException, ParseException {
 //    String input = getUserChoice();
     String result = "";
     if(input.equals("q") || input.equals("quit")){
@@ -333,7 +344,7 @@ public class Game {
 
   }
 
-  private String parseCommand(String[] arr) throws IOException {
+  private String parseCommand(String[] arr) throws IOException, ParseException {
     String result = "";
     String firstWord = arr[0];
 
