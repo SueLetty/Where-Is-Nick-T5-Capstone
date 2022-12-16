@@ -1,6 +1,7 @@
 package com.game.whereisnick.view;
 
 import com.game.whereisnick.model.Direction;
+import com.game.whereisnick.model.Instructor;
 import com.game.whereisnick.model.Room;
 import com.game.whereisnick.model.School;
 import com.game.whereisnick.model.Student;
@@ -14,8 +15,23 @@ import java.util.Arrays;
 public class Game {
 
 
-  private static BufferedReader inputBuffer;
   private static String userInput;
+//  String userInput = "";
+  String lobbyGreeting = " I hope you had your coffee this morning,\n"
+      + " because your going to have a very good, but long day,\n"
+      + " ..but I promise you, it's going to be great!..\n"
+      + " with that being said, I would  like to welcome you to TLG!\n\n"
+      + " You are about to meet with your first instructor,\n"
+      + " You will have to go to the HTML room, which is North of the this lobby.\n"
+      + " Be careful, don't venture to other areas of the building else you will be kicked out.\n"
+      + " Have a good day! ";
+
+  private Instructor Jeanette;
+
+
+
+
+  private static BufferedReader inputBuffer;
   private Student student;
   private School TLGSchool;
   String quitSynonymns[] = {"no", "n", "quit", "q"};
@@ -24,13 +40,12 @@ public class Game {
 
 
 
-
   public Game() throws IOException {
     showGameSplash();
     askToBeginGame();
     setUpInstances();
-//    commandList();
-//    checkWhereCanGo();
+    checklocation();
+    System.out.println(Jeanette.greeting() + lobbyGreeting);
 
   }
 
@@ -47,6 +62,7 @@ public class Game {
     Room jsRoom = new Room("JavaScript Room");
     Room pythonRoom = new Room("Python Room");
     Room study = new Room("study Room");
+    Jeanette = new Instructor("Jeanette", "TLG orientation instructor");
     lobby.setnRoom(htmlRoom);
     htmlRoom.setnRoom(jsRoom);
     htmlRoom.seteRoom(javaRoom);
@@ -59,8 +75,8 @@ public class Game {
     javaRoom.setnRoom(pythonRoom);
     student.setLocation(lobby);
 
-  }
 
+  }
 
   // Shows the splash screen during start of the game.
   private void showGameSplash() {
@@ -94,14 +110,14 @@ public class Game {
   public static String getUserChoice() throws IOException {
     inputBuffer = new BufferedReader(new InputStreamReader(System.in));
     String inputScan = inputBuffer.readLine();
-    userInput = inputScan.toString().toLowerCase();
+    userInput = inputScan.toLowerCase();
     return userInput;
   }
 
   //Display game introduction/ scenario
   public void introduction() {
     System.out.println(
-        "Introduction: You are now currently enrolled as a student of TLG Learning Facility.\n"
+        " Introduction: You are now currently enrolled as a student of TLG Learning Facility.\n"
             + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
             + " Upon completion of your orientation, you'll now navigate your way through different levels of coding classes in order to graduate\n"
             + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n");
@@ -139,19 +155,14 @@ public class Game {
   }
 
   // create command list method
-  public void commandList() throws IOException {
-//    String text = "help";
-//
-//    System.out.println("\n\ntype help if you need further instructions: ");
-//    String userInput = getUserChoice();
-//
-//    if (userInput.equals(text)) {
+  public void commandList() {
+
       System.out.println("Please select from the following commands : \n");
       System.out.println("You can type go/run/move to directions north/east/south/west\n"
           + "to navigate through this game!\n\n"
           + "Please type yes/no when being asked a question.\n\n"
           + "You can type grab/receive/get to access your key/diploma.");
-//    }
+
   }
 
   public void checklocation(){
@@ -173,6 +184,7 @@ public class Game {
     if(currentLocation.getsRoom()!=null){
       exit.add(Direction.SOUTH.toString());
     }
+
     if(currentLocation.getwRoom()!=null){
       exit.add(Direction.WEST.toString());
     }
@@ -182,8 +194,8 @@ public class Game {
 
     System.out.println("\n=============================================");
     System.out.printf("%s can go %s from current location.\n",student.getName(),exit);
-  }
 
+  }
 
 
   private void moveTo(Direction dir){
@@ -242,8 +254,7 @@ public class Game {
   }
 
   public String[] convertInputToArray(String input){
-    String[] arr = input.split(" ");
-    return arr;
+    return input.split(" ");
 
   }
 
@@ -251,7 +262,6 @@ public class Game {
     String result = "";
     String firstWord = arr[0];
 
-//    Direction exit=null;
     if(Array.getLength(arr)==2 && Arrays.asList(directionCommands).contains(firstWord)){
       String secondWord = arr[1];
 
