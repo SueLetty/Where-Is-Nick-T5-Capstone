@@ -1,6 +1,7 @@
 package com.game.whereisnick.view;
 
 import com.game.whereisnick.model.Direction;
+import com.game.whereisnick.model.Exam;
 import com.game.whereisnick.model.Instructor;
 import com.game.whereisnick.model.Room;
 import com.game.whereisnick.model.School;
@@ -11,12 +12,12 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.json.simple.parser.ParseException;
 
 public class Game {
 
 
   private static String userInput;
-//  String userInput = "";
   private Instructor Jeanette;
   private Instructor Donte;
   private Instructor Nelly;
@@ -31,20 +32,14 @@ public class Game {
 
 
 
-
   public Game() throws IOException {
     showGameSplash();
     askToBeginGame();
     setUpInstances();
-    checklocation();
+    checkLocation();
+//    student.getLocation();
     studentName();
-    greetingFromJeanette();
-    greetingFromDonte();
-    greetingFromNelly();
-    greetingFromChad();
-    greetingFromNick();
-    graduationGreeting();
-    greetingWhereIsNick();
+
   }
 
   public void studentName(){
@@ -53,6 +48,7 @@ public class Game {
 
   public void graduationGreeting(){
     System.out.println(" Congratulations! " + student.getName() + "you've graduated from TLG!");
+
   }
 
   public void greetingFromJeanette(){
@@ -66,6 +62,7 @@ public class Game {
         + " Have a good day! ";
     System.out.println(Jeanette.greeting() + lobbyGreeting);
   }
+
 
   public void greetingFromDonte(){
     String htmlGreeting = " I'm here to teach you web development in HTML.\n"
@@ -107,11 +104,11 @@ public class Game {
 
 
 
+
   public void setUpInstances() throws IOException {
-    //    create instances
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
     System.out.println("\nEnter your name: ");
-    String name = reader.readLine();
+    String name = getUserChoice();
     student = new Student(name, "student");
     TLGSchool = new School();
     Room lobby = new Room("Lobby");
@@ -119,7 +116,7 @@ public class Game {
     Room javaRoom = new Room("Java Room");
     Room jsRoom = new Room("JavaScript Room");
     Room pythonRoom = new Room("Python Room");
-    Room study = new Room("study Room");
+    Room studyRoom = new Room("studyRoom Room");
     Jeanette = new Instructor("Jeanette", "TLG orientation instructor");
     Donte = new Instructor("Donte", "HTML instructor");
     Nelly = new Instructor("Nelly", "JavaScript instructor");
@@ -131,14 +128,16 @@ public class Game {
     jsRoom.seteRoom(pythonRoom);
     pythonRoom.setwRoom(jsRoom);
     pythonRoom.setsRoom(javaRoom);
-    pythonRoom.seteRoom(study);
-    study.setwRoom(pythonRoom);
+    pythonRoom.seteRoom(studyRoom);
+    studyRoom.setwRoom(pythonRoom);
     javaRoom.setwRoom(htmlRoom);
     javaRoom.setnRoom(pythonRoom);
     student.setLocation(lobby);
+    TLGSchool.addRooms(lobby, htmlRoom,jsRoom,pythonRoom,studyRoom,javaRoom);
 
 
   }
+
 
   // Shows the splash screen during start of the game.
   private void showGameSplash() {
@@ -169,10 +168,12 @@ public class Game {
   }
 
   //Get user choice and return whether user wants to play or not
+
   public static String getUserChoice() throws IOException {
-    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
+    inputBuffer = new BufferedReader (new InputStreamReader (System.in));
+
     String inputScan = inputBuffer.readLine();
-    userInput = inputScan.toLowerCase();
+    String userInput = inputScan.toString().toLowerCase();
     return userInput;
   }
 
@@ -202,32 +203,36 @@ public class Game {
   }
 
   //Clear the screen before displaying it in console
-  public static void clearScreen(){
+  public static void clearScreen() throws IOException {
     //Clears Screen in java
     try {
       if (System.getProperty("os.name").contains("Windows")) {
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-      }
-      else {
+      } else {
         System.out.print("\033\143");
       }
     } catch (IOException | InterruptedException ex) {
-//      empty
     }
   }
 
   // create command list method
-  public void commandList() {
+  public void commandList() throws IOException {
+      String text = "help";
 
-      System.out.println("Please select from the following commands : \n");
-      System.out.println("You can type go/run/move to directions north/east/south/west\n"
-          + "to navigate through this game!\n\n"
-          + "Please type yes/no when being asked a question.\n\n"
-          + "You can type grab/receive/get to access your key/diploma.");
+      System.out.println("\n\ntype help if you need further instructions: ");
+      userInput = getUserChoice();
 
-  }
+      if (userInput.equals(text)) {
+        System.out.println("Please select from the following commands : \n");
+        System.out.println("You can type go/run/move to directions north/east/south/west\n"
+            + "to navigate through this game!\n\n"
+            + "Please type yes/no when being asked a question.\n\n"
+            + "You can type grab/receive/get to access your key/diploma.");
 
-  public void checklocation(){
+      }
+    }
+
+  public void checkLocation(){
     Room currentLocation = student.getLocation();
     System.out.println("\n=============================================");
     System.out.println("Current Room: " + currentLocation.getName());
@@ -260,7 +265,7 @@ public class Game {
   }
 
 
-  private void moveTo(Direction dir){
+  private void moveTo(Direction dir) throws IOException, ParseException {
     Room currentLocation = student.getLocation();
     Room exit = null;
     if(dir==Direction.NORTH){
@@ -279,13 +284,32 @@ public class Game {
 
     if(exit!=null){
       student.setLocation(exit);
+      Room location = student.getLocation();
+      showGreeting(location);
+      Exam.startQuiz(location.getName());
+
     }else{
       System.out.println("No exit! Choose another direction.");
     }
-    checklocation();
+    checkLocation();
   }
 
-  public String executeCommand(String input) throws IOException {
+  private void showGreeting(Room room){
+    if(room.equals(TLGSchool.getRooms().get(0))){
+      greetingFromJeanette();
+    }else if(room.equals(TLGSchool.getRooms().get(1))){
+      greetingFromDonte();
+    }else if(room.equals(TLGSchool.getRooms().get(2))){
+      greetingFromNelly();
+    }else if(room.equals(TLGSchool.getRooms().get(3))){
+      greetingFromChad();
+    }else if(room.equals(TLGSchool.getRooms().get(4))){
+      greetingFromNick();
+    }
+
+  }
+
+  public String executeCommand(String input) throws IOException, ParseException {
 //    String input = getUserChoice();
     String result = "";
     if(input.equals("q") || input.equals("quit")){
@@ -320,7 +344,7 @@ public class Game {
 
   }
 
-  private String parseCommand(String[] arr) throws IOException {
+  private String parseCommand(String[] arr) throws IOException, ParseException {
     String result = "";
     String firstWord = arr[0];
 

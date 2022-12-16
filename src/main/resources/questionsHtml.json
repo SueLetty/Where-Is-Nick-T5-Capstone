@@ -4,16 +4,17 @@
       "c": "Higher Tool Mark Language",
       "b": "Hyper Text Markup Language",
       "a": "Home Text Markup Language",
-      "answer": "d",
-      "Question": "What does HTML stand for?\n\n"
+      "answer": "b",
+      "Question": "What does HTML stand for?\n"
     },
     {
       "d": " head",
       "c": "<h1>",
       "b": "<h6>",
       "a": "<h10>",
-      "answer": "b",
-      "Question": "Which tag is used for inserting the largest heading in HTML?\n\n"
+      "answer": "c",
+
+      "Question": "Which tag is used for inserting the largest heading in HTML?\n"
     },
     {
       "d": "<image>",
@@ -21,7 +22,7 @@
       "b": "<pic>",
       "a": "<img>",
       "answer": "a",
-      "Question": "What is the HTML element used to display an image?\n\n"
+      "Question": "What is the HTML element used to display an image?\n"
     },
     {
       "d": "<table>",
@@ -29,7 +30,7 @@
       "b": "<td>",
       "a": "<tr>",
       "answer": "a",
-      "Question": "Which of the following table tags is used to create a table row?\n\n\n\n"
+      "Question": "Which of the following table tags is used to create a table row?\n"
     },
     {
       "d": "Charles Babbage",
@@ -37,6 +38,6 @@
       "b": "Rasmus Lerdorf",
       "a": "Sergio Brin",
       "answer": "c",
-      "Question": "Who is the father of HTML?\n\n\n"
+      "Question": "Who is the father of HTML?\n"
     }
   ]

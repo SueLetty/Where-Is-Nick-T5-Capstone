@@ -14,30 +14,59 @@ public class Exam {
   public static final String PYTHONFILENAME = "./src/main/resources/questionsPython.json";
   public static final String JAVAFILENAME = "./src/main/resources/questionsJava.json";
 
-
-    public static void getHTMLQuiz() throws IOException, ParseException {
-      JSONParser jsonParser=new JSONParser();
-      Object obj= jsonParser.parse(new FileReader(HTMLFILENAME));
-      JSONArray jsonArrayHTML=(JSONArray) obj;
-      startTheQuiz(jsonArrayHTML);
+  public static void main(String[] args) throws IOException, ParseException {
+    startQuiz("html");
   }
 
-  private static void startTheQuiz(JSONArray jsonArray) throws IOException {
+  public static void startQuiz(String quizType) throws IOException, ParseException {
+    String filePath;
+    switch (quizType){
+      case "HTML Room":
+        filePath = HTMLFILENAME;
+        break;
+      case"js":
+        filePath = JSFILENAME;
+        break;
+      case "python":
+        filePath = PYTHONFILENAME;
+        break;
+      case"java":
+        filePath = JAVAFILENAME;
+        break;
+      default:
+        throw new IllegalStateException("Unexpected value: " + quizType);
+    }
+    JSONParser jsonParser=new JSONParser();
+    Object obj= jsonParser.parse(new FileReader(filePath));
+    JSONArray jsonArray=(JSONArray) obj;
+    parseQuizFromJson(jsonArray);
+
+  }
+
+
+
+  private static void parseQuizFromJson(JSONArray jsonArray) throws IOException {
     int correctAnswer = 0;
-    for (int i = 1; i <= 5; i++) {
-      JSONObject jsonObject=(JSONObject) jsonArray.get(i);
-        System.out.println((String)jsonObject.get("Question"));
-        System.out.println( "a. " + jsonObject.get("a"));
-        System.out.println( "b. " + jsonObject.get("b"));
-        System.out.println( "c. " + jsonObject.get("c"));
-        System.out.println( "d. " + jsonObject.get("d"));
-        System.out.println("\nInput your answer");
-        String answer= Game.getUserChoice();
-        String actualAnswer= (String)jsonObject.get("answer");
+    do {
+      for (int i = 0; i < 5; i++) {
+        JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+        System.out.println((String) jsonObject.get("Question"));
+        System.out.println("a. " + jsonObject.get("a"));
+        System.out.println("b. " + jsonObject.get("b"));
+        System.out.println("c. " + jsonObject.get("c"));
+        System.out.println("d. " + jsonObject.get("d"));
+        System.out.println("\n  Enter your answer: ");
+        String answer = Game.getUserChoice();
+        String actualAnswer = (String) jsonObject.get("answer");
         correctAnswer = checkCorrectAnswerAndReturnCounter(correctAnswer, answer, actualAnswer);
-        System.out.printf("Result:You got: %d out of 5", correctAnswer);
-        System.out.println("\n\n");
       }
+      if (correctAnswer < 4){
+        System.out.println("\n\n You failed the exam. Please retake the exam! \n");
+      }
+    }
+    while (correctAnswer <5);
+    System.out.printf("Result:You got: %d out of 5", correctAnswer);
+    System.out.println("\n\n");
   }
 
   private static int checkCorrectAnswerAndReturnCounter(int correctAnswer, String answer, String actualAnswer) {
