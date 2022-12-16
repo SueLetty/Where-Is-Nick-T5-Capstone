@@ -96,12 +96,12 @@ public class Game {
   }
 
   public void greetingFromNick(){
-    String javaGreeting = "How may I be of help?";
+    String javaGreeting = " How may I be of help?";
     System.out.println(Nick.greeting() + javaGreeting);
   }
 
   public void greetingWhereIsNick(){
-    System.out.println("WHERE IS NICK!?");
+    System.out.println(" WHERE IS NICK!?");
   }
 
 
