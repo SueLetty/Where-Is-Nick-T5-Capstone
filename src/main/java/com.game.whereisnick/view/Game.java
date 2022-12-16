@@ -1,6 +1,7 @@
 package com.game.whereisnick.view;
 
 import com.game.whereisnick.model.Direction;
+import com.game.whereisnick.model.Exam;
 import com.game.whereisnick.model.Instructor;
 import com.game.whereisnick.model.Room;
 import com.game.whereisnick.model.School;
@@ -39,6 +40,7 @@ public class Game {
     checklocation();
     studentName();
     greetingFromJeanette();
+
     greetingFromDonte();
     greetingFromNelly();
     greetingFromChad();
@@ -53,6 +55,9 @@ public class Game {
 
   public void graduationGreeting(){
     System.out.println(" Congratulations! " + student.getName() + "you've graduated from TLG!");
+
+
+
   }
 
   public void greetingFromJeanette(){
@@ -66,6 +71,7 @@ public class Game {
         + " Have a good day! ";
     System.out.println(Jeanette.greeting() + lobbyGreeting);
   }
+
 
   public void greetingFromDonte(){
     String htmlGreeting = " I'm here to teach you web development in HTML.\n"
@@ -107,6 +113,7 @@ public class Game {
 
 
 
+
   public void setUpInstances() throws IOException {
     //    create instances
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -137,8 +144,8 @@ public class Game {
     javaRoom.setnRoom(pythonRoom);
     student.setLocation(lobby);
 
-
   }
+
 
   // Shows the splash screen during start of the game.
   private void showGameSplash() {
@@ -169,10 +176,12 @@ public class Game {
   }
 
   //Get user choice and return whether user wants to play or not
+
   public static String getUserChoice() throws IOException {
-    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
+    inputBuffer = new BufferedReader (new InputStreamReader (System.in));
+
     String inputScan = inputBuffer.readLine();
-    userInput = inputScan.toLowerCase();
+    String userInput = inputScan.toString().toLowerCase();
     return userInput;
   }
 
@@ -202,30 +211,34 @@ public class Game {
   }
 
   //Clear the screen before displaying it in console
-  public static void clearScreen(){
+  public static void clearScreen() throws IOException {
     //Clears Screen in java
     try {
       if (System.getProperty("os.name").contains("Windows")) {
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-      }
-      else {
+      } else {
         System.out.print("\033\143");
       }
     } catch (IOException | InterruptedException ex) {
-//      empty
     }
   }
 
   // create command list method
-  public void commandList() {
+  public void commandList() throws IOException {
+      String text = "help";
 
-      System.out.println("Please select from the following commands : \n");
-      System.out.println("You can type go/run/move to directions north/east/south/west\n"
-          + "to navigate through this game!\n\n"
-          + "Please type yes/no when being asked a question.\n\n"
-          + "You can type grab/receive/get to access your key/diploma.");
+      System.out.println("\n\ntype help if you need further instructions: ");
+      userInput = getUserChoice();
 
-  }
+      if (userInput.equals(text)) {
+        System.out.println("Please select from the following commands : \n");
+        System.out.println("You can type go/run/move to directions north/east/south/west\n"
+            + "to navigate through this game!\n\n"
+            + "Please type yes/no when being asked a question.\n\n"
+            + "You can type grab/receive/get to access your key/diploma.");
+
+      }
+    }
 
   public void checklocation(){
     Room currentLocation = student.getLocation();
