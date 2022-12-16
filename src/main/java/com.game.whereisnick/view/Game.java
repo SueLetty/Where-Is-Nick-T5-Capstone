@@ -16,7 +16,6 @@ public class Game {
 
 
   private static String userInput;
-//  String userInput = "";
   private Instructor Jeanette;
   private static BufferedReader inputBuffer;
   private Student student;
@@ -27,12 +26,11 @@ public class Game {
 
 
 
-
   public Game() throws IOException {
     showGameSplash();
     askToBeginGame();
     setUpInstances();
-    checklocation();
+    checkLocation();
     greetingFromJeanette();
   }
 
@@ -48,12 +46,26 @@ public class Game {
     System.out.println(Jeanette.greeting() + lobbyGreeting);
   }
 
+  public void greetingFromDonte(){
+    System.out.println("what's up.");
+  }
 
-  public void setUpInstances() throws IOException {
+  public void greetingFromNelly(){
+    System.out.println("Merry christmas!");
+  }
+  public void greetingFromNick(){
+    System.out.println("Nick is playing guitar.");
+  }
+  public void greetingFromChad(){
+    System.out.println("Python is fun");
+  }
+
+
+  public void setUpInstances() throws IOException, NullPointerException {
     //    create instances
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     System.out.println("\nEnter your name: ");
-    String name = reader.readLine();
+    String name = getUserChoice();
     student = new Student(name, "student");
     TLGSchool = new School();
     Room lobby = new Room("Lobby");
@@ -61,7 +73,7 @@ public class Game {
     Room javaRoom = new Room("Java Room");
     Room jsRoom = new Room("JavaScript Room");
     Room pythonRoom = new Room("Python Room");
-    Room study = new Room("study Room");
+    Room studyRoom = new Room("studyRoom Room");
     Jeanette = new Instructor("Jeanette", "TLG orientation instructor");
     lobby.setnRoom(htmlRoom);
     htmlRoom.setnRoom(jsRoom);
@@ -69,10 +81,15 @@ public class Game {
     jsRoom.seteRoom(pythonRoom);
     pythonRoom.setwRoom(jsRoom);
     pythonRoom.setsRoom(javaRoom);
-    pythonRoom.seteRoom(study);
-    study.setwRoom(pythonRoom);
+    pythonRoom.seteRoom(studyRoom);
+    studyRoom.setwRoom(pythonRoom);
     javaRoom.setwRoom(htmlRoom);
     javaRoom.setnRoom(pythonRoom);
+    System.out.println("tlg school is : ");
+    TLGSchool.addRooms(lobby, htmlRoom,jsRoom,pythonRoom,studyRoom,javaRoom);
+
+
+    System.out.println(TLGSchool);
     student.setLocation(lobby);
 
 
@@ -165,7 +182,7 @@ public class Game {
 
   }
 
-  public void checklocation(){
+  public void checkLocation(){
     Room currentLocation = student.getLocation();
     System.out.println("\n=============================================");
     System.out.println("Current Room: " + currentLocation.getName());
@@ -217,10 +234,27 @@ public class Game {
 
     if(exit!=null){
       student.setLocation(exit);
+      Room location = student.getLocation();
+      showGreeting(location);
     }else{
       System.out.println("No exit! Choose another direction.");
     }
-    checklocation();
+    checkLocation();
+  }
+
+  private void showGreeting(Room room){
+    if(room.equals(TLGSchool.getRooms().get(0))){
+      greetingFromJeanette();
+    }else if(room.equals(TLGSchool.getRooms().get(1))){
+      greetingFromDonte();
+    }else if(room.equals(TLGSchool.getRooms().get(2))){
+      greetingFromNelly();
+    }else if(room.equals(TLGSchool.getRooms().get(3))){
+      greetingFromChad();
+    }else if(room.equals(TLGSchool.getRooms().get(4))){
+      greetingFromNick();
+    }
+
   }
 
   public String executeCommand(String input) throws IOException {
