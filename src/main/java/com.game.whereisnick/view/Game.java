@@ -17,20 +17,7 @@ public class Game {
 
   private static String userInput;
 //  String userInput = "";
-  String lobbyGreeting = " I hope you had your coffee this morning,\n"
-      + " because your going to have a very good, but long day,\n"
-      + " ..but I promise you, it's going to be great!..\n"
-      + " with that being said, I would  like to welcome you to TLG!\n\n"
-      + " You are about to meet with your first instructor,\n"
-      + " You will have to go to the HTML room, which is North of the this lobby.\n"
-      + " Be careful, don't venture to other areas of the building else you will be kicked out.\n"
-      + " Have a good day! ";
-
   private Instructor Jeanette;
-
-
-
-
   private static BufferedReader inputBuffer;
   private Student student;
   private School TLGSchool;
@@ -40,14 +27,27 @@ public class Game {
 
 
 
+
   public Game() throws IOException {
     showGameSplash();
     askToBeginGame();
     setUpInstances();
     checklocation();
-    System.out.println(Jeanette.greeting() + lobbyGreeting);
-
+    greetingFromJeanette();
   }
+
+  public void greetingFromJeanette(){
+    String lobbyGreeting = " I hope you had your coffee this morning,\n"
+        + " because your going to have a very good, but long day,\n"
+        + " ..but I promise you, it's going to be great!..\n"
+        + " with that being said, I would  like to welcome you to TLG!\n\n"
+        + " You are about to meet with your first instructor,\n"
+        + " You will have to go to the HTML room, which is North of the this lobby.\n"
+        + " Be careful, don't venture to other areas of the building else you will be kicked out.\n"
+        + " Have a good day! ";
+    System.out.println(Jeanette.greeting() + lobbyGreeting);
+  }
+
 
   public void setUpInstances() throws IOException {
     //    create instances
