@@ -13,6 +13,4 @@ public class Instructor extends Character{
 
   }
 
-
-
 }
