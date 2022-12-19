@@ -228,7 +228,7 @@ public class Game {
     }else if(answer.equals("no") || answer.equals("n")){
       System.out.println("You can type your command or you can quit the game by tying quit");
       String input = getUserChoice();
-      executeCommand(input);
+      System.out.println(executeCommand(input));
     }else{
       System.out.println("You must type yes or no.");
       executeExamCommand(room);
