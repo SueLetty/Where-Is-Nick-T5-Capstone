@@ -6,11 +6,10 @@ import com.game.whereisnick.view.Game;
 
 import java.util.Scanner;
 import java.io.IOException;
-import org.json.simple.parser.ParseException;
 
 public class RunGame {
 
-  public static void main(String[] args) throws IOException, ParseException {
+  public static void main(String[] args) throws IOException {
     Game newGame = new Game();
 //    Exam.getHTMLQuiz();
 
@@ -18,7 +17,7 @@ public class RunGame {
     String input = "";
 
     while(true){
-      System.out.println("\n type your command: ");
+      System.out.println("\nType your command: ");
       input = Game.getUserChoice();
       System.out.println(newGame.executeCommand(input));
 
@@ -29,7 +28,6 @@ public class RunGame {
     }
 
     System.out.println("Bye!");
-
 
   }
 
