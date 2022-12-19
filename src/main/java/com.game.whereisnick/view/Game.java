@@ -3,6 +3,7 @@ package com.game.whereisnick.view;
 import com.game.whereisnick.model.Direction;
 import com.game.whereisnick.model.Exam;
 import com.game.whereisnick.model.Instructor;
+import com.game.whereisnick.model.Music;
 import com.game.whereisnick.model.Room;
 import com.game.whereisnick.model.School;
 import com.game.whereisnick.model.Student;
@@ -101,6 +102,10 @@ public class Game {
     System.out.println(" WHERE IS NICK!?");
   }
 
+  public void messageFromJava(){
+    System.out.println("OH NO!... The java code is encrypted!");
+  }
+
 
 
 
@@ -135,6 +140,14 @@ public class Game {
     student.setLocation(lobby);
     TLGSchool.addRooms(lobby, htmlRoom,jsRoom,pythonRoom,studyRoom,javaRoom);
 
+
+
+  }
+
+  private void playMusicInBackground(){
+    Music musicObject = new Music();
+    String filepath = ""; // put filepath here, ex: musicPlayBackground.wav
+    musicObject.playMusic(filepath);
 
   }
 
