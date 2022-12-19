@@ -9,11 +9,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 
 public class Exam {
-
-  public static boolean passHTML =false;
-  public static boolean passJs =false;
-  public static boolean passPython =false;
-  public static boolean passJava =false;
   public static final String HTMLFILENAME = "./src/main/resources/questionsHtml.json";
   public static final String JSFILENAME = "./src/main/resources/questionsJavascript.json";
   public static final String PYTHONFILENAME = "./src/main/resources/questionsPython.json";
@@ -52,8 +47,7 @@ public class Exam {
 
   private static void parseQuizFromJson(JSONArray jsonArray) throws IOException {
     int correctAnswer = 0;
-
-    while (correctAnswer <5){
+    do {
       for (int i = 0; i < 5; i++) {
         JSONObject jsonObject = (JSONObject) jsonArray.get(i);
         System.out.println((String) jsonObject.get("Question"));
@@ -68,14 +62,9 @@ public class Exam {
       }
       if (correctAnswer < 4){
         System.out.println("\n\n You failed the exam. Please retake the exam! \n");
-      } else{
-//        System.out.println("you got it");
-//        System.out.println("correct answer: " +correctAnswer);
-        // TODO: 12/18/22 correctAnswer is not correct! 
-        passHTML = true;
       }
     }
-
+    while (correctAnswer <5);
     System.out.printf("Result:You got: %d out of 5", correctAnswer);
     System.out.println("\n\n");
   }
