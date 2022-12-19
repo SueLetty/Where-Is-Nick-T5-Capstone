@@ -28,7 +28,7 @@ public class RunGame {
 
     }
 
-    System.out.println("Bye bye!");
+    System.out.println("Bye!");
 
   }
 
