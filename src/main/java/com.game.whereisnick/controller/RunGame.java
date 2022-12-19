@@ -18,7 +18,7 @@ public class RunGame {
     String input = "";
 
     while(true){
-      System.out.println("\nType your command: ");
+      System.out.println("\nRType your command: ");
       input = Game.getUserChoice();
       System.out.println(newGame.executeCommand(input));
 
