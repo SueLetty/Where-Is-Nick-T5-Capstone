@@ -37,10 +37,9 @@ public class Game {
   public Game() throws IOException {
     showGameSplash();
     introduction();
-//    askToBeginGame();
     setUpInstances();
     checkLocation();
-//    student.getLocation();
+
   }
 
 
@@ -221,10 +220,7 @@ public class Game {
 //    System.out.println("Are you ready to take the exam?");
 
     String answer = getUserChoice();
-//    if(answer.isEmpty()){
-//      System.out.println("You must type yes or no.");
-//      executeExamCommand(room);
-//    }
+
     if(answer.equals("yes") || answer.equals("y")){
       Exam.startQuiz(room.getName());
       checkKey(room);
@@ -261,9 +257,7 @@ public class Game {
 
   }
   public void executeDifferentExam(Room room) throws IOException, ParseException {
-    //   if(!Exam.passHTML){ //todo how to combine string and variable Exam.pass{location.getDescription()}
-//        executeExamCommand(location);
-//      }
+
     Room htmlRoom = TLGSchool.getRooms().get(1);
     Room jsRoom = TLGSchool.getRooms().get(2);
     Room pythonRoom = TLGSchool.getRooms().get(3);
