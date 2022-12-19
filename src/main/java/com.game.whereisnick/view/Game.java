@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import org.json.simple.parser.ParseException;
 
 public class Game {
 
@@ -26,8 +25,8 @@ public class Game {
   private static BufferedReader inputBuffer;
   private Student student;
   private School TLGSchool;
-  private String quitSynonymns[] = {"no", "n", "quit", "q"};
-  private String yesSynonymns[] = {"yes", "y", "play"};
+  private static String quitSynonymns[] = {"no", "n", "quit", "q"};
+  private static String yesSynonymns[] = {"yes", "y", "play"};
   private String[] directionCommands = {"go", "run", "move", "walk"};
   private boolean htmlKey=false;
   private boolean pythonKey=false;
@@ -122,6 +121,20 @@ public class Game {
     }
   }
 
+  public static boolean checkIfUserQuit(String input) throws IOException {
+    boolean quit = false;
+    if(Arrays.asList(quitSynonymns).contains(input)){
+      System.out.println("Are you sure you want to quit?");
+      userInput = getUserChoice();
+      if(Arrays.asList(yesSynonymns).contains(userInput)){
+        quit = true;
+      }
+    }else{
+      quit = false;
+    }
+    return quit;
+  }
+
   // create command list method
   public void commandList() throws IOException {
 
@@ -132,7 +145,7 @@ public class Game {
             + "You can type grab/receive/get to access your key/diploma.");
     }
 
-  private void moveTo(Direction dir) throws IOException, ParseException {
+  private void moveTo(Direction dir) throws IOException {
     Room currentLocation = student.getLocation();
     Room exit = null;
     if(dir==Direction.NORTH){
@@ -217,7 +230,7 @@ public class Game {
 
 
 
-  public void executeExamCommand(Room room) throws IOException, ParseException {
+  public void executeExamCommand(Room room) throws IOException {
 //    System.out.println("Are you ready to take the exam?");
 
     String answer = getUserChoice();
@@ -226,7 +239,7 @@ public class Game {
 //      executeExamCommand(room);
 //    }
     if(answer.equals("yes") || answer.equals("y")){
-      Exam.startQuiz(room.getName());
+      Exam.startQuiz(room);
       checkKey(room);
 
     }else if(answer.equals("no") || answer.equals("n")){
@@ -260,7 +273,7 @@ public class Game {
     }
 
   }
-  public void executeDifferentExam(Room room) throws IOException, ParseException {
+  public void executeDifferentExam(Room room) throws IOException {
     //   if(!Exam.passHTML){ //todo how to combine string and variable Exam.pass{location.getDescription()}
 //        executeExamCommand(location);
 //      }
@@ -299,7 +312,7 @@ public class Game {
   }
 
 
-  public String executeCommand(String input) throws IOException, ParseException {
+  public String executeCommand(String input) throws IOException {
 //    String input = getUserChoice();
     String result = "";
     if(input.equals("q") || input.equals("quit")){
@@ -337,7 +350,7 @@ public class Game {
 
   }
 
-  private String parseCommand(String[] arr) throws IOException, ParseException {
+  private String parseCommand(String[] arr) throws IOException {
     String result = "";
     String firstWord = arr[0];
 
