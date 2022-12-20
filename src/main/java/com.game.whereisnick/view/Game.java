@@ -32,7 +32,8 @@ public class Game {
   private boolean jsKey=false;
   private boolean pythonKey=false;
   private boolean javaKey=false;
-  private boolean findNick = false;
+
+
   private boolean wentToJavaWithoutNick=false;
 
 
@@ -470,13 +471,11 @@ public class Game {
   }
 
   public void greetingFromNick(){
-    String javaGreeting = "How may I be of help?";
+    String javaGreeting = "Let's learn Java.\nCouple of months later...\nAre you ready to take the exam?";
     System.out.println(Nick.greeting() + javaGreeting);
   }
 
-  public void greetingWhereIsNick(){
-    System.out.println("WHERE IS NICK!?");
-  }
+
   public void printDontHaveKey() throws IOException, ParseException {
     System.out.println("You can't enter this room because you don't have the key to unlock this door.");
     System.out.println("Maybe go to last room and pass the exam?");
