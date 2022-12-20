@@ -32,7 +32,7 @@ public class Game {
   private boolean htmlKey = false;
   private boolean pythonKey = false;
   private boolean javaKey = false;
-  public static final String BUNSENBURNER = "./resources/audio/BunsenBurner.wav";
+  private static final String BUNSENBURNER = "./resources/audio/BunsenBurner.wav";
 
 
   public Game() throws IOException {
