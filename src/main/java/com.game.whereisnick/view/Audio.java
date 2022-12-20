@@ -89,12 +89,17 @@ public class Audio implements LineListener, Runnable {
   }
 
   public static void main(String[] args) {
+    String audioFilePath = "correct.wav";
+    Audio player = new Audio();
+    player.play(audioFilePath);
+  }
+
    /* String audioFilePath = "./resources/audio/correct.wav";
     Audio player = new Audio();
     player.play(audioFilePath);*/
 
 
-  }
+
 
   @Override
   public void run() {

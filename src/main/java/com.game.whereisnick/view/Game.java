@@ -3,6 +3,7 @@ package com.game.whereisnick.view;
 import com.game.whereisnick.model.Direction;
 import com.game.whereisnick.model.Exam;
 import com.game.whereisnick.model.Instructor;
+import com.game.whereisnick.model.Music;
 import com.game.whereisnick.model.Room;
 import com.game.whereisnick.model.School;
 import com.game.whereisnick.model.Student;
@@ -29,19 +30,31 @@ public class Game {
   private static String quitSynonymns[] = {"no", "n", "quit", "q"};
   private static String yesSynonymns[] = {"yes", "y", "play"};
   private String[] directionCommands = {"go", "run", "move", "walk"};
+  private boolean htmlKey = false;
+  private boolean pythonKey = false;
+  private boolean javaKey = false;
+  private static final String BUNSENBURNER = "./resources/audio/BunsenBurner.wav";
   private boolean jsKey=false;
-  private boolean pythonKey=false;
-  private boolean javaKey=false;
   private boolean findNick = false;
-
 
   public Game() throws IOException, ParseException {
     showGameSplash();
+    playMusicInBackground();
     introduction();
+//    askToBeginGame();
     setUpInstances();
     checkLocation();
-
+//    student.getLocation();
   }
+
+
+  private void playMusicInBackground() {
+    Music musicObject = new Music();
+    String filepath = BUNSENBURNER; // put filepath here, ex: musicPlayBackground.wav
+    musicObject.playMusic(filepath);
+  }
+
+
 
   // Shows the splash screen during start of the game.
   private void showGameSplash() {
@@ -64,13 +77,16 @@ public class Game {
             + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n"
             + " You can type your name to start the game, after game starts, quit the game anytime by typing q or quit.");
   }
-  
+
   public static String getUserChoice() throws IOException {
-    inputBuffer = new BufferedReader (new InputStreamReader (System.in));
+    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
     String inputScan = inputBuffer.readLine();
     String userInput = inputScan.toString().toLowerCase();
     return userInput;
   }
+
+
+  
 
 
   //Clear the screen before displaying it in console
@@ -125,17 +141,18 @@ public class Game {
 
   public static boolean checkIfUserQuit(String input) throws IOException {
     boolean quit = false;
-    if(Arrays.asList(quitSynonymns).contains(input)){
+    if (Arrays.asList(quitSynonymns).contains(input)) {
       System.out.println("Are you sure you want to quit?");
       userInput = getUserChoice();
-      if(Arrays.asList(yesSynonymns).contains(userInput)){
+      if (Arrays.asList(yesSynonymns).contains(userInput)) {
         quit = true;
       }
-    }else{
+    } else {
       quit = false;
     }
     return quit;
   }
+
 
 
 
@@ -231,31 +248,31 @@ public class Game {
     }
   }
 
-  private void checkWhereCanGo(){
+
+
+  private void checkWhereCanGo() {
     Room currentLocation = student.getLocation();
     ArrayList<String> exit = new ArrayList<>();
 
-    if(currentLocation.getnRoom()!=null){
+    if (currentLocation.getnRoom() != null) {
       exit.add(Direction.NORTH.toString());
     }
 
-    if(currentLocation.getsRoom()!=null){
+    if (currentLocation.getsRoom() != null) {
       exit.add(Direction.SOUTH.toString());
     }
 
-    if(currentLocation.getwRoom()!=null){
+    if (currentLocation.getwRoom() != null) {
       exit.add(Direction.WEST.toString());
     }
-    if(currentLocation.geteRoom()!=null){
+    if (currentLocation.geteRoom() != null) {
       exit.add(Direction.EAST.toString());
     }
 
     System.out.println("\n=============================================");
-    System.out.printf("%s can go %s from current location --- %s.\n",student.getName(),exit,currentLocation.getName());
+    System.out.printf("%s can go %s from current location.\n", student.getName(), exit);
     System.out.println("\n=============================================");
   }
-
-
 
 
 
@@ -291,49 +308,55 @@ public class Game {
             "Congratulations! %s give you the key and you can use it to unlock Python Room.",
             jsRoom.getInstructor().getName());
         pythonKey = true;
-      } else if (room.equals(pythonRoom)) {
-        System.out.println("Congratulations! You got the key to Java Room.");
-        javaKey = true;
-      } else if (room.equals(javaRoom)) {
-        System.out.println("Congratulations! You graduated from TLG school.");
       }
+    } else if (room.equals(pythonRoom)) {
+      if (Exam.passPython) {
+        System.out.printf(
+            "Congratulations! %s give you the key and you can use it to unlock Java Room.",
+            jsRoom.getInstructor().getName());
+        javaKey = true;
+      }
+    } else if (room.equals(javaRoom)) {
+      if (Exam.passJava) {
+        System.out.printf(
+            "Congratulations! %s give you the diploma and you are graduated from TLG.",
+            jsRoom.getInstructor().getName());
+//        pythonKey = true;
+      }
+
     }
   }
-
-  
-
 
   public String executeCommand(String input) throws IOException, ParseException {
 
     String result = "";
-    if(input.equals("q") || input.equals("quit")){
+    if (input.equals("q") || input.equals("quit")) {
 
       result = "Quiting the game...";
 
     }
     else if(input.isEmpty()){
       result = "You can't leave it blank. You must enter a command!";
-    }
-    else if(input.equals("hint")){
+    } else if (input.equals("hint")) {
       checkWhereCanGo();
-    }
-    else if(input.equals("map")){
+    } else if (input.equals("map")) {
       getMap();
-    }
-    else if(input.equals("help")){
+    } else if (input.equals("help")) {
       commandList();
-    }
-    else if(input.equals("where")){
+    } else if (input.equals("where")) {
       checkLocation();
-    } else{
+    }
+    // TODO: 12/15/22  check whether the input is q or help after updated the methods from remote dev
+
+     else{
       String[] inputArr = convertInputToArray(input);
 
-      result =parseCommand(inputArr);
+      result = parseCommand(inputArr);
     }
     return result;
   }
 
-  public String[] convertInputToArray(String input){
+  public String[] convertInputToArray(String input) {
     return input.split(" ");
   }
 
@@ -341,10 +364,10 @@ public class Game {
     String result = "";
     String firstWord = arr[0];
 
-    if(Array.getLength(arr)==2 && Arrays.asList(directionCommands).contains(firstWord)){
+    if (Array.getLength(arr) == 2 && Arrays.asList(directionCommands).contains(firstWord)) {
       String secondWord = arr[1];
 
-      switch (secondWord){
+      switch (secondWord) {
         case "north":
           moveTo(Direction.NORTH);
           break;
@@ -358,24 +381,25 @@ public class Game {
           moveTo(Direction.EAST);
           break;
         default:
-          result = secondWord +" is not a valid word.";
+          result = secondWord + " is not a valid word.";
           break;
       }
-    }else if(!Arrays.asList(directionCommands).contains(firstWord)){
-      result = firstWord +" is not a valid word.";
+    } else if (!Arrays.asList(directionCommands).contains(firstWord)) {
+      result = firstWord + " is not a valid word.";
       // TODO: 12/15/22 add get command later for another ticket
 
-    }else{
+    } else {
       result = "You can only type 2 words as command.";
     }
     return result;
   }
 
 
-  public void graduationGreeting(){
+  public void graduationGreeting() {
     System.out.println(" Congratulations! " + student.getName() + "you've graduated from TLG!");
 
   }
+
   // create command list method
   public void commandList() throws IOException {
 
