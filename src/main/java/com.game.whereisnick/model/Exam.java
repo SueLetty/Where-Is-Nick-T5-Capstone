@@ -46,7 +46,7 @@ public class Exam {
     Gson gson = new Gson();
     JsonObject obj = gson.fromJson(
         new BufferedReader(new FileReader(filePath)), JsonObject.class);
-    JsonArray arr = (JsonArray) obj.get("HTML Room");
+    JsonArray arr = (JsonArray) obj.get(room.getName());
     parseQuizFromJson(arr, room);
 
   }

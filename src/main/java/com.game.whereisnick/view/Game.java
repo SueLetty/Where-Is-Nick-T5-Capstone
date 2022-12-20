@@ -271,7 +271,6 @@ public class Game {
 
     System.out.println("\n=============================================");
     System.out.printf("%s can go %s from current location.\n", student.getName(), exit);
-    System.out.printf("%s can go %s from current location --- %s.\n",student.getName(),exit,currentLocation.getName());
     System.out.println("\n=============================================");
   }
 
@@ -297,20 +296,6 @@ public class Game {
     Room jsRoom = TLGSchool.getRooms().get(2);
     Room pythonRoom = TLGSchool.getRooms().get(3);
     Room javaRoom = TLGSchool.getRooms().get(5);
-    if (room.equals(htmlRoom)) {
-      if (Exam.passHTML) {
-        System.out.println("Congratulations! You got the key to JavaScript Room.");
-        htmlKey = true;
-      }
-    } else if (room.equals(jsRoom)) {
-      System.out.println("Congratulations! You got the key to Python Room.");
-      pythonKey = true;
-    } else if (room.equals(pythonRoom)) {
-      System.out.println("Congratulations! You got the key to Java Room.");
-      javaKey = true;
-    } else if (room.equals(javaRoom)) {
-      System.out.println("Congratulations! You graduated from TLG school.");
-    }
     if(room.equals(htmlRoom)){
       if(Exam.passHTML){
         System.out.printf("Congratulations! %s give you the key and you can use it to unlock JavaScript Room.", htmlRoom.getInstructor().getName());
@@ -323,12 +308,22 @@ public class Game {
             "Congratulations! %s give you the key and you can use it to unlock Python Room.",
             jsRoom.getInstructor().getName());
         pythonKey = true;
-      } else if (room.equals(pythonRoom)) {
-        System.out.println("Congratulations! You got the key to Java Room.");
-        javaKey = true;
-      } else if (room.equals(javaRoom)) {
-        System.out.println("Congratulations! You graduated from TLG school.");
       }
+    } else if (room.equals(pythonRoom)) {
+      if (Exam.passPython) {
+        System.out.printf(
+            "Congratulations! %s give you the key and you can use it to unlock Java Room.",
+            jsRoom.getInstructor().getName());
+        javaKey = true;
+      }
+    } else if (room.equals(javaRoom)) {
+      if (Exam.passJava) {
+        System.out.printf(
+            "Congratulations! %s give you the diploma and you are graduated from TLG.",
+            jsRoom.getInstructor().getName());
+//        pythonKey = true;
+      }
+
     }
   }
 
