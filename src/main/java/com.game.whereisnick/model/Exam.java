@@ -22,7 +22,7 @@ public class Exam {
   private static final String PYTHONFILENAME = "./resources/questionsPython.json";
   private static final String JAVAFILENAME = "./resources/questionsJava.json";
   private static final String CORRECTAUDIO = "./resources/audio/correct.wav";
-  private static final String WRONGAUDIO = "./resources/audio/wrong.wav";
+  private static final String WRONGAUDIO = "./resources/audio/wrongCopy.wav";
 
   public Exam() {
 
@@ -64,16 +64,16 @@ public class Exam {
     do {
       for (int i = 0; i < 5; i++) {
         JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-        System.out.println(jsonObject.get("Question"));
-        System.out.println("a. " + jsonObject.get("a"));
-        System.out.println("b. " + jsonObject.get("b"));
-        System.out.println("c. " + jsonObject.get("c"));
-        System.out.println("d. " + jsonObject.get("d"));
+        System.out.println(jsonObject.get("Question").toString().replaceAll("\"", ""));
+        System.out.println("a. " + jsonObject.get("a").toString().replaceAll("\"", ""));
+        System.out.println("b. " + jsonObject.get("b").toString().replaceAll("\"", ""));
+        System.out.println("c. " + jsonObject.get("c").toString().replaceAll("\"", ""));
+        System.out.println("d. " + jsonObject.get("d").toString().replaceAll("\"", ""));
         System.out.println("\n  Enter your answer: ");
         answer = Game.getUserChoice();
         checkIfUserQuit = Game.checkIfUserQuit(answer);
         if(checkIfUserQuit){
-          System.out.println("Quitting game....");
+          System.out.println("Quitting exam....");
           break;
         }
         String actualAnswer = jsonObject.get("answer").getAsString();
@@ -89,16 +89,12 @@ public class Exam {
     System.out.println("\n\n");
     if(room.getName().equals("HTML Room") && correctAnswer>3){
       passHTML = true;
-      System.out.println("pass html: " +passHTML);
     }else if(room.getName().equals("JavaScript Room")&& correctAnswer>3){
       passJs = true;
-      System.out.println("pass js: " +passJs);
     }else if(room.getName().equals("Python Room")&& correctAnswer>3){
       passPython = true;
-      System.out.println("pass python: " +passPython);
     }else if(room.getName().equals("Java Room")&& correctAnswer>3){
       passJava = true;
-      System.out.println("pass java: " +passJava);
     }
 
   }

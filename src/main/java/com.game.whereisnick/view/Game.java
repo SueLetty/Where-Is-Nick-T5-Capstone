@@ -33,6 +33,7 @@ public class Game {
   private boolean pythonKey=false;
   private boolean javaKey=false;
 
+  private boolean findNick = false;
 
   private boolean wentToJavaWithoutNick=false;
 
@@ -307,30 +308,31 @@ public class Game {
     Room javaRoom = TLGSchool.getRooms().get(5);
     if(room.equals(htmlRoom)){
       if(Exam.passHTML){
-        System.out.printf("Congratulations! %s give you the key and you can use it to unlock JavaScript Room.", htmlRoom.getInstructor().getName());
+        System.out.printf("Congratulations! %s gives you the key and you can use it to unlock JavaScript Room.", htmlRoom.getInstructor().getName());
         jsKey = true;
       }
     }else if(room.equals(jsRoom)) {
 
       if (Exam.passJs) {
         System.out.printf(
-            "Congratulations! %s give you the key and you can use it to unlock Python Room.",
+            "Congratulations! %s gives you the key and you can use it to unlock Python Room.",
             jsRoom.getInstructor().getName());
         pythonKey = true;
       }
     } else if (room.equals(pythonRoom)) {
         if (Exam.passPython) {
           System.out.printf(
-              "Congratulations! %s give you the key and you can use it to unlock Java Room.",
-              jsRoom.getInstructor().getName());
+              "Congratulations! %s gives you the key and you can use it to unlock Java Room.",
+              pythonRoom.getInstructor().getName());
           javaKey = true;
         }
       } else if (room.equals(javaRoom)) {
       if (Exam.passJava) {
         System.out.printf(
-            "Congratulations! %s give you the diploma and you are graduated from TLG.",
-            jsRoom.getInstructor().getName());
-//        pythonKey = true;
+            "--------Congratulations! %s gives you the diploma and you are graduated from TLG.--------\n",
+            javaRoom.getInstructor().getName());
+        System.exit(0);
+
       }
 
       }

@@ -33,12 +33,12 @@
       "Question": "How do you declare a JavaScript variable x?"
     },
     {
-      "d": "14",
-      "c": "\"347\"",
-      "b": "\"77\"",
-      "a": "77",
-      "answer": "b",
-      "Question": "var x = 3 + 4 + \"7\""
+      "d": "yes",
+      "c": "no",
+      "b": "it depends",
+      "a": "maybe",
+      "answer": "d",
+      "Question": "Can you assign an anonymous function to a variable and pass it as an argument to another function?"
     }
   ]
 }

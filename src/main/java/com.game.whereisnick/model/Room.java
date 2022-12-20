@@ -10,7 +10,7 @@ public class Room {
   private Room wRoom;
   private Room eRoom;
   private Instructor instructor;
-  private Item key;
+//  private Item key;
   private Exam exam;
 
   public Room(String name, String description) {
@@ -78,13 +78,13 @@ public class Room {
     this.instructor = instructor;
   }
 
-  public Item getKey() {
-    return key;
-  }
+//  public Item getKey() {
+//    return key;
+//  }
 
-  public void setKey(Item key) {
-    this.key = key;
-  }
+//  public void setKey(Item key) {
+//    this.key = key;
+//  }
 
   public Exam getExam() {
     return exam;

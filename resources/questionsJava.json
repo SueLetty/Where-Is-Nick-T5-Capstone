@@ -13,7 +13,7 @@
       "c": "int myArray [] [] = {1,2,3,4};",
       "b": "int [] myArray = (5, 4, 3);",
       "a": "int [] myArray = {“1”, “2”, “3”};",
-      "answer": "a",
+      "answer": "d",
       "Question": "Which of the below is valid way to instantiate an array in java?"
     },
     {
@@ -33,12 +33,12 @@
       "Question": "Which data type is used to create a variable that should store text?"
     },
     {
-      "d": "The \"extend\" keyword is used to extend a class in java.",
-      "c": "You can extend multiple classes in java.",
-      "b": "Private members of the superclass are accessible to the subclass.",
-      "a": "We can’t extend Final classes in java.",
-      "answer": "d",
-      "Question": "Which of the following statements are true for inheritance in Java?"
+      "d": "JRE",
+      "c": "JIT",
+      "b": " JDK",
+      "a": "JVM",
+      "answer": "b",
+      "Question": "Which component is used to compile, debug and execute the java programs?"
     }
   ]
 }

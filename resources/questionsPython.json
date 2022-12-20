@@ -5,16 +5,16 @@
       "c": "True",
       "b": "-33",
       "a": "None of the above",
-      "answer": "b",
+      "answer": "c",
       "Question": "What is output of: 33 == 33.0"
     },
     {
-      "d": "echo \"Hello World\"",
-      "c": "print \"Hello World\"",
-      "b": "p \"Hello World\"",
-      "a": "echo (\"Hello World\")",
-      "answer": "c",
-      "Question": "What is a correct syntax to output \"Hello World\" in Python?"
+      "d": "object-oriented programming",
+      "c": "structured programming",
+      "b": "functional programming",
+      "a": "all of the mentioned",
+      "answer": "a",
+      "Question": "Which type of Programming does Python support?"
     },
     {
       "d": ".py",

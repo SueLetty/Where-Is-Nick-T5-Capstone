@@ -14,10 +14,10 @@ public class Student extends Character{
     return points += 25;
   }
 
-  public void addInventory(Item thing){
-    ArrayList<Item> inventory = super.getInventory();
-    inventory.add(thing);
-  }
+//  public void addInventory(Item thing){
+//    ArrayList<Item> inventory = super.getInventory();
+//    inventory.add(thing);
+//  }
 
   public Room getLocation() {
     return location;
