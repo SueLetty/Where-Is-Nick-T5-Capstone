@@ -33,6 +33,9 @@ public class Game {
   private boolean pythonKey=false;
   private boolean javaKey=false;
   private boolean findNick = false;
+  private boolean wentToJavaWithoutNick=false;
+
+
 
 
   public Game() throws IOException, ParseException {
@@ -127,6 +130,9 @@ public class Game {
     System.out.println("\n=============================================");
     System.out.println("Current Room: " + currentLocation.getName());
     System.out.println("\n=============================================");
+    if(currentLocation.getName().equals("Java Room") && javaKey){
+      wentToJavaWithoutNick = true;
+    }
     showGreeting(currentLocation);
   }
 
@@ -151,7 +157,6 @@ public class Game {
       student.setLocation(exit);
       Room location = student.getLocation();
       checkLocation();
-//      executeDifferentExam(location);
 
     }else{
       System.out.println("No exit! Choose another direction.");
@@ -166,52 +171,72 @@ public class Game {
     Room htmlRoom = TLGSchool.getRooms().get(1);
     Room jsRoom = TLGSchool.getRooms().get(2);
     Room pythonRoom = TLGSchool.getRooms().get(3);
+    Room studyRoom = TLGSchool.getRooms().get(4);
     Room javaRoom = TLGSchool.getRooms().get(5);
+
     if(room.equals(lobby)){
       greetingFromJeanette();
-
     }else if(room.equals(htmlRoom)){
       if(Exam.passHTML){
-        System.out.println("You already passed the exam. Go check other places.");
+        System.out.println("You already passed the HTML exam. Go check other places.");
       }else{
         greetingFromDonte();
-//        executeDifferentExam(htmlRoom);
         executeExamCommand(htmlRoom);
       }
     }else if(room.equals(jsRoom)){
       if(!jsKey){
         printDontHaveKey();
       }else if(Exam.passJs){
-        System.out.println("You already passed the exam. Go check other places.");
+        System.out.println("You already passed the JavaScript exam. Go check other places.");
       } else{
         greetingFromNelly();
         executeExamCommand(jsRoom);
       }
 
-
     }else if(room.equals(pythonRoom)){
       if(!pythonKey){
         printDontHaveKey();
       }else if(Exam.passPython){
-        System.out.println("You already passed the exam. Go check other places.");
+        System.out.println("You already passed the Python exam. Go check other places.");
       } else{
         greetingFromChad();
         executeExamCommand(pythonRoom);
       }
-
-    }else if(room.equals(javaRoom)){
+    }else if(room.equals(studyRoom)){
+      if(!javaKey || !wentToJavaWithoutNick){
+        System.out.println("SHH...Nick is playing guitar.");
+      }else if(javaKey && wentToJavaWithoutNick){
+        System.out.println("Nick says: \"I know what happened. Come and fly with me to Java Room.\"\n");
+        findNick=true;
+        javaRoom.setInstructor(Nick);
+        student.setLocation(javaRoom);
+        greetingFromNick();
+        executeExamCommand(javaRoom);
+      }
+//      if(wentToJavaWithoutNick){
+//        System.out.println("SHH...Nick is playing guitar.");
+//      }else{
+//        System.out.println("Nick says: \"I know what happened. Come and fly with me to Java Room.\"\n");
+//        findNick=true;
+//        javaRoom.setInstructor(Nick);
+//        student.setLocation(javaRoom);
+//        showGreeting(javaRoom);
+//      }
+    } else if(room.equals(javaRoom)){
       if(!javaKey){
         printDontHaveKey();
       }else if(Exam.passJava){
         System.out.println("You already passed all of the exam. AAAAAAAAAAAAAA");
 
       } else if(!findNick){
-        System.out.println("Oh no, you need someone to translate the code.");
-      }else{
-        greetingFromNick();
-        executeExamCommand(javaRoom);
-
+        encryptedmessage();
+//        System.out.println("Oh no, you need someone to translate the code.");
       }
+//      else{
+//        greetingFromNick();
+//        executeExamCommand(javaRoom);
+//
+//      }
     }
   }
 
@@ -360,6 +385,9 @@ public class Game {
       result = "You can only type 2 words as command.";
     }
     return result;
+  }
+  public void encryptedmessage(){
+    System.out.println("$$WHGEH&*BEDE@@ILRIENGT*EBEAA975%FE#HGHJUUTJN RF#WWW YTU$BD @GE &EHGEHH%E$SWHEH*NFDEREDG@B GHR8543!GHR HRHSHJJ&09$22GENES@G!\nOh no, you need to find someone to translate this excrypted message.");
   }
 
 
