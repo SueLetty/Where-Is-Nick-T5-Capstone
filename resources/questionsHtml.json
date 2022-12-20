@@ -6,7 +6,7 @@
       "b": "Hyper Text Markup Language",
       "a": "Home Text Markup Language",
       "answer": "b",
-      "Question": "What does HTML stand for?\n"
+      "Question": "What does HTML stand for?"
     },
     {
       "d": " head",
@@ -14,7 +14,11 @@
       "b": "<h6>",
       "a": "<h10>",
       "answer": "c",
+<<<<<<< HEAD
       "Question": "Which tag is used for inserting the largest heading in HTML?\n"
+=======
+      "Question": "Which tag is used for inserting the largest heading in HTML?"
+>>>>>>> 1631f8edb78b742ea5ce3cda18dedfd4582a2240
     },
     {
       "d": "<image>",
@@ -22,7 +26,7 @@
       "b": "<pic>",
       "a": "<img>",
       "answer": "a",
-      "Question": "What is the HTML element used to display an image?\n"
+      "Question": "What is the HTML element used to display an image?"
     },
     {
       "d": "<table>",
@@ -30,7 +34,7 @@
       "b": "<td>",
       "a": "<tr>",
       "answer": "a",
-      "Question": "Which of the following table tags is used to create a table row?\n"
+      "Question": "Which of the following table tags is used to create a table row?"
     },
     {
       "d": "Charles Babbage",

@@ -18,10 +18,13 @@ public class Room {
     this.description = description;
   }
 
+<<<<<<< HEAD
 //  public Room(String name) {
 //    this.name = name;
 //  }
 
+=======
+>>>>>>> 1631f8edb78b742ea5ce3cda18dedfd4582a2240
   public String welcome(){
     return "Welcome to "+ name;
   }

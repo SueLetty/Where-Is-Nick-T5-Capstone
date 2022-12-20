@@ -1,6 +1,7 @@
 package com.game.whereisnick.view;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.sound.sampled.AudioFormat;
@@ -19,7 +20,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author www.codejava.net
  *
  */
-public class Audio implements LineListener {
+public class Audio implements LineListener, Runnable {
 
   /**
    * this flag indicates whether the playback completes or not.
@@ -93,4 +94,15 @@ public class Audio implements LineListener {
     player.play(audioFilePath);
   }
 
+   /* String audioFilePath = "./resources/audio/correct.wav";
+    Audio player = new Audio();
+    player.play(audioFilePath);*/
+
+
+
+
+  @Override
+  public void run() {
+
+  }
 }

@@ -1,0 +1,44 @@
+{
+  "Python Room": [
+    {
+      "d": "Flase",
+      "c": "True",
+      "b": "-33",
+      "a": "None of the above",
+      "answer": "b",
+      "Question": "What is output of: 33 == 33.0"
+    },
+    {
+      "d": "echo \"Hello World\"",
+      "c": "print \"Hello World\"",
+      "b": "p \"Hello World\"",
+      "a": "echo (\"Hello World\")",
+      "answer": "c",
+      "Question": "What is a correct syntax to output \"Hello World\" in Python?"
+    },
+    {
+      "d": ".py",
+      "c": ".pyth",
+      "b": ".pt",
+      "a": ".python",
+      "answer": "d",
+      "Question": "What is the correct file extension for Python files?"
+    },
+    {
+      "d": "uppercase()",
+      "c": "upperCase()",
+      "b": "toUpperCase()",
+      "a": "upper()",
+      "answer": "a",
+      "Question": "Which method can be used to return a string in upper case letters?"
+    },
+    {
+      "d": "switch()",
+      "c": "replaceString()",
+      "b": "repl()",
+      "a": "replace()",
+      "answer": "a",
+      "Question": "Which method can be used to replace parts of a string?"
+    }
+  ]
+}

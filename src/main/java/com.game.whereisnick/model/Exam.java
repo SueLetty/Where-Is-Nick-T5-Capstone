@@ -12,12 +12,12 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 
-
 public class Exam {
-  public static boolean passHTML =false;
-  public static boolean passJs =false;
-  public static boolean passPython =false;
-  public static boolean passJava =false;
+
+  public static boolean passHTML = false;
+  public static boolean passJs = false;
+  public static boolean passPython = false;
+  public static boolean passJava = false;
   public static final String HTMLFILENAME = "./resources/questionsHtml.json";
   public static final String JSFILENAME = "./resources/questionsJavascript.json";
   public static final String PYTHONFILENAME = "./resources/questionsPython.json";
@@ -26,13 +26,11 @@ public class Exam {
   public static final String WRONGAUDIO = "./resources/audio/wrong.wav";
 
 
-  public static void main(String[] args) throws IOException {
-  Room room = new Room("HTML Room", "hello");
-    startQuiz(room);
-
+  public Exam() {
+    super();
   }
 
-  public static void startQuiz(Room room) throws IOException{
+  public static void startQuiz(Room room) throws IOException {
     String filePath;
     if (room.getName().equals("HTML Room")) {
       filePath = HTMLFILENAME;
@@ -53,7 +51,7 @@ public class Exam {
 
   }
 
-   private static void parseQuizFromJson(JsonArray jsonArray, Room room) throws IOException {
+  private static void parseQuizFromJson(JsonArray jsonArray, Room room) throws IOException {
     int correctAnswer = 0;
     String answer = "";
     boolean checkIfUserQuit = false;
@@ -68,45 +66,55 @@ public class Exam {
         System.out.println("\n  Enter your answer: ");
         answer = Game.getUserChoice();
         checkIfUserQuit = Game.checkIfUserQuit(answer);
-        if(checkIfUserQuit){
+        if (checkIfUserQuit) {
           System.out.println("Quitting game....");
           break;
         }
         String actualAnswer = jsonObject.get("answer").getAsString();
         correctAnswer = checkCorrectAnswerAndReturnCounter(correctAnswer, answer, actualAnswer);
       }
-      if (correctAnswer < 4){
+      if (correctAnswer < 4) {
         System.out.println("\n\n You failed the exam. Please retake the exam! \n");
         correctAnswer = 0;
       }
     }
-    while (correctAnswer <4 && !checkIfUserQuit);
+    while (correctAnswer < 4 && !checkIfUserQuit);
     System.out.printf("Result:You got: %d out of 5", correctAnswer);
     System.out.println("\n\n");
-    if(room.getName().equals("HTML Room")){
+    if (room.getName().equals("HTML Room")) {
       passHTML = true;
-    }else if(room.getName().equals("JavaScript Room")){
+    } else if (room.getName().equals("JavaScript Room")) {
       passJs = true;
-    }else if(room.getName().equals("Python Room")){
+    } else if (room.getName().equals("Python Room")) {
       passPython = true;
-    }else if(room.getName().equals("Java Room")){
+    } else if (room.getName().equals("Java Room")) {
       passJava = true;
     }
-     System.out.println(passHTML);
-     System.out.println(passPython);
-     System.out.println(passJava);
-     System.out.println(passJs);
+    System.out.println(passHTML);
+    System.out.println(passPython);
+    System.out.println(passJava);
+    System.out.println(passJs);
+    if (room.getName().equals("HTML Room") && correctAnswer > 3) {
+      passHTML = true;
+      System.out.println(passHTML);
+    } else if (room.getName().equals("JavaScript Room") && correctAnswer > 3) {
+      passJs = true;
+    } else if (room.getName().equals("Python Room") && correctAnswer > 3) {
+      passPython = true;
+    } else if (room.getName().equals("Java Room") && correctAnswer > 3) {
+      passJava = true;
+    }
 
   }
 
-  private static int checkCorrectAnswerAndReturnCounter(int correctAnswer, String answer, String actualAnswer) {
+  private static int checkCorrectAnswerAndReturnCounter(int correctAnswer, String answer,
+      String actualAnswer) {
     Audio audio = new Audio();
-    if(answer.equals(actualAnswer)){
-      correctAnswer +=1;
+    if (answer.equals(actualAnswer)) {
+      correctAnswer += 1;
       System.out.println("Correct! \n");
       audio.play(CORRECTAUDIO);
-    }
-    else {
+    } else {
       System.out.println("Not correct! \n");
       audio.play(WRONGAUDIO);
     }
