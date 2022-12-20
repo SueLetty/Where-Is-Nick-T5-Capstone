@@ -28,24 +28,64 @@ public class Game {
   private static String quitSynonymns[] = {"no", "n", "quit", "q"};
   private static String yesSynonymns[] = {"yes", "y", "play"};
   private String[] directionCommands = {"go", "run", "move", "walk"};
-  private boolean htmlKey=false;
+  private boolean jsKey=false;
   private boolean pythonKey=false;
   private boolean javaKey=false;
+  private boolean findNick = false;
 
 
-  public Game() throws IOException {
+  public Game() throws IOException, ParseException {
     showGameSplash();
     introduction();
-//    askToBeginGame();
     setUpInstances();
     checkLocation();
-//    student.getLocation();
+
+  }
+
+  // Shows the splash screen during start of the game.
+  private void showGameSplash() {
+    System.out.println(
+        "  __      __.__                           .___          _______  .__        __     ._.\n"
+            + "/ \\    /  \\  |__   ___________   ____   |   | ______  \\      \\ |__| ____ |  | __ | |\n"
+            + "\\   \\/\\/   /  |  \\_/ __ \\_  __ \\_/ __ \\  |   |/  ___/  /   |   \\|  |/ ___\\|  |/ / | |\n"
+            + " \\        /|   Y  \\  ___/|  | \\/\\  ___/  |   |\\___ \\  /    |    \\  \\  \\___|    <   \\|\n"
+            + "  \\__/\\  / |___|  /\\___  >__|    \\___  > |___/____  > \\____|__  /__|\\___  >__|_ \\  __\n"
+            + "       \\/       \\/     \\/            \\/           \\/          \\/        \\/     \\/  \\/"
+    );
+  }
+
+  //Display game introduction/ scenario
+  public void introduction() {
+    System.out.println(
+        " Introduction: You are now currently enrolled as a student of TLG Learning Facility.\n"
+            + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
+            + " Upon completion of your orientation, you'll now navigate your way through different levels of coding classes in order to graduate\n"
+            + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n"
+            + " You can type your name to start the game, after game starts, quit the game anytime by typing q or quit.");
+  }
+  
+  public static String getUserChoice() throws IOException {
+    inputBuffer = new BufferedReader (new InputStreamReader (System.in));
+    String inputScan = inputBuffer.readLine();
+    String userInput = inputScan.toString().toLowerCase();
+    return userInput;
   }
 
 
-
+  //Clear the screen before displaying it in console
+  public static void clearScreen() throws IOException {
+    //Clears Screen in java
+    try {
+      if (System.getProperty("os.name").contains("Windows")) {
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+      } else {
+        System.out.print("\033\143");
+      }
+    } catch (IOException | InterruptedException ex) {
+    }
+  }
+  
   public void setUpInstances() throws IOException {
-
     System.out.println("\nEnter your name: ");
     String name = getUserChoice();
     student = new Student(name, "student");
@@ -74,51 +114,12 @@ public class Game {
     javaRoom.setwRoom(htmlRoom);
     javaRoom.setnRoom(pythonRoom);
     student.setLocation(lobby);
+    lobby.setInstructor(Jeanette);
+    htmlRoom.setInstructor(Donte);
+    jsRoom.setInstructor(Nelly);
+    pythonRoom.setInstructor(Chad);
+    studyRoom.setInstructor(Nick);
     TLGSchool.addRooms(lobby, htmlRoom,jsRoom,pythonRoom,studyRoom,javaRoom);
-  }
-
-
-  // Shows the splash screen during start of the game.
-  private void showGameSplash() {
-    System.out.println(
-        "  __      __.__                           .___          _______  .__        __     ._.\n"
-            + "/ \\    /  \\  |__   ___________   ____   |   | ______  \\      \\ |__| ____ |  | __ | |\n"
-            + "\\   \\/\\/   /  |  \\_/ __ \\_  __ \\_/ __ \\  |   |/  ___/  /   |   \\|  |/ ___\\|  |/ / | |\n"
-            + " \\        /|   Y  \\  ___/|  | \\/\\  ___/  |   |\\___ \\  /    |    \\  \\  \\___|    <   \\|\n"
-            + "  \\__/\\  / |___|  /\\___  >__|    \\___  > |___/____  > \\____|__  /__|\\___  >__|_ \\  __\n"
-            + "       \\/       \\/     \\/            \\/           \\/          \\/        \\/     \\/  \\/"
-    );
-  }
-
-  //Display game introduction/ scenario
-  public void introduction() {
-    System.out.println(
-        " Introduction: You are now currently enrolled as a student of TLG Learning Facility.\n"
-            + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
-            + " Upon completion of your orientation, you'll now navigate your way through different levels of coding classes in order to graduate\n"
-            + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n"
-            + " You can type your name to start the game, after game starts, quit the game anytime by typing q or quit.");
-  }
-
-  public static String getUserChoice() throws IOException {
-    inputBuffer = new BufferedReader (new InputStreamReader (System.in));
-    String inputScan = inputBuffer.readLine();
-    String userInput = inputScan.toString().toLowerCase();
-    return userInput;
-  }
-
-
-  //Clear the screen before displaying it in console
-  public static void clearScreen() throws IOException {
-    //Clears Screen in java
-    try {
-      if (System.getProperty("os.name").contains("Windows")) {
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-      } else {
-        System.out.print("\033\143");
-      }
-    } catch (IOException | InterruptedException ex) {
-    }
   }
 
   public static boolean checkIfUserQuit(String input) throws IOException {
@@ -135,15 +136,15 @@ public class Game {
     return quit;
   }
 
-  // create command list method
-  public void commandList() throws IOException {
 
-        System.out.println("Please select from the following commands : \n");
-        System.out.println("You can type go/run/move to directions north/east/south/west\n"
-            + "to navigate through this game!\n\n"
-            + "Please type yes/no when being asked a question.\n\n"
-            + "You can type grab/receive/get to access your key/diploma.");
-    }
+
+  public void checkLocation() throws IOException, ParseException {
+    Room currentLocation = student.getLocation();
+    System.out.println("\n=============================================");
+    System.out.println("Current Room: " + currentLocation.getName());
+    System.out.println("\n=============================================");
+    showGreeting(currentLocation);
+  }
 
   private void moveTo(Direction dir) throws IOException {
     Room currentLocation = student.getLocation();
@@ -166,40 +167,66 @@ public class Game {
       student.setLocation(exit);
       Room location = student.getLocation();
       checkLocation();
-      executeDifferentExam(location);
 
     }else{
       System.out.println("No exit! Choose another direction.");
     }
   }
 
-  public void checkLocation(){
-    Room currentLocation = student.getLocation();
-    System.out.println("\n=============================================");
-    System.out.println("Current Room: " + currentLocation.getName());
-    System.out.println("\n=============================================");
-    showGreeting(currentLocation);
-  }
 
 
-  private void showGreeting(Room room){
+  private void showGreeting(Room room) throws IOException, ParseException {
     // TODO: 12/18/22 may need remove passed eaxm print out and change if(Exam.passHTML) to check if(htmlRoom.firstTime)
-    if(room.equals(TLGSchool.getRooms().get(0))){
+    Room lobby = TLGSchool.getRooms().get(0);
+    Room htmlRoom = TLGSchool.getRooms().get(1);
+    Room jsRoom = TLGSchool.getRooms().get(2);
+    Room pythonRoom = TLGSchool.getRooms().get(3);
+    Room javaRoom = TLGSchool.getRooms().get(5);
+    
+    if(room.equals(lobby)){
       greetingFromJeanette();
 
-    }else if(room.equals(TLGSchool.getRooms().get(1))){
+    }else if(room.equals(htmlRoom)){
       if(Exam.passHTML){
         System.out.println("You already passed the exam. Go check other places.");
       }else{
         greetingFromDonte();
+        executeExamCommand(htmlRoom);
+      }
+    }else if(room.equals(jsRoom)){
+      if(!jsKey){
+        printDontHaveKey();
+      }else if(Exam.passJs){
+        System.out.println("You already passed the exam. Go check other places.");
+      } else{
+        greetingFromNelly();
+        executeExamCommand(jsRoom);
       }
 
-    }else if(room.equals(TLGSchool.getRooms().get(2))){
-      greetingFromNelly();
-    }else if(room.equals(TLGSchool.getRooms().get(3))){
-      greetingFromChad();
-    }else if(room.equals(TLGSchool.getRooms().get(4))){
-      greetingFromNick();
+
+    }else if(room.equals(pythonRoom)){
+      if(!pythonKey){
+        printDontHaveKey();
+      }else if(Exam.passPython){
+        System.out.println("You already passed the exam. Go check other places.");
+      } else{
+        greetingFromChad();
+        executeExamCommand(pythonRoom);
+      }
+
+    }else if(room.equals(javaRoom)){
+      if(!javaKey){
+        printDontHaveKey();
+      }else if(Exam.passJava){
+        System.out.println("You already passed all of the exam. AAAAAAAAAAAAAA");
+
+      } else if(!findNick){
+        System.out.println("Oh no, you need someone to translate the code.");
+      }else{
+        greetingFromNick();
+        executeExamCommand(javaRoom);
+
+      }
     }
   }
 
@@ -223,29 +250,23 @@ public class Game {
     }
 
     System.out.println("\n=============================================");
-    System.out.printf("%s can go %s from current location.\n",student.getName(),exit);
+    System.out.printf("%s can go %s from current location --- %s.\n",student.getName(),exit,currentLocation.getName());
     System.out.println("\n=============================================");
   }
 
 
 
 
-  public void executeExamCommand(Room room) throws IOException {
-//    System.out.println("Are you ready to take the exam?");
 
+  public void executeExamCommand(Room room) throws IOException, ParseException {
     String answer = getUserChoice();
-//    if(answer.isEmpty()){
-//      System.out.println("You must type yes or no.");
-//      executeExamCommand(room);
-//    }
+
     if(answer.equals("yes") || answer.equals("y")){
       Exam.startQuiz(room);
       checkKey(room);
 
     }else if(answer.equals("no") || answer.equals("n")){
       System.out.println("You can type your command or you can quit the game by tying quit");
-      String input = getUserChoice();
-      executeCommand(input);
     }else{
       System.out.println("You must type yes or no.");
       executeExamCommand(room);
@@ -259,68 +280,33 @@ public class Game {
     Room javaRoom = TLGSchool.getRooms().get(5);
     if(room.equals(htmlRoom)){
       if(Exam.passHTML){
-        System.out.println("Congratulations! You got the key to JavaScript Room.");
-        htmlKey = true;
+        System.out.printf("Congratulations! %s give you the key and you can use it to unlock JavaScript Room.", htmlRoom.getInstructor().getName());
+        jsKey = true;
       }
     }else if(room.equals(jsRoom)){
-      System.out.println("Congratulations! You got the key to Python Room.");
-      pythonKey = true;
+
+      if(Exam.passJs){
+        System.out.printf("Congratulations! %s give you the key and you can use it to unlock Python Room.", jsRoom.getInstructor().getName());
+        pythonKey = true;
     }else if(room.equals(pythonRoom)){
       System.out.println("Congratulations! You got the key to Java Room.");
       javaKey =true;
     }else if(room.equals(javaRoom)){
       System.out.println("Congratulations! You graduated from TLG school.");
     }
-
   }
-  public void executeDifferentExam(Room room) throws IOException {
-    //   if(!Exam.passHTML){ //todo how to combine string and variable Exam.pass{location.getDescription()}
-//        executeExamCommand(location);
-//      }
-    Room htmlRoom = TLGSchool.getRooms().get(1);
-    Room jsRoom = TLGSchool.getRooms().get(2);
-    Room pythonRoom = TLGSchool.getRooms().get(3);
-    Room javaRoom = TLGSchool.getRooms().get(5);
-
-    if(room.equals(htmlRoom)){
-      if(!Exam.passHTML){
-        executeExamCommand(htmlRoom);
-      }else{
-        return;
-      }
-    }else if(room.equals(jsRoom)){
-      if(!Exam.passJs){
-        executeExamCommand(jsRoom);
-      }else{
-        return;
-      }
-    }else if(room.equals(pythonRoom)){
-      if(!Exam.passPython){
-        executeExamCommand(pythonRoom);
-      }else{
-        return;
-      }
-    }else if(room.equals(javaRoom)){
-      if(!Exam.passJava){
-        executeExamCommand(javaRoom);
-      }else{
-        return;
-      }
-    }
+  
 
 
-  }
+  public String executeCommand(String input) throws IOException, ParseException {
 
-
-  public String executeCommand(String input) throws IOException {
-//    String input = getUserChoice();
     String result = "";
     if(input.equals("q") || input.equals("quit")){
 
       result = "Quiting the game...";
 
     }
-    else if(input==null || input.isEmpty()){
+    else if(input.isEmpty()){
       result = "You can't leave it blank. You must enter a command!";
     }
     else if(input.equals("hint")){
@@ -334,10 +320,7 @@ public class Game {
     }
     else if(input.equals("where")){
       checkLocation();
-    }
-    // TODO: 12/15/22  check whether the input is q or help after updated the methods from remote dev
-
-    else{
+    } else{
       String[] inputArr = convertInputToArray(input);
 
       result =parseCommand(inputArr);
@@ -347,7 +330,6 @@ public class Game {
 
   public String[] convertInputToArray(String input){
     return input.split(" ");
-
   }
 
   private String parseCommand(String[] arr) throws IOException {
@@ -381,7 +363,6 @@ public class Game {
     }else{
       result = "You can only type 2 words as command.";
     }
-
     return result;
   }
 
@@ -389,6 +370,15 @@ public class Game {
   public void graduationGreeting(){
     System.out.println(" Congratulations! " + student.getName() + "you've graduated from TLG!");
 
+  }
+  // create command list method
+  public void commandList() throws IOException {
+
+    System.out.println("Please select from the following commands : \n");
+    System.out.println("You can type go/run/move to directions north/east/south/west\n"
+        + "to navigate through this game!\n\n"
+        + "Please type yes/no when being asked a question.\n\n"
+        + "You can type grab/receive/get to access your key/diploma.");
   }
 
   public void greetingFromJeanette(){
@@ -442,6 +432,10 @@ public class Game {
 
   public void greetingWhereIsNick(){
     System.out.println("WHERE IS NICK!?");
+  }
+  public void printDontHaveKey() throws IOException, ParseException {
+    System.out.println("You can't enter this room because you don't have the key to unlock this door.");
+    System.out.println("Maybe go to last room and pass the exam?");
   }
 
 
