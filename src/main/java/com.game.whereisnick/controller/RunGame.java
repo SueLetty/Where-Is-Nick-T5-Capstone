@@ -4,12 +4,13 @@ import com.game.whereisnick.model.Exam;
 import com.game.whereisnick.model.Instructor;
 import com.game.whereisnick.view.Game;
 
+import java.text.ParseException;
 import java.util.Scanner;
 import java.io.IOException;
 
 public class RunGame {
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, ParseException {
     Game newGame = new Game();
 //    Exam.getHTMLQuiz();
 

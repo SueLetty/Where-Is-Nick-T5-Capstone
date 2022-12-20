@@ -17,12 +17,16 @@ public class Exam {
   public static boolean passJs =false;
   public static boolean passPython =false;
   public static boolean passJava =false;
-  public static final String HTMLFILENAME = "./resources/questionsHtml.json";
-  public static final String JSFILENAME = "./resources/questionsJavascript.json";
-  public static final String PYTHONFILENAME = "./resources/questionsPython.json";
-  public static final String JAVAFILENAME = "./resources/questionsJava.json";
-  public static final String CORRECTAUDIO = "./resources/audio/correct.wav";
-  public static final String WRONGAUDIO = "./resources/audio/wrong.wav";
+  private static final String HTMLFILENAME = "./resources/questionsHtml.json";
+  private static final String JSFILENAME = "./resources/questionsJavascript.json";
+  private static final String PYTHONFILENAME = "./resources/questionsPython.json";
+  private static final String JAVAFILENAME = "./resources/questionsJava.json";
+  private static final String CORRECTAUDIO = "./resources/audio/correct.wav";
+  private static final String WRONGAUDIO = "./resources/audio/wrong.wav";
+
+  public Exam() {
+
+  }
 
 
   public static void main(String[] args) throws IOException {
@@ -49,6 +53,7 @@ public class Exam {
         new BufferedReader(new FileReader(filePath)), JsonObject.class);
     JsonArray arr = (JsonArray) obj.get("HTML Room");
     parseQuizFromJson(arr, room);
+
 
   }
 
@@ -82,19 +87,16 @@ public class Exam {
     while (correctAnswer <4 && !checkIfUserQuit);
     System.out.printf("Result:You got: %d out of 5", correctAnswer);
     System.out.println("\n\n");
-    if(room.getName().equals("HTML Room")){
+    if(room.getName().equals("HTML Room") && correctAnswer>3){
       passHTML = true;
-    }else if(room.getName().equals("JavaScript Room")){
+      System.out.println(passHTML);
+    }else if(room.getName().equals("JavaScript Room")&& correctAnswer>3){
       passJs = true;
-    }else if(room.getName().equals("Python Room")){
+    }else if(room.getName().equals("Python Room")&& correctAnswer>3){
       passPython = true;
-    }else if(room.getName().equals("Java Room")){
+    }else if(room.getName().equals("Java Room")&& correctAnswer>3){
       passJava = true;
     }
-     System.out.println(passHTML);
-     System.out.println(passPython);
-     System.out.println(passJava);
-     System.out.println(passJs);
 
   }
 

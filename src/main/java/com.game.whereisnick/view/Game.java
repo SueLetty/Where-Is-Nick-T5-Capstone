@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -146,7 +147,7 @@ public class Game {
     showGreeting(currentLocation);
   }
 
-  private void moveTo(Direction dir) throws IOException {
+  private void moveTo(Direction dir) throws IOException, ParseException {
     Room currentLocation = student.getLocation();
     Room exit = null;
     if(dir==Direction.NORTH){
@@ -283,18 +284,22 @@ public class Game {
         System.out.printf("Congratulations! %s give you the key and you can use it to unlock JavaScript Room.", htmlRoom.getInstructor().getName());
         jsKey = true;
       }
-    }else if(room.equals(jsRoom)){
+    }else if(room.equals(jsRoom)) {
 
-      if(Exam.passJs){
-        System.out.printf("Congratulations! %s give you the key and you can use it to unlock Python Room.", jsRoom.getInstructor().getName());
+      if (Exam.passJs) {
+        System.out.printf(
+            "Congratulations! %s give you the key and you can use it to unlock Python Room.",
+            jsRoom.getInstructor().getName());
         pythonKey = true;
-    }else if(room.equals(pythonRoom)){
-      System.out.println("Congratulations! You got the key to Java Room.");
-      javaKey =true;
-    }else if(room.equals(javaRoom)){
-      System.out.println("Congratulations! You graduated from TLG school.");
+      } else if (room.equals(pythonRoom)) {
+        System.out.println("Congratulations! You got the key to Java Room.");
+        javaKey = true;
+      } else if (room.equals(javaRoom)) {
+        System.out.println("Congratulations! You graduated from TLG school.");
+      }
     }
   }
+
   
 
 
@@ -332,7 +337,7 @@ public class Game {
     return input.split(" ");
   }
 
-  private String parseCommand(String[] arr) throws IOException {
+  private String parseCommand(String[] arr) throws IOException, ParseException {
     String result = "";
     String firstWord = arr[0];
 
