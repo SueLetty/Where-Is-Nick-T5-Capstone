@@ -18,10 +18,6 @@ public class Room {
     this.description = description;
   }
 
-//  public Room(String name) {
-//    this.name = name;
-//  }
-
   public String welcome(){
     return "Welcome to "+ name;
   }

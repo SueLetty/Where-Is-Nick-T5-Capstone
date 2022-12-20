@@ -1,0 +1,44 @@
+{
+  "Java Room": [
+    {
+      "d": "8 bit",
+      "c": "16 bit",
+      "b": "32 bit",
+      "a": "64 bit",
+      "answer": "c",
+      "Question": "What is the size of short variable?"
+    },
+    {
+      "d": "int myArray [] = {1, 3, 5};",
+      "c": "int myArray [] [] = {1,2,3,4};",
+      "b": "int [] myArray = (5, 4, 3);",
+      "a": "int [] myArray = {“1”, “2”, “3”};",
+      "answer": "a",
+      "Question": "Which of the below is valid way to instantiate an array in java?"
+    },
+    {
+      "d": "The “extend” keyword is used to extend a class in java.",
+      "c": "You can extend multiple classes in java.",
+      "b": "Private members of the superclass are accessible to the subclass.",
+      "a": "We can’t extend Final classes in java.",
+      "answer": "d",
+      "Question": "Which of the following statements are true for inheritance in Java?"
+    },
+    {
+      "d": "myString",
+      "c": "String",
+      "b": "Txt",
+      "a": "string",
+      "answer": "c",
+      "Question": "Which data type is used to create a variable that should store text?"
+    },
+    {
+      "d": "The \"extend\" keyword is used to extend a class in java.",
+      "c": "You can extend multiple classes in java.",
+      "b": "Private members of the superclass are accessible to the subclass.",
+      "a": "We can’t extend Final classes in java.",
+      "answer": "d",
+      "Question": "Which of the following statements are true for inheritance in Java?"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "JavaScript Room": [
+    {
+      "d": "<javascript>",
+      "c": "<scripting>",
+      "b": "<script>",
+      "a": "<js>",
+      "answer": "b",
+      "Question": "Inside which HTML element do we put the JavaScript?"
+    },
+    {
+      "d": "msgBox(\"Hello World\")",
+      "c": "alertBox(\"Hello World\")",
+      "b": "alert(\"Hello World\")",
+      "a": "msg(\"Hello World\")",
+      "answer": "b",
+      "Question": "How do you write \"Hello World\" in an alert box?\n"
+    },
+    {
+      "d": "<script src=\"new.js\">",
+      "c": "<script name=\"new.js\">",
+      "b": "<script href=\"new.js\">",
+      "a": "<script content=\"new.js\">",
+      "answer": "d",
+      "Question": "What is the correct syntax to use an external script called \"new.js\"?"
+    },
+    {
+      "d": "define x;",
+      "c": "variable x;",
+      "b": "let x;",
+      "a": "def x;",
+      "answer": "b",
+      "Question": "How do you declare a JavaScript variable x?"
+    },
+    {
+      "d": "14",
+      "c": "\"347\"",
+      "b": "\"77\"",
+      "a": "77",
+      "answer": "b",
+      "Question": "var x = 3 + 4 + \"7\""
+    }
+  ]
+}

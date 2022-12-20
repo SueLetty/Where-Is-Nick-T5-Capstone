@@ -4,9 +4,9 @@ import com.game.whereisnick.model.Exam;
 import com.game.whereisnick.model.Instructor;
 import com.game.whereisnick.view.Game;
 
+import java.text.ParseException;
 import java.util.Scanner;
 import java.io.IOException;
-import org.json.simple.parser.ParseException;
 
 public class RunGame {
 

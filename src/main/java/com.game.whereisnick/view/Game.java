@@ -10,9 +10,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import org.json.simple.parser.ParseException;
 
 public class Game {
 
@@ -26,8 +26,8 @@ public class Game {
   private static BufferedReader inputBuffer;
   private Student student;
   private School TLGSchool;
-  private String quitSynonymns[] = {"no", "n", "quit", "q"};
-  private String yesSynonymns[] = {"yes", "y", "play"};
+  private static String quitSynonymns[] = {"no", "n", "quit", "q"};
+  private static String yesSynonymns[] = {"yes", "y", "play"};
   private String[] directionCommands = {"go", "run", "move", "walk"};
   private boolean jsKey=false;
   private boolean pythonKey=false;
@@ -67,6 +67,7 @@ public class Game {
             + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n"
             + " You can type your name to start the game, after game starts, quit the game anytime by typing q or quit.");
   }
+  
   public static String getUserChoice() throws IOException {
     inputBuffer = new BufferedReader (new InputStreamReader (System.in));
     String inputScan = inputBuffer.readLine();
@@ -87,8 +88,8 @@ public class Game {
     } catch (IOException | InterruptedException ex) {
     }
   }
+  
   public void setUpInstances() throws IOException {
-
     System.out.println("\nEnter your name: ");
     String name = getUserChoice();
     student = new Student(name, "student");
@@ -124,6 +125,22 @@ public class Game {
     studyRoom.setInstructor(Nick);
     TLGSchool.addRooms(lobby, htmlRoom,jsRoom,pythonRoom,studyRoom,javaRoom);
   }
+
+  public static boolean checkIfUserQuit(String input) throws IOException {
+    boolean quit = false;
+    if(Arrays.asList(quitSynonymns).contains(input)){
+      System.out.println("Are you sure you want to quit?");
+      userInput = getUserChoice();
+      if(Arrays.asList(yesSynonymns).contains(userInput)){
+        quit = true;
+      }
+    }else{
+      quit = false;
+    }
+    return quit;
+  }
+
+
 
   public void checkLocation() throws IOException, ParseException {
     Room currentLocation = student.getLocation();
@@ -192,7 +209,6 @@ public class Game {
         greetingFromNelly();
         executeExamCommand(jsRoom);
       }
-
     }else if(room.equals(pythonRoom)){
       if(!pythonKey){
         printDontHaveKey();
@@ -267,12 +283,12 @@ public class Game {
 
 
 
-  public void executeExamCommand(Room room) throws IOException, ParseException {
 
+  public void executeExamCommand(Room room) throws IOException, ParseException {
     String answer = getUserChoice();
 
     if(answer.equals("yes") || answer.equals("y")){
-      Exam.startQuiz(room.getName());
+      Exam.startQuiz(room);
       checkKey(room);
 
     }else if(answer.equals("no") || answer.equals("n")){
@@ -293,31 +309,38 @@ public class Game {
         System.out.printf("Congratulations! %s give you the key and you can use it to unlock JavaScript Room.", htmlRoom.getInstructor().getName());
         jsKey = true;
       }
-    }else if(room.equals(jsRoom)){
-      if(Exam.passJs){
-        System.out.printf("Congratulations! %s give you the key and you can use it to unlock Python Room.", jsRoom.getInstructor().getName());
+    }else if(room.equals(jsRoom)) {
+
+      if (Exam.passJs) {
+        System.out.printf(
+            "Congratulations! %s give you the key and you can use it to unlock Python Room.",
+            jsRoom.getInstructor().getName());
         pythonKey = true;
       }
-
-    }else if(room.equals(pythonRoom)){
-      if(Exam.passPython){
-        System.out.printf("Congratulations! %s give you the key and you can use it to unlock Java Room.", pythonRoom.getInstructor().getName());
-        javaKey =true;
+    } else if (room.equals(pythonRoom)) {
+        if (Exam.passPython) {
+          System.out.printf(
+              "Congratulations! %s give you the key and you can use it to unlock Java Room.",
+              jsRoom.getInstructor().getName());
+          javaKey = true;
+        }
+      } else if (room.equals(javaRoom)) {
+      if (Exam.passJava) {
+        System.out.printf(
+            "Congratulations! %s give you the diploma and you are graduated from TLG.",
+            jsRoom.getInstructor().getName());
+//        pythonKey = true;
       }
 
-    }else if(room.equals(javaRoom)){
-      if(Exam.passJava){
-//        System.out.println("Congratulations! You graduated from TLG school.");
-        graduationGreeting();
       }
-
     }
 
-  }
 
+  
 
 
   public String executeCommand(String input) throws IOException, ParseException {
+
     String result = "";
     if(input.equals("q") || input.equals("quit")){
 
@@ -338,10 +361,7 @@ public class Game {
     }
     else if(input.equals("where")){
       checkLocation();
-    }
-    // TODO: 12/15/22  check whether the input is q or help after updated the methods from remote dev
-
-    else{
+    } else{
       String[] inputArr = convertInputToArray(input);
 
       result =parseCommand(inputArr);
