@@ -29,13 +29,15 @@ public class Game {
   private static String quitSynonymns[] = {"no", "n", "quit", "q"};
   private static String yesSynonymns[] = {"yes", "y", "play"};
   private String[] directionCommands = {"go", "run", "move", "walk"};
-  private boolean htmlKey=false;
-  private boolean pythonKey=false;
-  private boolean javaKey=false;
+  private boolean htmlKey = false;
+  private boolean pythonKey = false;
+  private boolean javaKey = false;
+  public static final String BUNSENBURNER = "./resources/audio/BunsenBurner.wav";
 
 
   public Game() throws IOException {
     showGameSplash();
+    playMusicInBackground();
     introduction();
 //    askToBeginGame();
     setUpInstances();
@@ -48,19 +50,20 @@ public class Game {
     System.out.println("\nEnter your name: ");
     String name = getUserChoice();
     student = new Student(name, "student");
-    System.out.printf("\nHello %s!", student.getName());;
+    System.out.printf("\nHello %s!", student.getName());
+    ;
     TLGSchool = new School();
-    Room lobby = new Room("Lobby","lobby");
-    Room htmlRoom = new Room("HTML Room","HTML");
-    Room javaRoom = new Room("Java Room","Java");
-    Room jsRoom = new Room("JavaScript Room","Js");
-    Room pythonRoom = new Room("Python Room","Python");
-    Room studyRoom = new Room("studyRoom Room","study");
+    Room lobby = new Room("Lobby", "lobby");
+    Room htmlRoom = new Room("HTML Room", "HTML");
+    Room javaRoom = new Room("Java Room", "Java");
+    Room jsRoom = new Room("JavaScript Room", "Js");
+    Room pythonRoom = new Room("Python Room", "Python");
+    Room studyRoom = new Room("studyRoom Room", "study");
     Jeanette = new Instructor("Jeanette", "TLG orientation instructor");
     Donte = new Instructor("Donte", "HTML instructor");
     Nelly = new Instructor("Nelly", "JavaScript instructor");
-    Chad = new Instructor("Chad","Python instructor");
-    Nick = new Instructor("Nick","Java instructor");
+    Chad = new Instructor("Chad", "Python instructor");
+    Nick = new Instructor("Nick", "Java instructor");
     lobby.setnRoom(htmlRoom);
     htmlRoom.setnRoom(jsRoom);
     htmlRoom.seteRoom(javaRoom);
@@ -73,12 +76,12 @@ public class Game {
     javaRoom.setwRoom(htmlRoom);
     javaRoom.setnRoom(pythonRoom);
     student.setLocation(lobby);
-    TLGSchool.addRooms(lobby, htmlRoom,jsRoom,pythonRoom,studyRoom,javaRoom);
+    TLGSchool.addRooms(lobby, htmlRoom, jsRoom, pythonRoom, studyRoom, javaRoom);
   }
 
-  private void playMusicInBackground(){
+  private void playMusicInBackground() {
     Music musicObject = new Music();
-    String filepath = ""; // put filepath here, ex: musicPlayBackground.wav
+    String filepath = BUNSENBURNER; // put filepath here, ex: musicPlayBackground.wav
     musicObject.playMusic(filepath);
   }
 
@@ -105,7 +108,7 @@ public class Game {
   }
 
   public static String getUserChoice() throws IOException {
-    inputBuffer = new BufferedReader (new InputStreamReader (System.in));
+    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
     String inputScan = inputBuffer.readLine();
     String userInput = inputScan.toString().toLowerCase();
     return userInput;
@@ -127,13 +130,13 @@ public class Game {
 
   public static boolean checkIfUserQuit(String input) throws IOException {
     boolean quit = false;
-    if(Arrays.asList(quitSynonymns).contains(input)){
+    if (Arrays.asList(quitSynonymns).contains(input)) {
       System.out.println("Are you sure you want to quit?");
       userInput = getUserChoice();
-      if(Arrays.asList(yesSynonymns).contains(userInput)){
+      if (Arrays.asList(yesSynonymns).contains(userInput)) {
         quit = true;
       }
-    }else{
+    } else {
       quit = false;
     }
     return quit;
@@ -142,42 +145,41 @@ public class Game {
   // create command list method
   public void commandList() throws IOException {
 
-        System.out.println("Please select from the following commands : \n");
-        System.out.println("You can type go/run/move to directions north/east/south/west\n"
-            + "to navigate through this game!\n\n"
-            + "Please type yes/no when being asked a question.\n\n"
-            + "You can type grab/receive/get to access your key/diploma.");
-    }
+    System.out.println("Please select from the following commands : \n");
+    System.out.println("You can type go/run/move to directions north/east/south/west\n"
+        + "to navigate through this game!\n\n"
+        + "Please type yes/no when being asked a question.\n\n"
+        + "You can type grab/receive/get to access your key/diploma.");
+  }
 
   private void moveTo(Direction dir) throws IOException {
     Room currentLocation = student.getLocation();
     Room exit = null;
-    if(dir==Direction.NORTH){
+    if (dir == Direction.NORTH) {
       exit = currentLocation.getnRoom();
     }
-    if(dir==Direction.SOUTH){
+    if (dir == Direction.SOUTH) {
       exit = currentLocation.getsRoom();
     }
-    if(dir==Direction.WEST){
+    if (dir == Direction.WEST) {
       exit = currentLocation.getwRoom();
     }
-    if(dir==Direction.EAST){
+    if (dir == Direction.EAST) {
       exit = currentLocation.geteRoom();
     }
 
-
-    if(exit!=null){
+    if (exit != null) {
       student.setLocation(exit);
       Room location = student.getLocation();
       checkLocation();
       executeDifferentExam(location);
 
-    }else{
+    } else {
       System.out.println("No exit! Choose another direction.");
     }
   }
 
-  public void checkLocation(){
+  public void checkLocation() {
     Room currentLocation = student.getLocation();
     System.out.println("\n=============================================");
     System.out.println("Current Room: " + currentLocation.getName());
@@ -186,52 +188,50 @@ public class Game {
   }
 
 
-  private void showGreeting(Room room){
+  private void showGreeting(Room room) {
     // TODO: 12/18/22 may need remove passed eaxm print out and change if(Exam.passHTML) to check if(htmlRoom.firstTime)
-    if(room.equals(TLGSchool.getRooms().get(0))){
+    if (room.equals(TLGSchool.getRooms().get(0))) {
       greetingFromJeanette();
 
-    }else if(room.equals(TLGSchool.getRooms().get(1))){
-      if(Exam.passHTML){
+    } else if (room.equals(TLGSchool.getRooms().get(1))) {
+      if (Exam.passHTML) {
         System.out.println("You already passed the exam. Go check other places.");
-      }else{
+      } else {
         greetingFromDonte();
       }
 
-    }else if(room.equals(TLGSchool.getRooms().get(2))){
+    } else if (room.equals(TLGSchool.getRooms().get(2))) {
       greetingFromNelly();
-    }else if(room.equals(TLGSchool.getRooms().get(3))){
+    } else if (room.equals(TLGSchool.getRooms().get(3))) {
       greetingFromChad();
-    }else if(room.equals(TLGSchool.getRooms().get(4))){
+    } else if (room.equals(TLGSchool.getRooms().get(4))) {
       greetingFromNick();
     }
   }
 
-  private void checkWhereCanGo(){
+  private void checkWhereCanGo() {
     Room currentLocation = student.getLocation();
     ArrayList<String> exit = new ArrayList<>();
 
-    if(currentLocation.getnRoom()!=null){
+    if (currentLocation.getnRoom() != null) {
       exit.add(Direction.NORTH.toString());
     }
 
-    if(currentLocation.getsRoom()!=null){
+    if (currentLocation.getsRoom() != null) {
       exit.add(Direction.SOUTH.toString());
     }
 
-    if(currentLocation.getwRoom()!=null){
+    if (currentLocation.getwRoom() != null) {
       exit.add(Direction.WEST.toString());
     }
-    if(currentLocation.geteRoom()!=null){
+    if (currentLocation.geteRoom() != null) {
       exit.add(Direction.EAST.toString());
     }
 
     System.out.println("\n=============================================");
-    System.out.printf("%s can go %s from current location.\n",student.getName(),exit);
+    System.out.printf("%s can go %s from current location.\n", student.getName(), exit);
     System.out.println("\n=============================================");
   }
-
-
 
 
   public void executeExamCommand(Room room) throws IOException {
@@ -242,41 +242,42 @@ public class Game {
 //      System.out.println("You must type yes or no.");
 //      executeExamCommand(room);
 //    }
-    if(answer.equals("yes") || answer.equals("y")){
+    if (answer.equals("yes") || answer.equals("y")) {
       Exam.startQuiz(room);
       checkKey(room);
 
-    }else if(answer.equals("no") || answer.equals("n")){
+    } else if (answer.equals("no") || answer.equals("n")) {
       System.out.println("You can type your command or you can quit the game by tying quit");
       String input = getUserChoice();
       executeCommand(input);
-    }else{
+    } else {
       System.out.println("You must type yes or no.");
       executeExamCommand(room);
     }
   }
 
-  public void checkKey(Room room){
+  public void checkKey(Room room) {
     Room htmlRoom = TLGSchool.getRooms().get(1);
     Room jsRoom = TLGSchool.getRooms().get(2);
     Room pythonRoom = TLGSchool.getRooms().get(3);
     Room javaRoom = TLGSchool.getRooms().get(5);
-    if(room.equals(htmlRoom)){
-      if(Exam.passHTML){
+    if (room.equals(htmlRoom)) {
+      if (Exam.passHTML) {
         System.out.println("Congratulations! You got the key to JavaScript Room.");
         htmlKey = true;
       }
-    }else if(room.equals(jsRoom)){
+    } else if (room.equals(jsRoom)) {
       System.out.println("Congratulations! You got the key to Python Room.");
       pythonKey = true;
-    }else if(room.equals(pythonRoom)){
+    } else if (room.equals(pythonRoom)) {
       System.out.println("Congratulations! You got the key to Java Room.");
-      javaKey =true;
-    }else if(room.equals(javaRoom)){
+      javaKey = true;
+    } else if (room.equals(javaRoom)) {
       System.out.println("Congratulations! You graduated from TLG school.");
     }
 
   }
+
   public void executeDifferentExam(Room room) throws IOException {
     //   if(!Exam.passHTML){ //todo how to combine string and variable Exam.pass{location.getDescription()}
 //        executeExamCommand(location);
@@ -286,28 +287,28 @@ public class Game {
     Room pythonRoom = TLGSchool.getRooms().get(3);
     Room javaRoom = TLGSchool.getRooms().get(5);
 
-    if(room.equals(htmlRoom)){
-      if(!Exam.passHTML){
+    if (room.equals(htmlRoom)) {
+      if (!Exam.passHTML) {
         executeExamCommand(htmlRoom);
-      }else{
+      } else {
         return;
       }
-    }else if(room.equals(jsRoom)){
-      if(!Exam.passJs){
+    } else if (room.equals(jsRoom)) {
+      if (!Exam.passJs) {
         executeExamCommand(jsRoom);
-      }else{
+      } else {
         return;
       }
-    }else if(room.equals(pythonRoom)){
-      if(!Exam.passPython){
+    } else if (room.equals(pythonRoom)) {
+      if (!Exam.passPython) {
         executeExamCommand(pythonRoom);
-      }else{
+      } else {
         return;
       }
-    }else if(room.equals(javaRoom)){
-      if(!Exam.passJava){
+    } else if (room.equals(javaRoom)) {
+      if (!Exam.passJava) {
         executeExamCommand(javaRoom);
-      }else{
+      } else {
         return;
       }
     }
@@ -319,37 +320,32 @@ public class Game {
   public String executeCommand(String input) throws IOException {
 //    String input = getUserChoice();
     String result = "";
-    if(input.equals("q") || input.equals("quit")){
+    if (input.equals("q") || input.equals("quit")) {
 
       result = "Quiting the game...";
 
-    }
-    else if(input==null || input.isEmpty()){
+    } else if (input == null || input.isEmpty()) {
       result = "You can't leave it blank. You must enter a command!";
-    }
-    else if(input.equals("hint")){
+    } else if (input.equals("hint")) {
       checkWhereCanGo();
-    }
-    else if(input.equals("map")){
+    } else if (input.equals("map")) {
       getMap();
-    }
-    else if(input.equals("help")){
+    } else if (input.equals("help")) {
       commandList();
-    }
-    else if(input.equals("where")){
+    } else if (input.equals("where")) {
       checkLocation();
     }
     // TODO: 12/15/22  check whether the input is q or help after updated the methods from remote dev
 
-    else{
+    else {
       String[] inputArr = convertInputToArray(input);
 
-      result =parseCommand(inputArr);
+      result = parseCommand(inputArr);
     }
     return result;
   }
 
-  public String[] convertInputToArray(String input){
+  public String[] convertInputToArray(String input) {
     return input.split(" ");
 
   }
@@ -358,10 +354,10 @@ public class Game {
     String result = "";
     String firstWord = arr[0];
 
-    if(Array.getLength(arr)==2 && Arrays.asList(directionCommands).contains(firstWord)){
+    if (Array.getLength(arr) == 2 && Arrays.asList(directionCommands).contains(firstWord)) {
       String secondWord = arr[1];
 
-      switch (secondWord){
+      switch (secondWord) {
         case "north":
           moveTo(Direction.NORTH);
           break;
@@ -375,14 +371,14 @@ public class Game {
           moveTo(Direction.EAST);
           break;
         default:
-          result = secondWord +" is not a valid word.";
+          result = secondWord + " is not a valid word.";
           break;
       }
-    }else if(!Arrays.asList(directionCommands).contains(firstWord)){
-      result = firstWord +" is not a valid word.";
+    } else if (!Arrays.asList(directionCommands).contains(firstWord)) {
+      result = firstWord + " is not a valid word.";
       // TODO: 12/15/22 add get command later for another ticket
 
-    }else{
+    } else {
       result = "You can only type 2 words as command.";
     }
 
@@ -390,12 +386,12 @@ public class Game {
   }
 
 
-  public void graduationGreeting(){
+  public void graduationGreeting() {
     System.out.println(" Congratulations! " + student.getName() + "you've graduated from TLG!");
 
   }
 
-  public void greetingFromJeanette(){
+  public void greetingFromJeanette() {
     String lobbyGreeting = " I hope you had your coffee this morning,\n"
         + " because your going to have a very good, but long day,\n"
         + " ..but I promise you, it's going to be great!..\n"
@@ -408,7 +404,7 @@ public class Game {
   }
 
 
-  public void greetingFromDonte(){
+  public void greetingFromDonte() {
     String htmlGreeting = " I'm here to teach you web development in HTML.\n"
         + " Get ready to have your mind blown....\n"
         + " Three days later...\n"
@@ -418,18 +414,19 @@ public class Game {
     System.out.println(Donte.greeting() + htmlGreeting);
   }
 
-  public void greetingFromNelly(){
-    String javaScriptGreeting = " You are in my Javascript class for web development! Merry Christmas!\n"
-        + " Lets get started! Beware, there is going to be pain in this learning,\n"
-        + " you will sweat but it's worth it. I am telling you, life is not easy and you have to work hard for it\n"
-        + " let's get started.......\n"
-        + " 1 week later...\n"
-        + " Ok now you'll have to pass the exam for this class in order to move forward in the boot camp.\n"
-        + " Good luck!\n Are you ready to take the exam?";
+  public void greetingFromNelly() {
+    String javaScriptGreeting =
+        " You are in my Javascript class for web development! Merry Christmas!\n"
+            + " Lets get started! Beware, there is going to be pain in this learning,\n"
+            + " you will sweat but it's worth it. I am telling you, life is not easy and you have to work hard for it\n"
+            + " let's get started.......\n"
+            + " 1 week later...\n"
+            + " Ok now you'll have to pass the exam for this class in order to move forward in the boot camp.\n"
+            + " Good luck!\n Are you ready to take the exam?";
     System.out.println(Nelly.greeting() + javaScriptGreeting);
   }
 
-  public void greetingFromChad(){
+  public void greetingFromChad() {
     String pythonGreeting = " Welcome! Sorry about the loud music.\n"
         + " Let's learn Python! One important principle in software design,\n"
         + " you have to keep in mind \"Users are very stupid!\" -In radio personality voice.\n"
@@ -439,22 +436,21 @@ public class Game {
     System.out.println(Chad.greeting() + pythonGreeting);
   }
 
-  public void greetingFromNick(){
+  public void greetingFromNick() {
     String javaGreeting = "How may I be of help?";
     System.out.println(Nick.greeting() + javaGreeting);
   }
 
-  public void greetingWhereIsNick(){
+  public void greetingWhereIsNick() {
     System.out.println("WHERE IS NICK!?");
   }
 
-  public void messageFromJava(){
+  public void messageFromJava() {
     System.out.println("OH NO!... The java code is encrypted!");
   }
 
 
-
-  private void getMap(){
+  private void getMap() {
     System.out.println(" \n"
 
         + "  |JAVASCRIPT|----------|PYTHON|--------|STUDYROOM|\n"
@@ -468,6 +464,7 @@ public class Game {
         + "   |LOBBY|              |EXIT|                    \n"
     );
   }
+
   public Student getStudent() {
     return student;
   }

@@ -21,16 +21,23 @@ public class Music {
         clip.start();
         clip.loop(Clip.LOOP_CONTINUOUSLY);
 
-        JOptionPane.showMessageDialog(null, "Press OK to stop pause");
+        JOptionPane.showMessageDialog(null, "Press OK to pause");
         long clipTimePosition = clip.getMicrosecondPosition();
         clip.stop();
 
         JOptionPane.showMessageDialog(null, "Hit OK to resume");
         clip.setMicrosecondPosition(clipTimePosition);
+        clip.start();
+        //clip.stop();
 
         JOptionPane.showMessageDialog(null, "Press OK to stop playing");
+        clip.stop();
 
-      } else {
+        JOptionPane.showMessageDialog(null, "Press OK to start playing");
+        clip.start();
+        //clip.stop();
+
+      } else{
         System.out.println("Can't find file");
       }
     } catch (Exception ex) {
