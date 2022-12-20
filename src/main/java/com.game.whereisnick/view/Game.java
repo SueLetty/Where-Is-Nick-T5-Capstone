@@ -33,28 +33,25 @@ public class Game {
   private boolean htmlKey = false;
   private boolean pythonKey = false;
   private boolean javaKey = false;
-  private static final String BUNSENBURNER = "./resources/audio/BunsenBurner.wav";
   private boolean jsKey=false;
   private boolean findNick = false;
+  private boolean wentToJavaWithoutNick=false;
+  private static final String BUNSENBURNER = "./resources/audio/BunsenBurner.wav";
+
 
   public Game() throws IOException, ParseException {
     showGameSplash();
     playMusicInBackground();
     introduction();
-//    askToBeginGame();
     setUpInstances();
     checkLocation();
-//    student.getLocation();
   }
-
 
   private void playMusicInBackground() {
     Music musicObject = new Music();
     String filepath = BUNSENBURNER; // put filepath here, ex: musicPlayBackground.wav
     musicObject.playMusic(filepath);
   }
-
-
 
   // Shows the splash screen during start of the game.
   private void showGameSplash() {
@@ -84,9 +81,6 @@ public class Game {
     String userInput = inputScan.toString().toLowerCase();
     return userInput;
   }
-
-
-  
 
 
   //Clear the screen before displaying it in console
@@ -153,14 +147,14 @@ public class Game {
     return quit;
   }
 
-
-
-
   public void checkLocation() throws IOException, ParseException {
     Room currentLocation = student.getLocation();
     System.out.println("\n=============================================");
     System.out.println("Current Room: " + currentLocation.getName());
     System.out.println("\n=============================================");
+    if(currentLocation.getName().equals("Java Room") && javaKey){
+      wentToJavaWithoutNick = true;
+    }
     showGreeting(currentLocation);
   }
 
@@ -183,7 +177,7 @@ public class Game {
 
     if(exit!=null){
       student.setLocation(exit);
-      Room location = student.getLocation();
+//      Room location = student.getLocation();
       checkLocation();
 
     }else{
@@ -191,22 +185,20 @@ public class Game {
     }
   }
 
-
-
   private void showGreeting(Room room) throws IOException, ParseException {
     // TODO: 12/18/22 may need remove passed eaxm print out and change if(Exam.passHTML) to check if(htmlRoom.firstTime)
     Room lobby = TLGSchool.getRooms().get(0);
     Room htmlRoom = TLGSchool.getRooms().get(1);
     Room jsRoom = TLGSchool.getRooms().get(2);
     Room pythonRoom = TLGSchool.getRooms().get(3);
+    Room studyRoom = TLGSchool.getRooms().get(4);
     Room javaRoom = TLGSchool.getRooms().get(5);
-    
+
     if(room.equals(lobby)){
       greetingFromJeanette();
-
     }else if(room.equals(htmlRoom)){
       if(Exam.passHTML){
-        System.out.println("You already passed the exam. Go check other places.");
+        System.out.println("You already passed the HTML exam. Go check other places.");
       }else{
         greetingFromDonte();
         executeExamCommand(htmlRoom);
@@ -215,36 +207,51 @@ public class Game {
       if(!jsKey){
         printDontHaveKey();
       }else if(Exam.passJs){
-        System.out.println("You already passed the exam. Go check other places.");
+        System.out.println("You already passed the JavaScript exam. Go check other places.");
       } else{
         greetingFromNelly();
         executeExamCommand(jsRoom);
       }
-
-
     }else if(room.equals(pythonRoom)){
       if(!pythonKey){
         printDontHaveKey();
       }else if(Exam.passPython){
-        System.out.println("You already passed the exam. Go check other places.");
+        System.out.println("You already passed the Python exam. Go check other places.");
       } else{
         greetingFromChad();
         executeExamCommand(pythonRoom);
       }
-
-    }else if(room.equals(javaRoom)){
+    }else if(room.equals(studyRoom)){
+      if(!javaKey || !wentToJavaWithoutNick){
+        System.out.println("SHH...Nick is playing guitar.");
+      }else if(javaKey && wentToJavaWithoutNick){
+        System.out.println("Nick says: \"I know what happened. Come and fly with me to Java Room.\"\n");
+        findNick=true;
+        javaRoom.setInstructor(Nick);
+        student.setLocation(javaRoom);
+        greetingFromNick();
+        executeExamCommand(javaRoom);
+      }
+//      if(wentToJavaWithoutNick){
+//        System.out.println("SHH...Nick is playing guitar.");
+//      }else{
+//        System.out.println("Nick says: \"I know what happened. Come and fly with me to Java Room.\"\n");
+//        findNick=true;
+//        javaRoom.setInstructor(Nick);
+//        student.setLocation(javaRoom);
+//        showGreeting(javaRoom);
+//      }
+    } else if(room.equals(javaRoom)){
       if(!javaKey){
         printDontHaveKey();
       }else if(Exam.passJava){
         System.out.println("You already passed all of the exam. AAAAAAAAAAAAAA");
 
       } else if(!findNick){
-        System.out.println("Oh no, you need someone to translate the code.");
-      }else{
-        greetingFromNick();
-        executeExamCommand(javaRoom);
-
+        encryptedmessage();
+//        System.out.println("Oh no, you need someone to translate the code.");
       }
+
     }
   }
 
@@ -291,41 +298,44 @@ public class Game {
     }
   }
 
-  public void checkKey(Room room){
+  public void checkKey(Room room) {
     Room htmlRoom = TLGSchool.getRooms().get(1);
     Room jsRoom = TLGSchool.getRooms().get(2);
     Room pythonRoom = TLGSchool.getRooms().get(3);
     Room javaRoom = TLGSchool.getRooms().get(5);
-    if(room.equals(htmlRoom)){
-      if(Exam.passHTML){
-        System.out.printf("Congratulations! %s give you the key and you can use it to unlock JavaScript Room.", htmlRoom.getInstructor().getName());
+    if (room.equals(htmlRoom)) {
+      if (Exam.passHTML) {
+        System.out.printf(
+            "Congratulations! %s gives you the key and you can use it to unlock JavaScript Room.",
+            htmlRoom.getInstructor().getName());
         jsKey = true;
       }
-    }else if(room.equals(jsRoom)) {
+    } else if (room.equals(jsRoom)) {
 
       if (Exam.passJs) {
         System.out.printf(
-            "Congratulations! %s give you the key and you can use it to unlock Python Room.",
+            "Congratulations! %s gives you the key and you can use it to unlock Python Room.",
             jsRoom.getInstructor().getName());
         pythonKey = true;
       }
     } else if (room.equals(pythonRoom)) {
       if (Exam.passPython) {
         System.out.printf(
-            "Congratulations! %s give you the key and you can use it to unlock Java Room.",
-            jsRoom.getInstructor().getName());
+            "Congratulations! %s gives you the key and you can use it to unlock Java Room.",
+            pythonRoom.getInstructor().getName());
         javaKey = true;
       }
     } else if (room.equals(javaRoom)) {
       if (Exam.passJava) {
         System.out.printf(
-            "Congratulations! %s give you the diploma and you are graduated from TLG.",
-            jsRoom.getInstructor().getName());
-//        pythonKey = true;
-      }
+            "--------Congratulations! %s gives you the diploma and you are graduated from TLG.--------\n",
+            javaRoom.getInstructor().getName());
+        System.exit(0);
 
+      }
     }
   }
+
 
   public String executeCommand(String input) throws IOException, ParseException {
 
@@ -393,6 +403,9 @@ public class Game {
     }
     return result;
   }
+  public void encryptedmessage(){
+    System.out.println("$$WHGEH&*BEDE@@ILRIENGT*EBEAA975%FE#HGHJUUTJN RF#WWW YTU$BD @GE &EHGEHH%E$SWHEH*NFDEREDG@B GHR8543!GHR HRHSHJJ&09$22GENES@G!\n\nOh no, you need to find someone to translate this encrypted message.");
+  }
 
 
   public void graduationGreeting() {
@@ -455,13 +468,11 @@ public class Game {
   }
 
   public void greetingFromNick(){
-    String javaGreeting = "How may I be of help?";
+    String javaGreeting = "Let's learn Java.\nCouple of months later...\nAre you ready to take the exam?";
     System.out.println(Nick.greeting() + javaGreeting);
   }
 
-  public void greetingWhereIsNick(){
-    System.out.println("WHERE IS NICK!?");
-  }
+
   public void printDontHaveKey() throws IOException, ParseException {
     System.out.println("You can't enter this room because you don't have the key to unlock this door.");
     System.out.println("Maybe go to last room and pass the exam?");

@@ -14,21 +14,21 @@ import java.io.InputStream;
 
 public class Exam {
 
-  public static boolean passHTML = false;
-  public static boolean passJs = false;
-  public static boolean passPython = false;
-  public static boolean passJava = false;
-  public static final String HTMLFILENAME = "./resources/questionsHtml.json";
-  public static final String JSFILENAME = "./resources/questionsJavascript.json";
-  public static final String PYTHONFILENAME = "./resources/questionsPython.json";
-  public static final String JAVAFILENAME = "./resources/questionsJava.json";
-  public static final String CORRECTAUDIO = "./resources/audio/correct.wav";
-  public static final String WRONGAUDIO = "./resources/audio/wrong.wav";
-
+  public static boolean passHTML =false;
+  public static boolean passJs =false;
+  public static boolean passPython =false;
+  public static boolean passJava =false;
+  private static final String HTMLFILENAME = "./resources/questionsHtml.json";
+  private static final String JSFILENAME = "./resources/questionsJavascript.json";
+  private static final String PYTHONFILENAME = "./resources/questionsPython.json";
+  private static final String JAVAFILENAME = "./resources/questionsJava.json";
+  private static final String CORRECTAUDIO = "./resources/audio/correct.wav";
+  private static final String WRONGAUDIO = "./resources/audio/wrongCopy.wav";
 
   public Exam() {
-    super();
+
   }
+
 
   public static void startQuiz(Room room) throws IOException {
     String filePath;
@@ -43,6 +43,7 @@ public class Exam {
     } else {
       throw new IllegalStateException("Unexpected value: ");
     }
+
     Gson gson = new Gson();
     JsonObject obj = gson.fromJson(
         new BufferedReader(new FileReader(filePath)), JsonObject.class);
@@ -58,16 +59,17 @@ public class Exam {
     do {
       for (int i = 0; i < 5; i++) {
         JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-        System.out.println(jsonObject.get("Question"));
-        System.out.println("a. " + jsonObject.get("a"));
-        System.out.println("b. " + jsonObject.get("b"));
-        System.out.println("c. " + jsonObject.get("c"));
-        System.out.println("d. " + jsonObject.get("d"));
+        System.out.println(jsonObject.get("Question").toString().replaceAll("\"", ""));
+        System.out.println("a. " + jsonObject.get("a").toString().replaceAll("\"", ""));
+        System.out.println("b. " + jsonObject.get("b").toString().replaceAll("\"", ""));
+        System.out.println("c. " + jsonObject.get("c").toString().replaceAll("\"", ""));
+        System.out.println("d. " + jsonObject.get("d").toString().replaceAll("\"", ""));
         System.out.println("\n  Enter your answer: ");
         answer = Game.getUserChoice();
         checkIfUserQuit = Game.checkIfUserQuit(answer);
-        if (checkIfUserQuit) {
-          System.out.println("Quitting game....");
+
+        if(checkIfUserQuit){
+          System.out.println("Quitting exam....");
           break;
         }
         String actualAnswer = jsonObject.get("answer").getAsString();
@@ -92,8 +94,8 @@ public class Exam {
     }
     if (room.getName().equals("HTML Room") && correctAnswer > 3) {
       passHTML = true;
-      System.out.println(passHTML);
     } else if (room.getName().equals("JavaScript Room") && correctAnswer > 3) {
+
       passJs = true;
     } else if (room.getName().equals("Python Room") && correctAnswer > 3) {
       passPython = true;

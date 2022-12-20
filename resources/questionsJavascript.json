@@ -9,36 +9,36 @@
       "Question": "Inside which HTML element do we put the JavaScript?"
     },
     {
-      "d": "msgBox(\"Hello World\")",
-      "c": "alertBox(\"Hello World\")",
-      "b": "alert(\"Hello World\")",
-      "a": "msg(\"Hello World\")",
-      "answer": "b",
-      "Question": "How do you write \"Hello World\" in an alert box?\n\n"
+      "d": "Object-Oriented",
+      "c": "Object-Based",
+      "b": "Assembly-language",
+      "a": "High-level",
+      "answer": "d",
+      "Question": "Which type of JavaScript language is?"
     },
     {
-      "d": "<script src=\"new.js\">",
-      "c": "<script name=\"new.js\">",
-      "b": "<script href=\"new.js\">",
-      "a": "<script content=\"new.js\">",
-      "answer": "a",
-      "Question": "What is the correct syntax to use an external script called \"new.js\"?"
+      "d": "Conditional block",
+      "c": "block that combines a number of statements into a single compound statement",
+      "b": "both conditional block and a single statement",
+      "a": "block that contains a single statement",
+      "answer": "c",
+      "Question": "In JavaScript, what is a block of statement?"
     },
     {
       "d": "define x;",
       "c": "variable x;",
-      "b": "var x;",
+      "b": "let x;",
       "a": "def x;",
       "answer": "b",
       "Question": "How do you declare a JavaScript variable x?"
     },
     {
-      "d": "14",
-      "c": "\"347\"",
-      "b": "\"77\"",
-      "a": "77",
-      "answer": "b",
-      "Question": "var x = 3 + 4 + \"7\""
+      "d": "yes",
+      "c": "no",
+      "b": "it depends",
+      "a": "maybe",
+      "answer": "d",
+      "Question": "Can you assign an anonymous function to a variable and pass it as an argument to another function?"
     }
   ]
 }
