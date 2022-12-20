@@ -8,11 +8,12 @@ import com.google.gson.JsonObject;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
-
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 public class Exam {
+
   public static boolean passHTML =false;
   public static boolean passJs =false;
   public static boolean passPython =false;
@@ -29,13 +30,7 @@ public class Exam {
   }
 
 
-  public static void main(String[] args) throws IOException {
-  Room room = new Room("HTML Room", "hello");
-    startQuiz(room);
-
-  }
-
-  public static void startQuiz(Room room) throws IOException{
+  public static void startQuiz(Room room) throws IOException {
     String filePath;
     if (room.getName().equals("HTML Room")) {
       filePath = HTMLFILENAME;
@@ -52,12 +47,12 @@ public class Exam {
     Gson gson = new Gson();
     JsonObject obj = gson.fromJson(
         new BufferedReader(new FileReader(filePath)), JsonObject.class);
-   JsonArray arr = (JsonArray) obj.get(room.getName());
+    JsonArray arr = (JsonArray) obj.get(room.getName());
     parseQuizFromJson(arr, room);
 
   }
 
-   private static void parseQuizFromJson(JsonArray jsonArray, Room room) throws IOException {
+  private static void parseQuizFromJson(JsonArray jsonArray, Room room) throws IOException {
     int correctAnswer = 0;
     String answer = "";
     boolean checkIfUserQuit = false;
@@ -72,6 +67,7 @@ public class Exam {
         System.out.println("\n  Enter your answer: ");
         answer = Game.getUserChoice();
         checkIfUserQuit = Game.checkIfUserQuit(answer);
+
         if(checkIfUserQuit){
           System.out.println("Quitting exam....");
           break;
@@ -79,34 +75,44 @@ public class Exam {
         String actualAnswer = jsonObject.get("answer").getAsString();
         correctAnswer = checkCorrectAnswerAndReturnCounter(correctAnswer, answer, actualAnswer);
       }
-      if (correctAnswer < 4){
+      if (correctAnswer < 4) {
         System.out.println("\n\n You failed the exam. Please retake the exam! \n");
         correctAnswer = 0;
       }
     }
-    while (correctAnswer <4 && !checkIfUserQuit);
+    while (correctAnswer < 4 && !checkIfUserQuit);
     System.out.printf("Result:You got: %d out of 5", correctAnswer);
     System.out.println("\n\n");
-    if(room.getName().equals("HTML Room") && correctAnswer>3){
+    if (room.getName().equals("HTML Room")) {
       passHTML = true;
-    }else if(room.getName().equals("JavaScript Room")&& correctAnswer>3){
+    } else if (room.getName().equals("JavaScript Room")) {
       passJs = true;
-    }else if(room.getName().equals("Python Room")&& correctAnswer>3){
+    } else if (room.getName().equals("Python Room")) {
       passPython = true;
-    }else if(room.getName().equals("Java Room")&& correctAnswer>3){
+    } else if (room.getName().equals("Java Room")) {
+      passJava = true;
+    }
+    if (room.getName().equals("HTML Room") && correctAnswer > 3) {
+      passHTML = true;
+    } else if (room.getName().equals("JavaScript Room") && correctAnswer > 3) {
+
+      passJs = true;
+    } else if (room.getName().equals("Python Room") && correctAnswer > 3) {
+      passPython = true;
+    } else if (room.getName().equals("Java Room") && correctAnswer > 3) {
       passJava = true;
     }
 
   }
 
-  private static int checkCorrectAnswerAndReturnCounter(int correctAnswer, String answer, String actualAnswer) {
+  private static int checkCorrectAnswerAndReturnCounter(int correctAnswer, String answer,
+      String actualAnswer) {
     Audio audio = new Audio();
-    if(answer.equals(actualAnswer)){
-      correctAnswer +=1;
+    if (answer.equals(actualAnswer)) {
+      correctAnswer += 1;
       System.out.println("Correct! \n");
       audio.play(CORRECTAUDIO);
-    }
-    else {
+    } else {
       System.out.println("Not correct! \n");
       audio.play(WRONGAUDIO);
     }

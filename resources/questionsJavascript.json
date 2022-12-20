@@ -9,20 +9,20 @@
       "Question": "Inside which HTML element do we put the JavaScript?"
     },
     {
-      "d": "msgBox(\"Hello World\")",
-      "c": "alertBox(\"Hello World\")",
-      "b": "alert(\"Hello World\")",
-      "a": "msg(\"Hello World\")",
-      "answer": "b",
-      "Question": "How do you write \"Hello World\" in an alert box?\n"
+      "d": "Object-Oriented",
+      "c": "Object-Based",
+      "b": "Assembly-language",
+      "a": "High-level",
+      "answer": "d",
+      "Question": "Which type of JavaScript language is?"
     },
     {
-      "d": "<script src=\"new.js\">",
-      "c": "<script name=\"new.js\">",
-      "b": "<script href=\"new.js\">",
-      "a": "<script content=\"new.js\">",
-      "answer": "d",
-      "Question": "What is the correct syntax to use an external script called \"new.js\"?"
+      "d": "Conditional block",
+      "c": "block that combines a number of statements into a single compound statement",
+      "b": "both conditional block and a single statement",
+      "a": "block that contains a single statement",
+      "answer": "c",
+      "Question": "In JavaScript, what is a block of statement?"
     },
     {
       "d": "define x;",

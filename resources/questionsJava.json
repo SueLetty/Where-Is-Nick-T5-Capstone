@@ -35,7 +35,7 @@
     {
       "d": "JRE",
       "c": "JIT",
-      "b": " JDK",
+      "b": "JDK",
       "a": "JVM",
       "answer": "b",
       "Question": "Which component is used to compile, debug and execute the java programs?"

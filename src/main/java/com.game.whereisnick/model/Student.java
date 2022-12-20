@@ -10,14 +10,10 @@ public class Student extends Character{
     super(name, description);
   }
 
-  public int addPoints(){
-    return points += 25;
-  }
-
-//  public void addInventory(Item thing){
-//    ArrayList<Item> inventory = super.getInventory();
-//    inventory.add(thing);
+//  public int addPoints(){
+//    return points += 25;
 //  }
+
 
   public Room getLocation() {
     return location;
@@ -27,13 +23,13 @@ public class Student extends Character{
     this.location = location;
   }
 
-  public int getPoints() {
-    return points;
-  }
-
-  public void setPoints(int points) {
-    this.points = points;
-  }
+//  public int getPoints() {
+//    return points;
+//  }
+//
+//  public void setPoints(int points) {
+//    this.points = points;
+//  }
 
 
 }
