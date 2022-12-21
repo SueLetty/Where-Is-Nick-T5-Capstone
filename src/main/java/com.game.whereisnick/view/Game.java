@@ -98,7 +98,10 @@ public class Game {
   
   public void setUpInstances() throws IOException {
     System.out.println("\nEnter your name: ");
-    String name = getUserChoice();
+    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
+    String inputScan = inputBuffer.readLine();
+    String name = inputScan.toString().toUpperCase();
+//    String name = getUserChoice();
     student = new Student(name, "student");
     System.out.printf("\nHello %s!", student.getName());;
     TLGSchool = new School();
