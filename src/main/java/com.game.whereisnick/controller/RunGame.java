@@ -12,7 +12,7 @@ public class RunGame {
 
   public static void main(String[] args) throws IOException, ParseException {
     Game newGame = new Game();
-//    Exam.getHTMLQuiz();
+
 
 
     String input = "";

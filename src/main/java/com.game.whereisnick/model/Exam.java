@@ -83,17 +83,10 @@ public class Exam {
     while (correctAnswer < 4 && !checkIfUserQuit);
     System.out.printf("Result:You got: %d out of 5", correctAnswer);
     System.out.println("\n\n");
-    if (room.getName().equals("HTML Room")) {
-      passHTML = true;
-    } else if (room.getName().equals("JavaScript Room")) {
-      passJs = true;
-    } else if (room.getName().equals("Python Room")) {
-      passPython = true;
-    } else if (room.getName().equals("Java Room")) {
-      passJava = true;
-    }
+
     if (room.getName().equals("HTML Room") && correctAnswer > 3) {
       passHTML = true;
+      System.out.println("pass html: "+passHTML);
     } else if (room.getName().equals("JavaScript Room") && correctAnswer > 3) {
 
       passJs = true;
@@ -102,7 +95,6 @@ public class Exam {
     } else if (room.getName().equals("Java Room") && correctAnswer > 3) {
       passJava = true;
     }
-
   }
 
   private static int checkCorrectAnswerAndReturnCounter(int correctAnswer, String answer,
