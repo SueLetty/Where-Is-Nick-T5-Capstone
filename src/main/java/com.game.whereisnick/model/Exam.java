@@ -85,9 +85,7 @@ public class Exam {
 
     if (room.getName().equals("HTML Room") && correctAnswer > 3) {
       passHTML = true;
-      System.out.println("pass html: "+passHTML);
     } else if (room.getName().equals("JavaScript Room") && correctAnswer > 3) {
-
       passJs = true;
     } else if (room.getName().equals("Python Room") && correctAnswer > 3) {
       passPython = true;
