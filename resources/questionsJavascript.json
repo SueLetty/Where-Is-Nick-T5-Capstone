@@ -1,0 +1,44 @@
+{
+  "JavaScript Room": [
+    {
+      "d": "<javascript>",
+      "c": "<scripting>",
+      "b": "<script>",
+      "a": "<js>",
+      "answer": "b",
+      "Question": "Inside which HTML element do we put the JavaScript?"
+    },
+    {
+      "d": "Object-Oriented",
+      "c": "Object-Based",
+      "b": "Assembly-language",
+      "a": "High-level",
+      "answer": "d",
+      "Question": "Which type of JavaScript language is?"
+    },
+    {
+      "d": "Conditional block",
+      "c": "block that combines a number of statements into a single compound statement",
+      "b": "both conditional block and a single statement",
+      "a": "block that contains a single statement",
+      "answer": "c",
+      "Question": "In JavaScript, what is a block of statement?"
+    },
+    {
+      "d": "define x;",
+      "c": "variable x;",
+      "b": "let x;",
+      "a": "def x;",
+      "answer": "b",
+      "Question": "How do you declare a JavaScript variable x?"
+    },
+    {
+      "d": "yes",
+      "c": "no",
+      "b": "it depends",
+      "a": "maybe",
+      "answer": "d",
+      "Question": "Can you assign an anonymous function to a variable and pass it as an argument to another function?"
+    }
+  ]
+}
