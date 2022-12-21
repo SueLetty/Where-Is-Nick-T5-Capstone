@@ -11,10 +11,7 @@ public class RunGame {
   public static void main(String[] args) throws IOException, ParseException {
     Game newGame = new Game();
 
-
-
     String input = "";
-
     while(true){
       System.out.println("\nType your command: ");
       input = Game.getUserChoice();
@@ -23,7 +20,6 @@ public class RunGame {
       if(input.equals("q") || input.equals("quit")){
         break;
       }
-
     }
 
     System.out.println("Bye!");

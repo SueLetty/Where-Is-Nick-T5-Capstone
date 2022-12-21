@@ -1,5 +1,4 @@
 package com.game.whereisnick.view;
-
 import com.game.whereisnick.model.Direction;
 import com.game.whereisnick.model.Exam;
 import com.game.whereisnick.model.Instructor;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Game {
-
 
   private static String userInput;
   private Instructor Jeanette;
@@ -40,6 +38,7 @@ public class Game {
 
 
   public Game() throws IOException, ParseException {
+    clearScreen();
     showGameSplash();
     playMusicInBackground();
     introduction();
@@ -228,7 +227,7 @@ public class Game {
       if(!javaKey || !wentToJavaWithoutNick){
         System.out.println("SHH...Nick is playing guitar.");
       }else if(javaKey && wentToJavaWithoutNick){
-        System.out.println("Nick says: \"I know what happened. Come and fly with me to Java Room.\"\n");
+        System.out.println("\n Nick says: \"I know what happened. Come and fly with me to Java Room.\"\n");
         findNick=true;
         javaRoom.setInstructor(Nick);
         student.setLocation(javaRoom);
@@ -319,8 +318,8 @@ public class Game {
     } else if (room.equals(javaRoom)) {
       if (Exam.passJava) {
         System.out.printf(
-            "--------Congratulations! %s gives you the diploma and you are graduated from TLG.--------\n",
-            javaRoom.getInstructor().getName());
+            "--------Congratulations %s! %s gives you the diploma and you have graduated from TLG Learning Facility!--------\n",
+            student.getName(),javaRoom.getInstructor().getName());
         System.exit(0);
 
       }
@@ -395,7 +394,7 @@ public class Game {
     return result;
   }
   public void encryptedmessage(){
-    System.out.println("$$WHGEH&*BEDE@@ILRIENGT*EBEAA975%FE#HGHJUUTJN RF#WWW YTU$BD @GE &EHGEHH%E$SWHEH*NFDEREDG@B GHR8543!GHR HRHSHJJ&09$22GENES@G!\n\nOh no, you need to find someone to translate this encrypted message.");
+    System.out.println(" $$WHGEH&*BEDE@@ILRIENGT*EBEAA975%FE#HGHJUUTJN RF#WWW YTU$BD @GE \n &EHGEHH%E$SWHEH*NFDEREDG@B GHR8543!GHR HRHSHJJ&09$22GENES@G!\n\n Oh no, you need to find someone to translate this encrypted message.\n\n WHERE IS NICK!? \n");
   }
 
 
@@ -410,8 +409,7 @@ public class Game {
     System.out.println("Please select from the following commands : \n");
     System.out.println("You can type go/run/move to directions north/east/south/west\n"
         + "to navigate through this game!\n\n"
-        + "Please type yes/no when being asked a question.\n\n"
-        + "You can type grab/receive/get to access your key/diploma.");
+        + "Please type yes/no when being asked a question.\n\n");
   }
 
   public void greetingFromJeanette(){
@@ -453,20 +451,20 @@ public class Game {
         + " Let's learn Python! One important principle in software design,\n"
         + " you have to keep in mind \"Users are very stupid!\" -In radio personality voice.\n"
         + " jk .. but it is very important to have efficient code!\n 1 week later...\n"
-        + "Ok, now you'll have to pass the exam for this class in order to move forward in the boot camp.\n"
+        + " Ok, now you'll have to pass the exam for this class in order to move forward in the boot camp.\n"
         + " Good luck!...\n Are you ready to take the exam? ";
     System.out.println(Chad.greeting() + pythonGreeting);
   }
 
   public void greetingFromNick(){
-    String javaGreeting = "Let's learn Java.\nCouple of months later...\nAre you ready to take the exam?";
+    String javaGreeting = " Let's learn Java.\n Couple of months later...\n Are you ready to take the exam?";
     System.out.println(Nick.greeting() + javaGreeting);
   }
 
 
   public void printDontHaveKey() throws IOException, ParseException {
-    System.out.println("You can't enter this room because you don't have the key to unlock this door.");
-    System.out.println("Maybe go to last room and pass the exam?");
+    System.out.println(" You can't enter this room because you don't have the key to unlock this door.");
+    System.out.println(" Maybe go to last room and pass the exam?");
   }
 
 
