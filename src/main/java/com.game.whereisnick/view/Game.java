@@ -74,12 +74,15 @@ public class Game {
             + " You can type your name to start the game.\n After game starts, type hint if you want to know where to go from current location,\n type map to see the map,\n type help to see the command you can use,\n or quit the game anytime by typing q or quit.");
   }
 
+
   public static String getUserChoice() throws IOException {
+
     inputBuffer = new BufferedReader(new InputStreamReader(System.in));
     String inputScan = inputBuffer.readLine();
     String userInput = inputScan.toString().toLowerCase();
     return userInput;
   }
+
 
 
   //Clear the screen before displaying it in console
@@ -100,7 +103,6 @@ public class Game {
     inputBuffer = new BufferedReader(new InputStreamReader(System.in));
     String inputScan = inputBuffer.readLine();
     String name = inputScan.toString().toUpperCase();
-//    String name = getUserChoice();
     student = new Student(name, "student");
     System.out.printf("\nHello %s!", student.getName());;
     TLGSchool = new School();
@@ -179,13 +181,11 @@ public class Game {
 
     if(exit!=null){
       student.setLocation(exit);
-
       checkLocation();
-
     }else{
       System.out.println("No exit! Choose another direction.");
+      }
     }
-  }
 
   private void showGreeting(Room room) throws IOException, ParseException {
     // TODO: 12/18/22 may need remove passed eaxm print out and change if(Exam.passHTML) to check if(htmlRoom.firstTime)
@@ -234,17 +234,15 @@ public class Game {
         greetingFromNick();
         executeExamCommand(javaRoom);
       }
-    } else if(room.equals(javaRoom)){
-      if(!javaKey){
+    } else if(room.equals(javaRoom)) {
+      if (!javaKey) {
         printDontHaveKey();
-      } else if(!findNick){
+      } else if (!findNick) {
         encryptedmessage();
 
       }
-
     }
-  }
-
+    }
 
 
   private void checkWhereCanGo() {
@@ -269,8 +267,8 @@ public class Game {
     System.out.println("\n=====================================================================================");
     System.out.printf("%s can go %s from current location --- %s.", student.getName(), exit,student.getLocation().getName());
     System.out.println("\n=====================================================================================");
-  }
 
+  }
 
 
   public void executeExamCommand(Room room) throws IOException, ParseException {
@@ -287,6 +285,7 @@ public class Game {
       executeExamCommand(room);
     }
   }
+
 
   public void checkKey(Room room) {
     Room htmlRoom = TLGSchool.getRooms().get(1);
@@ -319,12 +318,11 @@ public class Game {
       if (Exam.passJava) {
         System.out.printf(
             "--------Congratulations %s! %s gives you the diploma and you have graduated from TLG Learning Facility!--------\n",
-            student.getName(),javaRoom.getInstructor().getName());
+            student.getName(), javaRoom.getInstructor().getName());
         System.exit(0);
-
+      }
       }
     }
-  }
 
 
   public String executeCommand(String input) throws IOException, ParseException {
@@ -346,8 +344,6 @@ public class Game {
     } else if (input.equals("where")) {
       checkLocation();
     }
-    // TODO: 12/15/22  check whether the input is q or help after updated the methods from remote dev
-
      else{
       String[] inputArr = convertInputToArray(input);
 
@@ -386,22 +382,15 @@ public class Game {
       }
     } else if (!Arrays.asList(directionCommands).contains(firstWord)) {
       result = firstWord + " is not a valid word.";
-      // TODO: 12/15/22 add get command later for another ticket
-
     } else {
       result = "You can only type 2 words as command.";
     }
     return result;
   }
   public void encryptedmessage(){
-    System.out.println(" $$WHGEH&*BEDE@@ILRIENGT*EBEAA975%FE#HGHJUUTJN RF#WWW YTU$BD @GE \n &EHGEHH%E$SWHEH*NFDEREDG@B GHR8543!GHR HRHSHJJ&09$22GENES@G!\n\n Oh no, you need to find someone to translate this encrypted message.\n\n WHERE IS NICK!? \n");
+    System.out.println("\n $$WHGEH&*BEDE@@ILRIENGT*EBEAA975%FE#HGHJUUTJN RF#WWW YTU$BD @GE \n &EHGEHH%E$SWHEH*NFDEREDG@B GHR8543!GHR HRHSHJJ&09$22GENES@G!\n\n Oh no, you need to find someone to translate this encrypted message.\n\n WHERE IS NICK!? \n");
   }
 
-
-  public void graduationGreeting() {
-    System.out.println(" Congratulations! " + student.getName() + "you've graduated from TLG!");
-
-  }
 
   // create command list method
   public void commandList() throws IOException {
@@ -482,6 +471,7 @@ public class Game {
         + "   |LOBBY|              |EXIT|                    \n"
     );
   }
+
   public Student getStudent() {
     return student;
   }

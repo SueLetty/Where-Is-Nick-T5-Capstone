@@ -55,6 +55,7 @@ public class Exam {
     int correctAnswer = 0;
     String answer = "";
     boolean checkIfUserQuit = false;
+
     do {
       for (int i = 0; i < 5; i++) {
         JsonObject jsonObject = (JsonObject) jsonArray.get(i);
@@ -86,6 +87,7 @@ public class Exam {
     if (room.getName().equals("HTML Room") && correctAnswer > 3) {
       passHTML = true;
     } else if (room.getName().equals("JavaScript Room") && correctAnswer > 3) {
+
       passJs = true;
     } else if (room.getName().equals("Python Room") && correctAnswer > 3) {
       passPython = true;
@@ -93,6 +95,7 @@ public class Exam {
       passJava = true;
     }
   }
+
 
   private static int checkCorrectAnswerAndReturnCounter(int correctAnswer, String answer,
       String actualAnswer) {
