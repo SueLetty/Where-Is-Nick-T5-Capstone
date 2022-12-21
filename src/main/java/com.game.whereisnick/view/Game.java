@@ -68,11 +68,11 @@ public class Game {
   //Display game introduction/ scenario
   public void introduction() {
     System.out.println(
-        " Introduction: You are now currently enrolled as a student of TLG Learning Facility.\n"
+        "\n Introduction: You are now currently enrolled as a student of TLG Learning Facility.\n"
             + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
             + " Upon completion of your orientation, you'll now navigate your way through different levels of coding classes in order to graduate\n"
-            + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n"
-            + " You can type your name to start the game, after game starts, quit the game anytime by typing q or quit.");
+            + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n\n"
+            + " You can type your name to start the game.\n After game starts, type hint if you want to know where to go from current location,\n type map to see the map,\n type help to see the command you can use,\n or quit the game anytime by typing q or quit.");
   }
 
   public static String getUserChoice() throws IOException {
@@ -98,7 +98,10 @@ public class Game {
   
   public void setUpInstances() throws IOException {
     System.out.println("\nEnter your name: ");
-    String name = getUserChoice();
+    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
+    String inputScan = inputBuffer.readLine();
+    String name = inputScan.toString().toUpperCase();
+//    String name = getUserChoice();
     student = new Student(name, "student");
     System.out.printf("\nHello %s!", student.getName());;
     TLGSchool = new School();
@@ -177,7 +180,7 @@ public class Game {
 
     if(exit!=null){
       student.setLocation(exit);
-//      Room location = student.getLocation();
+
       checkLocation();
 
     }else{
@@ -232,24 +235,12 @@ public class Game {
         greetingFromNick();
         executeExamCommand(javaRoom);
       }
-//      if(wentToJavaWithoutNick){
-//        System.out.println("SHH...Nick is playing guitar.");
-//      }else{
-//        System.out.println("Nick says: \"I know what happened. Come and fly with me to Java Room.\"\n");
-//        findNick=true;
-//        javaRoom.setInstructor(Nick);
-//        student.setLocation(javaRoom);
-//        showGreeting(javaRoom);
-//      }
     } else if(room.equals(javaRoom)){
       if(!javaKey){
         printDontHaveKey();
-      }else if(Exam.passJava){
-        System.out.println("You already passed all of the exam. AAAAAAAAAAAAAA");
-
       } else if(!findNick){
         encryptedmessage();
-//        System.out.println("Oh no, you need someone to translate the code.");
+
       }
 
     }
@@ -276,9 +267,9 @@ public class Game {
       exit.add(Direction.EAST.toString());
     }
 
-    System.out.println("\n=============================================");
-    System.out.printf("%s can go %s from current location.\n", student.getName(), exit);
-    System.out.println("\n=============================================");
+    System.out.println("\n=====================================================================================");
+    System.out.printf("%s can go %s from current location --- %s.", student.getName(), exit,student.getLocation().getName());
+    System.out.println("\n=====================================================================================");
   }
 
 
