@@ -40,7 +40,7 @@ public class Game {
   public Game() throws IOException, ParseException {
     clearScreen();
     showGameSplash();
-//    playMusicInBackground();
+    playMusicInBackground();
     introduction();
     setUpInstances();
     checkLocation();

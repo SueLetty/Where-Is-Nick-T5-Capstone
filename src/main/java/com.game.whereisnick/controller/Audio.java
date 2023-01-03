@@ -3,6 +3,7 @@ package com.game.whereisnick.controller;
 import java.io.File;
 import java.io.IOException;
 
+import java.net.URL;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -34,7 +35,8 @@ public class Audio implements LineListener, Runnable {
     File audioFile = new File(audioFilePath);
 
     try {
-      AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+      URL url = Audio.class.getClassLoader().getResource(audioFilePath);
+      AudioInputStream audioStream = AudioSystem.getAudioInputStream(url);
 
       AudioFormat format = audioStream.getFormat();
 
