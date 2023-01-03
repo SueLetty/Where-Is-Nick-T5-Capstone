@@ -8,7 +8,8 @@ import com.google.gson.JsonObject;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class Exam {
@@ -17,12 +18,12 @@ public class Exam {
   public static boolean passJs =false;
   public static boolean passPython =false;
   public static boolean passJava =false;
-  private static final String HTMLFILENAME = "./resources/questionsHtml.json";
-  private static final String JSFILENAME = "./resources/questionsJavascript.json";
-  private static final String PYTHONFILENAME = "./resources/questionsPython.json";
-  private static final String JAVAFILENAME = "./resources/questionsJava.json";
-  private static final String CORRECTAUDIO = "./resources/audio/correct.wav";
-  private static final String WRONGAUDIO = "./resources/audio/wrongCopy.wav";
+  private static final String HTMLFILENAME = "questionsHtml.json";
+  private static final String JSFILENAME = "questionsJavascript.json";
+  private static final String PYTHONFILENAME = "questionsPython.json";
+  private static final String JAVAFILENAME = "questionsJava.json";
+  private static final String CORRECTAUDIO = "audio/correct.wav";
+  private static final String WRONGAUDIO = "audio/wrongCopy.wav";
 
   public Exam() {
 
@@ -44,10 +45,16 @@ public class Exam {
     }
 
     Gson gson = new Gson();
-    JsonObject obj = gson.fromJson(
-        new BufferedReader(new FileReader(filePath)), JsonObject.class);
-    JsonArray arr = (JsonArray) obj.get(room.getName());
-    parseQuizFromJson(arr, room);
+    ClassLoader classLoader = Exam.class.getClassLoader();
+    InputStream inputStream = classLoader.getResourceAsStream(filePath);
+    if (inputStream == null){
+      throw new IllegalArgumentException("File not found: " + filePath);
+    } else {
+      BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+      JsonObject obj = gson.fromJson(reader, JsonObject.class);
+      JsonArray arr = (JsonArray) obj.get(room.getName());
+      parseQuizFromJson(arr, room);
+    }
 
   }
 

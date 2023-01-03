@@ -34,13 +34,13 @@ public class Game {
   private boolean jsKey=false;
   private boolean findNick = false;
   private boolean wentToJavaWithoutNick=false;
-  private static final String BUNSENBURNER = "./resources/audio/BunsenBurner.wav";
+  private static final String BUNSENBURNER = "audio/BunsenBurner.wav";
 
 
   public Game() throws IOException, ParseException {
     clearScreen();
     showGameSplash();
-//    playMusicInBackground();
+    playMusicInBackground();
     introduction();
     setUpInstances();
     checkLocation();
