@@ -1,7 +1,6 @@
-package com.game.whereisnick.view;
+package com.game.whereisnick.controller;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.sound.sampled.AudioFormat;

@@ -1,7 +1,6 @@
-package com.game.whereisnick.controller;
+package com.game.whereisnick.view;
 
-import com.game.whereisnick.view.Game;
-
+import com.game.whereisnick.controller.Game;
 import java.text.ParseException;
 
 import java.io.IOException;

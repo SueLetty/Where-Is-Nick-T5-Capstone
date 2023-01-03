@@ -1,4 +1,4 @@
-package com.game.whereisnick.view;
+package com.game.whereisnick.controller;
 import com.game.whereisnick.model.Direction;
 import com.game.whereisnick.model.Exam;
 import com.game.whereisnick.model.Instructor;
@@ -40,7 +40,7 @@ public class Game {
   public Game() throws IOException, ParseException {
     clearScreen();
     showGameSplash();
-    playMusicInBackground();
+//    playMusicInBackground();
     introduction();
     setUpInstances();
     checkLocation();
@@ -53,25 +53,24 @@ public class Game {
   }
 
   // Shows the splash screen during start of the game.
-  private void showGameSplash() {
-    System.out.println(
+  public String showGameSplash() {
+    return
         "  __      __.__                           .___          _______  .__        __     ._.\n"
             + "/ \\    /  \\  |__   ___________   ____   |   | ______  \\      \\ |__| ____ |  | __ | |\n"
             + "\\   \\/\\/   /  |  \\_/ __ \\_  __ \\_/ __ \\  |   |/  ___/  /   |   \\|  |/ ___\\|  |/ / | |\n"
             + " \\        /|   Y  \\  ___/|  | \\/\\  ___/  |   |\\___ \\  /    |    \\  \\  \\___|    <   \\|\n"
             + "  \\__/\\  / |___|  /\\___  >__|    \\___  > |___/____  > \\____|__  /__|\\___  >__|_ \\  __\n"
-            + "       \\/       \\/     \\/            \\/           \\/          \\/        \\/     \\/  \\/"
-    );
+            + "       \\/       \\/     \\/            \\/           \\/          \\/        \\/     \\/  \\/";
   }
 
   //Display game introduction/ scenario
-  public void introduction() {
-    System.out.println(
+  public String introduction() {
+    return
         "\n Introduction: You are now currently enrolled as a student of TLG Learning Facility.\n"
             + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
             + " Upon completion of your orientation, you'll now navigate your way through different levels of coding classes in order to graduate\n"
             + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n\n"
-            + " You can type your name to start the game.\n After game starts, type hint if you want to know where to go from current location,\n type map to see the map,\n type help to see the command you can use,\n or quit the game anytime by typing q or quit.");
+            + " You can type your name to start the game.\n After game starts, type hint if you want to know where to go from current location,\n type map to see the map,\n type help to see the command you can use,\n or quit the game anytime by typing q or quit.";
   }
 
 
@@ -401,7 +400,7 @@ public class Game {
         + "Please type yes/no when being asked a question.\n\n");
   }
 
-  public void greetingFromJeanette(){
+  public String greetingFromJeanette(){
     String lobbyGreeting = " I hope you had your coffee this morning,\n"
         + " because your going to have a very good, but long day,\n"
         + " ..but I promise you, it's going to be great!..\n"
@@ -410,7 +409,7 @@ public class Game {
         + " You will have to go to the HTML room, which is North of the this lobby.\n"
         + " Be careful, don't venture to other areas of the building else you will be kicked out.\n"
         + " Have a good day! ";
-    System.out.println(Jeanette.greeting() + lobbyGreeting);
+    return Jeanette.greeting() + lobbyGreeting;
   }
 
 
