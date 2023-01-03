@@ -1,7 +1,7 @@
 package com.game.whereisnick.model;
 
-import com.game.whereisnick.view.Audio;
-import com.game.whereisnick.view.Game;
+import com.game.whereisnick.controller.Audio;
+import com.game.whereisnick.controller.Game;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
