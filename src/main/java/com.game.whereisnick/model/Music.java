@@ -28,7 +28,7 @@ public class Music extends Thread{
       musicClip.open(audioInput);
       musicClip.start();
       musicClip.loop(Clip.LOOP_CONTINUOUSLY);
-
+      Thread.sleep(100);
 
 
     } catch (Exception ex) {
