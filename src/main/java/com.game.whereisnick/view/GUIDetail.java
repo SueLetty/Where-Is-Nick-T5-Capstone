@@ -127,6 +127,16 @@ public class GUIDetail extends JFrame implements ActionListener {
     musicButton = new JButton("Music");
     musicButton.setBounds(180,250,100,30);
     musicButton.setFocusable(false);
+    musicButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (game.getMusicObject().isSoundOn()){
+          game.getMusicObject().stopMusic();
+        } else {
+          game.getMusicObject().turnSoundOn();
+        }
+      }
+    });
 
     northButton = new JButton("N");
     northButton.setBounds(125,75,50,50);
