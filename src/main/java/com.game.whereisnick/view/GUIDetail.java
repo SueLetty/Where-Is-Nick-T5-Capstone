@@ -231,10 +231,23 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   private void changeRoom(){
     if(currentRoom != null){
-      introInfo.setText(currentRoom.getDescription());
+
+      if(currentRoom.equals(game.getSchool().getRooms().get(0))){
+        introInfo.setText(game.greetingFromJeanette());
+      }else if(currentRoom.equals(game.getSchool().getRooms().get(1))){
+        introInfo.setText(game.greetingFromDonte());
+      }else if(currentRoom.equals(game.getSchool().getRooms().get(2))){
+        introInfo.setText(game.greetingFromNelly());
+      }else if(currentRoom.equals(game.getSchool().getRooms().get(3))){
+        introInfo.setText(game.greetingFromChad());
+      }else if(currentRoom.equals(game.getSchool().getRooms().get(4))){
+        introInfo.setText(game.greetingFromNick());
+      }
+
+
       introPanel.add(introInfo);
 
-      game.executeExamCommand(currentRoom);
+      Exam.startQuiz(currentRoom);
 
       optionInfo.setText(exam.question);
       JRadioButton answer1 = new JRadioButton(exam.answer1);
