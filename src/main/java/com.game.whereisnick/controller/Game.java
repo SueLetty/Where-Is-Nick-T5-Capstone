@@ -34,7 +34,7 @@ public class Game {
   private boolean jsKey=false;
   private boolean findNick = false;
   private boolean wentToJavaWithoutNick=false;
-  private static final String BUNSENBURNER = "audio/BunsenBurner.wav";
+  private static final String BUNSENBURNER = "audio/BBMT16Bit.wav";
 
   private Music musicObject = new Music();
 
