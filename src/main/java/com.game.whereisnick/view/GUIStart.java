@@ -1,6 +1,7 @@
 package com.game.whereisnick.view;
 
 import com.game.whereisnick.controller.Game;
+import com.game.whereisnick.model.Exam;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -12,6 +13,7 @@ import javax.swing.JLabel;
 
 public class GUIStart extends JFrame implements ActionListener {
   private Game game;
+  private Exam exam;
   private MainPanel mainPanel;
 
   public GUIStart() throws IOException, ParseException {
@@ -39,7 +41,7 @@ public class GUIStart extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         dispose();
         try {
-          GUIDetail guiDetail = new GUIDetail(game);
+          GUIDetail guiDetail = new GUIDetail(game, exam);
         } catch (IOException e) {
           throw new RuntimeException(e);
         } catch (ParseException e) {

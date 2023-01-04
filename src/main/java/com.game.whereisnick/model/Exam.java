@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 
 public class Exam {
@@ -24,13 +25,18 @@ public class Exam {
   private static final String JAVAFILENAME = "questionsJava.json";
   private static final String CORRECTAUDIO = "audio/correct.wav";
   private static final String WRONGAUDIO = "audio/wrongCopy.wav";
+  public static String question;
+  public static String answer1;
+  public static String answer2;
+  public static String answer3;
+  public static String answer4;
 
   public Exam() {
 
   }
 
 
-  public static void startQuiz(Room room) throws IOException {
+  public static void startQuiz(Room room) {
     String filePath;
     if (room.getName().equals("HTML Room")) {
       filePath = HTMLFILENAME;
@@ -50,10 +56,14 @@ public class Exam {
     if (inputStream == null){
       throw new IllegalArgumentException("File not found: " + filePath);
     } else {
+      try{
       BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
       JsonObject obj = gson.fromJson(reader, JsonObject.class);
       JsonArray arr = (JsonArray) obj.get(room.getName());
       parseQuizFromJson(arr, room);
+      }catch (IOException e) {
+        throw new RuntimeException(e);
+      }
     }
 
   }
@@ -66,11 +76,11 @@ public class Exam {
     do {
       for (int i = 0; i < 5; i++) {
         JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-        System.out.println(jsonObject.get("Question").toString().replaceAll("\"", ""));
-        System.out.println("a. " + jsonObject.get("a").toString().replaceAll("\"", ""));
-        System.out.println("b. " + jsonObject.get("b").toString().replaceAll("\"", ""));
-        System.out.println("c. " + jsonObject.get("c").toString().replaceAll("\"", ""));
-        System.out.println("d. " + jsonObject.get("d").toString().replaceAll("\"", ""));
+        question = jsonObject.get("Question").toString().replaceAll("\"", "");
+        answer1 = "a. " + jsonObject.get("a").toString().replaceAll("\"", "");
+        answer2 = "b. " + jsonObject.get("b").toString().replaceAll("\"", "");
+        answer3 = "c. " + jsonObject.get("c").toString().replaceAll("\"", "");
+        answer4 = "d. " + jsonObject.get("d").toString().replaceAll("\"", "");
         System.out.println("\n  Enter your answer: ");
         answer = Game.getUserChoice();
         checkIfUserQuit = Game.checkIfUserQuit(answer);
