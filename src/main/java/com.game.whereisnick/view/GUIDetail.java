@@ -55,9 +55,9 @@ public class GUIDetail extends JFrame implements ActionListener {
   private JButton eastButton;
   private JButton westButton;
 
-  public GUIDetail(Game game, Exam exam) throws IOException, ParseException {
+  public GUIDetail(Game game) throws IOException, ParseException {
     this.game = game;
-    this.exam = exam;
+
 
     introPanel = new JPanel();
     introPanel.setBackground(Color.red);
@@ -226,7 +226,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   public static void main(String[] args) throws IOException, ParseException {
-    new GUIDetail(new Game(), new Exam());
+    new GUIDetail(new Game());
   }
 
   private void changeRoom(){
@@ -246,14 +246,23 @@ public class GUIDetail extends JFrame implements ActionListener {
 
 
       introPanel.add(introInfo);
+      introPanel.revalidate();
+      exam = new Exam();
+      exam.startQuiz(currentRoom);
 
-      Exam.startQuiz(currentRoom);
 
       optionInfo.setText(exam.question);
       JRadioButton answer1 = new JRadioButton(exam.answer1);
+      answer1.setBounds(50, 50,270,30);
+
       JRadioButton answer2 = new JRadioButton(exam.answer2);
+      answer2.setBounds(50, 100,270,30);
       JRadioButton answer3 = new JRadioButton(exam.answer3);
+      answer3.setBounds(50, 150,270,30);
       JRadioButton answer4 = new JRadioButton(exam.answer4);
+      answer4.setBounds(50, 200,270,30);
+
+
 
       ButtonGroup group = new ButtonGroup();
       group.add(answer1);
@@ -262,11 +271,14 @@ public class GUIDetail extends JFrame implements ActionListener {
       group.add(answer4);
 
       optionPanel.add(optionInfo);
+      optionPanel.setLayout(null);
       optionPanel.add(answer1);
       optionPanel.add(answer2);
       optionPanel.add(answer3);
       optionPanel.add(answer4);
       optionPanel.setVisible(true);
+      optionPanel.revalidate();
+      repaint();
 
 
     }else{

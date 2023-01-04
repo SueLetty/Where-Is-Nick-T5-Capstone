@@ -83,15 +83,15 @@ public class Game {
   }
 
 
-  public static String getUserChoice(){
-
-//    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
-//    String inputScan = inputBuffer.readLine();
-    inputBuffer = new Scanner(System.in);
-    String inputScan = inputBuffer.nextLine();
-    String userInput = inputScan.toString().toLowerCase();
-    return userInput;
-  }
+//  public static String getUserChoice(){
+//
+////    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
+////    String inputScan = inputBuffer.readLine();
+//    inputBuffer = new Scanner(System.in);
+//    String inputScan = inputBuffer.nextLine();
+//    String userInput = inputScan.toString().toLowerCase();
+//    return userInput;
+//  }
 
 
 
@@ -153,7 +153,7 @@ public class Game {
     boolean quit = false;
     if (Arrays.asList(quitSynonymns).contains(input)) {
       System.out.println("Are you sure you want to quit?");
-      userInput = getUserChoice();
+//      userInput = getUserChoice();
       if (Arrays.asList(yesSynonymns).contains(userInput)) {
         quit = true;
       }
@@ -189,7 +189,7 @@ public class Game {
     if (dir == Direction.EAST) {
       exit = currentLocation.geteRoom();
     }
-
+    accessible(exit);
     return exit;
   }
   public boolean accessible(Room room){
@@ -217,7 +217,7 @@ public class Game {
         System.out.println("You already passed the HTML exam. Go check other places.");
       }else{
         greetingFromDonte();
-        executeExamCommand(htmlRoom);
+//        executeExamCommand(htmlRoom);
       }
     }else if(room.equals(jsRoom)){
       if(!jsKey){
@@ -226,7 +226,7 @@ public class Game {
         System.out.println("You already passed the JavaScript exam. Go check other places.");
       } else{
         greetingFromNelly();
-        executeExamCommand(jsRoom);
+//        executeExamCommand(jsRoom);
       }
     }else if(room.equals(pythonRoom)){
       if(!pythonKey){
@@ -235,7 +235,7 @@ public class Game {
         System.out.println("You already passed the Python exam. Go check other places.");
       } else{
         greetingFromChad();
-        executeExamCommand(pythonRoom);
+//        executeExamCommand(pythonRoom);
       }
     }else if(room.equals(studyRoom)){
       if(!javaKey || !wentToJavaWithoutNick){
@@ -246,7 +246,7 @@ public class Game {
         javaRoom.setInstructor(Nick);
         student.setLocation(javaRoom);
         greetingFromNick();
-        executeExamCommand(javaRoom);
+//        executeExamCommand(javaRoom);
       }
     } else if(room.equals(javaRoom)) {
       if (!javaKey) {
@@ -285,20 +285,20 @@ public class Game {
   }
 
 
-  public void executeExamCommand(Room room) {
-    String answer = getUserChoice();
-
-    if(answer.equals("yes") || answer.equals("y")){
-      Exam.startQuiz(room);
-      checkKey(room);
-
-    }else if(answer.equals("no") || answer.equals("n")){
-      System.out.println("You can type your command or you can quit the game by tying quit");
-    }else{
-      System.out.println("You must type yes or no.");
-      executeExamCommand(room);
-    }
-  }
+//  public void executeExamCommand(Room room) {
+////    String answer = getUserChoice();
+//
+//    if(answer.equals("yes") || answer.equals("y")){
+//      Exam.startQuiz(room);
+//      checkKey(room);
+//
+//    }else if(answer.equals("no") || answer.equals("n")){
+//      System.out.println("You can type your command or you can quit the game by tying quit");
+//    }else{
+//      System.out.println("You must type yes or no.");
+//      executeExamCommand(room);
+//    }
+//  }
 
 
   public void checkKey(Room room) {

@@ -13,7 +13,7 @@ public class RunGame {
     String input = "";
     while(true){
       System.out.println("\n type your command: ");
-      input = Game.getUserChoice();
+//      input = Game.getUserChoice();
       System.out.println(newGame.executeCommand(input));
 
       if(input.equals("q") || input.equals("quit")){
