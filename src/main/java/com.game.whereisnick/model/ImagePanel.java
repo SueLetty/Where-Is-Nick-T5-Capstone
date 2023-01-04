@@ -1,10 +1,7 @@
 package com.game.whereisnick.model;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Point;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;

@@ -19,7 +19,6 @@ public class ControllerPanel extends JPanel {
   private JButton westButton;
   public ControllerPanel(){
 
-    this.setBackground(Color.lightGray);
     this.setLayout(null);
 
     mapButton = new JButton("Map");
@@ -63,7 +62,7 @@ public class ControllerPanel extends JPanel {
     this.add(eastButton);
     this.add(westButton);
 
-
+    this.setVisible(true);
   }
   public void paint(Graphics g){
     Graphics2D g2D = (Graphics2D) g;

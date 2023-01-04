@@ -18,33 +18,27 @@ public class MainPanel extends JPanel{
   JButton beginButton;
   JButton quitButton;
   JLabel intro;
-  JLabel splash;
   public MainPanel(){
-    this.setPreferredSize(new Dimension(900,750));
-    this.setLayout(new BorderLayout());
+    this.setPreferredSize(new Dimension(1000,600));
+    this.setLayout(null);
 
-    splash = new JLabel();
     intro = new JLabel();
-    intro.setBounds(400,500,700,450);
+    intro.setBounds(10,10,980,500);
     intro.setOpaque(true);
+    intro.setHorizontalAlignment(JLabel.CENTER);
     intro.setBackground(Color.lightGray);
 
 
     startButton = new JButton("Start Game");
-    startButton.setBounds(400,600,100,30);
+    startButton.setBounds(450,530,100,30);
     startButton.setFocusable(false);
 
     beginButton = new JButton("Begin");
-    beginButton.setBounds(400,600,100,30);
+    beginButton.setBounds(450,530,100,30);
     startButton.setFocusable(false);
 
-    quitButton = new JButton("Quit");
-    quitButton.setBounds(400,650,100,30);
-    startButton.setFocusable(false);
-
-    this.add(intro,BorderLayout.CENTER);
-//    this.add(splash,BorderLayout.CENTER);
-    this.add(startButton,BorderLayout.SOUTH);
+    this.add(intro);
+    this.add(startButton);
 
 
   }

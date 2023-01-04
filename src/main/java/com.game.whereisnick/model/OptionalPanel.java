@@ -2,8 +2,10 @@ package com.game.whereisnick.model;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -12,14 +14,25 @@ public class OptionalPanel extends JPanel {
   private JRadioButton answer2;
   private JRadioButton answer3;
   private JRadioButton answer4;
+  private JLabel info;
   public OptionalPanel(){
 
-    this.setBackground(Color.lightGray);
+
+
+    info = new JLabel();
+    info.setFont(new Font("MV Boli",Font.PLAIN,12));
+    info.setText("Click on direction button and move to a different room.");
+    info.setOpaque(true);
+    info.setBackground(Color.CYAN);
+    info.setVisible(true);
 
     answer1 = new JRadioButton();
     answer2 = new JRadioButton();
     answer3 = new JRadioButton();
     answer4 = new JRadioButton();
+
+    this.add(info);
+    this.setVisible(true);
   }
   public void paint(Graphics g){
     Graphics2D g2D = (Graphics2D) g;
