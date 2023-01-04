@@ -6,9 +6,11 @@ import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.JOptionPane;
 
 public class Music extends Thread{
+
+  private Clip musicClip;
+  private boolean soundOn = true;
 
   public void run(){
     playMusic("audio/BunsenBurner.wav");
@@ -22,10 +24,10 @@ public class Music extends Thread{
       URL url = Music.class.getClassLoader().getResource(musicLocation);
       assert url != null;
       AudioInputStream audioInput = AudioSystem.getAudioInputStream(url);
-      Clip clip = AudioSystem.getClip();
-      clip.open(audioInput);
-      clip.start();
-      clip.loop(Clip.LOOP_CONTINUOUSLY);
+      musicClip = AudioSystem.getClip();
+      musicClip.open(audioInput);
+      musicClip.start();
+      musicClip.loop(Clip.LOOP_CONTINUOUSLY);
 
 
 
@@ -35,6 +37,19 @@ public class Music extends Thread{
     }
   }
 
+  public void stopMusic(){
+    musicClip.stop();
+    //musicClip.close();
+    soundOn = false;
+  }
 
+  public boolean isSoundOn(){
+    return soundOn;
+  }
+
+  public void turnSoundOn(){
+    musicClip.start();
+    soundOn = true;
+  }
 
 }

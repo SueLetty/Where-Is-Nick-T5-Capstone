@@ -36,20 +36,25 @@ public class Game {
   private boolean wentToJavaWithoutNick=false;
   private static final String BUNSENBURNER = "audio/BunsenBurner.wav";
 
+  private Music musicObject = new Music();
+
 
   public Game() throws IOException, ParseException {
     clearScreen();
     showGameSplash();
-//    playMusicInBackground();
+    playMusicInBackground();
     introduction();
     setUpInstances();
     checkLocation();
   }
 
   private void playMusicInBackground() {
-    Music musicObject = new Music();
     String filepath = BUNSENBURNER; // put filepath here, ex: musicPlayBackground.wav
     musicObject.playMusic(filepath);
+  }
+
+  public Music getMusicObject(){
+    return musicObject;
   }
 
   // Shows the splash screen during start of the game.
