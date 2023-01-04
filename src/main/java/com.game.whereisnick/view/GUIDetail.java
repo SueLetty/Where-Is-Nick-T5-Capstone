@@ -4,6 +4,7 @@ import com.game.whereisnick.controller.Game;
 import com.game.whereisnick.model.ControllerPanel;
 import com.game.whereisnick.model.Direction;
 import com.game.whereisnick.model.Exam;
+import com.game.whereisnick.model.ImageImport;
 import com.game.whereisnick.model.ImagePanel;
 import com.game.whereisnick.model.IntroPanel;
 import com.game.whereisnick.model.OptionalPanel;
@@ -71,7 +72,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     introPanel.add(introInfo);
 
 
-    image = new ImageIcon("resources/love.png");
+    image = ImageImport.importIcon("images/love.png");
     imageLabel = new JLabel();
     imageLabel.setIcon(image);
     imageLabel.setBackground(Color.BLUE);
