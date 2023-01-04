@@ -10,17 +10,21 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
-public class GUIDetail extends JFrame {
+public class GUIDetail extends JFrame implements ActionListener {
   private Game game;
 
   private JPanel introPanel;
@@ -83,14 +87,42 @@ public class GUIDetail extends JFrame {
     mapButton = new JButton("Map");
     mapButton.setBounds(10,10,100,30);
     mapButton.setFocusable(false);
+    mapButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt) {
+        JOptionPane.showMessageDialog(null, game.getMap(),"Map", JOptionPane.PLAIN_MESSAGE);
+      }
+    });
 
     helpButton = new JButton("Help");
     helpButton.setBounds(180,10,100,30);
     helpButton.setFocusable(false);
+    helpButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt) {
+        JOptionPane.showMessageDialog(null, game.commandList(),"Help", JOptionPane.PLAIN_MESSAGE);
+      }
+    });
 
     quitButton = new JButton("Quit");
     quitButton.setBounds(10,250,100,30);
     quitButton.setFocusable(false);
+    quitButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt) {
+        String[] responses = {"Yes", "No"};
+        int reply = JOptionPane.showOptionDialog(null,
+            "Are you sure",
+            "Quit",JOptionPane.YES_NO_OPTION,
+            JOptionPane.INFORMATION_MESSAGE,
+            null,
+            responses,
+            0);
+        if(reply == JOptionPane.YES_OPTION){
+          JOptionPane.showMessageDialog(null, "GoodBye!");
+          System.exit(0);
+        }
+
+
+      }
+    });
 
     musicButton = new JButton("Music");
     musicButton.setBounds(180,250,100,30);
@@ -142,5 +174,10 @@ public class GUIDetail extends JFrame {
 
   public static void main(String[] args) throws IOException, ParseException {
     new GUIDetail(new Game());
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+
   }
 }
