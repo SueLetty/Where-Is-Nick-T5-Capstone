@@ -40,7 +40,7 @@ public class Game {
   public Game() throws IOException, ParseException {
     clearScreen();
     showGameSplash();
-    playMusicInBackground();
+//    playMusicInBackground();
     introduction();
     setUpInstances();
     checkLocation();
@@ -392,12 +392,12 @@ public class Game {
 
 
   // create command list method
-  public void commandList() throws IOException {
+  public String commandList()  {
 
-    System.out.println("Please select from the following commands : \n");
-    System.out.println("You can type go/run/move to directions north/east/south/west\n"
+    return "Please select from the following commands : \n" +
+    "You can type go/run/move to directions north/east/south/west\n"
         + "to navigate through this game!\n\n"
-        + "Please type yes/no when being asked a question.\n\n");
+        + "Please type yes/no when being asked a question.\n\n";
   }
 
   public String greetingFromJeanette(){
@@ -456,8 +456,8 @@ public class Game {
   }
 
 
-  private void getMap(){
-    System.out.println(" \n"
+  public String getMap(){
+    return " \n"
 
         + "  |JAVASCRIPT|----------|PYTHON|--------|STUDYROOM|\n"
         + "      |                   |                       \n"
@@ -468,7 +468,7 @@ public class Game {
         + "      |                   |                       \n"
         + "      |                   |                       \n"
         + "   |LOBBY|              |EXIT|                    \n"
-    );
+    ;
   }
 
   public Student getStudent() {

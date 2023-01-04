@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.ParseException;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class GUIStart extends JFrame implements ActionListener {
   private Game game;
@@ -18,26 +19,32 @@ public class GUIStart extends JFrame implements ActionListener {
 
     this.setTitle("Where is Nick");
     this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-    this.setSize(1000,750);
+    this.setSize(1000,600);
 
     mainPanel = new MainPanel();
-    mainPanel.splash.setText(game.showGameSplash());
     mainPanel.intro.setText("Where is Nick?");
     mainPanel.intro.setFont(new Font("MV Boli",Font.BOLD,36));
     mainPanel.startButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
       mainPanel.intro.setText(game.introduction());
+      mainPanel.intro.setHorizontalAlignment(JLabel.CENTER);
       mainPanel.intro.setVisible(true);
         mainPanel.intro.setFont(new Font("MV Boli",Font.BOLD,12));
       mainPanel.remove(mainPanel.startButton);
-      mainPanel.add(mainPanel.beginButton, BorderLayout.SOUTH);
+      mainPanel.add(mainPanel.beginButton);
       }
     });
 
     mainPanel.beginButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         dispose();
-        GUIDetail guiDetail = new GUIDetail();
+        try {
+          GUIDetail guiDetail = new GUIDetail(game);
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        } catch (ParseException e) {
+          throw new RuntimeException(e);
+        }
 
       }
     });
