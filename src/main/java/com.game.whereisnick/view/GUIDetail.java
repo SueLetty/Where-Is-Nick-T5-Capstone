@@ -2,12 +2,17 @@ package com.game.whereisnick.view;
 
 import com.game.whereisnick.controller.Game;
 import com.game.whereisnick.model.ControllerPanel;
+import com.game.whereisnick.model.Direction;
+import com.game.whereisnick.model.Exam;
 import com.game.whereisnick.model.ImagePanel;
 import com.game.whereisnick.model.IntroPanel;
 import com.game.whereisnick.model.OptionalPanel;
+import com.game.whereisnick.model.Room;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -16,16 +21,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import javax.swing.Action;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 
 public class GUIDetail extends JFrame implements ActionListener {
   private Game game;
+  private Exam exam;
+  private Room currentRoom;
+
 
   private JPanel introPanel;
 
@@ -45,8 +55,9 @@ public class GUIDetail extends JFrame implements ActionListener {
   private JButton eastButton;
   private JButton westButton;
 
-  public GUIDetail(Game game) throws IOException, ParseException {
+  public GUIDetail(Game game, Exam exam) throws IOException, ParseException {
     this.game = game;
+    this.exam = exam;
 
     introPanel = new JPanel();
     introPanel.setBackground(Color.red);
@@ -141,19 +152,45 @@ public class GUIDetail extends JFrame implements ActionListener {
     northButton = new JButton("N");
     northButton.setBounds(125,75,50,50);
     northButton.setFocusable(false);
+    northButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt){
+        currentRoom = game.moveTo(Direction.NORTH);
+        changeRoom();
+      }
+    });
 
     southButton = new JButton("S");
     southButton.setBounds(125,175,50,50);
     southButton.setFocusable(false);
+    southButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt){
+        currentRoom = game.moveTo(Direction.SOUTH);
+        changeRoom();
+      }
+    });
 
     eastButton = new JButton("E");
     eastButton.setBounds(75,125,50,50);
     eastButton.setFocusable(false);
+    eastButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt){
+        currentRoom = game.moveTo(Direction.EAST);
+        changeRoom();
+      }
+    });
 
     westButton = new JButton("W");
     westButton.setBounds(175,125,50,50);
     westButton.setFocusable(false);
+    westButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt){
+        currentRoom = game.moveTo(Direction.WEST);
+        changeRoom();
+      }
+    });
+
     controllerPanel.setLayout(null);
+
 
     controllerPanel.add(helpButton);
     controllerPanel.add(mapButton);
@@ -181,11 +218,49 @@ public class GUIDetail extends JFrame implements ActionListener {
     this.setLocationRelativeTo(null);
 
   }
+  public void paint(Graphics g){
+    super.paint(g);
 
-  public static void main(String[] args) throws IOException, ParseException {
-    new GUIDetail(new Game());
+    Graphics2D g2d = (Graphics2D) g;
+
   }
 
+  public static void main(String[] args) throws IOException, ParseException {
+    new GUIDetail(new Game(), new Exam());
+  }
+
+  private void changeRoom(){
+    if(currentRoom != null){
+      introInfo.setText(currentRoom.getDescription());
+      introPanel.add(introInfo);
+
+      game.executeExamCommand(currentRoom);
+
+      optionInfo.setText(exam.question);
+      JRadioButton answer1 = new JRadioButton(exam.answer1);
+      JRadioButton answer2 = new JRadioButton(exam.answer2);
+      JRadioButton answer3 = new JRadioButton(exam.answer3);
+      JRadioButton answer4 = new JRadioButton(exam.answer4);
+
+      ButtonGroup group = new ButtonGroup();
+      group.add(answer1);
+      group.add(answer2);
+      group.add(answer3);
+      group.add(answer4);
+
+      optionPanel.add(optionInfo);
+      optionPanel.add(answer1);
+      optionPanel.add(answer2);
+      optionPanel.add(answer3);
+      optionPanel.add(answer4);
+      optionPanel.setVisible(true);
+
+
+    }else{
+      JOptionPane.showMessageDialog(null, game.getNO_DIRECTION_MESSAGE(),"Warning", JOptionPane.WARNING_MESSAGE);
+
+    }
+  }
   @Override
   public void actionPerformed(ActionEvent e) {
 

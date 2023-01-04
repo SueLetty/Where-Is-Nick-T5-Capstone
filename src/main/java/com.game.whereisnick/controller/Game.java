@@ -13,6 +13,7 @@ import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Game {
 
@@ -22,7 +23,8 @@ public class Game {
   private Instructor Nelly;
   private Instructor Chad;
   private Instructor Nick;
-  private static BufferedReader inputBuffer;
+//  private static BufferedReader inputBuffer;
+  private static Scanner inputBuffer;
   private Student student;
   private School TLGSchool;
   private static String quitSynonymns[] = {"no", "n", "quit", "q"};
@@ -38,8 +40,10 @@ public class Game {
 
   private Music musicObject = new Music();
 
+  private final String NO_DIRECTION_MESSAGE = "No exit! Choose another direction.";
 
-  public Game() throws IOException, ParseException {
+
+  public Game(){
     clearScreen();
     showGameSplash();
     playMusicInBackground();
@@ -79,10 +83,12 @@ public class Game {
   }
 
 
-  public static String getUserChoice() throws IOException {
+  public static String getUserChoice(){
 
-    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
-    String inputScan = inputBuffer.readLine();
+//    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
+//    String inputScan = inputBuffer.readLine();
+    inputBuffer = new Scanner(System.in);
+    String inputScan = inputBuffer.nextLine();
     String userInput = inputScan.toString().toLowerCase();
     return userInput;
   }
@@ -90,7 +96,7 @@ public class Game {
 
 
   //Clear the screen before displaying it in console
-  public static void clearScreen() throws IOException {
+  public static void clearScreen(){
     //Clears Screen in java
     try {
       if (System.getProperty("os.name").contains("Windows")) {
@@ -102,10 +108,12 @@ public class Game {
     }
   }
   
-  public void setUpInstances() throws IOException {
+  public void setUpInstances(){
     System.out.println("\nEnter your name: ");
-    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
-    String inputScan = inputBuffer.readLine();
+//    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
+//    String inputScan = inputBuffer.readLine();
+    inputBuffer = new Scanner(System.in);
+    String inputScan = inputBuffer.nextLine();
     String name = inputScan.toString().toUpperCase();
     student = new Student(name, "student");
     System.out.printf("\nHello %s!", student.getName());;
@@ -141,7 +149,7 @@ public class Game {
     TLGSchool.addRooms(lobby, htmlRoom,jsRoom,pythonRoom,studyRoom,javaRoom);
   }
 
-  public static boolean checkIfUserQuit(String input) throws IOException {
+  public static boolean checkIfUserQuit(String input){
     boolean quit = false;
     if (Arrays.asList(quitSynonymns).contains(input)) {
       System.out.println("Are you sure you want to quit?");
@@ -155,7 +163,7 @@ public class Game {
     return quit;
   }
 
-  public void checkLocation() throws IOException, ParseException {
+  public void checkLocation(){
     Room currentLocation = student.getLocation();
     System.out.println("\n=============================================");
     System.out.println("Current Room: " + currentLocation.getName());
@@ -166,7 +174,7 @@ public class Game {
     showGreeting(currentLocation);
   }
 
-  private void moveTo(Direction dir) throws IOException, ParseException {
+  public Room moveTo(Direction dir){
     Room currentLocation = student.getLocation();
     Room exit = null;
     if(dir==Direction.NORTH){
@@ -187,11 +195,12 @@ public class Game {
       student.setLocation(exit);
       checkLocation();
     }else{
-      System.out.println("No exit! Choose another direction.");
+      System.out.println(NO_DIRECTION_MESSAGE);
       }
+    return exit;
     }
 
-  private void showGreeting(Room room) throws IOException, ParseException {
+  private void showGreeting(Room room) {
     // TODO: 12/18/22 may need remove passed eaxm print out and change if(Exam.passHTML) to check if(htmlRoom.firstTime)
     Room lobby = TLGSchool.getRooms().get(0);
     Room htmlRoom = TLGSchool.getRooms().get(1);
@@ -249,7 +258,7 @@ public class Game {
     }
 
 
-  private void checkWhereCanGo() {
+  public String checkWhereCanGo() {
     Room currentLocation = student.getLocation();
     ArrayList<String> exit = new ArrayList<>();
 
@@ -268,14 +277,14 @@ public class Game {
       exit.add(Direction.EAST.toString());
     }
 
-    System.out.println("\n=====================================================================================");
-    System.out.printf("%s can go %s from current location --- %s.", student.getName(), exit,student.getLocation().getName());
-    System.out.println("\n=====================================================================================");
+    return "\n====================================================================================="
+    + student.getName() +" can go " + exit + "from current location --- " + student.getLocation().getName() +
+        "\n=====================================================================================";
 
   }
 
 
-  public void executeExamCommand(Room room) throws IOException, ParseException {
+  public void executeExamCommand(Room room) {
     String answer = getUserChoice();
 
     if(answer.equals("yes") || answer.equals("y")){
@@ -329,7 +338,7 @@ public class Game {
     }
 
 
-  public String executeCommand(String input) throws IOException, ParseException {
+  public String executeCommand(String input) throws IOException {
 
     String result = "";
     if (input.equals("q") || input.equals("quit")) {
@@ -360,7 +369,7 @@ public class Game {
     return input.split(" ");
   }
 
-  private String parseCommand(String[] arr) throws IOException, ParseException {
+  private String parseCommand(String[] arr) throws IOException {
     String result = "";
     String firstWord = arr[0];
 
@@ -455,7 +464,7 @@ public class Game {
   }
 
 
-  public void printDontHaveKey() throws IOException, ParseException {
+  public void printDontHaveKey(){
     System.out.println(" You can't enter this room because you don't have the key to unlock this door.");
     System.out.println(" Maybe go to last room and pass the exam?");
   }
@@ -490,5 +499,9 @@ public class Game {
 
   public void setSchool(School school) {
     this.TLGSchool = school;
+  }
+
+  public String getNO_DIRECTION_MESSAGE() {
+    return NO_DIRECTION_MESSAGE;
   }
 }
