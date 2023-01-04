@@ -31,6 +31,7 @@ public class Exam {
   public static String answer3;
   public static String answer4;
 
+
   public Exam() {
 
   }
@@ -68,7 +69,7 @@ public class Exam {
 
   }
 
-  private static void parseQuizFromJson(JsonArray jsonArray, Room room) throws IOException {
+  private static void parseQuizFromJson(JsonArray jsonArray, Room room){
     int correctAnswer = 0;
     String answer = "";
     boolean checkIfUserQuit = false;

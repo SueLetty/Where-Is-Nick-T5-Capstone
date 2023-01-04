@@ -171,36 +171,37 @@ public class Game {
     if(currentLocation.getName().equals("Java Room") && javaKey){
       wentToJavaWithoutNick = true;
     }
-    showGreeting(currentLocation);
+//    showGreeting(currentLocation);
   }
 
-  public Room moveTo(Direction dir){
+  public Room moveTo(Direction dir) {
     Room currentLocation = student.getLocation();
     Room exit = null;
-    if(dir==Direction.NORTH){
+    if (dir == Direction.NORTH) {
       exit = currentLocation.getnRoom();
     }
-    if(dir==Direction.SOUTH){
+    if (dir == Direction.SOUTH) {
       exit = currentLocation.getsRoom();
     }
-    if(dir==Direction.WEST){
+    if (dir == Direction.WEST) {
       exit = currentLocation.getwRoom();
     }
-    if(dir==Direction.EAST){
+    if (dir == Direction.EAST) {
       exit = currentLocation.geteRoom();
     }
 
-
-    if(exit!=null){
-      student.setLocation(exit);
-      checkLocation();
-    }else{
-      System.out.println(NO_DIRECTION_MESSAGE);
-      }
     return exit;
+  }
+  public boolean accessible(Room room){
+
+    if(room!=null){
+      student.setLocation(room);
+//      checkLocation();
+    }
+    return false;
     }
 
-  private void showGreeting(Room room) {
+  public void showGreeting(Room room) {
     // TODO: 12/18/22 may need remove passed eaxm print out and change if(Exam.passHTML) to check if(htmlRoom.firstTime)
     Room lobby = TLGSchool.getRooms().get(0);
     Room htmlRoom = TLGSchool.getRooms().get(1);
@@ -427,17 +428,17 @@ public class Game {
   }
 
 
-  public void greetingFromDonte(){
+  public String greetingFromDonte(){
     String htmlGreeting = " I'm here to teach you web development in HTML.\n"
         + " Get ready to have your mind blown....\n"
         + " Three days later...\n"
         + " Now.. you need to pass the exam in order to get to the next round.\n"
         + " It's all up to you!.. Good luck!\n"
         + " Are you ready to take the exam?";
-    System.out.println(Donte.greeting() + htmlGreeting);
+    return Donte.greeting() + htmlGreeting;
   }
 
-  public void greetingFromNelly(){
+  public String greetingFromNelly(){
     String javaScriptGreeting = " You are in my Javascript class for web development! Merry Christmas!\n"
         + " Lets get started! Beware, there is going to be pain in this learning,\n"
         + " you will sweat but it's worth it. I am telling you, life is not easy and you have to work hard for it\n"
@@ -445,22 +446,22 @@ public class Game {
         + " 1 week later...\n"
         + " Ok now you'll have to pass the exam for this class in order to move forward in the boot camp.\n"
         + " Good luck!\n Are you ready to take the exam?";
-    System.out.println(Nelly.greeting() + javaScriptGreeting);
+    return Nelly.greeting() + javaScriptGreeting;
   }
 
-  public void greetingFromChad(){
+  public String greetingFromChad(){
     String pythonGreeting = " Welcome! Sorry about the loud music.\n"
         + " Let's learn Python! One important principle in software design,\n"
         + " you have to keep in mind \"Users are very stupid!\" -In radio personality voice.\n"
         + " jk .. but it is very important to have efficient code!\n 1 week later...\n"
         + " Ok, now you'll have to pass the exam for this class in order to move forward in the boot camp.\n"
         + " Good luck!...\n Are you ready to take the exam? ";
-    System.out.println(Chad.greeting() + pythonGreeting);
+    return Chad.greeting() + pythonGreeting;
   }
 
-  public void greetingFromNick(){
+  public String greetingFromNick(){
     String javaGreeting = " Let's learn Java.\n Couple of months later...\n Are you ready to take the exam?";
-    System.out.println(Nick.greeting() + javaGreeting);
+    return Nick.greeting() + javaGreeting;
   }
 
 
