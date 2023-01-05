@@ -46,7 +46,7 @@ public class GUIStart extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         dispose();
         try {
-          GUIDetail guiDetail = new GUIDetail(game, exam);
+          GUIDetail guiDetail = new GUIDetail(game);
         } catch (IOException e) {
           throw new RuntimeException(e);
         } catch (ParseException e) {

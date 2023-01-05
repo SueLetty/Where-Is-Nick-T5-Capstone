@@ -30,6 +30,9 @@ public class Exam {
   public static String answer2;
   public static String answer3;
   public static String answer4;
+  public static int correctAnswer = 0;
+  public static String actualAnswer;
+  public static int count = 0;
 
 
   public Exam() {
@@ -61,7 +64,7 @@ public class Exam {
       BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
       JsonObject obj = gson.fromJson(reader, JsonObject.class);
       JsonArray arr = (JsonArray) obj.get(room.getName());
-      parseQuizFromJson(arr, room);
+      parseQuizFromJson(arr);
       }catch (IOException e) {
         throw new RuntimeException(e);
       }
@@ -69,53 +72,58 @@ public class Exam {
 
   }
 
-  private static void parseQuizFromJson(JsonArray jsonArray, Room room){
-    int correctAnswer = 0;
-    String answer = "";
-    boolean checkIfUserQuit = false;
+  public static void parseQuizFromJson(JsonArray jsonArray){
+//    int correctAnswer = 0;
+//    String answer = "";
+//    boolean checkIfUserQuit = false;
 
-    do {
-      for (int i = 0; i < 5; i++) {
-        JsonObject jsonObject = (JsonObject) jsonArray.get(i);
+//    do {
+//      for (int i = 0; i < 5; i++) {
+        JsonObject jsonObject = (JsonObject) jsonArray.get(count++);
         question = jsonObject.get("Question").toString().replaceAll("\"", "");
         answer1 = "a. " + jsonObject.get("a").toString().replaceAll("\"", "");
         answer2 = "b. " + jsonObject.get("b").toString().replaceAll("\"", "");
         answer3 = "c. " + jsonObject.get("c").toString().replaceAll("\"", "");
         answer4 = "d. " + jsonObject.get("d").toString().replaceAll("\"", "");
-        System.out.println("\n  Enter your answer: ");
-        answer = Game.getUserChoice();
-        checkIfUserQuit = Game.checkIfUserQuit(answer);
+    System.out.println(count + ". " + question);
+    System.out.println(answer1);
+    System.out.println(answer2);
+    System.out.println(answer3);
+    System.out.println(answer4);
+//        System.out.println("\n  Enter your answer: ");
+//        answer = Game.getUserChoice();
+//        checkIfUserQuit = Game.checkIfUserQuit(answer);
 
-        if(checkIfUserQuit){
-          System.out.println("Quitting exam....");
-          break;
-        }
-        String actualAnswer = jsonObject.get("answer").getAsString();
-        correctAnswer = checkCorrectAnswerAndReturnCounter(correctAnswer, answer, actualAnswer);
-      }
-      if (correctAnswer < 4) {
-        System.out.println("\n\n You failed the exam. Please retake the exam! \n");
-        correctAnswer = 0;
-      }
-    }
-    while (correctAnswer < 4 && !checkIfUserQuit);
-    System.out.printf("Result:You got: %d out of 5", correctAnswer);
-    System.out.println("\n\n");
+//        if(checkIfUserQuit){
+//          System.out.println("Quitting exam....");
+//          break;
+//        }
+        actualAnswer = jsonObject.get("answer").getAsString();
+    System.out.println(actualAnswer);
+//        correctAnswer = checkCorrectAnswerAndReturnCounter(correctAnswer, answer, actualAnswer);
+//      }
+//      if (correctAnswer < 4) {
+//        System.out.println("\n\n You failed the exam. Please retake the exam! \n");
+//        correctAnswer = 0;
+//      }
+//    } while (correctAnswer < 4 && !checkIfUserQuit);
+//    System.out.printf("Result:You got: %d out of 5", correctAnswer);
+//    System.out.println("\n\n");
 
-    if (room.getName().equals("HTML Room") && correctAnswer > 3) {
-      passHTML = true;
-    } else if (room.getName().equals("JavaScript Room") && correctAnswer > 3) {
-
-      passJs = true;
-    } else if (room.getName().equals("Python Room") && correctAnswer > 3) {
-      passPython = true;
-    } else if (room.getName().equals("Java Room") && correctAnswer > 3) {
-      passJava = true;
-    }
+//    if (room.getName().equals("HTML Room") && correctAnswer > 3) {
+//      passHTML = true;
+//    } else if (room.getName().equals("JavaScript Room") && correctAnswer > 3) {
+//
+//      passJs = true;
+//    } else if (room.getName().equals("Python Room") && correctAnswer > 3) {
+//      passPython = true;
+//    } else if (room.getName().equals("Java Room") && correctAnswer > 3) {
+//      passJava = true;
+//    }
   }
 
 
-  private static int checkCorrectAnswerAndReturnCounter(int correctAnswer, String answer,
+  public static int checkCorrectAnswerAndReturnCounter(int correctAnswer, String answer,
       String actualAnswer) {
     Audio audio = new Audio();
     if (answer.equals(actualAnswer)) {
