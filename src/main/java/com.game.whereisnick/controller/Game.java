@@ -505,4 +505,32 @@ public class Game {
   public String getNO_DIRECTION_MESSAGE() {
     return NO_DIRECTION_MESSAGE;
   }
+
+  public static String getUserInput() {
+    return userInput;
+  }
+
+  public boolean isHtmlKey() {
+    return htmlKey;
+  }
+
+  public boolean isPythonKey() {
+    return pythonKey;
+  }
+
+  public boolean isJavaKey() {
+    return javaKey;
+  }
+
+  public boolean isJsKey() {
+    return jsKey;
+  }
+
+  public boolean isFindNick() {
+    return findNick;
+  }
+
+  public boolean isWentToJavaWithoutNick() {
+    return wentToJavaWithoutNick;
+  }
 }
