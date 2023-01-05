@@ -1,5 +1,6 @@
 package com.game.whereisnick.view;
 
+import com.game.whereisnick.model.ImageImport;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +24,7 @@ public class MainPanel extends JPanel{
     this.setPreferredSize(new Dimension(1000,600));
     this.setLayout(null);
 
+    ImageIcon imageIcon = ImageImport.importIcon("images/intro.png");
     intro = new JLabel();
     intro.setBounds(10,10,980,500);
     intro.setOpaque(true);
