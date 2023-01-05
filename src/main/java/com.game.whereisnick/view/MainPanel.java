@@ -1,35 +1,27 @@
 package com.game.whereisnick.view;
 
-import com.game.whereisnick.model.ImageImport;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
 
 public class MainPanel extends JPanel{
   JButton startButton;
   JButton beginButton;
   JButton quitButton;
-  JLabel intro;
+  JTextArea intro;
   public MainPanel(){
     this.setPreferredSize(new Dimension(1000,600));
     this.setLayout(null);
 
-    ImageIcon imageIcon = ImageImport.importIcon("images/intro.png");
-    intro = new JLabel();
-    intro.setBounds(10,10,980,500);
-    intro.setOpaque(true);
-    intro.setHorizontalAlignment(JLabel.CENTER);
-    intro.setBackground(Color.lightGray);
+    intro = new JTextArea(15,70);
+    intro.setLineWrap(true);
+    intro.setEnabled(false);
+    intro.setBounds(100, 100, 825, 215);
+    intro.setBorder(null);
+
+    /* intro.setAlignmentX(0.5f);
+    intro.setMargin(new Insets(0, 0, 0, 0));
+    intro.setAlignmentY(CENTER_ALIGNMENT); */
+
 
 
     startButton = new JButton("Start Game");
@@ -70,11 +62,14 @@ public class MainPanel extends JPanel{
     this.quitButton = quitButton;
   }
 
-  public JLabel getIntro() {
+  public JTextArea getIntro() {
     return intro;
   }
 
-  public void setIntro(JLabel intro) {
+  public void setIntro(JTextArea intro) {
     this.intro = intro;
+  }
+
+  public void setPreferredSize(int width, int height) {
   }
 }

@@ -8,8 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.ParseException;
-import javax.swing.JFrame;
+import javax.swing.*;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class GUIStart extends JFrame implements ActionListener {
   private Game game;
@@ -26,10 +28,13 @@ public class GUIStart extends JFrame implements ActionListener {
     mainPanel = new MainPanel();
     mainPanel.intro.setText("Where is Nick?");
     mainPanel.intro.setFont(new Font("MV Boli",Font.BOLD,36));
+    mainPanel.setLayout(null);
+
+
     mainPanel.startButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
       mainPanel.intro.setText(game.introduction());
-      mainPanel.intro.setHorizontalAlignment(JLabel.CENTER);
+      mainPanel.intro.setAlignmentX(JLabel.CENTER);
       mainPanel.intro.setVisible(true);
         mainPanel.intro.setFont(new Font("MV Boli",Font.BOLD,12));
       mainPanel.remove(mainPanel.startButton);
