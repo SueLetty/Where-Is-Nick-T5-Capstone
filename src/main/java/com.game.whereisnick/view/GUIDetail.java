@@ -3,7 +3,6 @@ package com.game.whereisnick.view;
 import com.game.whereisnick.controller.Game;
 import com.game.whereisnick.model.Direction;
 import com.game.whereisnick.model.Exam;
-import com.game.whereisnick.model.ImageImport;
 import com.game.whereisnick.model.Room;
 import java.awt.Color;
 import java.awt.Font;
@@ -74,6 +73,8 @@ public class GUIDetail extends JFrame implements ActionListener {
 
     image = ImageImport.importIcon("images/love.png");
 //    image = ImageImport.importIcon("images/smile.png");
+    // TODO: 1/5/2023 This image needs to be dependant on what room.
+    image = ImageImport.importIcon("images/jeanette.jpg"); //need to be less than 32bit color depth.
     imageLabel = new JLabel();
     imageLabel.setIcon(image);
     imageLabel.setBackground(Color.BLUE);
@@ -209,7 +210,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
     this.setVisible(true);
     this.add(introPanel);
-    this.add(imageLabel);
+    this.getContentPane().add(imageLabel);
     this.add(optionPanel);
     this.add(controllerPanel);
 
