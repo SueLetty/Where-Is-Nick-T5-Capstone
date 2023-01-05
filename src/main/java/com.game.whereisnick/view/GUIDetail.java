@@ -372,7 +372,6 @@ public class GUIDetail extends JFrame implements ActionListener {
       optionPanel.setVisible(false);
     }
   }
-
   @Override
   public void actionPerformed(ActionEvent e) {
 

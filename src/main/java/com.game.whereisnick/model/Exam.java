@@ -79,17 +79,19 @@ public class Exam {
 
 //    do {
 //      for (int i = 0; i < 5; i++) {
-        JsonObject jsonObject = (JsonObject) jsonArray.get(count++);
-        question = jsonObject.get("Question").toString().replaceAll("\"", "");
-        answer1 = "a. " + jsonObject.get("a").toString().replaceAll("\"", "");
-        answer2 = "b. " + jsonObject.get("b").toString().replaceAll("\"", "");
-        answer3 = "c. " + jsonObject.get("c").toString().replaceAll("\"", "");
-        answer4 = "d. " + jsonObject.get("d").toString().replaceAll("\"", "");
-    System.out.println(count + ". " + question);
-    System.out.println(answer1);
-    System.out.println(answer2);
-    System.out.println(answer3);
-    System.out.println(answer4);
+    if(count < 5) {
+      JsonObject jsonObject = (JsonObject) jsonArray.get(count++);
+      question = jsonObject.get("Question").toString().replaceAll("\"", "");
+      answer1 = "a. " + jsonObject.get("a").toString().replaceAll("\"", "");
+      answer2 = "b. " + jsonObject.get("b").toString().replaceAll("\"", "");
+      answer3 = "c. " + jsonObject.get("c").toString().replaceAll("\"", "");
+      answer4 = "d. " + jsonObject.get("d").toString().replaceAll("\"", "");
+      System.out.println(count + ". " + question);
+      System.out.println(answer1);
+      System.out.println(answer2);
+      System.out.println(answer3);
+      System.out.println(answer4);
+
 //        System.out.println("\n  Enter your answer: ");
 //        answer = Game.getUserChoice();
 //        checkIfUserQuit = Game.checkIfUserQuit(answer);
@@ -98,8 +100,9 @@ public class Exam {
 //          System.out.println("Quitting exam....");
 //          break;
 //        }
-        actualAnswer = jsonObject.get("answer").getAsString();
-    System.out.println(actualAnswer);
+      actualAnswer = jsonObject.get("answer").getAsString();
+      System.out.println(actualAnswer);
+    }
 //        correctAnswer = checkCorrectAnswerAndReturnCounter(correctAnswer, answer, actualAnswer);
 //      }
 //      if (correctAnswer < 4) {

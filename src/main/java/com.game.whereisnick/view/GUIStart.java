@@ -63,9 +63,7 @@ public class GUIStart extends JFrame implements ActionListener {
     this.setVisible(true);
   }
 
-  public static void main(String[] args) throws IOException, ParseException {
-    GUIStart gui = new GUIStart();
-  }
+
 
   @Override
   public void actionPerformed(ActionEvent e) {
