@@ -172,23 +172,23 @@ public class GUIDetail extends JFrame implements ActionListener {
       }
     });
 
-    eastButton = new JButton("E");
+    eastButton = new JButton("W");
     eastButton.setBounds(75, 125, 50, 50);
     eastButton.setFocusable(false);
     eastButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-        currentRoom = game.moveTo(Direction.EAST);
+        currentRoom = game.moveTo(Direction.WEST);
         changeRoom();
         optionPanel.setVisible(true);
       }
     });
 
-    westButton = new JButton("W");
+    westButton = new JButton("E");
     westButton.setBounds(175, 125, 50, 50);
     westButton.setFocusable(false);
     westButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-        currentRoom = game.moveTo(Direction.WEST);
+        currentRoom = game.moveTo(Direction.EAST);
         changeRoom();
         optionPanel.setVisible(true);
       }
@@ -229,6 +229,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   private void changeRoom() {
+    System.out.println(currentRoom.getName());
     if (currentRoom != null && (!currentRoom.getName().equals("Java Room") || (
         currentRoom.getName().equals("Java Room") && game.isFindNick() && game.isJavaKey()))) {
 
@@ -257,7 +258,12 @@ public class GUIDetail extends JFrame implements ActionListener {
         setQuestion();
 
 
-      } else {
+      } else if (currentRoom.equals(game.getSchool().getRooms().get(5)) && Exam.passPython) {
+        introInfo.setText(game.greetingFromNick());
+        setQuestion();
+
+
+      }else {
         JOptionPane.showMessageDialog(null, "You have to pass the exam first.", "Warning",
             JOptionPane.WARNING_MESSAGE);
       }
@@ -269,6 +275,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   public void setQuestion() {
 
+    System.out.println(currentRoom.getName());
     Exam.startQuiz(currentRoom);
     introPanel.add(introInfo);
     introPanel.revalidate();
@@ -363,12 +370,13 @@ public class GUIDetail extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null, "You got " + Exam.correctAnswer + "/5. " + currentRoom.conclusionForPassingExam(), "Warning",
             JOptionPane.INFORMATION_MESSAGE);
       } else {
-        Exam.correctAnswer = 0;
-        Exam.count = 0;
+
 
         JOptionPane.showMessageDialog(null, currentRoom.conclusionForNotPassingExam(), "Warning",
             JOptionPane.INFORMATION_MESSAGE);
       }
+      Exam.correctAnswer = 0;
+      Exam.count = 0;
       optionPanel.setVisible(false);
     }
   }

@@ -3,6 +3,7 @@ package com.game.whereisnick.view;
 import com.game.whereisnick.controller.Game;
 import com.game.whereisnick.model.Exam;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
