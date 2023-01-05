@@ -2,11 +2,10 @@ package com.game.whereisnick;
 
 import static org.junit.Assert.*;
 
-import com.game.whereisnick.model.Instructor;
 import com.game.whereisnick.model.Room;
 import com.game.whereisnick.model.School;
 import com.game.whereisnick.model.Student;
-import com.game.whereisnick.view.Game;
+import com.game.whereisnick.controller.Game;
 import java.io.IOException;
 import java.text.ParseException;
 import org.junit.Before;
