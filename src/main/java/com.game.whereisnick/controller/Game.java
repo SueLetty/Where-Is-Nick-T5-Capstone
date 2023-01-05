@@ -54,7 +54,6 @@ public class Game {
   }
 
   private void playMusicInBackground() {
-    Music musicObject = new Music();
     String filepath = BUNSENBURNER; // put filepath here, ex: musicPlayBackground.wav
     musicObject.playMusic(filepath);
   }
@@ -81,7 +80,7 @@ public class Game {
             + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
             + " Upon completion of your orientation, you'll now navigate your way through different levels of coding classes in order to graduate\n"
             + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n\n"
-            + " You can type your name to start the game.\n After game starts, type hint if you want to know where to go from current location,\n type map to see the map,\n type help to see the command you can use,\n or quit the game anytime by typing q or quit.";
+            + " Click the button to start the game.\n After game starts, you click on directional buttons to move,\n click map button to view the map,\n click help for assistance,\n or quit the game.";
   }
 
 
@@ -340,7 +339,12 @@ public class Game {
       }
     }
 
-
+  /**
+   * depreciated?
+   * @param input
+   * @return
+   * @throws IOException
+   */
   public String executeCommand(String input) throws IOException {
 
     String result = "";
@@ -372,6 +376,12 @@ public class Game {
     return input.split(" ");
   }
 
+  /**
+   * depreciated?
+   * @param arr
+   * @return
+   * @throws IOException
+   */
   private String parseCommand(String[] arr) throws IOException {
     String result = "";
     String firstWord = arr[0];
@@ -404,17 +414,18 @@ public class Game {
     return result;
   }
   public void encryptedmessage(){
-    System.out.println("\n $$WHGEH&*BEDE@@ILRIENGT*EBEAA975%FE#HGHJUUTJN RF#WWW YTU$BD @GE \n &EHGEHH%E$SWHEH*NFDEREDG@B GHR8543!GHR HRHSHJJ&09$22GENES@G!\n\n Oh no, you need to find someone to translate this encrypted message.\n\n WHERE IS NICK!? \n");
+    System.out.println("\n $$WHGEH&*BEDE@@ILRIENGT*EBEAA975%FE#HGHJUUTJN RF#WWW YTU$BD @GE \n &EHGEHH%E$SWHEH*NFDEREDG@B GHR8543!GHR HRHSHJJ&09$22GENES@G!\n\n Oh no, Adobe Connect is having issues.\n\n WHERE IS NICK!? \n");
   }
 
 
   // create command list method
   public String commandList()  {
 
-    return "Please select from the following commands : \n" +
-    "You can type go/run/move to directions north/east/south/west\n"
-        + "to navigate through this game!\n\n"
-        + "Please type yes/no when being asked a question.\n\n";
+    return "This will need expanded for exams.\n"
+        + "You can move to other rooms with the N,S,E,W buttons.\n"
+        + "Music button will mute the background music.\n"
+        + "Map button will display a map of the game.\n"
+        + "Quit button will quit the game.";
   }
 
   public String greetingFromJeanette(){
@@ -426,7 +437,7 @@ public class Game {
         + " You will have to go to the HTML room, which is North of the this lobby.\n"
         + " Be careful, don't venture to other areas of the building else you will be kicked out.\n"
         + " Have a good day! ";
-    return Jeanette.greeting() + lobbyGreeting;
+    return Jeanette.greeting() + lobbyGreeting + commandList();
   }
 
 
