@@ -3,6 +3,7 @@ package com.game.whereisnick.view;
 import com.game.whereisnick.controller.Game;
 import com.game.whereisnick.model.Exam;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,9 +64,7 @@ public class GUIStart extends JFrame implements ActionListener {
     this.setVisible(true);
   }
 
-  public static void main(String[] args) throws IOException, ParseException {
-    GUIStart gui = new GUIStart();
-  }
+
 
   @Override
   public void actionPerformed(ActionEvent e) {
