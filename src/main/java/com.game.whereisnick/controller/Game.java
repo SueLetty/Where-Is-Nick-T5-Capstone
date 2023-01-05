@@ -13,6 +13,7 @@ import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JLabel;
 import java.util.Scanner;
 
 public class Game {
@@ -53,6 +54,7 @@ public class Game {
   }
 
   private void playMusicInBackground() {
+    Music musicObject = new Music();
     String filepath = BUNSENBURNER; // put filepath here, ex: musicPlayBackground.wav
     musicObject.playMusic(filepath);
   }
