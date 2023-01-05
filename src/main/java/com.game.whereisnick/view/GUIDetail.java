@@ -3,6 +3,7 @@ package com.game.whereisnick.view;
 import com.game.whereisnick.controller.Game;
 import com.game.whereisnick.model.Direction;
 import com.game.whereisnick.model.Exam;
+import com.game.whereisnick.model.ImageImport;
 import com.game.whereisnick.model.Room;
 import java.awt.Color;
 import java.awt.Font;
@@ -20,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 
 public class GUIDetail extends JFrame implements ActionListener {
@@ -34,7 +37,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   private JPanel optionPanel;
   private JLabel imageLabel;
   private JPanel controllerPanel;
-  private JLabel introInfo;
+  private JTextArea introInfo;
   private ImageIcon image;
   private JLabel optionInfo;
 
@@ -59,14 +62,18 @@ public class GUIDetail extends JFrame implements ActionListener {
     introPanel.setBackground(Color.red);
     introPanel.setBounds(10, 10, 680, 300);
 
-    introInfo = new JLabel(game.greetingFromJeanette());
+    introInfo = new JTextArea(15,50);
+    introInfo.setLineWrap(true);
+    introInfo.setEnabled(false);
+    introInfo.setText(game.greetingFromJeanette());
     introInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
     introInfo.setOpaque(true);
-    introInfo.setBounds(10, 10, 660, 4280);
+    introInfo.setBounds(100, 10, 500, 480);
     introInfo.setVisible(true);
     introPanel.add(introInfo);
 
-    image = new ImageIcon("resources/love.png");
+    image = ImageImport.importIcon("images/love.png");
+//    image = ImageImport.importIcon("images/smile.png");
     imageLabel = new JLabel();
     imageLabel.setIcon(image);
     imageLabel.setBackground(Color.BLUE);
@@ -217,14 +224,9 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   }
 
-  public static void main(String[] args) throws IOException, ParseException {
-    new GUIDetail(new Game());
-  }
-
   private void changeRoom() {
-    if (currentRoom != null && (!currentRoom.getName().equals("Java Room")
-        || currentRoom.getName().equals("Java Room") && Exam.passPython && game.isJavaKey()
-        && game.isFindNick())) {
+    if (currentRoom != null && (!currentRoom.getName().equals("Java Room") || (
+        currentRoom.getName().equals("Java Room") && game.isFindNick() && game.isJavaKey()))) {
 
       if (currentRoom.equals(game.getSchool().getRooms().get(0))) {
         introInfo.setText(game.greetingFromJeanette());
@@ -252,7 +254,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
 
       } else {
-        JOptionPane.showMessageDialog(null, "You need to passed exam first!", "Warning",
+        JOptionPane.showMessageDialog(null, "You have to pass the exam first.", "Warning",
             JOptionPane.WARNING_MESSAGE);
       }
     } else {
@@ -262,100 +264,109 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   public void setQuestion() {
-    do {
+
+    Exam.startQuiz(currentRoom);
     introPanel.add(introInfo);
     introPanel.revalidate();
 
-      condition = false;
-      Exam.startQuiz(currentRoom);
-      optionInfo.setText(Exam.question);
-      optionInfo.revalidate();
-      answer1.setText(Exam.answer1);
-      answer1.setBounds(50, 50, 270, 30);
-      answer1.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent evt) {
-          Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
-              Exam.answer1.substring(0, 1), Exam.actualAnswer);
-          condition = true;
+    optionInfo.setText(Exam.question);
+    answer1 = new JRadioButton();
+    answer1.setText(Exam.answer1);
+    answer1.setBounds(50, 50, 260, 30);
 
-        }
-      });
-
-      answer2.setText(Exam.answer2);
-      answer2.setBounds(50, 100, 270, 30);
-      answer2.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent evt) {
-          Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
-              Exam.answer2.substring(0, 1), Exam.actualAnswer);
-          condition = true;
-
-        }
-      });
-
-      answer3.setText(Exam.answer3);
-      answer3.setBounds(50, 150, 270, 30);
-      answer3.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent evt) {
-          Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
-              Exam.answer3.substring(0, 1), Exam.actualAnswer);
-          condition = true;
-        }
-      });
-
-      answer4.setText(Exam.answer4);
-      answer4.setBounds(50, 200, 270, 30);
-      answer4.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent evt) {
-          Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
-              Exam.answer4.substring(0, 1), Exam.actualAnswer);
-          condition = true;
-        }
-
-      });
-
-      ButtonGroup group = new ButtonGroup();
-      group.add(answer1);
-      group.add(answer2);
-      group.add(answer3);
-      group.add(answer4);
-
-      optionPanel.add(optionInfo);
-      optionPanel.setLayout(null);
-      optionPanel.add(answer1);
-      optionPanel.add(answer2);
-      optionPanel.add(answer3);
-      optionPanel.add(answer4);
-      optionPanel.setVisible(true);
-      optionPanel.revalidate();
-
-    } while (Exam.count < 5 && condition);
-
-    if (Exam.count == 5 && Exam.correctAnswer > 3) {
-      if (currentRoom.getName().equals("HTML Room")) {
-        Exam.passHTML = true;
-      } else if (currentRoom.getName().equals("JavaScript Room")) {
-        Exam.passJs = true;
-      } else if (currentRoom.getName().equals("Python Room")) {
-        Exam.passPython = true;
-      } else if (currentRoom.getName().equals("JavaRoom")) {
-        Exam.passJava = true;
+    answer1.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt) {
+        Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
+            Exam.answer1.substring(0, 1), Exam.actualAnswer);
+        getQuestion();
       }
-      optionInfo.setText("You passed ");
-      optionInfo.revalidate();
-    } else if (Exam.count == 5 && Exam.correctAnswer <= 3) {
-      Exam.correctAnswer = 0;
-      Exam.count = 0;
-      optionInfo.setText(currentRoom.conclusionForNotPassingExam());
-      optionPanel.remove(answer1);
-      optionPanel.remove(answer2);
-      optionPanel.remove(answer3);
-      optionPanel.remove(answer4);
-      optionPanel.revalidate();
-      Exam.startQuiz(currentRoom);
-    } else {
+    });
 
+    answer2 = new JRadioButton();
+    answer2.setText(Exam.answer2);
+    answer2.setBounds(50, 100, 260, 30);
+//      answer2.revalidate();
+    answer2.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt) {
+        Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
+            Exam.answer2.substring(0, 1), Exam.actualAnswer);
+        getQuestion();
+      }
+    });
+    answer3 = new JRadioButton();
+    answer3.setText(Exam.answer3);
+    answer3.setBounds(50, 150, 260, 30);
+//      answer3.revalidate();
+    answer3.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt) {
+        Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
+            Exam.answer3.substring(0, 1), Exam.actualAnswer);
+        getQuestion();
+      }
+    });
+    answer4 = new JRadioButton();
+    answer4.setText(Exam.answer4);
+    answer4.setBounds(50, 200, 260, 30);
+//      answer4.revalidate();
+    answer4.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt) {
+        Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
+            Exam.answer4.substring(0, 1), Exam.actualAnswer);
+        getQuestion();
+      }
+    });
+
+    ButtonGroup group = new ButtonGroup();
+    group.add(answer1);
+    group.add(answer2);
+    group.add(answer3);
+    group.add(answer4);
+
+    optionPanel.add(optionInfo);
+    optionPanel.setLayout(null);
+    optionPanel.add(answer1);
+    optionPanel.add(answer2);
+    optionPanel.add(answer3);
+    optionPanel.add(answer4);
+    optionPanel.setVisible(true);
+    optionPanel.revalidate();
+
+
+  }
+
+  public void getQuestion() {
+    if (Exam.count < 5) {
+      setQuestion();
     }
+    if (Exam.count == 5) {
+      if (Exam.correctAnswer > 3) {
+        switch (currentRoom.getName()) {
+          case "HTML Room":
+            Exam.passHTML = true;
+            game.setHtmlKey(true);
+            break;
+          case "JavaScript Room":
+            Exam.passJs = true;
+            game.setJsKey(true);
+            break;
+          case "Python Room":
+            Exam.passPython = true;
+            game.setPythonKey(true);
+            break;
+          case "Java Room":
+            Exam.passJava = true;
+            game.setJavaKey(true);
+        }
+        JOptionPane.showMessageDialog(null, "You got " + Exam.correctAnswer + "/5. " + currentRoom.conclusionForPassingExam(), "Warning",
+            JOptionPane.INFORMATION_MESSAGE);
+      } else {
+        Exam.correctAnswer = 0;
+        Exam.count = 0;
 
+        JOptionPane.showMessageDialog(null, currentRoom.conclusionForNotPassingExam(), "Warning",
+            JOptionPane.INFORMATION_MESSAGE);
+      }
+    }
   }
 
   @Override

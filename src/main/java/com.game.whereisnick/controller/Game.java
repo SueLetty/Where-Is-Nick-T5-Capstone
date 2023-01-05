@@ -533,4 +533,28 @@ public class Game {
   public boolean isWentToJavaWithoutNick() {
     return wentToJavaWithoutNick;
   }
+
+  public void setHtmlKey(boolean htmlKey) {
+    this.htmlKey = htmlKey;
+  }
+
+  public void setPythonKey(boolean pythonKey) {
+    this.pythonKey = pythonKey;
+  }
+
+  public void setJavaKey(boolean javaKey) {
+    this.javaKey = javaKey;
+  }
+
+  public void setJsKey(boolean jsKey) {
+    this.jsKey = jsKey;
+  }
+
+  public void setFindNick(boolean findNick) {
+    this.findNick = findNick;
+  }
+
+  public void setWentToJavaWithoutNick(boolean wentToJavaWithoutNick) {
+    this.wentToJavaWithoutNick = wentToJavaWithoutNick;
+  }
 }
