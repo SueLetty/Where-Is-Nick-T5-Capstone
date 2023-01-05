@@ -3,6 +3,7 @@ package com.game.whereisnick.view;
 import com.game.whereisnick.controller.Game;
 import com.game.whereisnick.model.Direction;
 import com.game.whereisnick.model.Exam;
+import com.game.whereisnick.model.ImageImport;
 import com.game.whereisnick.model.Room;
 import java.awt.Color;
 import java.awt.Font;
@@ -21,15 +22,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
+
 
 
 public class GUIDetail extends JFrame implements ActionListener {
 
   private Game game;
-  private Exam exam;
   private Room currentRoom;
-
 
   private JPanel introPanel;
 
@@ -158,6 +157,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.NORTH);
         changeRoom();
+        optionPanel.setVisible(true);
       }
     });
 
@@ -168,6 +168,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.SOUTH);
         changeRoom();
+        optionPanel.setVisible(true);
       }
     });
 
@@ -178,6 +179,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.EAST);
         changeRoom();
+        optionPanel.setVisible(true);
       }
     });
 
@@ -188,6 +190,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.WEST);
         changeRoom();
+        optionPanel.setVisible(true);
       }
     });
 
@@ -338,8 +341,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   public void getQuestion() {
     if (Exam.count < 5) {
       setQuestion();
-    }
-    if (Exam.count == 5) {
+    }else if (Exam.count == 5) {
       if (Exam.correctAnswer > 3) {
         switch (currentRoom.getName()) {
           case "HTML Room":
@@ -367,6 +369,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null, currentRoom.conclusionForNotPassingExam(), "Warning",
             JOptionPane.INFORMATION_MESSAGE);
       }
+      optionPanel.setVisible(false);
     }
   }
 

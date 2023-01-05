@@ -54,7 +54,6 @@ public class Game {
   }
 
   private void playMusicInBackground() {
-    Music musicObject = new Music();
     String filepath = BUNSENBURNER; // put filepath here, ex: musicPlayBackground.wav
     musicObject.playMusic(filepath);
   }
