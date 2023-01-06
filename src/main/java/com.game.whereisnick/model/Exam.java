@@ -128,14 +128,14 @@ public class Exam {
 
   public static int checkCorrectAnswerAndReturnCounter(int correctAnswer, String answer,
       String actualAnswer) {
-    Audio audio = new Audio();
+//    Audio audio = new Audio();
     if (answer.equals(actualAnswer)) {
       correctAnswer += 1;
       System.out.println("Correct! \n");
-      audio.play(CORRECTAUDIO);
+//      audio.play(CORRECTAUDIO);
     } else {
       System.out.println("Not correct! \n");
-      audio.play(WRONGAUDIO);
+//      audio.play(WRONGAUDIO);
     }
     return correctAnswer;
   }

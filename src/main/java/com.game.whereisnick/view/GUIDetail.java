@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 
 public class GUIDetail extends JFrame implements ActionListener {
@@ -259,7 +260,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
       if (currentRoom.getName().equals("Lobby")) {
         introInfo.setText(game.greetingFromJeanette());
-        setQuestion();
+//        setQuestion();
 
 
       } else if (currentRoom.getName().equals("HTML Room")) {
@@ -270,7 +271,10 @@ public class GUIDetail extends JFrame implements ActionListener {
           introInfo.revalidate();
         }else{
           introInfo.setText(game.greetingFromDonte());
+//          SwingUtilities.invokeLater(setQuestion());
+
           setQuestion();
+
         }
 
       } else if (currentRoom.getName().equals("JavaScript Room") && Exam.passHTML) {
@@ -333,7 +337,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     introPanel.revalidate();
 
     optionInfo.setText(Exam.question);
-    answer1 = new JRadioButton();
+//    answer1 = new JRadioButton();
     answer1.setText(Exam.answer1);
     answer1.setBounds(50, 50, 260, 30);
 
@@ -345,7 +349,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       }
     });
 
-    answer2 = new JRadioButton();
+//    answer2 = new JRadioButton();
     answer2.setText(Exam.answer2);
     answer2.setBounds(50, 100, 260, 30);
 //      answer2.revalidate();
@@ -356,7 +360,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         getQuestion();
       }
     });
-    answer3 = new JRadioButton();
+//    answer3 = new JRadioButton();
     answer3.setText(Exam.answer3);
     answer3.setBounds(50, 150, 260, 30);
 //      answer3.revalidate();
@@ -367,7 +371,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         getQuestion();
       }
     });
-    answer4 = new JRadioButton();
+//    answer4 = new JRadioButton();
     answer4.setText(Exam.answer4);
     answer4.setBounds(50, 200, 260, 30);
 //      answer4.revalidate();
@@ -394,7 +398,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionPanel.setVisible(true);
     optionPanel.revalidate();
 
-
+//    return null;
   }
 
   public void getQuestion() {
