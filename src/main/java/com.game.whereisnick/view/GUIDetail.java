@@ -36,6 +36,17 @@ public class GUIDetail extends JFrame implements ActionListener {
   private JPanel controllerPanel;
   private JTextArea introInfo;
   private ImageIcon image;
+  private ImageIcon chad;
+  private ImageIcon donte;
+  private ImageIcon richard;
+  private ImageIcon jeanette;
+  private ImageIcon nelly;
+  private ImageIcon nick;
+  private ImageIcon scott;
+  private ImageIcon shang;
+  private ImageIcon tom;
+  private ImageIcon love;
+
   private JLabel optionInfo;
 
   private JButton mapButton;
@@ -51,6 +62,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   private JRadioButton answer3 = new JRadioButton();
   private JRadioButton answer4 = new JRadioButton();
   private boolean condition = false;
+
 
   public GUIDetail(Game game) throws IOException, ParseException {
     this.game = game;
@@ -69,12 +81,24 @@ public class GUIDetail extends JFrame implements ActionListener {
     introInfo.setVisible(true);
     introPanel.add(introInfo);
 
-    image = ImageImport.importIcon("images/love.png");
+//    image = ImageImport.importIcon("images/love.png");
 //    image = ImageImport.importIcon("images/smile.png");
     // TODO: 1/5/2023 This image needs to be dependant on what room.
-    image = ImageImport.importIcon("images/jeanette.jpg"); //need to be less than 32bit color depth.
+//    image = ImageImport.importIcon("images/jeanette.jpg"); //need to be less than 32bit color depth.
+    chad = ImageImport.importIcon("images/Chad_Gale.jpg");
+    donte = ImageImport.importIcon("images/Donte_Tyrus.png");
+    richard = ImageImport.importIcon("images/Hank_Richard.png");
+    jeanette = ImageImport.importIcon("images/jeanette.jpg");
+    nelly = ImageImport.importIcon("images/Nelly_Gus.jpg");
+    nick = ImageImport.importIcon("images/Nick_Walter.jpg");
+    scott = ImageImport.importIcon("images/Scott_Mike.jpg");
+    shang = ImageImport.importIcon("images/Shang_Hector.jpg");
+    tom = ImageImport.importIcon("images/Tom_Saul.jpg");
+    love = ImageImport.importIcon("images/love.jpg");
+
     imageLabel = new JLabel();
-    imageLabel.setIcon(image);
+    imageLabel.setIcon(jeanette);
+
     imageLabel.setBackground(Color.BLUE);
     imageLabel.setBounds(700, -10, 280, 280);
     imageLabel.setVisible(true);
@@ -239,6 +263,8 @@ public class GUIDetail extends JFrame implements ActionListener {
 
 
       } else if (currentRoom.getName().equals("HTML Room")) {
+        imageLabel.setIcon(donte);
+        imageLabel.revalidate();
         if(Exam.passHTML){
           introInfo.setText("You have passed HTML course.\n Go you different room.");
           introInfo.revalidate();
@@ -248,6 +274,8 @@ public class GUIDetail extends JFrame implements ActionListener {
         }
 
       } else if (currentRoom.getName().equals("JavaScript Room") && Exam.passHTML) {
+        imageLabel.setIcon(nelly);
+        imageLabel.revalidate();
         if(Exam.passJs){
           introInfo.setText("You have passed JavaScript course.\n Go you different room.");
           introInfo.revalidate();
@@ -257,6 +285,8 @@ public class GUIDetail extends JFrame implements ActionListener {
         }
 
       } else if (currentRoom.getName().equals("Python Room") && Exam.passJs) {
+        imageLabel.setIcon(chad);
+        imageLabel.revalidate();
         if(Exam.passPython){
           introInfo.setText("You have passed Python course.\n Go you different room.");
           introInfo.revalidate();
@@ -265,10 +295,14 @@ public class GUIDetail extends JFrame implements ActionListener {
           setQuestion();
         }
       } else if (currentRoom.getName().equals("Java Room") && Exam.passPython) {
+        imageLabel.setIcon(nick);
+        imageLabel.revalidate();
         game.setWentToJavaWithoutNick(true);
         introInfo.setText(game.encryptedmessage() + "\nYou need to find Nick!");
         introInfo.revalidate();
       } else if (currentRoom.getName().equals("Study Room") && Exam.passPython) {
+        imageLabel.setIcon(love);
+        imageLabel.revalidate();
         if (game.isWentToJavaWithoutNick()) {
           introInfo.setText(game.greetingFromNick());
           setQuestion();
@@ -288,10 +322,10 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   public void setQuestion() {
-    northButton.setEnabled(false);
-    southButton.setEnabled(false);
-    eastButton.setEnabled(false);
-    westButton.setEnabled(false);
+//    northButton.setEnabled(false);
+//    southButton.setEnabled(false);
+//    eastButton.setEnabled(false);
+//    westButton.setEnabled(false);
 
 //    System.out.println(currentRoom.getName());
     Exam.startQuiz(currentRoom);
@@ -409,7 +443,23 @@ public class GUIDetail extends JFrame implements ActionListener {
       optionPanel.setVisible(false);
     }
   }
+  public void setImage() {
+    switch (currentRoom.getName()) {
+      case "HTML Room":
+        image = ImageImport.importIcon("images/love.png");
+        break;
+      case "JavaScript Room":
+        ImageImport.importIcon("images/love.png");
+        break;
+      case "Python Room":
+        ImageImport.importIcon("images/love.png");
+        break;
+      case "Java Room":
+        ImageImport.importIcon("images/love.png");
+        break;
 
+    }
+  }
   @Override
   public void actionPerformed(ActionEvent e) {
 

@@ -4,19 +4,20 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
 import javax.swing.ImageIcon;
-import javax.tools.Tool;
+
 
 public class ImageImport {
 
   public static Image importImage(String location){
     URL url = getURL(location);
     Image image = Toolkit.getDefaultToolkit().getImage(url);
+
     return image;
   }
 
   public static ImageIcon importIcon(String location){
     URL url  = getURL(location);
-    ImageIcon imageIcon = new ImageIcon(url);
+    ImageIcon imageIcon = new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(220, 260 , Image.SCALE_DEFAULT));
     return imageIcon;
   }
 
