@@ -108,16 +108,24 @@ public class Game {
     } catch (IOException | InterruptedException ex) {
     }
   }
-  
-  public void setUpInstances(){
-    System.out.println("\nEnter your name: ");
+
+  /**
+   * Sets up the student, old way that is extracted from setUpInstances().
+   * Depreciated.
+   */
+  private void setUpStudent(){
+//    System.out.println("\nEnter your name: ");
 //    inputBuffer = new BufferedReader(new InputStreamReader(System.in));
 //    String inputScan = inputBuffer.readLine();
-    inputBuffer = new Scanner(System.in);
-    String inputScan = inputBuffer.nextLine();
-    String name = inputScan.toString().toUpperCase();
-    student = new Student(name, "student");
-    System.out.printf("\nHello %s!", student.getName());;
+//    inputBuffer = new Scanner(System.in);
+//    String inputScan = inputBuffer.nextLine();
+//    String name = inputScan.toString().toUpperCase();
+//    student = new Student(name, "student");
+//    System.out.printf("\nHello %s!", student.getName());
+  }
+
+  public void setUpInstances(){
+    student = new Student("You", "student"); // move old code for student into setUpStudent()
     TLGSchool = new School();
     Room lobby = new Room("Lobby","lobby");
     Room htmlRoom = new Room("HTML Room","HTML");
