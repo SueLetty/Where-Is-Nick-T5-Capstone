@@ -24,7 +24,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 
-
 public class GUIDetail extends JFrame implements ActionListener {
 
   private Game game;
@@ -60,7 +59,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     introPanel.setBackground(Color.red);
     introPanel.setBounds(10, 10, 680, 300);
 
-    introInfo = new JTextArea(15,50);
+    introInfo = new JTextArea(15, 50);
     introInfo.setLineWrap(true);
     introInfo.setEnabled(false);
     introInfo.setText(game.greetingFromJeanette());
@@ -229,44 +228,48 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   private void changeRoom() {
-    System.out.println(currentRoom.getName());
-    if (currentRoom != null && (!currentRoom.getName().equals("Java Room") || (
-        currentRoom.getName().equals("Java Room") && game.isFindNick() && game.isJavaKey()))) {
 
-      if (currentRoom.equals(game.getSchool().getRooms().get(0))) {
+    if (currentRoom != null) {
+//      if (!currentRoom.getName().equals("Java Room") || (
+//          currentRoom.getName().equals("Java Room") && game.isFindNick() && game.isJavaKey())) {
+
+      if (currentRoom.getName().equals("Lobby")) {
         introInfo.setText(game.greetingFromJeanette());
         setQuestion();
 
 
-      } else if (currentRoom.equals(game.getSchool().getRooms().get(1))) {
+      } else if (currentRoom.getName().equals("HTML Room")) {
         introInfo.setText(game.greetingFromDonte());
         setQuestion();
 
 
-      } else if (currentRoom.equals(game.getSchool().getRooms().get(2)) && Exam.passHTML) {
+      } else if (currentRoom.getName().equals("JavaScript Room") && Exam.passHTML) {
         introInfo.setText(game.greetingFromNelly());
         setQuestion();
 
 
-      } else if (currentRoom.equals(game.getSchool().getRooms().get(3)) && Exam.passJs) {
+      } else if (currentRoom.getName().equals("Python Room") && Exam.passJs) {
         introInfo.setText(game.greetingFromChad());
         setQuestion();
 
 
-      } else if (currentRoom.equals(game.getSchool().getRooms().get(4)) && Exam.passPython) {
-        introInfo.setText(game.greetingFromNick());
-        setQuestion();
+      } else if (currentRoom.getName().equals("Java Room") && Exam.passPython) {
+        game.setWentToJavaWithoutNick(true);
+        introInfo.setText(game.encryptedmessage() + "\nYou need to find Nick!");
+        introInfo.revalidate();
+      } else if (currentRoom.getName().equals("Study Room") && Exam.passPython) {
+        if (game.isWentToJavaWithoutNick()) {
+          introInfo.setText(game.greetingFromNick());
+          setQuestion();
+        } else {
+          introInfo.setText("SHH...Nick is playing guitar.");
+        }
 
-
-      } else if (currentRoom.equals(game.getSchool().getRooms().get(5)) && Exam.passPython) {
-        introInfo.setText(game.greetingFromNick());
-        setQuestion();
-
-
-      }else {
+      } else {
         JOptionPane.showMessageDialog(null, "You have to pass the exam first.", "Warning",
             JOptionPane.WARNING_MESSAGE);
       }
+
     } else {
       JOptionPane.showMessageDialog(null, game.getNO_DIRECTION_MESSAGE(), "Warning",
           JOptionPane.WARNING_MESSAGE);
@@ -274,6 +277,10 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   public void setQuestion() {
+    northButton.setEnabled(false);
+    southButton.setEnabled(false);
+    eastButton.setEnabled(false);
+    westButton.setEnabled(false);
 
     System.out.println(currentRoom.getName());
     Exam.startQuiz(currentRoom);
@@ -348,7 +355,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   public void getQuestion() {
     if (Exam.count < 5) {
       setQuestion();
-    }else if (Exam.count == 5) {
+    } else if (Exam.count == 5) {
       if (Exam.correctAnswer > 3) {
         switch (currentRoom.getName()) {
           case "HTML Room":
@@ -367,10 +374,15 @@ public class GUIDetail extends JFrame implements ActionListener {
             Exam.passJava = true;
             game.setJavaKey(true);
         }
-        JOptionPane.showMessageDialog(null, "You got " + Exam.correctAnswer + "/5. " + currentRoom.conclusionForPassingExam(), "Warning",
+        JOptionPane.showMessageDialog(null,
+            "You got " + Exam.correctAnswer + "/5. " + currentRoom.conclusionForPassingExam(),
+            "Warning",
             JOptionPane.INFORMATION_MESSAGE);
+        northButton.setEnabled(true);
+        southButton.setEnabled(true);
+        eastButton.setEnabled(true);
+        westButton.setEnabled(true);
       } else {
-
 
         JOptionPane.showMessageDialog(null, currentRoom.conclusionForNotPassingExam(), "Warning",
             JOptionPane.INFORMATION_MESSAGE);
@@ -380,6 +392,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       optionPanel.setVisible(false);
     }
   }
+
   @Override
   public void actionPerformed(ActionEvent e) {
 

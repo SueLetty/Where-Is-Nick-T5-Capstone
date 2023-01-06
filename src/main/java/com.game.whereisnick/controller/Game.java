@@ -413,8 +413,9 @@ public class Game {
     }
     return result;
   }
-  public void encryptedmessage(){
-    System.out.println("\n $$WHGEH&*BEDE@@ILRIENGT*EBEAA975%FE#HGHJUUTJN RF#WWW YTU$BD @GE \n &EHGEHH%E$SWHEH*NFDEREDG@B GHR8543!GHR HRHSHJJ&09$22GENES@G!\n\n Oh no, Adobe Connect is having issues.\n\n WHERE IS NICK!? \n");
+  public String encryptedmessage(){
+    //todo changed the script
+    return "\n $$WHGEH&*BEDE@@ILRIENGT*EBEAA975%FE#HGHJUUTJN RF#WWW YTU$BD @GE \n &EHGEHH%E$SWHEH*NFDEREDG@B GHR8543!GHR HRHSHJJ&09$22GENES@G!\n\n Oh no, Adobe Connect is having issues.\n\n WHERE IS NICK!? \n";
   }
 
 
