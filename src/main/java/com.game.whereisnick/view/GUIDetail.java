@@ -331,7 +331,6 @@ public class GUIDetail extends JFrame implements ActionListener {
     eastButton.setEnabled(false);
     westButton.setEnabled(false);
 
-//    System.out.println(currentRoom.getName());
     Exam.startQuiz(currentRoom);
     introPanel.add(introInfo);
     introPanel.revalidate();
@@ -433,15 +432,14 @@ public class GUIDetail extends JFrame implements ActionListener {
         southButton.setEnabled(true);
         eastButton.setEnabled(true);
         westButton.setEnabled(true);
+        introInfo.setText("Congratulations! You passed " + currentRoom.getName().substring(0,currentRoom.getName().length()-5));
+        introInfo.revalidate();
       } else {
 
         JOptionPane.showMessageDialog(null, currentRoom.conclusionForNotPassingExam(), "Warning",
             JOptionPane.INFORMATION_MESSAGE);
       }
-//      northButton.setEnabled(true);
-//      southButton.setEnabled(true);
-//      eastButton.setEnabled(true);
-//      westButton.setEnabled(true);
+
       Exam.correctAnswer = 0;
       Exam.count = 0;
       optionPanel.setVisible(false);
