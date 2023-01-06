@@ -24,6 +24,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 
+
 public class GUIDetail extends JFrame implements ActionListener {
 
   private Game game;
@@ -71,7 +72,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     introPanel.setBackground(Color.red);
     introPanel.setBounds(10, 10, 680, 300);
 
-    introInfo = new JTextArea(15, 50);
+    introInfo = new JTextArea(15,50);
     introInfo.setLineWrap(true);
     introInfo.setEnabled(false);
     introInfo.setText(game.greetingFromJeanette());
@@ -180,7 +181,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.NORTH);
         changeRoom();
-        optionPanel.setVisible(true);
+
       }
     });
 
@@ -191,7 +192,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.SOUTH);
         changeRoom();
-        optionPanel.setVisible(true);
+
       }
     });
 
@@ -202,7 +203,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.WEST);
         changeRoom();
-        optionPanel.setVisible(true);
+
       }
     });
 
@@ -213,7 +214,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.EAST);
         changeRoom();
-        optionPanel.setVisible(true);
+
       }
     });
 
@@ -295,16 +296,18 @@ public class GUIDetail extends JFrame implements ActionListener {
           setQuestion();
         }
       } else if (currentRoom.getName().equals("Java Room") && Exam.passPython) {
-        imageLabel.setIcon(nick);
+        imageLabel.setIcon(love);
         imageLabel.revalidate();
         game.setWentToJavaWithoutNick(true);
         introInfo.setText(game.encryptedmessage() + "\nYou need to find Nick!");
         introInfo.revalidate();
-      } else if (currentRoom.getName().equals("Study Room") && Exam.passPython) {
-        imageLabel.setIcon(love);
+      } else if (currentRoom.getName().equals("studyRoom Room") && Exam.passPython) {
+        imageLabel.setIcon(nick);
         imageLabel.revalidate();
         if (game.isWentToJavaWithoutNick()) {
           introInfo.setText(game.greetingFromNick());
+          game.getStudent().setLocation(game.getSchool().getRooms().get(5));
+          currentRoom = game.getSchool().getRooms().get(5);
           setQuestion();
         } else {
           introInfo.setText("SHH...Nick is playing guitar.");
@@ -318,14 +321,15 @@ public class GUIDetail extends JFrame implements ActionListener {
     } else {
       JOptionPane.showMessageDialog(null, game.getNO_DIRECTION_MESSAGE(), "Warning",
           JOptionPane.WARNING_MESSAGE);
+      optionInfo.setText("Try different direction!");
     }
   }
 
   public void setQuestion() {
-//    northButton.setEnabled(false);
-//    southButton.setEnabled(false);
-//    eastButton.setEnabled(false);
-//    westButton.setEnabled(false);
+    northButton.setEnabled(false);
+    southButton.setEnabled(false);
+    eastButton.setEnabled(false);
+    westButton.setEnabled(false);
 
 //    System.out.println(currentRoom.getName());
     Exam.startQuiz(currentRoom);
