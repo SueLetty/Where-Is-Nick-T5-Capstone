@@ -15,9 +15,9 @@ public class ImageImport {
     return image;
   }
 
-  public static ImageIcon importIcon(String location){
+  public static ImageIcon importIcon(String location, int width, int height){
     URL url  = getURL(location);
-    ImageIcon imageIcon = new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(220, 260 , Image.SCALE_DEFAULT));
+    ImageIcon imageIcon = new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(width, height , Image.SCALE_DEFAULT));
     return imageIcon;
   }
 
