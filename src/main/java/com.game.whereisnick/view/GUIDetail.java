@@ -65,6 +65,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   private JTextArea examChoice3 = new JTextArea(25,50);
   private JTextArea examChoice4 = new JTextArea(25,50);
   ButtonGroup group = new ButtonGroup();
+  MusicPanel musicPanel = new MusicPanel();
 
 
   public GUIDetail(Game game) throws IOException, ParseException {
@@ -164,11 +165,24 @@ public class GUIDetail extends JFrame implements ActionListener {
     musicButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        if (game.getMusicObject().isSoundOn()) {
-          game.getMusicObject().stopMusic();
-        } else {
-          game.getMusicObject().turnSoundOn();
-        }
+        musicPanel.setVisible(true);
+        // TODO: 1/9/2023 button update, reopening a window having issues.
+        // TODO: 1/9/2023 add more buttons, change button sizes and window.
+        musicPanel.getMuteMusicButton().addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            if (game.getMusicObject().isSoundOn()) {
+              game.getMusicObject().stopMusic();
+              musicPanel.getMuteMusicButton().setText("Unmute Music");
+            } else {
+              game.getMusicObject().turnSoundOn();
+              musicPanel.getMuteMusicButton().setText("Mute Music");
+            }
+          }
+        });
+
+
+
       }
     });
 
