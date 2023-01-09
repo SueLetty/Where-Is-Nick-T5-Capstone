@@ -45,7 +45,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   private ImageIcon love;
 
-  private JLabel optionInfo;
+  private JTextArea optionInfo;
 
   private JButton mapButton;
   private JButton helpButton;
@@ -106,13 +106,15 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionPanel.setBackground(Color.green);
     optionPanel.setBounds(10, 320, 680, 300);
 
-    optionInfo = new JLabel("Using Direction button go to a different room.");
-    optionInfo.setVerticalAlignment(JLabel.CENTER);
+    optionInfo = new JTextArea(1,50);
+    optionInfo.setText("Using Direction button go to a different room.");
     optionInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
     optionInfo.setOpaque(true);
     optionInfo.setBounds(10, 10, 660, 4280);
     optionInfo.setVisible(true);
+    optionInfo.setEditable(false);
     optionPanel.add(optionInfo);
+
 
     controllerPanel = new JPanel();
     controllerPanel.setBackground(Color.yellow);
