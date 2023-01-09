@@ -2,6 +2,7 @@ package com.game.whereisnick.view;
 
 import com.game.whereisnick.controller.Game;
 import com.game.whereisnick.model.Exam;
+import com.game.whereisnick.model.ImageImport;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
@@ -16,9 +17,9 @@ import javax.swing.JPanel;
 
 public class GUIStart extends JFrame implements ActionListener {
   private Game game;
-  private Exam exam;
   private MainPanel mainPanel;
-
+  private JLabel image;
+  private ImageIcon backgroundImage;
   public GUIStart() throws IOException, ParseException {
     game = new Game();
 
@@ -30,6 +31,7 @@ public class GUIStart extends JFrame implements ActionListener {
     mainPanel.intro.setText("Where is Nick?");
     mainPanel.intro.setFont(new Font("MV Boli",Font.BOLD,36));
     mainPanel.setLayout(null);
+
 
 
     mainPanel.startButton.addActionListener(new ActionListener() {
@@ -56,7 +58,7 @@ public class GUIStart extends JFrame implements ActionListener {
 
       }
     });
-
+//    this.setContentPane(mainPanel);
     this.add(mainPanel);
     this.setResizable(false);
     this.pack();
@@ -70,5 +72,6 @@ public class GUIStart extends JFrame implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
   }
+
 
 }

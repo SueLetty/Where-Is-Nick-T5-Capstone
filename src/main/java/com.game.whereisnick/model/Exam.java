@@ -41,7 +41,8 @@ public class Exam {
     String filePath;
     if (room.getName().equals("HTML Room")) {
       filePath = HTMLFILENAME;
-    } else if (room.getName().equals("JavaScript Room")) {
+    }
+    else if (room.getName().equals("JavaScript Room")) {
       filePath = JSFILENAME;
     } else if (room.getName().equals("Python Room")) {
       filePath = PYTHONFILENAME;

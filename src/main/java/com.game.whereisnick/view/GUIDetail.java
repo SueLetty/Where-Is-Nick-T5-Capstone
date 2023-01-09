@@ -349,6 +349,24 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   }
 
+  public void retakeExam(){
+    optionInfo.setText("Do you want to re-take the exam?");
+    JButton yesButton = new JButton("Yes");
+    yesButton.setBounds(300, 60, 100, 30);
+    yesButton.setFocusable(false);
+    yesButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt) {
+        yesButton.setVisible(false);
+        setQuestion();
+      }
+    });
+    optionPanel.add(optionInfo);
+    optionPanel.setLayout(null);
+    optionPanel.add(yesButton);
+    optionPanel.revalidate();
+    optionPanel.setVisible(true);
+  }
+
   public void setQuestion() {
     northButton.setEnabled(false);
     southButton.setEnabled(false);
@@ -513,15 +531,18 @@ public class GUIDetail extends JFrame implements ActionListener {
         introInfo.setText("Congratulations! You passed " + currentRoom.getName()
             .substring(0, currentRoom.getName().length() - 5));
         introInfo.revalidate();
+        Exam.correctCount = 0;
+        Exam.count = 0;
+        optionPanel.setVisible(false);
       } else {
+        Exam.correctCount= 0;
+        Exam.count = 0;
 
         JOptionPane.showMessageDialog(null, currentRoom.conclusionForNotPassingExam(), "Warning",
             JOptionPane.INFORMATION_MESSAGE);
+        retakeExam();
       }
 
-      Exam.correctCount = 0;
-      Exam.count = 0;
-      optionPanel.setVisible(false);
     }
   }
 
