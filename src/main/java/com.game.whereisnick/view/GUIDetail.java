@@ -355,6 +355,10 @@ public class GUIDetail extends JFrame implements ActionListener {
     eastButton.setEnabled(false);
     westButton.setEnabled(false);
 
+    optionPanel.removeAll();
+    optionPanel.revalidate();
+    optionPanel.repaint();
+
     Exam.startQuiz(currentRoom);
     group.clearSelection();
 
