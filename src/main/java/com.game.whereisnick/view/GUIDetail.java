@@ -337,6 +337,10 @@ public class GUIDetail extends JFrame implements ActionListener {
         setQuestion();
       }
     });
+//    removeExamChoices();
+    optionPanel.removeAll();
+    optionPanel.revalidate();
+    optionPanel.repaint();
     optionPanel.add(optionInfo);
     optionPanel.setLayout(null);
     optionPanel.add(yesButton);
@@ -388,6 +392,10 @@ public class GUIDetail extends JFrame implements ActionListener {
     southButton.setEnabled(false);
     eastButton.setEnabled(false);
     westButton.setEnabled(false);
+
+    optionPanel.removeAll();
+    optionPanel.revalidate();
+    optionPanel.repaint();
 
     Exam.startQuiz(currentRoom);
     group.clearSelection();
