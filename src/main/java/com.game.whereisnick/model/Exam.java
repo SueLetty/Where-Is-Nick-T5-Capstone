@@ -1,16 +1,13 @@
 package com.game.whereisnick.model;
 
 import com.game.whereisnick.controller.Audio;
-import com.game.whereisnick.controller.Game;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 
 
 public class Exam {
@@ -30,7 +27,7 @@ public class Exam {
   public static String answer2;
   public static String answer3;
   public static String answer4;
-  public static int correctAnswer = 0;
+  public static int correctCount = 0;
   public static String actualAnswer;
   public static int count = 0;
 

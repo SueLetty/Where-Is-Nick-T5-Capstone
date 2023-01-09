@@ -24,7 +24,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
 
-
 public class GUIDetail extends JFrame implements ActionListener {
 
   private Game game;
@@ -63,6 +62,11 @@ public class GUIDetail extends JFrame implements ActionListener {
   private JRadioButton answer3 = new JRadioButton();
   private JRadioButton answer4 = new JRadioButton();
   private boolean condition = false;
+  private JTextArea examChoice1 = new JTextArea(25,50);
+  private JTextArea examChoice2 = new JTextArea(25,50);
+  private JTextArea examChoice3 = new JTextArea(25,50);
+  private JTextArea examChoice4 = new JTextArea(25,50);
+  ButtonGroup group = new ButtonGroup();
 
 
   public GUIDetail(Game game) throws IOException, ParseException {
@@ -72,7 +76,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     introPanel.setBackground(Color.red);
     introPanel.setBounds(10, 10, 680, 300);
 
-    introInfo = new JTextArea(15,50);
+    introInfo = new JTextArea(15, 50);
     introInfo.setLineWrap(true);
     introInfo.setEnabled(false);
     introInfo.setText(game.greetingFromJeanette());
@@ -255,45 +259,41 @@ public class GUIDetail extends JFrame implements ActionListener {
   private void changeRoom() {
 
     if (currentRoom != null) {
-//      if (!currentRoom.getName().equals("Java Room") || (
-//          currentRoom.getName().equals("Java Room") && game.isFindNick() && game.isJavaKey())) {
 
       if (currentRoom.getName().equals("Lobby")) {
         introInfo.setText(game.greetingFromJeanette());
-        setQuestion();
-
 
       } else if (currentRoom.getName().equals("HTML Room")) {
         imageLabel.setIcon(donte);
         imageLabel.revalidate();
-        if(Exam.passHTML){
+        if (Exam.passHTML) {
           introInfo.setText("You have passed HTML course.\n Go you different room.");
           introInfo.revalidate();
-        }else{
+        } else {
           introInfo.setText(game.greetingFromDonte());
-          setQuestion();
+          confirmTakingExam();
         }
 
       } else if (currentRoom.getName().equals("JavaScript Room") && Exam.passHTML) {
         imageLabel.setIcon(nelly);
         imageLabel.revalidate();
-        if(Exam.passJs){
+        if (Exam.passJs) {
           introInfo.setText("You have passed JavaScript course.\n Go you different room.");
           introInfo.revalidate();
-        }else {
+        } else {
           introInfo.setText(game.greetingFromNelly());
-          setQuestion();
+          confirmTakingExam();
         }
 
       } else if (currentRoom.getName().equals("Python Room") && Exam.passJs) {
         imageLabel.setIcon(chad);
         imageLabel.revalidate();
-        if(Exam.passPython){
+        if (Exam.passPython) {
           introInfo.setText("You have passed Python course.\n Go you different room.");
           introInfo.revalidate();
-        }else {
+        } else {
           introInfo.setText(game.greetingFromChad());
-          setQuestion();
+          confirmTakingExam();
         }
       } else if (currentRoom.getName().equals("Java Room") && Exam.passPython) {
         imageLabel.setIcon(love);
@@ -308,7 +308,7 @@ public class GUIDetail extends JFrame implements ActionListener {
           introInfo.setText(game.greetingFromNick());
           game.getStudent().setLocation(game.getSchool().getRooms().get(5));
           currentRoom = game.getSchool().getRooms().get(5);
-          setQuestion();
+          confirmTakingExam();
         } else {
           introInfo.setText("SHH...Nick is playing guitar.");
         }
@@ -325,8 +325,26 @@ public class GUIDetail extends JFrame implements ActionListener {
     }
   }
 
-<<<<<<< Updated upstream
-=======
+  public void confirmTakingExam() {
+
+    optionInfo.setText("Are you ready to take the exam?");
+    JButton yesButton = new JButton("Yes");
+    yesButton.setBounds(300, 60, 100, 30);
+    yesButton.setFocusable(false);
+    yesButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent evt) {
+        yesButton.setVisible(false);
+        setQuestion();
+      }
+    });
+    optionPanel.add(optionInfo);
+    optionPanel.setLayout(null);
+    optionPanel.add(yesButton);
+    optionPanel.revalidate();
+    optionPanel.setVisible(true);
+
+  }
+
   public void confirmTakingExam() {
 
     optionInfo.setText("Are you ready to take the exam?");
@@ -372,57 +390,60 @@ public class GUIDetail extends JFrame implements ActionListener {
     westButton.setEnabled(false);
 
     Exam.startQuiz(currentRoom);
+    group.clearSelection();
+
     introPanel.add(introInfo);
     introPanel.revalidate();
 
     optionInfo.setText(Exam.question);
     answer1 = new JRadioButton();
-    answer1.setText(Exam.answer1);
-    answer1.setBounds(50, 50, 260, 30);
+    answer1.setText("A:");
+    answer1.setBounds(50, 50, 40, 30);
 
     answer1.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-        Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
+        Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
             Exam.answer1.substring(0, 1), Exam.actualAnswer);
         getQuestion();
       }
     });
 
     answer2 = new JRadioButton();
-    answer2.setText(Exam.answer2);
-    answer2.setBounds(50, 100, 260, 30);
+    answer2.setText("B:");
+    answer2.setBounds(50, 100, 40, 30);
 //      answer2.revalidate();
     answer2.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-        Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
+        Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
             Exam.answer2.substring(0, 1), Exam.actualAnswer);
         getQuestion();
       }
     });
     answer3 = new JRadioButton();
-    answer3.setText(Exam.answer3);
-    answer3.setBounds(50, 150, 260, 30);
+    answer3.setText("C:");
+    answer3.setBounds(50, 150, 40, 30);
 //      answer3.revalidate();
     answer3.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-        Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
+        Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
             Exam.answer3.substring(0, 1), Exam.actualAnswer);
         getQuestion();
       }
     });
     answer4 = new JRadioButton();
-    answer4.setText(Exam.answer4);
-    answer4.setBounds(50, 200, 260, 30);
+    answer4.setText("D:");
+    answer4.setBounds(50, 200, 40, 30);
 //      answer4.revalidate();
     answer4.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-        Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
+        Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
             Exam.answer4.substring(0, 1), Exam.actualAnswer);
         getQuestion();
       }
     });
 
-    ButtonGroup group = new ButtonGroup();
+    drawExamChoices(90, 50);
+
     group.add(answer1);
     group.add(answer2);
     group.add(answer3);
@@ -434,9 +455,56 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionPanel.add(answer2);
     optionPanel.add(answer3);
     optionPanel.add(answer4);
+    optionPanel.add(examChoice1);
+    optionPanel.add(examChoice2);
+    optionPanel.add(examChoice3);
+    optionPanel.add(examChoice4);
     optionPanel.setVisible(true);
     optionPanel.revalidate();
 
+  }
+
+  /**
+   * Fills the data for JTextAreas for exam options. y coordinate is added 50 for spacing.
+   * @param x int coordinate to first string choice.
+   * @param y int coordinate for first choice option.
+   */
+  private void drawExamChoices(int x, int y){
+    examChoice1.setLineWrap(true);
+    examChoice1.setEnabled(false);
+    examChoice1.setText(" ");
+    examChoice1.setFont(new Font("MV Bole", Font.PLAIN, 14));
+    examChoice1.setOpaque(true);
+    examChoice1.setBounds(x, y, 500, 30);
+    examChoice1.setVisible(true);
+    examChoice1.setText(Exam.answer1.substring(3));
+
+    examChoice2.setLineWrap(true);
+    examChoice2.setEnabled(false);
+    examChoice2.setText(" ");
+    examChoice2.setFont(new Font("MV Bole", Font.PLAIN, 14));
+    examChoice2.setOpaque(true);
+    examChoice2.setBounds(x, y + 50, 500, 30);
+    examChoice2.setVisible(true);
+    examChoice2.setText(Exam.answer2.substring(3));
+
+    examChoice3.setLineWrap(true);
+    examChoice3.setEnabled(false);
+    examChoice3.setText(" ");
+    examChoice3.setFont(new Font("MV Bole", Font.PLAIN, 14));
+    examChoice3.setOpaque(true);
+    examChoice3.setBounds(x, y + 100, 500, 30);
+    examChoice3.setVisible(true);
+    examChoice3.setText(Exam.answer3.substring(3));
+
+    examChoice4.setLineWrap(true);
+    examChoice4.setEnabled(false);
+    examChoice4.setText(" ");
+    examChoice4.setFont(new Font("MV Bole", Font.PLAIN, 14));
+    examChoice4.setOpaque(true);
+    examChoice4.setBounds(x, y + 150, 500, 30);
+    examChoice4.setVisible(true);
+    examChoice4.setText(Exam.answer4.substring(3));
 
   }
 
@@ -444,7 +512,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     if (Exam.count < 5) {
       setQuestion();
     } else if (Exam.count == 5) {
-      if (Exam.correctAnswer > 3) {
+      if (Exam.correctCount > 3) {
         switch (currentRoom.getName()) {
           case "HTML Room":
             Exam.passHTML = true;
@@ -465,14 +533,15 @@ public class GUIDetail extends JFrame implements ActionListener {
             break;
         }
         JOptionPane.showMessageDialog(null,
-            "You got " + Exam.correctAnswer + "/5. " + currentRoom.conclusionForPassingExam(),
+            "You got " + Exam.correctCount + "/5. " + currentRoom.conclusionForPassingExam(),
             "Warning",
             JOptionPane.INFORMATION_MESSAGE);
         northButton.setEnabled(true);
         southButton.setEnabled(true);
         eastButton.setEnabled(true);
         westButton.setEnabled(true);
-        introInfo.setText("Congratulations! You passed " + currentRoom.getName().substring(0,currentRoom.getName().length()-5));
+        introInfo.setText("Congratulations! You passed " + currentRoom.getName()
+            .substring(0, currentRoom.getName().length() - 5));
         introInfo.revalidate();
         Exam.correctAnswer = 0;
         Exam.count = 0;
@@ -490,27 +559,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
     }
   }
-  public void setImage() {
-    switch (currentRoom.getName()) {
-      case "HTML Room":
-        image = ImageImport.importIcon("images/love.png");
-        break;
-      case "JavaScript Room":
-        ImageImport.importIcon("images/love.png");
-        break;
-      case "Python Room":
-        ImageImport.importIcon("images/love.png");
-        break;
-      case "Java Room":
-        ImageImport.importIcon("images/love.png");
-        break;
 
-<<<<<<< Updated upstream
-    }
-  }
-=======
-
->>>>>>> Stashed changes
   @Override
   public void actionPerformed(ActionEvent e) {
 
