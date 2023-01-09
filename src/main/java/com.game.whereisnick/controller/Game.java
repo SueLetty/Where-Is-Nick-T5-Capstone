@@ -47,7 +47,7 @@ public class Game {
   public Game(){
     clearScreen();
     showGameSplash();
-    //playMusicInBackground();
+    playMusicInBackground();
     introduction();
     setUpInstances();
     checkLocation();

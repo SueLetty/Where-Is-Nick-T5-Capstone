@@ -22,7 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
 
 
 
@@ -64,6 +63,8 @@ public class GUIDetail extends JFrame implements ActionListener {
   private JRadioButton answer3 = new JRadioButton();
   private JRadioButton answer4 = new JRadioButton();
   private boolean condition = false;
+  JTextArea examQuestions = new JTextArea(25,50);
+  ButtonGroup group = new ButtonGroup();
 
 
   public GUIDetail(Game game) throws IOException, ParseException {
@@ -334,59 +335,74 @@ public class GUIDetail extends JFrame implements ActionListener {
     southButton.setEnabled(false);
     eastButton.setEnabled(false);
     westButton.setEnabled(false);
-
     Exam.startQuiz(currentRoom);
+
+    group.clearSelection();
+//    JTextArea examQuestions = new JTextArea(25,50);
+    examQuestions.setLineWrap(true);
+    examQuestions.setEnabled(false);
+    examQuestions.setText(" ");
+    examQuestions.setFont(new Font("MV Bole", Font.PLAIN, 14));
+    examQuestions.setOpaque(true);
+    examQuestions.setBounds(100, 50, 500, 180);
+    examQuestions.setVisible(true);
+    examQuestions.setText(Exam.answer1 + "\n" + Exam.answer2 + "\n" + Exam.answer3 + "\n" + Exam.answer4);
+
     introPanel.add(introInfo);
     introPanel.revalidate();
 
     optionInfo.setText(Exam.question);
-//    answer1 = new JRadioButton();
-    answer1.setText(Exam.answer1);
-    answer1.setBounds(50, 50, 260, 30);
+    answer1 = new JRadioButton();
+//    answer1.setText(Exam.answer1);
+    answer1.setText("A:");
+    answer1.setBounds(50, 50, 40, 30);
 
     answer1.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-        Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
+        Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
             Exam.answer1.substring(0, 1), Exam.actualAnswer);
         getQuestion();
       }
     });
 
-//    answer2 = new JRadioButton();
-    answer2.setText(Exam.answer2);
-    answer2.setBounds(50, 100, 260, 30);
+    answer2 = new JRadioButton();
+//    answer2.setText(Exam.answer2);
+    answer2.setText("B:");
+    answer2.setBounds(50, 100, 40, 30);
 //      answer2.revalidate();
     answer2.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-        Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
+        Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
             Exam.answer2.substring(0, 1), Exam.actualAnswer);
         getQuestion();
       }
     });
-//    answer3 = new JRadioButton();
-    answer3.setText(Exam.answer3);
-    answer3.setBounds(50, 150, 260, 30);
+    answer3 = new JRadioButton();
+//    answer3.setText(Exam.answer3);
+    answer3.setText("C:");
+    answer3.setBounds(50, 150, 40, 30);
 //      answer3.revalidate();
     answer3.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-        Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
+        Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
             Exam.answer3.substring(0, 1), Exam.actualAnswer);
         getQuestion();
       }
     });
-//    answer4 = new JRadioButton();
-    answer4.setText(Exam.answer4);
-    answer4.setBounds(50, 200, 260, 30);
+    answer4 = new JRadioButton();
+//    answer4.setText(Exam.answer4);
+    answer4.setText("D:");
+    answer4.setBounds(50, 200, 40, 30);
 //      answer4.revalidate();
     answer4.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-        Exam.correctAnswer = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctAnswer,
+        Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
             Exam.answer4.substring(0, 1), Exam.actualAnswer);
         getQuestion();
       }
     });
 
-    ButtonGroup group = new ButtonGroup();
+//    ButtonGroup group = new ButtonGroup();
     group.add(answer1);
     group.add(answer2);
     group.add(answer3);
@@ -398,17 +414,17 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionPanel.add(answer2);
     optionPanel.add(answer3);
     optionPanel.add(answer4);
+    optionPanel.add(examQuestions);
     optionPanel.setVisible(true);
     optionPanel.revalidate();
 
-//    return null;
   }
 
   public void getQuestion() {
     if (Exam.count < 5) {
       setQuestion();
     } else if (Exam.count == 5) {
-      if (Exam.correctAnswer > 3) {
+      if (Exam.correctCount > 3) {
         switch (currentRoom.getName()) {
           case "HTML Room":
             Exam.passHTML = true;
@@ -429,7 +445,7 @@ public class GUIDetail extends JFrame implements ActionListener {
             break;
         }
         JOptionPane.showMessageDialog(null,
-            "You got " + Exam.correctAnswer + "/5. " + currentRoom.conclusionForPassingExam(),
+            "You got " + Exam.correctCount + "/5. " + currentRoom.conclusionForPassingExam(),
             "Warning",
             JOptionPane.INFORMATION_MESSAGE);
         northButton.setEnabled(true);
@@ -444,7 +460,7 @@ public class GUIDetail extends JFrame implements ActionListener {
             JOptionPane.INFORMATION_MESSAGE);
       }
 
-      Exam.correctAnswer = 0;
+      Exam.correctCount = 0;
       Exam.count = 0;
       optionPanel.setVisible(false);
     }
