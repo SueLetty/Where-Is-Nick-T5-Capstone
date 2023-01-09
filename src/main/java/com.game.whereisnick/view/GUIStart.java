@@ -18,8 +18,7 @@ import javax.swing.JPanel;
 public class GUIStart extends JFrame implements ActionListener {
   private Game game;
   private MainPanel mainPanel;
-  private JLabel image;
-  private ImageIcon backgroundImage;
+
   public GUIStart() throws IOException, ParseException {
     game = new Game();
 
@@ -58,7 +57,6 @@ public class GUIStart extends JFrame implements ActionListener {
 
       }
     });
-//    this.setContentPane(mainPanel);
     this.add(mainPanel);
     this.setResizable(false);
     this.pack();
