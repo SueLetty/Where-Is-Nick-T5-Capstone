@@ -38,13 +38,11 @@ public class GUIDetail extends JFrame implements ActionListener {
   private ImageIcon image;
   private ImageIcon chad;
   private ImageIcon donte;
-  private ImageIcon richard;
+
   private ImageIcon jeanette;
   private ImageIcon nelly;
   private ImageIcon nick;
-  private ImageIcon scott;
-  private ImageIcon shang;
-  private ImageIcon tom;
+
   private ImageIcon love;
 
   private JLabel optionInfo;
@@ -90,16 +88,12 @@ public class GUIDetail extends JFrame implements ActionListener {
 //    image = ImageImport.importIcon("images/smile.png");
     // TODO: 1/5/2023 This image needs to be dependant on what room.
 //    image = ImageImport.importIcon("images/jeanette.jpg"); //need to be less than 32bit color depth.
-    chad = ImageImport.importIcon("images/Chad_Gale.jpg");
-    donte = ImageImport.importIcon("images/Donte_Tyrus.png");
-    richard = ImageImport.importIcon("images/Hank_Richard.png");
-    jeanette = ImageImport.importIcon("images/jeanette.jpg");
-    nelly = ImageImport.importIcon("images/Nelly_Gus.jpg");
-    nick = ImageImport.importIcon("images/Nick_Walter.jpg");
-    scott = ImageImport.importIcon("images/Scott_Mike.jpg");
-    shang = ImageImport.importIcon("images/Shang_Hector.jpg");
-    tom = ImageImport.importIcon("images/Tom_Saul.jpg");
-    love = ImageImport.importIcon("images/love.jpg");
+    chad = ImageImport.importIcon("images/Chad_Gale.jpg", 220, 260);
+    donte = ImageImport.importIcon("images/Donte_Tyrus.png",220, 260);
+    jeanette = ImageImport.importIcon("images/jeanette.jpg",220, 260);
+    nelly = ImageImport.importIcon("images/Nelly_Gus.jpg",220, 260);
+    nick = ImageImport.importIcon("images/Nick_Walter.jpg",220, 260);
+    love = ImageImport.importIcon("images/love.jpg",220, 260);
 
     imageLabel = new JLabel();
     imageLabel.setIcon(jeanette);
@@ -520,7 +514,6 @@ public class GUIDetail extends JFrame implements ActionListener {
           case "Java Room":
             Exam.passJava = true;
             game.setJavaKey(true);
-            //todo take the player to the graduation page
             break;
         }
         JOptionPane.showMessageDialog(null,
@@ -537,6 +530,10 @@ public class GUIDetail extends JFrame implements ActionListener {
         Exam.correctCount = 0;
         Exam.count = 0;
         optionPanel.setVisible(false);
+        if(game.isJavaKey() && Exam.passJava){
+          new GraduationPanel();
+        }
+
       } else {
         Exam.correctCount= 0;
         Exam.count = 0;
