@@ -62,7 +62,10 @@ public class GUIDetail extends JFrame implements ActionListener {
   private JRadioButton answer3 = new JRadioButton();
   private JRadioButton answer4 = new JRadioButton();
   private boolean condition = false;
-  JTextArea examQuestions = new JTextArea(25,50);
+  private JTextArea examChoice1 = new JTextArea(25,50);
+  private JTextArea examChoice2 = new JTextArea(25,50);
+  private JTextArea examChoice3 = new JTextArea(25,50);
+  private JTextArea examChoice4 = new JTextArea(25,50);
   ButtonGroup group = new ButtonGroup();
 
 
@@ -351,23 +354,11 @@ public class GUIDetail extends JFrame implements ActionListener {
     Exam.startQuiz(currentRoom);
     group.clearSelection();
 
-    //going to set the examQuestions in a separate method.
-//    JTextArea examQuestions = new JTextArea(25,50);
-    examQuestions.setLineWrap(true);
-    examQuestions.setEnabled(false);
-    examQuestions.setText(" ");
-    examQuestions.setFont(new Font("MV Bole", Font.PLAIN, 14));
-    examQuestions.setOpaque(true);
-    examQuestions.setBounds(100, 50, 500, 180);
-    examQuestions.setVisible(true);
-    examQuestions.setText(Exam.answer1 + "\n" + Exam.answer2 + "\n" + Exam.answer3 + "\n" + Exam.answer4);
-
     introPanel.add(introInfo);
     introPanel.revalidate();
 
     optionInfo.setText(Exam.question);
     answer1 = new JRadioButton();
-//    answer1.setText(Exam.answer1);
     answer1.setText("A:");
     answer1.setBounds(50, 50, 40, 30);
 
@@ -380,7 +371,6 @@ public class GUIDetail extends JFrame implements ActionListener {
     });
 
     answer2 = new JRadioButton();
-//    answer2.setText(Exam.answer2);
     answer2.setText("B:");
     answer2.setBounds(50, 100, 40, 30);
 //      answer2.revalidate();
@@ -392,7 +382,6 @@ public class GUIDetail extends JFrame implements ActionListener {
       }
     });
     answer3 = new JRadioButton();
-//    answer3.setText(Exam.answer3);
     answer3.setText("C:");
     answer3.setBounds(50, 150, 40, 30);
 //      answer3.revalidate();
@@ -404,7 +393,6 @@ public class GUIDetail extends JFrame implements ActionListener {
       }
     });
     answer4 = new JRadioButton();
-//    answer4.setText(Exam.answer4);
     answer4.setText("D:");
     answer4.setBounds(50, 200, 40, 30);
 //      answer4.revalidate();
@@ -416,7 +404,8 @@ public class GUIDetail extends JFrame implements ActionListener {
       }
     });
 
-//    ButtonGroup group = new ButtonGroup();
+    drawExamChoices(90, 50);
+
     group.add(answer1);
     group.add(answer2);
     group.add(answer3);
@@ -428,9 +417,56 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionPanel.add(answer2);
     optionPanel.add(answer3);
     optionPanel.add(answer4);
-    optionPanel.add(examQuestions);
+    optionPanel.add(examChoice1);
+    optionPanel.add(examChoice2);
+    optionPanel.add(examChoice3);
+    optionPanel.add(examChoice4);
     optionPanel.setVisible(true);
     optionPanel.revalidate();
+
+  }
+
+  /**
+   * Fills the data for JTextAreas for exam options. y coordinate is added 50 for spacing.
+   * @param x int coordinate to first string choice.
+   * @param y int coordinate for first choice option.
+   */
+  private void drawExamChoices(int x, int y){
+    examChoice1.setLineWrap(true);
+    examChoice1.setEnabled(false);
+    examChoice1.setText(" ");
+    examChoice1.setFont(new Font("MV Bole", Font.PLAIN, 14));
+    examChoice1.setOpaque(true);
+    examChoice1.setBounds(x, y, 500, 30);
+    examChoice1.setVisible(true);
+    examChoice1.setText(Exam.answer1.substring(3));
+
+    examChoice2.setLineWrap(true);
+    examChoice2.setEnabled(false);
+    examChoice2.setText(" ");
+    examChoice2.setFont(new Font("MV Bole", Font.PLAIN, 14));
+    examChoice2.setOpaque(true);
+    examChoice2.setBounds(x, y + 50, 500, 30);
+    examChoice2.setVisible(true);
+    examChoice2.setText(Exam.answer2.substring(3));
+
+    examChoice3.setLineWrap(true);
+    examChoice3.setEnabled(false);
+    examChoice3.setText(" ");
+    examChoice3.setFont(new Font("MV Bole", Font.PLAIN, 14));
+    examChoice3.setOpaque(true);
+    examChoice3.setBounds(x, y + 100, 500, 30);
+    examChoice3.setVisible(true);
+    examChoice3.setText(Exam.answer3.substring(3));
+
+    examChoice4.setLineWrap(true);
+    examChoice4.setEnabled(false);
+    examChoice4.setText(" ");
+    examChoice4.setFont(new Font("MV Bole", Font.PLAIN, 14));
+    examChoice4.setOpaque(true);
+    examChoice4.setBounds(x, y + 150, 500, 30);
+    examChoice4.setVisible(true);
+    examChoice4.setText(Exam.answer4.substring(3));
 
   }
 
