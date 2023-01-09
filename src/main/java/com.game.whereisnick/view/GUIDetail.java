@@ -347,9 +347,11 @@ public class GUIDetail extends JFrame implements ActionListener {
     southButton.setEnabled(false);
     eastButton.setEnabled(false);
     westButton.setEnabled(false);
-    Exam.startQuiz(currentRoom);
 
+    Exam.startQuiz(currentRoom);
     group.clearSelection();
+
+    //going to set the examQuestions in a separate method.
 //    JTextArea examQuestions = new JTextArea(25,50);
     examQuestions.setLineWrap(true);
     examQuestions.setEnabled(false);
