@@ -503,7 +503,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       }
     });
 
-    drawExamChoices(90, 50);
+    drawExamChoices(95, 50);
 
     group.add(answer1);
     group.add(answer2);
@@ -536,7 +536,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice1.setText(" ");
     examChoice1.setFont(new Font("MV Bole", Font.PLAIN, 14));
     examChoice1.setOpaque(true);
-    examChoice1.setBounds(x, y, 500, 30);
+    examChoice1.setBounds(x, y, 550, 30);
     examChoice1.setVisible(true);
     examChoice1.setText(Exam.answer1.substring(3));
 
@@ -545,7 +545,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice2.setText(" ");
     examChoice2.setFont(new Font("MV Bole", Font.PLAIN, 14));
     examChoice2.setOpaque(true);
-    examChoice2.setBounds(x, y + 50, 500, 30);
+    examChoice2.setBounds(x, y + 50, 550, 30);
     examChoice2.setVisible(true);
     examChoice2.setText(Exam.answer2.substring(3));
 
@@ -554,7 +554,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice3.setText(" ");
     examChoice3.setFont(new Font("MV Bole", Font.PLAIN, 14));
     examChoice3.setOpaque(true);
-    examChoice3.setBounds(x, y + 100, 500, 30);
+    examChoice3.setBounds(x, y + 100, 550, 30);
     examChoice3.setVisible(true);
     examChoice3.setText(Exam.answer3.substring(3));
 
@@ -563,7 +563,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice4.setText(" ");
     examChoice4.setFont(new Font("MV Bole", Font.PLAIN, 14));
     examChoice4.setOpaque(true);
-    examChoice4.setBounds(x, y + 150, 500, 30);
+    examChoice4.setBounds(x, y + 150, 550, 30);
     examChoice4.setVisible(true);
     examChoice4.setText(Exam.answer4.substring(3));
 

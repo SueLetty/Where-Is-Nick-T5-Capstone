@@ -16,7 +16,7 @@ public class MusicPanel extends JFrame implements Runnable {
   private JButton muteAudioButton;
 
   public MusicPanel() {
-    this.setPreferredSize(new Dimension(230, 130));
+    this.setPreferredSize(new Dimension(210, 130));
     this.setLayout(null);
     this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     this.addWindowListener(new WindowAdapter() {
@@ -27,16 +27,16 @@ public class MusicPanel extends JFrame implements Runnable {
     });
 
     muteMusicButton = new JButton("Mute Music");
-    muteMusicButton.setBounds(10, 10, 100, 30);
+    muteMusicButton.setBounds(10, 10, 120, 30);
 
     increaseVolumeButton = new JButton("+");
-    increaseVolumeButton.setBounds(110, 10, 100, 30);
+    increaseVolumeButton.setBounds(135, 10, 50, 30);
 
     decreaseVolumeButton = new JButton("-");
-    decreaseVolumeButton.setBounds(110, 50, 100, 30);
+    decreaseVolumeButton.setBounds(135, 50, 50, 30);
 
     muteAudioButton = new JButton("Mute SFX");
-    muteAudioButton.setBounds(10, 50, 100, 30);
+    muteAudioButton.setBounds(10, 50, 120, 30);
 
     this.add(muteMusicButton);
     this.add(muteAudioButton);
