@@ -545,6 +545,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         Exam.count = 0;
         optionPanel.setVisible(false);
         if(game.isJavaKey() && Exam.passJava){
+          this.dispose();
           new GraduationPanel();
         }
 
