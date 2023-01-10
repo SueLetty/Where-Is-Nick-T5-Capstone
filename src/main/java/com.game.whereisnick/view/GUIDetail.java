@@ -273,6 +273,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     musicPanel.getMuteMusicButton().addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+        System.out.println("Press the mute/unmute.");
         if (game.getMusicObject().isSoundOn()) {
           game.getMusicObject().stopMusic();
           musicPanel.getMuteMusicButton().setText("Unmute Music");
@@ -286,13 +287,32 @@ public class GUIDetail extends JFrame implements ActionListener {
     musicPanel.getMuteAudioButton().addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+        System.out.println("Press the mute/unmute.");
         if (Exam.audio.isMutedAudio()){
           Exam.audio.setMutedAudio(false);
           musicPanel.getMuteAudioButton().setText("Mute SFX");
+          System.out.println("Is muted? " + Exam.audio.isMutedAudio());
         } else {
           Exam.audio.setMutedAudio(true);
           musicPanel.getMuteAudioButton().setText("Unmute SFX");
+          System.out.println("Is muted? " + Exam.audio.isMutedAudio());
         }
+      }
+    });
+
+    musicPanel.getIncreaseVolumeButton().addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        game.getMusicObject().increaseVolume();
+        System.out.println("Music volume increased.");
+      }
+    });
+
+    musicPanel.getDecreaseVolumeButton().addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        game.getMusicObject().decreaseVolume();
+        System.out.println("Music volume decreased.");
       }
     });
 

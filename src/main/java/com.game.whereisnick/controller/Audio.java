@@ -51,17 +51,6 @@ public class Audio implements LineListener, Runnable {
 
       audioClip.start();
 
-      while (!playCompleted) {
-        // wait for the playback completes
-        try {
-          Thread.sleep(100);
-        } catch (InterruptedException ex) {
-          ex.printStackTrace();
-        }
-      }
-
-      audioClip.close();
-
     } catch (UnsupportedAudioFileException ex) {
       System.out.println("The specified audio file is not supported.");
       ex.printStackTrace();
