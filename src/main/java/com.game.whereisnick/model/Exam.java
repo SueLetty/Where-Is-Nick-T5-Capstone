@@ -30,7 +30,7 @@ public class Exam {
   public static int correctCount = 0;
   public static String actualAnswer;
   public static int count = 0;
-
+  public static Audio audio = new Audio();
 
   public Exam() {
 
@@ -126,14 +126,18 @@ public class Exam {
 
   public static int checkCorrectAnswerAndReturnCounter(int correctAnswer, String answer,
       String actualAnswer) {
-    Audio audio = new Audio();
+
     if (answer.equals(actualAnswer)) {
       correctAnswer += 1;
       System.out.println("Correct! \n");
-      audio.play(CORRECTAUDIO);
+      if (!audio.isMutedAudio()){
+        audio.play(CORRECTAUDIO);
+      }
     } else {
       System.out.println("Not correct! \n");
-      audio.play(WRONGAUDIO);
+      if (!audio.isMutedAudio()){
+        audio.play(WRONGAUDIO);
+      }
     }
     return correctAnswer;
   }
