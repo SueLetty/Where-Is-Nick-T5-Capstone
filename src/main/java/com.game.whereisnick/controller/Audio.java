@@ -26,6 +26,7 @@ public class Audio implements LineListener, Runnable {
    * this flag indicates whether the playback completes or not.
    */
   boolean playCompleted;
+  private boolean mutedAudio = false;
 
   /**
    * Play a given audio file.
@@ -50,17 +51,6 @@ public class Audio implements LineListener, Runnable {
 
       audioClip.start();
 
-      while (!playCompleted) {
-        // wait for the playback completes
-        try {
-          Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-          ex.printStackTrace();
-        }
-      }
-
-      audioClip.close();
-
     } catch (UnsupportedAudioFileException ex) {
       System.out.println("The specified audio file is not supported.");
       ex.printStackTrace();
@@ -72,6 +62,14 @@ public class Audio implements LineListener, Runnable {
       ex.printStackTrace();
     }
 
+  }
+
+  public boolean isMutedAudio() {
+    return mutedAudio;
+  }
+
+  public void setMutedAudio(boolean mutedAudio) {
+    this.mutedAudio = mutedAudio;
   }
 
   /**
@@ -89,18 +87,9 @@ public class Audio implements LineListener, Runnable {
 
   }
 
-  public static void main(String[] args) {
-    String audioFilePath = "correct.wav";
-    Audio player = new Audio();
-    player.play(audioFilePath);
-  }
-
    /* String audioFilePath = "./resources/audio/correct.wav";
     Audio player = new Audio();
     player.play(audioFilePath);*/
-
-
-
 
   @Override
   public void run() {

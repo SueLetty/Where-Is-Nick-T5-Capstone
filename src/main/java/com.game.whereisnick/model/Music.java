@@ -6,11 +6,15 @@ import java.net.URL;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.FloatControl.Type;
 
 public class Music extends Thread{
 
   private Clip musicClip;
   private boolean soundOn = true;
+
+  private float volumeGain = 0f;
 
   public void run(){
     playMusic("audio/BunsenBurner.wav");
@@ -28,7 +32,7 @@ public class Music extends Thread{
       musicClip.open(audioInput);
       musicClip.start();
       musicClip.loop(Clip.LOOP_CONTINUOUSLY);
-      Thread.sleep(100);
+      Thread.sleep(1);
 
 
     } catch (Exception ex) {
@@ -43,13 +47,28 @@ public class Music extends Thread{
     soundOn = false;
   }
 
+  public void increaseVolume(){
+    FloatControl gain = (FloatControl) musicClip.getControl(FloatControl.Type.MASTER_GAIN);
+    volumeGain = volumeGain + 5;
+    gain.setValue(volumeGain);
+  }
+
+  public void decreaseVolume(){
+    FloatControl gain = (FloatControl) musicClip.getControl(FloatControl.Type.MASTER_GAIN);
+    volumeGain = volumeGain - 5;
+    gain.setValue(volumeGain);
+  }
+
+
   public boolean isSoundOn(){
     return soundOn;
   }
 
   public void turnSoundOn(){
     musicClip.start();
+    musicClip.loop(Clip.LOOP_CONTINUOUSLY);
     soundOn = true;
   }
+
 
 }

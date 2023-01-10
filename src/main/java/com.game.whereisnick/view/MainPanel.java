@@ -1,28 +1,36 @@
 package com.game.whereisnick.view;
 
-import java.awt.*;
+import com.game.whereisnick.model.ImageImport;
+
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import java.awt.*;
 
 public class MainPanel extends JPanel{
   JButton startButton;
   JButton beginButton;
   JButton quitButton;
-  JTextArea intro;
+  JTextPane intro;
+
+  private Image backgroundImage;
+
   public MainPanel(){
     this.setPreferredSize(new Dimension(1000,600));
     this.setLayout(null);
 
-    intro = new JTextArea(15,70);
-    intro.setLineWrap(true);
+    intro = new JTextPane();
     intro.setEnabled(false);
-    intro.setBounds(100, 100, 825, 215);
-    intro.setBorder(null);
+    intro.setBounds(0, 0, 1000, 600);
+    intro.setOpaque(false);
+    StyledDocument doc = intro.getStyledDocument();
+    SimpleAttributeSet center = new SimpleAttributeSet();
+    StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+    doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
-    /* intro.setAlignmentX(0.5f);
-    intro.setMargin(new Insets(0, 0, 0, 0));
-    intro.setAlignmentY(CENTER_ALIGNMENT); */
 
-
+    backgroundImage = ImageImport.importImage("images/intro.png");
 
     startButton = new JButton("Start Game");
     startButton.setBounds(450,530,100,30);
@@ -32,8 +40,8 @@ public class MainPanel extends JPanel{
     beginButton.setBounds(450,530,100,30);
     startButton.setFocusable(false);
 
-    this.add(intro);
     this.add(startButton);
+    this.add(intro);
 
 
   }
@@ -62,14 +70,21 @@ public class MainPanel extends JPanel{
     this.quitButton = quitButton;
   }
 
-  public JTextArea getIntro() {
+  public JTextPane getIntro() {
     return intro;
   }
 
-  public void setIntro(JTextArea intro) {
+  public void setIntro(JTextPane intro) {
     this.intro = intro;
   }
 
   public void setPreferredSize(int width, int height) {
   }
+
+  public void paintComponent(Graphics g){
+
+  }
+
+
+
 }
