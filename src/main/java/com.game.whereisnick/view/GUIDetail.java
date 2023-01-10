@@ -503,7 +503,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       }
     });
 
-    drawExamChoices(90, 50);
+    drawExamChoices(95, 50);
 
     group.add(answer1);
     group.add(answer2);
