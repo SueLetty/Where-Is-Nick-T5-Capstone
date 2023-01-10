@@ -19,8 +19,8 @@ public class MainPanel extends JPanel{
 
     intro = new JTextPane();
     intro.setEnabled(false);
-    intro.setBounds(100, 100, 825, 215);
-    intro.setBorder(null);
+    intro.setBounds(100, 100, 825, 300);
+    intro.setOpaque(false);
     StyledDocument doc = intro.getStyledDocument();
     SimpleAttributeSet center = new SimpleAttributeSet();
     StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
