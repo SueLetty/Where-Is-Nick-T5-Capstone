@@ -32,7 +32,7 @@ public class Music extends Thread{
       musicClip.open(audioInput);
       musicClip.start();
       musicClip.loop(Clip.LOOP_CONTINUOUSLY);
-      Thread.sleep(100);
+      Thread.sleep(1);
 
 
     } catch (Exception ex) {
@@ -66,7 +66,9 @@ public class Music extends Thread{
 
   public void turnSoundOn(){
     musicClip.start();
+    musicClip.loop(Clip.LOOP_CONTINUOUSLY);
     soundOn = true;
   }
+
 
 }
