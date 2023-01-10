@@ -26,6 +26,7 @@ public class Audio implements LineListener, Runnable {
    * this flag indicates whether the playback completes or not.
    */
   boolean playCompleted;
+  private boolean mutedAudio = false;
 
   /**
    * Play a given audio file.
@@ -74,6 +75,14 @@ public class Audio implements LineListener, Runnable {
 
   }
 
+  public boolean isMutedAudio() {
+    return mutedAudio;
+  }
+
+  public void setMutedAudio(boolean mutedAudio) {
+    this.mutedAudio = mutedAudio;
+  }
+
   /**
    * Listens to the START and STOP events of the audio line.
    */
@@ -89,18 +98,9 @@ public class Audio implements LineListener, Runnable {
 
   }
 
-  public static void main(String[] args) {
-    String audioFilePath = "correct.wav";
-    Audio player = new Audio();
-    player.play(audioFilePath);
-  }
-
    /* String audioFilePath = "./resources/audio/correct.wav";
     Audio player = new Audio();
     player.play(audioFilePath);*/
-
-
-
 
   @Override
   public void run() {

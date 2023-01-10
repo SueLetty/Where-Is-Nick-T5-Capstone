@@ -1,17 +1,13 @@
 package com.game.whereisnick.view;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import javax.swing.JPanel;
 
-public class MusicPanel extends JFrame {
+public class MusicPanel extends JFrame implements Runnable {
 
   private JPanel panel;
   private JButton muteMusicButton;
@@ -22,6 +18,13 @@ public class MusicPanel extends JFrame {
   public MusicPanel() {
     this.setPreferredSize(new Dimension(230, 130));
     this.setLayout(null);
+    this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    this.addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosed(WindowEvent e) {
+        GUIDetail.setMusicPanelCount(0);
+      }
+    });
 
     muteMusicButton = new JButton("Mute Music");
     muteMusicButton.setBounds(10, 10, 100, 30);
@@ -43,7 +46,7 @@ public class MusicPanel extends JFrame {
     this.setResizable(false);
     this.pack();
     this.setLocationRelativeTo(null);
-
+    this.setVisible(true);
   }
 
   public JButton getMuteMusicButton() {
@@ -60,5 +63,10 @@ public class MusicPanel extends JFrame {
 
   public JButton getMuteAudioButton() {
     return muteAudioButton;
+  }
+
+  @Override
+  public void run() {
+
   }
 }

@@ -11,6 +11,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import javax.swing.ButtonGroup;
@@ -23,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -68,8 +71,8 @@ public class GUIDetail extends JFrame implements ActionListener {
   private JTextArea examChoice2 = new JTextArea(25,50);
   private JTextArea examChoice3 = new JTextArea(25,50);
   private JTextArea examChoice4 = new JTextArea(25,50);
-  ButtonGroup group = new ButtonGroup();
-  MusicPanel musicPanel = new MusicPanel();
+  private ButtonGroup group = new ButtonGroup();
+  private static int musicPanelCount = 0;
 
 
   public GUIDetail(Game game) throws IOException, ParseException {
@@ -172,24 +175,10 @@ public class GUIDetail extends JFrame implements ActionListener {
     musicButton.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        musicPanel.setVisible(true);
-        // TODO: 1/9/2023 button update, reopening a window having issues.
-        // TODO: 1/9/2023 add more buttons, change button sizes and window.
-        musicPanel.getMuteMusicButton().addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-            if (game.getMusicObject().isSoundOn()) {
-              game.getMusicObject().stopMusic();
-              musicPanel.getMuteMusicButton().setText("Unmute Music");
-            } else {
-              game.getMusicObject().turnSoundOn();
-              musicPanel.getMuteMusicButton().setText("Mute Music");
-            }
-          }
-        });
-
-
-
+        if (musicPanelCount == 0){
+          musicPanelCount++;
+          SwingUtilities.invokeLater(musicWindow());
+        }
       }
     });
 
@@ -262,6 +251,52 @@ public class GUIDetail extends JFrame implements ActionListener {
 
     this.setLocationRelativeTo(null);
 
+  }
+
+  /**
+   * Runnable to display and control audio.
+   * @return null
+   */
+  public Runnable musicWindow(){
+    MusicPanel musicPanel = new MusicPanel();
+    if (game.getMusicObject().isSoundOn()){
+      musicPanel.getMuteMusicButton().setText("Mute Music");
+    } else {
+      musicPanel.getMuteMusicButton().setText("Unmute Music");
+    }
+    if (Exam.audio.isMutedAudio()){
+      musicPanel.getMuteAudioButton().setText("Unmute SFX");
+    } else {
+      musicPanel.getMuteAudioButton().setText("Mute SFX");
+    }
+
+    musicPanel.getMuteMusicButton().addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (game.getMusicObject().isSoundOn()) {
+          game.getMusicObject().stopMusic();
+          musicPanel.getMuteMusicButton().setText("Unmute Music");
+        } else {
+          game.getMusicObject().turnSoundOn();
+          musicPanel.getMuteMusicButton().setText("Mute Music");
+        }
+      }
+    });
+
+    musicPanel.getMuteAudioButton().addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        if (Exam.audio.isMutedAudio()){
+          Exam.audio.setMutedAudio(false);
+          musicPanel.getMuteAudioButton().setText("Mute SFX");
+        } else {
+          Exam.audio.setMutedAudio(true);
+          musicPanel.getMuteAudioButton().setText("Unmute SFX");
+        }
+      }
+    });
+
+    return null;
   }
 
   public void paint(Graphics g) {
@@ -566,6 +601,14 @@ public class GUIDetail extends JFrame implements ActionListener {
       }
 
     }
+  }
+
+  public static int getMusicPanelCount() {
+    return musicPanelCount;
+  }
+
+  public static void setMusicPanelCount(int count) {
+    musicPanelCount = count;
   }
 
   @Override
