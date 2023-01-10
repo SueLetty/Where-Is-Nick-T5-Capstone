@@ -22,6 +22,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 
 public class GUIDetail extends JFrame implements ActionListener {
@@ -34,7 +38,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   private JPanel optionPanel;
   private JLabel imageLabel;
   private JPanel controllerPanel;
-  private JTextArea introInfo;
+  private JTextPane introInfo;
   private ImageIcon image;
   private ImageIcon chad;
   private ImageIcon donte;
@@ -45,7 +49,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   private ImageIcon love;
 
-  private JTextArea optionInfo;
+  private JTextPane optionInfo;
 
   private JButton mapButton;
   private JButton helpButton;
@@ -75,20 +79,19 @@ public class GUIDetail extends JFrame implements ActionListener {
     introPanel.setBackground(Color.red);
     introPanel.setBounds(10, 10, 680, 300);
 
-    introInfo = new JTextArea(15, 50);
-    introInfo.setLineWrap(true);
+    introInfo = new JTextPane();
     introInfo.setEnabled(false);
     introInfo.setText(game.greetingFromJeanette());
     introInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
     introInfo.setOpaque(true);
     introInfo.setBounds(100, 10, 500, 480);
+    StyledDocument doc = introInfo.getStyledDocument();
+    SimpleAttributeSet center = new SimpleAttributeSet();
+    StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+    doc.setParagraphAttributes(0, doc.getLength(), center, false);
     introInfo.setVisible(true);
     introPanel.add(introInfo);
 
-//    image = ImageImport.importIcon("images/love.png");
-//    image = ImageImport.importIcon("images/smile.png");
-    // TODO: 1/5/2023 This image needs to be dependant on what room.
-//    image = ImageImport.importIcon("images/jeanette.jpg"); //need to be less than 32bit color depth.
     chad = ImageImport.importIcon("images/Chad_Gale.jpg", 220, 260);
     donte = ImageImport.importIcon("images/Donte_Tyrus.png",220, 260);
     jeanette = ImageImport.importIcon("images/jeanette.jpg",220, 260);
@@ -107,11 +110,15 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionPanel.setBackground(Color.green);
     optionPanel.setBounds(10, 320, 680, 300);
 
-    optionInfo = new JTextArea(1,50);
+    optionInfo = new JTextPane();
     optionInfo.setText("Using Direction button go to a different room.");
     optionInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
     optionInfo.setOpaque(true);
     optionInfo.setBounds(10, 10, 660, 4280);
+    StyledDocument doc1 = optionInfo.getStyledDocument();
+    SimpleAttributeSet center1 = new SimpleAttributeSet();
+    StyleConstants.setAlignment(center1, StyleConstants.ALIGN_CENTER);
+    doc.setParagraphAttributes(0, doc1.getLength(), center1, false);
     optionInfo.setVisible(true);
     optionInfo.setEditable(false);
     optionPanel.add(optionInfo);

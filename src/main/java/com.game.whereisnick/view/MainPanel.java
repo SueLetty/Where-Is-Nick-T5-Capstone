@@ -3,22 +3,28 @@ package com.game.whereisnick.view;
 import com.game.whereisnick.model.ImageImport;
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 public class MainPanel extends JPanel{
   JButton startButton;
   JButton beginButton;
   JButton quitButton;
-  JTextArea intro;
+  JTextPane intro;
 
   public MainPanel(){
     this.setPreferredSize(new Dimension(1000,600));
     this.setLayout(null);
 
-    intro = new JTextArea(15,70);
-    intro.setLineWrap(true);
+    intro = new JTextPane();
     intro.setEnabled(false);
     intro.setBounds(100, 100, 825, 215);
     intro.setBorder(null);
+    StyledDocument doc = intro.getStyledDocument();
+    SimpleAttributeSet center = new SimpleAttributeSet();
+    StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+    doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
     startButton = new JButton("Start Game");
     startButton.setBounds(450,530,100,30);
@@ -58,14 +64,18 @@ public class MainPanel extends JPanel{
     this.quitButton = quitButton;
   }
 
-  public JTextArea getIntro() {
+  public JTextPane getIntro() {
     return intro;
   }
 
-  public void setIntro(JTextArea intro) {
+  public void setIntro(JTextPane intro) {
     this.intro = intro;
   }
 
   public void setPreferredSize(int width, int height) {
+  }
+
+  public void paintComponent(Graphics g){
+
   }
 }
