@@ -40,8 +40,8 @@ public class MainPanel extends JPanel{
     beginButton.setBounds(450,530,100,30);
     startButton.setFocusable(false);
 
-    this.add(intro);
     this.add(startButton);
+    this.add(intro);
 
 
   }

@@ -52,6 +52,7 @@ public class GUIStart extends JFrame implements ActionListener {
       doc.setParagraphAttributes(0, doc.getLength(), center, false);
       mainPanel.remove(mainPanel.startButton);
       mainPanel.add(mainPanel.beginButton);
+      mainPanel.add(mainPanel.intro);
       }
     });
 
