@@ -1,11 +1,12 @@
 package com.game.whereisnick.view;
 
 import com.game.whereisnick.model.ImageImport;
-import java.awt.*;
+
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import java.awt.*;
 
 public class MainPanel extends JPanel{
   JButton startButton;
@@ -13,18 +14,23 @@ public class MainPanel extends JPanel{
   JButton quitButton;
   JTextPane intro;
 
+  private Image backgroundImage;
+
   public MainPanel(){
     this.setPreferredSize(new Dimension(1000,600));
     this.setLayout(null);
 
     intro = new JTextPane();
     intro.setEnabled(false);
-    intro.setBounds(100, 100, 825, 300);
+    intro.setBounds(0, 0, 1000, 600);
     intro.setOpaque(false);
     StyledDocument doc = intro.getStyledDocument();
     SimpleAttributeSet center = new SimpleAttributeSet();
     StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
     doc.setParagraphAttributes(0, doc.getLength(), center, false);
+
+
+    backgroundImage = ImageImport.importImage("images/intro.png");
 
     startButton = new JButton("Start Game");
     startButton.setBounds(450,530,100,30);
@@ -78,4 +84,7 @@ public class MainPanel extends JPanel{
   public void paintComponent(Graphics g){
 
   }
+
+
+
 }
