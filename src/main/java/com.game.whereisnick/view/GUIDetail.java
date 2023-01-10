@@ -155,8 +155,6 @@ public class GUIDetail extends JFrame implements ActionListener {
           JOptionPane.showMessageDialog(null, "GoodBye!");
           System.exit(0);
         }
-
-
       }
     });
 
