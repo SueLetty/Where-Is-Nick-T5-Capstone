@@ -59,7 +59,7 @@ public class GraduationPanel extends JFrame {
 
     textPane = new JTextPane();
     textPane.setText("Congratulations! \nYou have successfully graduated from TLG!");
-    textPane.setFont(new Font("MV Boli", Font.BOLD,35));
+    textPane.setFont(new Font("MV Boli", Font.BOLD,50));
     textPane.setBounds(330,150,300,120);
 
     StyledDocument doc = textPane.getStyledDocument();

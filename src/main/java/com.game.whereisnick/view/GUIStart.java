@@ -45,7 +45,9 @@ public class GUIStart extends JFrame implements ActionListener {
       mainPanel.intro.setText(game.introduction());
       mainPanel.intro.setAlignmentX(JLabel.CENTER);
       mainPanel.intro.setVisible(true);
-      mainPanel.intro.setFont(new Font("MV Boli",Font.BOLD,12));
+      mainPanel.intro.setBounds(100, 50, 825, 300);
+      mainPanel.intro.setFont(new Font("MV Boli",Font.BOLD,16));
+      mainPanel.intro.setOpaque(false);
       StyledDocument doc = mainPanel.intro.getStyledDocument();
       SimpleAttributeSet center = new SimpleAttributeSet();
       StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
