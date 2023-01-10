@@ -8,7 +8,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 public class GraduationPanel extends JFrame {
@@ -55,15 +58,14 @@ public class GraduationPanel extends JFrame {
     panel.setBounds(0,0,1000,600);
 
     textPane = new JTextPane();
-    StyledDocument doc = textPane.getStyledDocument();
-//    SimpleAttributeSet center = new SimpleAttributeSet();
-//    StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-//    doc.setParagraphAttributes(0, doc.getLength(), center, false);
-    
-//    textArea = new JTextArea(4,25);
     textPane.setText("Congratulations! \nYou have successfully graduated from TLG!");
     textPane.setFont(new Font("MV Boli", Font.BOLD,35));
     textPane.setBounds(330,150,300,120);
+
+    StyledDocument doc = textPane.getStyledDocument();
+    SimpleAttributeSet center = new SimpleAttributeSet();
+    StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+    doc.setParagraphAttributes(0, doc.getLength(), center, false);
     textPane.setEditable(false);
 
 
