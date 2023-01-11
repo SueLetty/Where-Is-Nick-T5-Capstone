@@ -1,18 +1,12 @@
 package com.game.whereisnick.view;
 
 import com.game.whereisnick.model.ImageImport;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
+
+import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import java.awt.*;
 
 public class GraduationPanel extends JFrame {
   private JPanel panel;
@@ -37,6 +31,8 @@ public class GraduationPanel extends JFrame {
   private ImageIcon shang;
   private ImageIcon tom;
 
+private JPanel contentPane;
+
   public GraduationPanel(){
     this.setPreferredSize(new Dimension(1000,600));
     this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
@@ -59,7 +55,7 @@ public class GraduationPanel extends JFrame {
 
     textPane = new JTextPane();
     textPane.setText("Congratulations! \nYou have successfully graduated from TLG!");
-    textPane.setFont(new Font("MV Boli", Font.BOLD,50));
+    textPane.setFont(new Font("MV Boli", Font.BOLD,40));
     textPane.setBounds(330,150,300,120);
 
     StyledDocument doc = textPane.getStyledDocument();
