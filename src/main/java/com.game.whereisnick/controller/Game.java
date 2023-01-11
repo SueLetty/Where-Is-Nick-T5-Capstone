@@ -1,19 +1,11 @@
 package com.game.whereisnick.controller;
-import com.game.whereisnick.model.Direction;
-import com.game.whereisnick.model.Exam;
-import com.game.whereisnick.model.Instructor;
-import com.game.whereisnick.model.Music;
-import com.game.whereisnick.model.Room;
-import com.game.whereisnick.model.School;
-import com.game.whereisnick.model.Student;
-import java.io.BufferedReader;
+
+import com.game.whereisnick.model.*;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.reflect.Array;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.JLabel;
 import java.util.Scanner;
 
 public class Game {
@@ -76,11 +68,11 @@ public class Game {
   //Display game introduction/ scenario
   public String introduction() {
     return
-        "\nYou are now currently enrolled as a student of TLG Learning Facility.\n"
+        "\nYou are now currently enrolled as a student with TLG Learning Facility.\n"
             + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
             + " Upon completion of your orientation, \nyou'll now navigate your way through different levels of coding classes \nin order to graduate"
-            + " from the TLG Learning Facility! \nGet ready to learn and soak up your mind to become a real software engineer! \n\n"
-            + " Click the button to start the game.\n After game starts, you click on directional buttons to move,\n click map button to view the map,\n click help for assistance,\n or quit the game.";
+            + " from the TLG Learning Facility! \nGet ready to learn and soak up your mind to become a real Software Engineer! \n\n"
+            + " Click the button to start the game.\n After game starts, you will click on compass buttons to move,\n click Map button to view the map,\n click Help for assistance,\n or Quit the game.";
   }
 
 
@@ -211,7 +203,7 @@ public class Game {
     }
 
   public void showGreeting(Room room) {
-    // TODO: 12/18/22 may need remove passed eaxm print out and change if(Exam.passHTML) to check if(htmlRoom.firstTime)
+    // TODO: 12/18/22 may need remove passed exam print out and change if(Exam.passHTML) to check if(htmlRoom.firstTime)
     Room lobby = TLGSchool.getRooms().get(0);
     Room htmlRoom = TLGSchool.getRooms().get(1);
     Room jsRoom = TLGSchool.getRooms().get(2);
@@ -417,7 +409,7 @@ public class Game {
     } else if (!Arrays.asList(directionCommands).contains(firstWord)) {
       result = firstWord + " is not a valid word.";
     } else {
-      result = "You can only type 2 words as command.";
+      result = "You can only type 2 words for a command.";
     }
     return result;
   }
@@ -430,21 +422,21 @@ public class Game {
   // create command list method
   public String commandList()  {
 
-    return "This will need expanded for exams.\n"
+    return "This will need to be expanded for exams.\n"
         + "You can move to other rooms with the N,S,E,W buttons.\n"
         + "Music button will mute the background music.\n"
         + "Map button will display a map of the game.\n"
-        + "Quit button will quit the game.";
+        + "Quit button will end the game.";
   }
 
   public String greetingFromJeanette(){
     String lobbyGreeting = " I hope you had your coffee this morning,\n"
-        + " because your going to have a very good, but long day,\n"
+        + " because you're going to have a very good, but long day,\n"
         + " ..but I promise you, it's going to be great!..\n"
-        + " with that being said, I would  like to welcome you to TLG!\n\n"
+        + " with that being said, I would like to welcome you to TLG!\n\n"
         + " You are about to meet with your first instructor,\n"
-        + " You will have to go to the HTML room, which is North of the this lobby.\n"
-        + " Be careful, don't venture to other areas of the building else you will be kicked out.\n"
+        + " You will have to go into the HTML room, which is North of the this lobby.\n"
+        + " Be careful, don't venture to other areas of the building or else you will be kicked out.\n"
         + " Have a good day! ";
     return Jeanette.greeting() + lobbyGreeting + commandList();
   }
@@ -455,8 +447,7 @@ public class Game {
         + " Get ready to have your mind blown....\n"
         + " Three days later...\n"
         + " Now.. you need to pass the exam in order to get to the next round.\n"
-        + " It's all up to you!.. Good luck!\n"
-        + " Are you ready to take the exam?";
+        + " It's all up to you!.. Good luck!";
     return Donte.greeting() + htmlGreeting;
   }
 
@@ -466,8 +457,8 @@ public class Game {
         + " you will sweat but it's worth it. I am telling you, life is not easy and you have to work hard for it\n"
         + " let's get started.......\n"
         + " 1 week later...\n"
-        + " Ok now you'll have to pass the exam for this class in order to move forward in the boot camp.\n"
-        + " Good luck!\n Are you ready to take the exam?";
+        + " Ok, now you'll have to pass the exam for this class in order to move forward in the boot camp.\n"
+        + " Good luck!";
     return Nelly.greeting() + javaScriptGreeting;
   }
 
@@ -477,19 +468,19 @@ public class Game {
         + " you have to keep in mind \"Users are very stupid!\" -In radio personality voice.\n"
         + " jk .. but it is very important to have efficient code!\n 1 week later...\n"
         + " Ok, now you'll have to pass the exam for this class in order to move forward in the boot camp.\n"
-        + " Good luck!...\n Are you ready to take the exam? ";
+        + " Good luck!...";
     return Chad.greeting() + pythonGreeting;
   }
 
   public String greetingFromNick(){
-    String javaGreeting = " Let's learn Java.\n Couple of months later...\n Are you ready to take the exam?";
+    String javaGreeting = " Let's learn Java.\n Couple of months later...";
     return Nick.greeting() + javaGreeting;
   }
 
 
   public void printDontHaveKey(){
     System.out.println(" You can't enter this room because you don't have the key to unlock this door.");
-    System.out.println(" Maybe go to last room and pass the exam?");
+    System.out.println(" Maybe go to the last room and pass the exam?");
   }
 
 
