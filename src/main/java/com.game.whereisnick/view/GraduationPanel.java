@@ -50,13 +50,21 @@ private JPanel contentPane;
 
 
 
-    panel = new JPanel();
+    panel = new JPanel(){
+      @Override
+      public void paintComponent(Graphics g){
+        Image backgroundImage = ImageImport.importImage("images/Graduation_background.jpg");
+        g.drawImage(backgroundImage,0,0,1000,600,null);
+
+      }
+    };
     panel.setBounds(0,0,1000,600);
 
     textPane = new JTextPane();
     textPane.setText("Congratulations! \nYou have successfully graduated from TLG!");
     textPane.setFont(new Font("MV Boli", Font.BOLD,40));
     textPane.setBounds(330,150,300,120);
+    textPane.setOpaque(false);
 
     StyledDocument doc = textPane.getStyledDocument();
     SimpleAttributeSet center = new SimpleAttributeSet();
@@ -139,7 +147,6 @@ private JPanel contentPane;
 
 
     panel.setLayout(new FlowLayout());
-
     panel.add(jeanetteImage);
     panel.add(donteImage);
     panel.add(nellyImage);

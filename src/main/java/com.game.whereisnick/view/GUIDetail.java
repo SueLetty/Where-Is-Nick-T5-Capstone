@@ -8,7 +8,6 @@ import com.game.whereisnick.model.Room;
 
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
@@ -22,6 +21,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   private Game game;
   private Room currentRoom;
+  private JPanel imagePanel;
 
   private JPanel introPanel;
 
@@ -64,9 +64,20 @@ public class GUIDetail extends JFrame implements ActionListener {
   public GUIDetail(Game game) throws IOException, ParseException {
     this.game = game;
 
+    imagePanel = new JPanel(){
+      @Override
+      public void paintComponent(Graphics g){
+        Image backgroundImage = ImageImport.importImage("images/intro.png");
+        g.drawImage(backgroundImage,0,0,1000,600,null);
+
+      }
+    };
+    imagePanel.setBounds(0,0,1000,600);
+    imagePanel.setVisible(true);
+
     introPanel = new JPanel();
-    introPanel.setBackground(new Color(170, 0, 0));
     introPanel.setBounds(10, 10, 680, 300);
+    introPanel.setBackground(new Color(255, 255, 255, 100));
 
     introInfo = new JTextPane();
     introInfo.setText(game.greetingFromJeanette());
@@ -91,13 +102,12 @@ public class GUIDetail extends JFrame implements ActionListener {
     imageLabel = new JLabel();
     imageLabel.setIcon(jeanette);
 
-    imageLabel.setBackground(new Color(0, 153, 0));
     imageLabel.setBounds(700, -10, 280, 280);
     imageLabel.setVisible(true);
 
     optionPanel = new JPanel();
-    optionPanel.setBackground(new Color(0, 102, 0));
     optionPanel.setBounds(10, 320, 680, 300);
+    optionPanel.setBackground(new Color(255, 255, 255, 100));
 
     optionInfo = new JTextPane();
     optionInfo.setText("Using the direction buttons, accesses a different room.");
@@ -113,8 +123,8 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionPanel.add(optionInfo);
 
     controllerPanel = new JPanel();
-    controllerPanel.setBackground(new Color(0, 102, 0));
     controllerPanel.setBounds(700, 270, 300, 300);
+    controllerPanel.setBackground(new Color(255, 255, 255, 100));
 
     mapButton = new JButton("Map");
     mapButton.setBounds(10, 10, 100, 30);
@@ -221,19 +231,28 @@ public class GUIDetail extends JFrame implements ActionListener {
     controllerPanel.add(eastButton);
     controllerPanel.add(westButton);
 
+    imagePanel.setLayout(null);
+    imagePanel.add(introPanel);
+    imagePanel.add(imageLabel);
+    imagePanel.add(optionPanel);
+    imagePanel.add(controllerPanel);
+
     this.setTitle("Where is Nick");
     this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
     this.setLayout(null);
     this.setResizable(false);
     this.setSize(1000, 600);
 
-    this.setVisible(true);
-    this.add(introPanel);
-    this.getContentPane().add(imageLabel);
-    this.add(optionPanel);
-    this.add(controllerPanel);
 
-    this.setLocationRelativeTo(null);
+    this.setLayout(null);
+    this.add(imagePanel);
+    this.setVisible(true);
+//    this.add(introPanel);
+//    this.getContentPane().add(imageLabel);
+//    this.add(optionPanel);
+//    this.add(controllerPanel);
+
+    this.setLocationRelativeTo(imagePanel);
 
   }
 
@@ -316,7 +335,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
       if (currentRoom.getName().equals("Lobby")) {
         introInfo.setText(game.greetingFromJeanette());
-        introInfo.setOpaque(false);
+//        introInfo.setOpaque(false);
         introInfo.revalidate();
 
       } else if (currentRoom.getName().equals("HTML Room")) {
@@ -327,9 +346,10 @@ public class GUIDetail extends JFrame implements ActionListener {
           introInfo.revalidate();
           optionPanel.removeAll();
           optionPanel.revalidate();
-          optionPanel.repaint();
+          repaint();
         } else {
           introInfo.setText(game.greetingFromDonte());
+          repaint();
           confirmTakingExam();
         }
 
@@ -341,9 +361,10 @@ public class GUIDetail extends JFrame implements ActionListener {
           introInfo.revalidate();
           optionPanel.removeAll();
           optionPanel.revalidate();
-          optionPanel.repaint();
+          repaint();
         } else {
           introInfo.setText(game.greetingFromNelly());
+          repaint();
           confirmTakingExam();
         }
 
@@ -355,7 +376,7 @@ public class GUIDetail extends JFrame implements ActionListener {
           introInfo.revalidate();
           optionPanel.removeAll();
           optionPanel.revalidate();
-          optionPanel.repaint();
+          repaint();
         } else {
           introInfo.setText(game.greetingFromChad());
           confirmTakingExam();
@@ -392,7 +413,9 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   public void confirmTakingExam() {
-
+    optionPanel.removeAll();
+    optionPanel.revalidate();
+    repaint();
     optionInfo.setText("Are you ready to take the exam?");
     optionInfo.setOpaque(false);
     optionInfo.revalidate();
@@ -402,14 +425,17 @@ public class GUIDetail extends JFrame implements ActionListener {
     yesButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         yesButton.setVisible(false);
+        optionPanel.removeAll();
+        optionPanel.revalidate();
+        repaint();
         setQuestion();
       }
     });
     optionPanel.removeAll();
     optionPanel.revalidate();
-    optionPanel.repaint();
-    optionPanel.add(optionInfo);
+    repaint();
     optionPanel.setLayout(null);
+    optionPanel.add(optionInfo);
     optionPanel.add(yesButton);
     optionPanel.setVisible(true);
     optionPanel.revalidate();
@@ -418,6 +444,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   public void retakeExam(){
+
     optionInfo.setText("Do you want to re-take the exam?");
     optionInfo.setOpaque(false);
     optionInfo.revalidate();
@@ -430,9 +457,10 @@ public class GUIDetail extends JFrame implements ActionListener {
         setQuestion();
       }
     });
+
     optionPanel.removeAll();
     optionPanel.revalidate();
-    optionPanel.repaint();
+    repaint();
     optionPanel.add(optionInfo);
     optionPanel.setLayout(null);
     optionPanel.add(yesButton);
@@ -441,20 +469,26 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   public void setQuestion() {
+
+    imagePanel.setVisible(true);
+    imagePanel.revalidate();
+
     northButton.setEnabled(false);
     southButton.setEnabled(false);
     eastButton.setEnabled(false);
     westButton.setEnabled(false);
 
+//    introPanel.removeAll();
+//    introPanel.revalidate();
+//    introPanel.revalidate();
     optionPanel.removeAll();
     optionPanel.revalidate();
-    optionPanel.repaint();
 
     Exam.startQuiz(currentRoom);
     group.clearSelection();
 
-    introPanel.add(introInfo);
-    introPanel.revalidate();
+//    introPanel.add(introInfo);
+//    introPanel.revalidate();
 
     optionInfo.setText(Exam.question);
     optionInfo.setOpaque(false);
@@ -521,6 +555,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionPanel.add(examChoice4);
     optionPanel.setVisible(true);
     optionPanel.revalidate();
+    repaint();
 
   }
 
@@ -601,11 +636,13 @@ public class GUIDetail extends JFrame implements ActionListener {
         westButton.setEnabled(true);
         introInfo.setText("Congratulations! You passed " + currentRoom.getName()
             .substring(0, currentRoom.getName().length() - 5));
-        introInfo.setOpaque(false);
+//        introInfo.setOpaque(false);
         introInfo.revalidate();
         Exam.correctCount = 0;
         Exam.count = 0;
-        optionPanel.setVisible(false);
+        optionPanel.removeAll();
+        optionPanel.revalidate();
+        repaint();
         if(game.isJavaKey() && Exam.passJava){
           this.dispose();
           new GraduationPanel();
@@ -636,37 +673,3 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   }
 }
-/*
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.*;
-
-public class TranslucentBackgroundPanel extends JPanel {
-    private Image backgroundImage;
-    private float opacity = 0.5f;
-
-    public TranslucentBackgroundPanel() {
-        setOpaque(false);
-        backgroundImage = new ImageIcon("Images/Four-Corners-Monument_TLG Graduation.jpg").getImage();
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                // change the opacity of the background image
-                opacity = (opacity == 1.0f) ? 0.5f : 1.0f;
-                repaint();
-            }
-        });
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
-        g2d.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
-        g2d.dispose();
-    }
-}
-
- */
