@@ -76,10 +76,10 @@ public class Game {
   //Display game introduction/ scenario
   public String introduction() {
     return
-        "\n Introduction: You are now currently enrolled as a student of TLG Learning Facility.\n"
+        "\nYou are now currently enrolled as a student of TLG Learning Facility.\n"
             + " You will be greeted by Jeanette in the lobby to get started with your orientation.\n"
-            + " Upon completion of your orientation, you'll now navigate your way through different levels of coding classes in order to graduate\n"
-            + " from the TLG Learning Facility! Get ready to learn and soak up your mind to become a real software engineer! \n\n"
+            + " Upon completion of your orientation, \nyou'll now navigate your way through different levels of coding classes \nin order to graduate"
+            + " from the TLG Learning Facility! \nGet ready to learn and soak up your mind to become a real software engineer! \n\n"
             + " Click the button to start the game.\n After game starts, you click on directional buttons to move,\n click map button to view the map,\n click help for assistance,\n or quit the game.";
   }
 
