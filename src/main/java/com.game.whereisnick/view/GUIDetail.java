@@ -325,6 +325,9 @@ public class GUIDetail extends JFrame implements ActionListener {
         if (Exam.passHTML) {
           introInfo.setText("You have passed HTML course.\n Go you different room.");
           introInfo.revalidate();
+          optionPanel.removeAll();
+          optionPanel.revalidate();
+          optionPanel.repaint();
         } else {
           introInfo.setText(game.greetingFromDonte());
           confirmTakingExam();
@@ -336,6 +339,9 @@ public class GUIDetail extends JFrame implements ActionListener {
         if (Exam.passJs) {
           introInfo.setText("You have passed JavaScript course.\n Go you different room.");
           introInfo.revalidate();
+          optionPanel.removeAll();
+          optionPanel.revalidate();
+          optionPanel.repaint();
         } else {
           introInfo.setText(game.greetingFromNelly());
           confirmTakingExam();
@@ -347,6 +353,9 @@ public class GUIDetail extends JFrame implements ActionListener {
         if (Exam.passPython) {
           introInfo.setText("You have passed Python course.\n Go you different room.");
           introInfo.revalidate();
+          optionPanel.removeAll();
+          optionPanel.revalidate();
+          optionPanel.repaint();
         } else {
           introInfo.setText(game.greetingFromChad());
           confirmTakingExam();
@@ -357,6 +366,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         game.setWentToJavaWithoutNick(true);
         introInfo.setText(game.encryptedmessage() + "\nYou need to find Nick!");
         introInfo.revalidate();
+
       } else if (currentRoom.getName().equals("studyRoom Room") && Exam.passPython) {
         imageLabel.setIcon(nick);
         imageLabel.revalidate();
@@ -365,13 +375,13 @@ public class GUIDetail extends JFrame implements ActionListener {
           game.getStudent().setLocation(game.getSchool().getRooms().get(5));
           currentRoom = game.getSchool().getRooms().get(5);
           confirmTakingExam();
+
         } else {
           introInfo.setText("SHH...Nick is playing guitar.");
         }
 
       } else {
-        JOptionPane.showMessageDialog(null, "You have to pass the exam first.", "Warning",
-            JOptionPane.WARNING_MESSAGE);
+
       }
 
     } else {
