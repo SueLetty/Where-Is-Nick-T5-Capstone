@@ -131,7 +131,9 @@ public class GUIDetail extends JFrame implements ActionListener {
     mapButton.setFocusable(false);
     mapButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-        JOptionPane.showMessageDialog(null, game.getMap(), "Map", JOptionPane.PLAIN_MESSAGE);
+        ImageIcon map = ImageImport.importIcon("images/map.jpg", 711,400);
+        JOptionPane.showMessageDialog(null, null, "Map", JOptionPane.PLAIN_MESSAGE, map);
+//        JOptionPane.showMessageDialog(null, game.getMap(), "Map", JOptionPane.PLAIN_MESSAGE);
       }
     });
 
