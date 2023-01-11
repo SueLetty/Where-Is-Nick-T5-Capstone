@@ -139,6 +139,7 @@ public class Exam {
         audio.play(WRONGAUDIO);
       }
     }
+    System.out.println(correctAnswer);
     return correctAnswer;
   }
 }
