@@ -85,6 +85,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     introInfo = new JTextPane();
     introInfo.setEnabled(false);
     introInfo.setText(game.greetingFromJeanette());
+    introInfo.setOpaque(false);
     introInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
     introInfo.setOpaque(true);
     introInfo.setBounds(100, 10, 500, 480);
@@ -93,6 +94,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
     doc.setParagraphAttributes(0, doc.getLength(), center, false);
     introInfo.setVisible(true);
+    introInfo.revalidate();
     introPanel.add(introInfo);
 
     chad = ImageImport.importIcon("images/Chad_Gale.jpg", 220, 260);
@@ -116,16 +118,15 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionInfo = new JTextPane();
     optionInfo.setText("Using Direction button go to a different room.");
     optionInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
-    optionInfo.setOpaque(true);
+    optionInfo.setOpaque(false);
     optionInfo.setBounds(10, 10, 660, 4280);
     StyledDocument doc1 = optionInfo.getStyledDocument();
     SimpleAttributeSet center1 = new SimpleAttributeSet();
     StyleConstants.setAlignment(center1, StyleConstants.ALIGN_CENTER);
-    doc.setParagraphAttributes(0, doc1.getLength(), center1, false);
+    doc1.setParagraphAttributes(0, doc1.getLength(), center1, false);
     optionInfo.setVisible(true);
     optionInfo.setEditable(false);
     optionPanel.add(optionInfo);
-
 
     controllerPanel = new JPanel();
     controllerPanel.setBackground(Color.yellow);
@@ -189,7 +190,6 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.NORTH);
         changeRoom();
-
       }
     });
 
@@ -332,6 +332,8 @@ public class GUIDetail extends JFrame implements ActionListener {
 
       if (currentRoom.getName().equals("Lobby")) {
         introInfo.setText(game.greetingFromJeanette());
+        introInfo.setOpaque(false);
+        introInfo.revalidate();
 
       } else if (currentRoom.getName().equals("HTML Room")) {
         imageLabel.setIcon(donte);
@@ -398,6 +400,8 @@ public class GUIDetail extends JFrame implements ActionListener {
   public void confirmTakingExam() {
 
     optionInfo.setText("Are you ready to take the exam?");
+    optionInfo.setOpaque(false);
+    optionInfo.revalidate();
     JButton yesButton = new JButton("Yes");
     yesButton.setBounds(300, 60, 100, 30);
     yesButton.setFocusable(false);
@@ -407,13 +411,13 @@ public class GUIDetail extends JFrame implements ActionListener {
         setQuestion();
       }
     });
-//    removeExamChoices();
     optionPanel.removeAll();
     optionPanel.revalidate();
     optionPanel.repaint();
     optionPanel.add(optionInfo);
     optionPanel.setLayout(null);
     optionPanel.add(yesButton);
+    optionPanel.setVisible(true);
     optionPanel.revalidate();
     optionPanel.setVisible(true);
 
@@ -421,6 +425,8 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   public void retakeExam(){
     optionInfo.setText("Do you want to re-take the exam?");
+    optionInfo.setOpaque(false);
+    optionInfo.revalidate();
     JButton yesButton = new JButton("Yes");
     yesButton.setBounds(300, 60, 100, 30);
     yesButton.setFocusable(false);
@@ -457,6 +463,8 @@ public class GUIDetail extends JFrame implements ActionListener {
     introPanel.revalidate();
 
     optionInfo.setText(Exam.question);
+    optionInfo.setOpaque(false);
+    optionInfo.revalidate();
     answer1 = new JRadioButton();
     answer1.setText("A:");
     answer1.setBounds(50, 50, 40, 30);
@@ -472,7 +480,6 @@ public class GUIDetail extends JFrame implements ActionListener {
     answer2 = new JRadioButton();
     answer2.setText("B:");
     answer2.setBounds(50, 100, 40, 30);
-//      answer2.revalidate();
     answer2.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
@@ -483,7 +490,6 @@ public class GUIDetail extends JFrame implements ActionListener {
     answer3 = new JRadioButton();
     answer3.setText("C:");
     answer3.setBounds(50, 150, 40, 30);
-//      answer3.revalidate();
     answer3.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
@@ -494,7 +500,6 @@ public class GUIDetail extends JFrame implements ActionListener {
     answer4 = new JRadioButton();
     answer4.setText("D:");
     answer4.setBounds(50, 200, 40, 30);
-//      answer4.revalidate();
     answer4.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
@@ -602,6 +607,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         westButton.setEnabled(true);
         introInfo.setText("Congratulations! You passed " + currentRoom.getName()
             .substring(0, currentRoom.getName().length() - 5));
+        introInfo.setOpaque(false);
         introInfo.revalidate();
         Exam.correctCount = 0;
         Exam.count = 0;
