@@ -50,7 +50,6 @@ public class GUIDetail extends JFrame implements ActionListener {
   private ImageIcon nelly;
   private ImageIcon nick;
 
-  private ImageIcon love;
 
   private JTextPane optionInfo;
 
@@ -102,7 +101,6 @@ public class GUIDetail extends JFrame implements ActionListener {
     jeanette = ImageImport.importIcon("images/jeanette.jpg",220, 260);
     nelly = ImageImport.importIcon("images/Nelly_Gus.jpg",220, 260);
     nick = ImageImport.importIcon("images/Nick_Walter.jpg",220, 260);
-    love = ImageImport.importIcon("images/love.jpg",220, 260);
 
     imageLabel = new JLabel();
     imageLabel.setIcon(jeanette);
@@ -368,7 +366,7 @@ public class GUIDetail extends JFrame implements ActionListener {
           confirmTakingExam();
         }
       } else if (currentRoom.getName().equals("Java Room") && Exam.passPython) {
-        imageLabel.setIcon(love);
+        imageLabel.setIcon(null);
         imageLabel.revalidate();
         game.setWentToJavaWithoutNick(true);
         introInfo.setText(game.encryptedmessage() + "\nYou need to find Nick!");
