@@ -5,30 +5,16 @@ import com.game.whereisnick.model.Direction;
 import com.game.whereisnick.model.Exam;
 import com.game.whereisnick.model.ImageImport;
 import com.game.whereisnick.model.Room;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
-import java.text.ParseException;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
+
+import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.text.ParseException;
 
 
 public class GUIDetail extends JFrame implements ActionListener {
@@ -78,7 +64,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     this.game = game;
 
     introPanel = new JPanel();
-    introPanel.setBackground(Color.red);
+    introPanel.setBackground(new Color(153, 0, 0));
     introPanel.setBounds(10, 10, 680, 300);
 
     introInfo = new JTextPane();
@@ -105,16 +91,16 @@ public class GUIDetail extends JFrame implements ActionListener {
     imageLabel = new JLabel();
     imageLabel.setIcon(jeanette);
 
-    imageLabel.setBackground(Color.BLUE);
+    imageLabel.setBackground(new Color(0, 153, 0));
     imageLabel.setBounds(700, -10, 280, 280);
     imageLabel.setVisible(true);
 
     optionPanel = new JPanel();
-    optionPanel.setBackground(Color.green);
+    optionPanel.setBackground(new Color(0, 102, 0));
     optionPanel.setBounds(10, 320, 680, 300);
 
     optionInfo = new JTextPane();
-    optionInfo.setText("Using Direction button go to a different room.");
+    optionInfo.setText("Using the direction buttons, accesses a different room.");
     optionInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
     optionInfo.setOpaque(false);
     optionInfo.setBounds(10, 10, 660, 4280);
@@ -127,7 +113,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionPanel.add(optionInfo);
 
     controllerPanel = new JPanel();
-    controllerPanel.setBackground(Color.yellow);
+    controllerPanel.setBackground(new Color(0, 102, 0));
     controllerPanel.setBounds(700, 270, 300, 300);
 
     mapButton = new JButton("Map");
@@ -640,3 +626,37 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   }
 }
+/*
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.*;
+
+public class TranslucentBackgroundPanel extends JPanel {
+    private Image backgroundImage;
+    private float opacity = 0.5f;
+
+    public TranslucentBackgroundPanel() {
+        setOpaque(false);
+        backgroundImage = new ImageIcon("Images/Four-Corners-Monument_TLG Graduation.jpg").getImage();
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                // change the opacity of the background image
+                opacity = (opacity == 1.0f) ? 0.5f : 1.0f;
+                repaint();
+            }
+        });
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g.create();
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
+        g2d.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        g2d.dispose();
+    }
+}
+
+ */
