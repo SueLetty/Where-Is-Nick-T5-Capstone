@@ -67,9 +67,26 @@ public class GUIDetail extends JFrame implements ActionListener {
     imagePanel = new JPanel(){
       @Override
       public void paintComponent(Graphics g){
-        Image backgroundImage = ImageImport.importImage("images/intro.png");
-        g.drawImage(backgroundImage,0,0,1000,600,null);
-
+        currentRoom = game.getStudent().getLocation();
+        if(currentRoom.getName().equals("Lobby")){
+          Image backgroundImage = ImageImport.importImage("images/backgrounds/lobby.jpg");
+          g.drawImage(backgroundImage,0,0,1000,600,null);
+        }else if(currentRoom.getName().equals("HTML Room")){
+          Image backgroundImage = ImageImport.importImage("images/backgrounds/html.jpg");
+          g.drawImage(backgroundImage,0,0,1000,600,null);
+        }else if(currentRoom.getName().equals("JavaScript Room")){
+          Image backgroundImage = ImageImport.importImage("images/backgrounds/javascript.jpg");
+          g.drawImage(backgroundImage,0,0,1000,600,null);
+        }else if(currentRoom.getName().equals("Python Room")){
+          Image backgroundImage = ImageImport.importImage("images/backgrounds/python.jpg");
+          g.drawImage(backgroundImage,0,0,1000,600,null);
+        }else if(currentRoom.getName().equals("Java Room")){
+          Image backgroundImage = ImageImport.importImage("images/backgrounds/java.jpg");
+          g.drawImage(backgroundImage,0,0,1000,600,null);
+        }else if(currentRoom.getName().equals("studyRoom Room")){
+          Image backgroundImage = ImageImport.importImage("images/backgrounds/studyroom.jpg");
+          g.drawImage(backgroundImage,0,0,1000,600,null);
+        }
       }
     };
     imagePanel.setBounds(0,0,1000,600);
@@ -336,45 +353,51 @@ public class GUIDetail extends JFrame implements ActionListener {
     if (currentRoom != null) {
 
       if (currentRoom.getName().equals("Lobby")) {
+        imagePanel.revalidate();
+        repaint();
         introInfo.setText(game.greetingFromJeanette());
-//        introInfo.setOpaque(false);
-        introInfo.revalidate();
 
       } else if (currentRoom.getName().equals("HTML Room")) {
-        imageLabel.setIcon(donte);
         imageLabel.revalidate();
+        repaint();
+        imageLabel.setIcon(donte);
+
         if (Exam.passHTML) {
           introInfo.setText("You have passed HTML course.\n Go you different room.");
+          introInfo.setOpaque(false);
           introInfo.revalidate();
           optionPanel.removeAll();
           optionPanel.revalidate();
           repaint();
         } else {
           introInfo.setText(game.greetingFromDonte());
-          repaint();
           confirmTakingExam();
         }
 
       } else if (currentRoom.getName().equals("JavaScript Room") && Exam.passHTML) {
-        imageLabel.setIcon(nelly);
         imageLabel.revalidate();
+        repaint();
+        imageLabel.setIcon(nelly);
+
         if (Exam.passJs) {
           introInfo.setText("You have passed JavaScript course.\n Go you different room.");
+          introInfo.setOpaque(false);
           introInfo.revalidate();
           optionPanel.removeAll();
           optionPanel.revalidate();
           repaint();
         } else {
           introInfo.setText(game.greetingFromNelly());
-          repaint();
           confirmTakingExam();
         }
 
       } else if (currentRoom.getName().equals("Python Room") && Exam.passJs) {
-        imageLabel.setIcon(chad);
         imageLabel.revalidate();
+        repaint();
+        imageLabel.setIcon(chad);
         if (Exam.passPython) {
           introInfo.setText("You have passed Python course.\n Go you different room.");
+          introInfo.setOpaque(false);
           introInfo.revalidate();
           optionPanel.removeAll();
           optionPanel.revalidate();
@@ -384,6 +407,8 @@ public class GUIDetail extends JFrame implements ActionListener {
           confirmTakingExam();
         }
       } else if (currentRoom.getName().equals("Java Room") && Exam.passPython) {
+        imageLabel.revalidate();
+        repaint();
         imageLabel.setIcon(null);
         imageLabel.revalidate();
         game.setWentToJavaWithoutNick(true);
@@ -391,8 +416,9 @@ public class GUIDetail extends JFrame implements ActionListener {
         introInfo.revalidate();
 
       } else if (currentRoom.getName().equals("studyRoom Room") && Exam.passPython) {
-        imageLabel.setIcon(nick);
         imageLabel.revalidate();
+        repaint();
+        imageLabel.setIcon(nick);
         if (game.isWentToJavaWithoutNick()) {
           introInfo.setText(game.greetingFromNick());
           game.getStudent().setLocation(game.getSchool().getRooms().get(5));
@@ -404,13 +430,15 @@ public class GUIDetail extends JFrame implements ActionListener {
         }
 
       } else {
-
+        JOptionPane.showMessageDialog(null, "You need to pass the exam first!", "Warning",
+            JOptionPane.WARNING_MESSAGE);
+//        optionInfo.setText("Try different direction!");
       }
 
     } else {
       JOptionPane.showMessageDialog(null, game.getNO_DIRECTION_MESSAGE(), "Warning",
           JOptionPane.WARNING_MESSAGE);
-      optionInfo.setText("Try different direction!");
+//      optionInfo.setText("Try different direction!");
     }
   }
 
@@ -480,17 +508,16 @@ public class GUIDetail extends JFrame implements ActionListener {
     eastButton.setEnabled(false);
     westButton.setEnabled(false);
 
-//    introPanel.removeAll();
-//    introPanel.revalidate();
-//    introPanel.revalidate();
+    introPanel.removeAll();
+    introPanel.revalidate();
     optionPanel.removeAll();
     optionPanel.revalidate();
 
     Exam.startQuiz(currentRoom);
     group.clearSelection();
 
-//    introPanel.add(introInfo);
-//    introPanel.revalidate();
+    introPanel.add(introInfo);
+    introPanel.revalidate();
 
     optionInfo.setText(Exam.question);
     optionInfo.setOpaque(false);
@@ -638,8 +665,9 @@ public class GUIDetail extends JFrame implements ActionListener {
         westButton.setEnabled(true);
         introInfo.setText("Congratulations! You passed " + currentRoom.getName()
             .substring(0, currentRoom.getName().length() - 5));
-//        introInfo.setOpaque(false);
-        introInfo.revalidate();
+        introInfo.setOpaque(false);
+        repaint();
+
         Exam.correctCount = 0;
         Exam.count = 0;
         optionPanel.removeAll();
