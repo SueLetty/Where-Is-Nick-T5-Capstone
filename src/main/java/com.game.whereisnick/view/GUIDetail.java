@@ -68,23 +68,23 @@ public class GUIDetail extends JFrame implements ActionListener {
       @Override
       public void paintComponent(Graphics g){
         currentRoom = game.getStudent().getLocation();
+        Image backgroundImage = ImageImport.importImage("images/backgrounds/lobby.jpg");
         if(currentRoom.getName().equals("Lobby")){
-          Image backgroundImage = ImageImport.importImage("images/backgrounds/lobby.jpg");
           g.drawImage(backgroundImage,0,0,1000,600,null);
         }else if(currentRoom.getName().equals("HTML Room")){
-          Image backgroundImage = ImageImport.importImage("images/backgrounds/html.jpg");
+          backgroundImage = ImageImport.importImage("images/backgrounds/html.jpg");
           g.drawImage(backgroundImage,0,0,1000,600,null);
         }else if(currentRoom.getName().equals("JavaScript Room")){
-          Image backgroundImage = ImageImport.importImage("images/backgrounds/javascript.jpg");
+          backgroundImage = ImageImport.importImage("images/backgrounds/javascript.jpg");
           g.drawImage(backgroundImage,0,0,1000,600,null);
         }else if(currentRoom.getName().equals("Python Room")){
-          Image backgroundImage = ImageImport.importImage("images/backgrounds/python.jpg");
+          backgroundImage = ImageImport.importImage("images/backgrounds/python.jpg");
           g.drawImage(backgroundImage,0,0,1000,600,null);
         }else if(currentRoom.getName().equals("Java Room")){
-          Image backgroundImage = ImageImport.importImage("images/backgrounds/java.jpg");
+          backgroundImage = ImageImport.importImage("images/backgrounds/java.jpg");
           g.drawImage(backgroundImage,0,0,1000,600,null);
         }else if(currentRoom.getName().equals("studyRoom Room")){
-          Image backgroundImage = ImageImport.importImage("images/backgrounds/studyroom.jpg");
+          backgroundImage = ImageImport.importImage("images/backgrounds/studyroom.jpg");
           g.drawImage(backgroundImage,0,0,1000,600,null);
         }
       }
@@ -129,7 +129,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionInfo = new JTextPane();
     optionInfo.setText("Using the direction buttons, accesses a different room.");
     optionInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
-    optionInfo.setOpaque(false);
+    optionInfo.setBackground(new Color(255,255,255,100));
     optionInfo.setBounds(10, 10, 660, 4280);
     StyledDocument doc1 = optionInfo.getStyledDocument();
     SimpleAttributeSet center1 = new SimpleAttributeSet();
@@ -150,7 +150,6 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         ImageIcon map = ImageImport.importIcon("images/map.jpg", 711,400);
         JOptionPane.showMessageDialog(null, null, "Map", JOptionPane.PLAIN_MESSAGE, map);
-//        JOptionPane.showMessageDialog(null, game.getMap(), "Map", JOptionPane.PLAIN_MESSAGE);
       }
     });
 
@@ -338,13 +337,13 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   private void changeRoom() {
-
     if (currentRoom != null) {
 
       if (currentRoom.getName().equals("Lobby")) {
         introInfo.setText(game.greetingFromJeanette());
 
       } else if (currentRoom.getName().equals("HTML Room")) {
+
         imageLabel.setIcon(donte);
         if (Exam.passHTML) {
           introInfo.setText("You have passed HTML course.\n Go you different room.");
@@ -374,6 +373,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
       } else if (currentRoom.getName().equals("Python Room") && Exam.passJs) {
         imageLabel.setIcon(chad);
+        imageLabel.setVisible(true);
         if (Exam.passPython) {
           introInfo.setText("You have passed Python course.\n Go you different room.");
           introInfo.setOpaque(false);
@@ -405,6 +405,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
         } else {
           introInfo.setText("SHH...Nick is playing guitar.");
+          repaint();
         }
 
       } else {
@@ -422,7 +423,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   public void confirmTakingExam() {
 
     optionInfo.setText("Are you ready to take the exam?");
-    optionInfo.setOpaque(false);
+    optionInfo.setBackground(new Color(255,255,255,100));
     optionInfo.revalidate();
     JButton yesButton = new JButton("Yes");
     yesButton.setBounds(300, 60, 100, 30);
@@ -439,7 +440,6 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionPanel.add(optionInfo);
     optionPanel.add(yesButton);
     optionPanel.setVisible(true);
-    optionPanel.revalidate();
     repaint();
 
   }
@@ -447,7 +447,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   public void retakeExam(){
 
     optionInfo.setText("Do you want to re-take the exam?");
-    optionInfo.setOpaque(false);
+    optionInfo.setBackground(new Color(255,255,255,100));
     optionInfo.revalidate();
     JButton yesButton = new JButton("Yes");
     yesButton.setBounds(300, 60, 100, 30);
@@ -455,6 +455,10 @@ public class GUIDetail extends JFrame implements ActionListener {
     yesButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         yesButton.setVisible(false);
+        northButton.setEnabled(false);
+        southButton.setEnabled(false);
+        eastButton.setEnabled(false);
+        westButton.setEnabled(false);
         setQuestion();
       }
     });
@@ -469,25 +473,11 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   public void setQuestion() {
-
-    northButton.setEnabled(false);
-    southButton.setEnabled(false);
-    eastButton.setEnabled(false);
-    westButton.setEnabled(false);
-
-    introPanel.removeAll();
-    introPanel.revalidate();
-    optionPanel.removeAll();
-    optionPanel.revalidate();
-
     Exam.startQuiz(currentRoom);
     group.clearSelection();
 
-    introPanel.add(introInfo);
-    introPanel.revalidate();
-
     optionInfo.setText(Exam.question);
-    optionInfo.setOpaque(false);
+    optionInfo.setBackground(new Color(255,255,255,100));
     optionInfo.revalidate();
     answer1 = new JRadioButton();
     answer1.setText("A:");
@@ -598,7 +588,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice4.setDisabledTextColor(Color.black);
     examChoice4.setBounds(x, y + 150, 550, 30);
     examChoice4.setVisible(true);
-    examChoice4.setText(Exam.answer3.substring(3));
+    examChoice4.setText(Exam.answer4.substring(3));
     examChoice4.setBackground(new Color(255,255,255,100));
 
   }
