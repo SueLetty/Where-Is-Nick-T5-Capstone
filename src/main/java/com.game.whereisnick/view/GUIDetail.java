@@ -123,14 +123,14 @@ public class GUIDetail extends JFrame implements ActionListener {
     imageLabel.setVisible(true);
 
     optionPanel = new JPanel();
-    optionPanel.setBounds(10, 320, 650, 300);
+    optionPanel.setBounds(10, 320, 680, 235);
     optionPanel.setBackground(new Color(255, 255, 255, 100));
 
     optionInfo = new JTextPane();
     optionInfo.setText("Using the direction buttons, accesses a different room.");
     optionInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
-    optionInfo.setBounds(0, 10, 650, 30);
-    optionInfo.setBackground(new Color(255,255,255,100));
+    optionInfo.setBounds(0, 10, 680, 30);
+    optionInfo.setBackground(new Color(255,255,255,200));
     StyledDocument doc1 = optionInfo.getStyledDocument();
     SimpleAttributeSet center1 = new SimpleAttributeSet();
     StyleConstants.setAlignment(center1, StyleConstants.ALIGN_CENTER);
@@ -141,8 +141,8 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionPanel.add(optionInfo);
 
     controllerPanel = new JPanel();
-    controllerPanel.setBounds(700, 270, 300, 300);
-    controllerPanel.setBackground(new Color(255, 255, 255, 50));
+    controllerPanel.setBounds(700, 270, 280, 284);
+    controllerPanel.setBackground(new Color(255, 255, 255, 100));
 
     mapButton = new JButton("Map");
     mapButton.setBounds(10, 10, 100, 30);
@@ -155,7 +155,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     });
 
     helpButton = new JButton("Help");
-    helpButton.setBounds(180, 10, 100, 30);
+    helpButton.setBounds(175, 10, 100, 30);
     helpButton.setFocusable(false);
     helpButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
@@ -184,7 +184,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     });
 
     musicButton = new JButton("Music");
-    musicButton.setBounds(180, 250, 100, 30);
+    musicButton.setBounds(175, 250, 100, 30);
     musicButton.setFocusable(false);
     musicButton.addActionListener(new ActionListener() {
       @Override
@@ -197,7 +197,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     });
 
     northButton = new JButton("N");
-    northButton.setBounds(125, 75, 50, 50);
+    northButton.setBounds(115, 75, 50, 50);
     northButton.setFocusable(false);
     northButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
@@ -207,7 +207,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     });
 
     southButton = new JButton("S");
-    southButton.setBounds(125, 175, 50, 50);
+    southButton.setBounds(115, 175, 50, 50);
     southButton.setFocusable(false);
     southButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
@@ -217,7 +217,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     });
 
     eastButton = new JButton("W");
-    eastButton.setBounds(75, 125, 50, 50);
+    eastButton.setBounds(65, 125, 50, 50);
     eastButton.setFocusable(false);
     eastButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
@@ -227,7 +227,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     });
 
     westButton = new JButton("E");
-    westButton.setBounds(175, 125, 50, 50);
+    westButton.setBounds(165, 125, 50, 50);
     westButton.setFocusable(false);
     westButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
@@ -429,7 +429,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   public void confirmTakingExam() {
 
     optionInfo.setText("Are you ready to take the exam?");
-    optionInfo.setBackground(new Color(255,255,255,100));
+    optionInfo.setBackground(new Color(255,255,255,200));
     optionInfo.revalidate();
     JButton yesButton = new JButton("Yes");
     yesButton.setBounds(300, 60, 100, 30);
@@ -453,7 +453,7 @@ public class GUIDetail extends JFrame implements ActionListener {
   public void retakeExam(){
 
     optionInfo.setText("Do you want to re-take the exam?");
-    optionInfo.setBackground(new Color(255,255,255,100));
+    optionInfo.setBackground(new Color(255,255,255,200));
     optionInfo.revalidate();
     JButton yesButton = new JButton("Yes");
     yesButton.setBounds(300, 60, 100, 30);
@@ -484,7 +484,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     group.clearSelection();
 
     optionInfo.setText(Exam.question);
-    optionInfo.setBackground(new Color(255,255,255,100));
+    optionInfo.setBackground(new Color(255,255,255,200));
     optionInfo.revalidate();
     repaint();
 
@@ -564,6 +564,7 @@ public class GUIDetail extends JFrame implements ActionListener {
    * @param y int coordinate for first choice option.
    */
   private void drawExamChoices(int x, int y){
+    int opacity = 180;
     examChoice1.setLineWrap(true);
     examChoice1.setEnabled(false);
     examChoice1.setFont(new Font("MV Bole", Font.PLAIN, 14));
@@ -571,7 +572,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice1.setBounds(x, y, 550, 30);
     examChoice1.setVisible(true);
     examChoice1.setText(Exam.answer1.substring(3));
-    examChoice1.setBackground(new Color(255,255,255,100));
+    examChoice1.setBackground(new Color(255,255,255,opacity));
 
     examChoice2.setLineWrap(true);
     examChoice2.setEnabled(false);
@@ -580,7 +581,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice2.setBounds(x, y + 50, 550, 30);
     examChoice2.setVisible(true);
     examChoice2.setText(Exam.answer2.substring(3));
-    examChoice2.setBackground(new Color(255,255,255,100));
+    examChoice2.setBackground(new Color(255,255,255,opacity));
 
     examChoice3.setLineWrap(true);
     examChoice3.setEnabled(false);
@@ -589,7 +590,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice3.setBounds(x, y + 100, 550, 30);
     examChoice3.setVisible(true);
     examChoice3.setText(Exam.answer3.substring(3));
-    examChoice3.setBackground(new Color(255,255,255,100));
+    examChoice3.setBackground(new Color(255,255,255,opacity));
 
     examChoice4.setLineWrap(true);
     examChoice4.setEnabled(false);
@@ -598,7 +599,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice4.setBounds(x, y + 150, 550, 30);
     examChoice4.setVisible(true);
     examChoice4.setText(Exam.answer4.substring(3));
-    examChoice4.setBackground(new Color(255,255,255,100));
+    examChoice4.setBackground(new Color(255,255,255,opacity));
 
   }
 
