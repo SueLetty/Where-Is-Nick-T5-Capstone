@@ -110,16 +110,16 @@ public class GUIDetail extends JFrame implements ActionListener {
     introInfo.revalidate();
     introPanel.add(introInfo);
 
-    chad = ImageImport.importIcon("images/Chad_Gale.jpg", 220, 260);
-    donte = ImageImport.importIcon("images/Donte_Tyrus.png",220, 260);
-    jeanette = ImageImport.importIcon("images/jeanette.jpg",220, 260);
-    nelly = ImageImport.importIcon("images/Nelly_Gus.jpg",220, 260);
-    nick = ImageImport.importIcon("images/Nick_Walter.jpg",220, 260);
+    chad = ImageImport.importIcon("images/resized/Chad_Gale.jpg", 280, 250);
+    donte = ImageImport.importIcon("images/resized/Donte_Tyrus.png",280, 250);
+    jeanette = ImageImport.importIcon("images/resized/jeanette.jpg",280, 250);
+    nelly = ImageImport.importIcon("images/resized/Nelly_Gus.jpg",280, 250);
+    nick = ImageImport.importIcon("images/resized/Nick_Walter.jpg",280, 250);
 
     imageLabel = new JLabel();
     imageLabel.setIcon(jeanette);
 
-    imageLabel.setBounds(700, -10, 280, 280);
+    imageLabel.setBounds(700, -5, 280, 280);
     imageLabel.setVisible(true);
 
     optionPanel = new JPanel();
