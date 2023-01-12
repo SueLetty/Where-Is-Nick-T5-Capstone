@@ -644,7 +644,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         }
 
       } else {
-        Exam.correctCount= 0;
+        Exam.correctCount = 0;
         Exam.count = 0;
 
         JOptionPane.showMessageDialog(null, currentRoom.conclusionForNotPassingExam(), "Warning",

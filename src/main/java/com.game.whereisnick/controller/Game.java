@@ -422,11 +422,15 @@ public class Game {
   // create command list method
   public String commandList()  {
 
-    return "This will need to be expanded for exams.\n"
-        + "You can move to other rooms with the N,S,E,W buttons.\n"
-        + "Music button will mute the background music.\n"
-        + "Map button will display a map of the game.\n"
-        + "Quit button will end the game.";
+
+    return "This will need expanded for exams.\n"
+        + "- You can move to other rooms with the N,S,E,W buttons.\n"
+        + "- Music button will mute/unmute the background music and\n"
+        + "  mute/unmute the sound effect, and\n"
+        + "  change the volume of the background music.\n"
+        + "- Map button will display a map of the game.\n"
+        + "- Quit button will quit the game.";
+
   }
 
   public String greetingFromJeanette(){
@@ -438,7 +442,7 @@ public class Game {
         + " You will have to go into the HTML room, which is North of the this lobby.\n"
         + " Be careful, don't venture to other areas of the building or else you will be kicked out.\n"
         + " Have a good day! ";
-    return Jeanette.greeting() + lobbyGreeting + commandList();
+    return Jeanette.greeting() + lobbyGreeting;
   }
 
 
