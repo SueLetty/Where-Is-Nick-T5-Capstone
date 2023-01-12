@@ -442,7 +442,7 @@ public class Game {
         + " You will have to go into the HTML room, which is North of the this lobby.\n"
         + " Be careful, don't venture to other areas of the building or else you will be kicked out.\n"
         + " Have a good day! ";
-    return Jeanette.greeting() + lobbyGreeting + commandList();
+    return Jeanette.greeting() + lobbyGreeting;
   }
 
 
