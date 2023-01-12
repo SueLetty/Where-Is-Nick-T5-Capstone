@@ -492,6 +492,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     answer1 = new JRadioButton();
     answer1.setText("A:");
     answer1.setBounds(50, 50, 40, 30);
+    answer1.setBackground(new Color(255,255,255,60));
 
     answer1.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
@@ -504,6 +505,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     answer2 = new JRadioButton();
     answer2.setText("B:");
     answer2.setBounds(50, 100, 40, 30);
+    answer2.setBackground(new Color(255,255,255,60));
     answer2.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
@@ -514,6 +516,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     answer3 = new JRadioButton();
     answer3.setText("C:");
     answer3.setBounds(50, 150, 40, 30);
+    answer3.setBackground(new Color(255,255,255,60));
     answer3.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
@@ -524,6 +527,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     answer4 = new JRadioButton();
     answer4.setText("D:");
     answer4.setBounds(50, 200, 40, 30);
+    answer4.setBackground(new Color(255,255,255,60));
     answer4.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
@@ -532,7 +536,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       }
     });
 
-    drawExamChoices(95, 50);
+    drawExamChoices(90, 50);
 
     group.add(answer1);
     group.add(answer2);
@@ -563,39 +567,39 @@ public class GUIDetail extends JFrame implements ActionListener {
   private void drawExamChoices(int x, int y){
     examChoice1.setLineWrap(true);
     examChoice1.setEnabled(false);
-    examChoice1.setText(" ");
     examChoice1.setFont(new Font("MV Bole", Font.PLAIN, 14));
-    examChoice1.setOpaque(true);
+    examChoice1.setDisabledTextColor(Color.black);
     examChoice1.setBounds(x, y, 550, 30);
     examChoice1.setVisible(true);
     examChoice1.setText(Exam.answer1.substring(3));
+    examChoice1.setBackground(new Color(255,255,255,100));
 
     examChoice2.setLineWrap(true);
     examChoice2.setEnabled(false);
-    examChoice2.setText(" ");
     examChoice2.setFont(new Font("MV Bole", Font.PLAIN, 14));
-    examChoice2.setOpaque(true);
+    examChoice2.setDisabledTextColor(Color.black);
     examChoice2.setBounds(x, y + 50, 550, 30);
     examChoice2.setVisible(true);
     examChoice2.setText(Exam.answer2.substring(3));
+    examChoice2.setBackground(new Color(255,255,255,100));
 
     examChoice3.setLineWrap(true);
     examChoice3.setEnabled(false);
-    examChoice3.setText(" ");
     examChoice3.setFont(new Font("MV Bole", Font.PLAIN, 14));
-    examChoice3.setOpaque(true);
+    examChoice3.setDisabledTextColor(Color.black);
     examChoice3.setBounds(x, y + 100, 550, 30);
     examChoice3.setVisible(true);
     examChoice3.setText(Exam.answer3.substring(3));
+    examChoice3.setBackground(new Color(255,255,255,100));
 
     examChoice4.setLineWrap(true);
     examChoice4.setEnabled(false);
-    examChoice4.setText(" ");
     examChoice4.setFont(new Font("MV Bole", Font.PLAIN, 14));
-    examChoice4.setOpaque(true);
+    examChoice4.setDisabledTextColor(Color.black);
     examChoice4.setBounds(x, y + 150, 550, 30);
     examChoice4.setVisible(true);
-    examChoice4.setText(Exam.answer4.substring(3));
+    examChoice4.setText(Exam.answer3.substring(3));
+    examChoice4.setBackground(new Color(255,255,255,100));
 
   }
 
