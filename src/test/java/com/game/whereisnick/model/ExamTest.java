@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import org.junit.jupiter.api.Test;
 
 public class ExamTest {
+
   Room html = new Room("HTML Room");
   Room ruby = new Room("Ruby Room");
 
@@ -22,9 +23,8 @@ public class ExamTest {
     });
     String expectedMessage = "Unexpected value: ";
     String actualMessage = exception.getMessage();
-    assertEquals(expectedMessage,actualMessage);
+    assertEquals(expectedMessage, actualMessage);
   }
-
 
   @org.junit.jupiter.api.Test
   void parseQuizFromJson() {
@@ -33,19 +33,19 @@ public class ExamTest {
     String filePath = "questionsHtml.json";
     ClassLoader classLoader = Exam.class.getClassLoader();
     InputStream inputStream = classLoader.getResourceAsStream(filePath);
-    if (inputStream == null){
+    if (inputStream == null) {
       throw new IllegalArgumentException("File not found: " + filePath);
     } else {
-      try{
+      try {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
         JsonObject obj = gson.fromJson(reader, JsonObject.class);
         JsonArray arr = (JsonArray) obj.get(html.getName());
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
           Exam.parseQuizFromJson(arr);
-          assertEquals(Exam.count, i+1);
+          assertEquals(Exam.count, i + 1);
         }
 
-      }catch (IOException e) {
+      } catch (IOException e) {
         throw new RuntimeException(e);
       }
     }
@@ -55,10 +55,12 @@ public class ExamTest {
   void negativeTestCheckCorrectAnswerAndReturnCounter() {
     Exam.startQuiz(html);
     String answer = "";
-    int actual = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,answer, Exam.actualAnswer);
+    int actual = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount, answer,
+        Exam.actualAnswer);
     int expected = 0;
-    assertEquals(actual,expected);
+    assertEquals(actual, expected);
   }
+
   @Test
   void positiveTestCheckCorrectAnswerAndReturnCounter() {
     Exam.correctCount = 0;
@@ -67,22 +69,23 @@ public class ExamTest {
     String filePath = "questionsHtml.json";
     ClassLoader classLoader = Exam.class.getClassLoader();
     InputStream inputStream = classLoader.getResourceAsStream(filePath);
-    String[] answers = new String[]{"b","c","a","a","c"};
-    if (inputStream == null){
+    String[] answers = new String[]{"b", "c", "a", "a", "c"};
+    if (inputStream == null) {
       throw new IllegalArgumentException("File not found: " + filePath);
     } else {
-      try{
+      try {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
         JsonObject obj = gson.fromJson(reader, JsonObject.class);
         JsonArray arr = (JsonArray) obj.get(html.getName());
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
           Exam.parseQuizFromJson(arr);
-          Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,answers[i],Exam.actualAnswer);
+          Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount, answers[i],
+              Exam.actualAnswer);
           System.out.println(answers[i] + ": " + Exam.actualAnswer);
-          assertEquals(i+1, Exam.correctCount);
+          assertEquals(i + 1, Exam.correctCount);
         }
 
-      }catch (IOException e) {
+      } catch (IOException e) {
         throw new RuntimeException(e);
       }
     }

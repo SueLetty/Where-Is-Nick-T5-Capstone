@@ -431,10 +431,12 @@ public class Game {
   public String commandList()  {
 
     return "This will need expanded for exams.\n"
-        + "You can move to other rooms with the N,S,E,W buttons.\n"
-        + "Music button will mute the background music.\n"
-        + "Map button will display a map of the game.\n"
-        + "Quit button will quit the game.";
+        + "- You can move to other rooms with the N,S,E,W buttons.\n"
+        + "- Music button will mute/unmute the background music and\n"
+        + "  mute/unmute the sound effect, and\n"
+        + "  change the volume of the background music.\n"
+        + "- Map button will display a map of the game.\n"
+        + "- Quit button will quit the game.";
   }
 
   public String greetingFromJeanette(){
