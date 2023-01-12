@@ -356,6 +356,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         } else {
           introInfo.setText(game.greetingFromDonte());
           confirmTakingExam();
+          update(getGraphics());
         }
 
       } else if (currentRoom.getName().equals("JavaScript Room") && Exam.passHTML) {
@@ -370,6 +371,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         } else {
           introInfo.setText(game.greetingFromNelly());
           confirmTakingExam();
+          update(getGraphics());
         }
 
       } else if (currentRoom.getName().equals("Python Room") && Exam.passJs) {
@@ -385,6 +387,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         } else {
           introInfo.setText(game.greetingFromChad());
           confirmTakingExam();
+          update(getGraphics());
         }
       } else if (currentRoom.getName().equals("Java Room") && Exam.passPython) {
         imageLabel.setIcon(null);
@@ -394,6 +397,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         introInfo.setText(game.encryptedmessage() + "\nYou need to find Nick!");
         introInfo.revalidate();
         repaint();
+        update(getGraphics());
 
       } else if (currentRoom.getName().equals("studyRoom Room") && Exam.passPython) {
         imageLabel.setIcon(nick);
@@ -403,10 +407,11 @@ public class GUIDetail extends JFrame implements ActionListener {
           game.getStudent().setLocation(game.getSchool().getRooms().get(5));
           currentRoom = game.getSchool().getRooms().get(5);
           confirmTakingExam();
-
+          update(getGraphics());
         } else {
           introInfo.setText("SHH...Nick is playing guitar.");
           repaint();
+          update(getGraphics());
         }
 
       } else {
