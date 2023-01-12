@@ -94,7 +94,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
     introPanel = new JPanel();
     introPanel.setBounds(10, 10, 680, 300);
-    introPanel.setBackground(new Color(255, 255, 255, 100));
+    introPanel.setBackground(new Color(255, 255, 255, 200));
 
     introInfo = new JTextPane();
     introInfo.setText(game.greetingFromJeanette());
@@ -141,7 +141,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
     controllerPanel = new JPanel();
     controllerPanel.setBounds(700, 270, 300, 300);
-    controllerPanel.setBackground(new Color(255, 255, 255, 100));
+    controllerPanel.setBackground(new Color(255, 255, 255, 50));
 
     mapButton = new JButton("Map");
     mapButton.setBounds(10, 10, 100, 30);
@@ -213,7 +213,6 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.SOUTH);
         changeRoom();
-
       }
     });
 
@@ -224,7 +223,6 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.WEST);
         changeRoom();
-
       }
     });
 
@@ -235,7 +233,6 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.EAST);
         changeRoom();
-
       }
     });
 
@@ -261,15 +258,9 @@ public class GUIDetail extends JFrame implements ActionListener {
     this.setLayout(null);
     this.setResizable(false);
     this.setSize(1000, 600);
-
-
     this.setLayout(null);
     this.add(imagePanel);
     this.setVisible(true);
-//    this.add(introPanel);
-//    this.getContentPane().add(imageLabel);
-//    this.add(optionPanel);
-//    this.add(controllerPanel);
 
     this.setLocationRelativeTo(imagePanel);
 
@@ -343,9 +334,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   public void paint(Graphics g) {
     super.paint(g);
-
     Graphics2D g2d = (Graphics2D) g;
-
   }
 
   private void changeRoom() {
@@ -353,15 +342,10 @@ public class GUIDetail extends JFrame implements ActionListener {
     if (currentRoom != null) {
 
       if (currentRoom.getName().equals("Lobby")) {
-        imagePanel.revalidate();
-        repaint();
         introInfo.setText(game.greetingFromJeanette());
 
       } else if (currentRoom.getName().equals("HTML Room")) {
-        imageLabel.revalidate();
-        repaint();
         imageLabel.setIcon(donte);
-
         if (Exam.passHTML) {
           introInfo.setText("You have passed HTML course.\n Go you different room.");
           introInfo.setOpaque(false);
@@ -375,10 +359,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         }
 
       } else if (currentRoom.getName().equals("JavaScript Room") && Exam.passHTML) {
-        imageLabel.revalidate();
-        repaint();
         imageLabel.setIcon(nelly);
-
         if (Exam.passJs) {
           introInfo.setText("You have passed JavaScript course.\n Go you different room.");
           introInfo.setOpaque(false);
@@ -392,8 +373,6 @@ public class GUIDetail extends JFrame implements ActionListener {
         }
 
       } else if (currentRoom.getName().equals("Python Room") && Exam.passJs) {
-        imageLabel.revalidate();
-        repaint();
         imageLabel.setIcon(chad);
         if (Exam.passPython) {
           introInfo.setText("You have passed Python course.\n Go you different room.");
@@ -407,18 +386,17 @@ public class GUIDetail extends JFrame implements ActionListener {
           confirmTakingExam();
         }
       } else if (currentRoom.getName().equals("Java Room") && Exam.passPython) {
-        imageLabel.revalidate();
-        repaint();
         imageLabel.setIcon(null);
+        imageLabel.setVisible(false);
         imageLabel.revalidate();
         game.setWentToJavaWithoutNick(true);
         introInfo.setText(game.encryptedmessage() + "\nYou need to find Nick!");
         introInfo.revalidate();
+        repaint();
 
       } else if (currentRoom.getName().equals("studyRoom Room") && Exam.passPython) {
-        imageLabel.revalidate();
-        repaint();
         imageLabel.setIcon(nick);
+        imageLabel.setVisible(true);
         if (game.isWentToJavaWithoutNick()) {
           introInfo.setText(game.greetingFromNick());
           game.getStudent().setLocation(game.getSchool().getRooms().get(5));
@@ -432,20 +410,17 @@ public class GUIDetail extends JFrame implements ActionListener {
       } else {
         JOptionPane.showMessageDialog(null, "You need to pass the exam first!", "Warning",
             JOptionPane.WARNING_MESSAGE);
-//        optionInfo.setText("Try different direction!");
       }
 
     } else {
       JOptionPane.showMessageDialog(null, game.getNO_DIRECTION_MESSAGE(), "Warning",
           JOptionPane.WARNING_MESSAGE);
-//      optionInfo.setText("Try different direction!");
+
     }
   }
 
   public void confirmTakingExam() {
-    optionPanel.removeAll();
-    optionPanel.revalidate();
-    repaint();
+
     optionInfo.setText("Are you ready to take the exam?");
     optionInfo.setOpaque(false);
     optionInfo.revalidate();
@@ -457,19 +432,15 @@ public class GUIDetail extends JFrame implements ActionListener {
         yesButton.setVisible(false);
         optionPanel.removeAll();
         optionPanel.revalidate();
-        repaint();
         setQuestion();
       }
     });
-    optionPanel.removeAll();
-    optionPanel.revalidate();
-    repaint();
     optionPanel.setLayout(null);
     optionPanel.add(optionInfo);
     optionPanel.add(yesButton);
     optionPanel.setVisible(true);
     optionPanel.revalidate();
-    optionPanel.setVisible(true);
+    repaint();
 
   }
 
@@ -490,7 +461,6 @@ public class GUIDetail extends JFrame implements ActionListener {
 
     optionPanel.removeAll();
     optionPanel.revalidate();
-    repaint();
     optionPanel.add(optionInfo);
     optionPanel.setLayout(null);
     optionPanel.add(yesButton);
@@ -499,9 +469,6 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   public void setQuestion() {
-
-    imagePanel.setVisible(true);
-    imagePanel.revalidate();
 
     northButton.setEnabled(false);
     southButton.setEnabled(false);
