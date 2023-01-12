@@ -123,20 +123,21 @@ public class GUIDetail extends JFrame implements ActionListener {
     imageLabel.setVisible(true);
 
     optionPanel = new JPanel();
-    optionPanel.setBounds(10, 320, 680, 300);
+    optionPanel.setBounds(10, 320, 650, 300);
     optionPanel.setBackground(new Color(255, 255, 255, 100));
 
     optionInfo = new JTextPane();
     optionInfo.setText("Using the direction buttons, accesses a different room.");
     optionInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
+    optionInfo.setBounds(0, 10, 650, 30);
     optionInfo.setBackground(new Color(255,255,255,100));
-    optionInfo.setBounds(10, 10, 660, 4280);
     StyledDocument doc1 = optionInfo.getStyledDocument();
     SimpleAttributeSet center1 = new SimpleAttributeSet();
     StyleConstants.setAlignment(center1, StyleConstants.ALIGN_CENTER);
     doc1.setParagraphAttributes(0, doc1.getLength(), center1, false);
     optionInfo.setVisible(true);
     optionInfo.setEditable(false);
+    optionPanel.setLayout(null);
     optionPanel.add(optionInfo);
 
     controllerPanel = new JPanel();
@@ -470,6 +471,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionPanel.add(yesButton);
     optionPanel.revalidate();
     optionPanel.setVisible(true);
+    repaint();
   }
 
   public void setQuestion() {
@@ -479,6 +481,8 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionInfo.setText(Exam.question);
     optionInfo.setBackground(new Color(255,255,255,100));
     optionInfo.revalidate();
+    repaint();
+
     answer1 = new JRadioButton();
     answer1.setText("A:");
     answer1.setBounds(50, 50, 40, 30);
