@@ -216,20 +216,20 @@ public class GUIDetail extends JFrame implements ActionListener {
       }
     });
 
-    eastButton = new JButton("W");
-    eastButton.setBounds(65, 125, 50, 50);
-    eastButton.setFocusable(false);
-    eastButton.addActionListener(new ActionListener() {
+    westButton = new JButton("W");
+    westButton.setBounds(65, 125, 50, 50);
+    westButton.setFocusable(false);
+    westButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.WEST);
         changeRoom();
       }
     });
 
-    westButton = new JButton("E");
-    westButton.setBounds(165, 125, 50, 50);
-    westButton.setFocusable(false);
-    westButton.addActionListener(new ActionListener() {
+    eastButton = new JButton("E");
+    eastButton.setBounds(165, 125, 50, 50);
+    eastButton.setFocusable(false);
+    eastButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         currentRoom = game.moveTo(Direction.EAST);
         changeRoom();
@@ -355,7 +355,7 @@ public class GUIDetail extends JFrame implements ActionListener {
           repaint();
         } else {
           introInfo.setText(game.greetingFromDonte());
-          confirmTakingExam();
+          confirmTakingExam(currentRoom);
           update(getGraphics());
         }
 
@@ -370,7 +370,7 @@ public class GUIDetail extends JFrame implements ActionListener {
           repaint();
         } else {
           introInfo.setText(game.greetingFromNelly());
-          confirmTakingExam();
+          confirmTakingExam(currentRoom);
           update(getGraphics());
         }
 
@@ -386,7 +386,7 @@ public class GUIDetail extends JFrame implements ActionListener {
           repaint();
         } else {
           introInfo.setText(game.greetingFromChad());
-          confirmTakingExam();
+          confirmTakingExam(currentRoom);
           update(getGraphics());
         }
       } else if (currentRoom.getName().equals("Java Room") && Exam.passPython) {
@@ -404,10 +404,11 @@ public class GUIDetail extends JFrame implements ActionListener {
         imageLabel.setVisible(true);
         if (game.isWentToJavaWithoutNick()) {
           introInfo.setText(game.greetingFromNick());
-          game.getStudent().setLocation(game.getSchool().getRooms().get(5));
-          currentRoom = game.getSchool().getRooms().get(5);
-          confirmTakingExam();
+//          game.getStudent().setLocation(game.getSchool().getRooms().get(5));
+//          currentRoom = game.getSchool().getRooms().get(5);
+          confirmTakingExam(game.getSchool().getRooms().get(5));
           update(getGraphics());
+
         } else {
           introInfo.setText("SHH...Nick is playing guitar.");
           repaint();
@@ -426,7 +427,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     }
   }
 
-  public void confirmTakingExam() {
+  public void confirmTakingExam(Room current) {
 
     optionInfo.setText("Are you ready to take the exam?");
     optionInfo.setBackground(new Color(255,255,255,200));
@@ -439,7 +440,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         yesButton.setVisible(false);
         optionPanel.removeAll();
         optionPanel.revalidate();
-        setQuestion();
+        setQuestion(current);
       }
     });
     optionPanel.setLayout(null);
@@ -450,7 +451,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   }
 
-  public void retakeExam(){
+  public void retakeExam(Room current){
 
     optionInfo.setText("Do you want to re-take the exam?");
     optionInfo.setBackground(new Color(255,255,255,200));
@@ -465,7 +466,7 @@ public class GUIDetail extends JFrame implements ActionListener {
         southButton.setEnabled(false);
         eastButton.setEnabled(false);
         westButton.setEnabled(false);
-        setQuestion();
+        setQuestion(current);
       }
     });
 
@@ -479,8 +480,8 @@ public class GUIDetail extends JFrame implements ActionListener {
     repaint();
   }
 
-  public void setQuestion() {
-    Exam.startQuiz(currentRoom);
+  public void setQuestion(Room current) {
+    Exam.startQuiz(current);
     group.clearSelection();
 
     optionInfo.setText(Exam.question);
@@ -497,7 +498,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
             Exam.answer1.substring(0, 1), Exam.actualAnswer);
-        getQuestion();
+        getQuestion(current);
       }
     });
 
@@ -509,7 +510,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
             Exam.answer2.substring(0, 1), Exam.actualAnswer);
-        getQuestion();
+        getQuestion(current);
       }
     });
     answer3 = new JRadioButton();
@@ -520,7 +521,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
             Exam.answer3.substring(0, 1), Exam.actualAnswer);
-        getQuestion();
+        getQuestion(current);
       }
     });
     answer4 = new JRadioButton();
@@ -531,7 +532,7 @@ public class GUIDetail extends JFrame implements ActionListener {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
             Exam.answer4.substring(0, 1), Exam.actualAnswer);
-        getQuestion();
+        getQuestion(current);
       }
     });
 
@@ -603,9 +604,9 @@ public class GUIDetail extends JFrame implements ActionListener {
 
   }
 
-  public void getQuestion() {
+  public void getQuestion(Room currentRoom) {
     if (Exam.count < 5) {
-      setQuestion();
+      setQuestion(currentRoom);
     } else if (Exam.count == 5) {
       if (Exam.correctCount > 3) {
         switch (currentRoom.getName()) {
@@ -650,12 +651,12 @@ public class GUIDetail extends JFrame implements ActionListener {
         }
 
       } else {
-        Exam.correctCount = 0;
+        Exam.correctCount= 0;
         Exam.count = 0;
 
         JOptionPane.showMessageDialog(null, currentRoom.conclusionForNotPassingExam(), "Warning",
             JOptionPane.INFORMATION_MESSAGE);
-        retakeExam();
+        retakeExam(currentRoom);
       }
 
     }

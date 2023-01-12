@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import org.junit.jupiter.api.Test;
 
 public class ExamTest {
-
   Room html = new Room("HTML Room");
   Room ruby = new Room("Ruby Room");
 
