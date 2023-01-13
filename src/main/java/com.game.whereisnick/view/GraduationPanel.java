@@ -67,67 +67,42 @@ public class GraduationPanel extends JFrame {
     textPane.setEditable(false);
     jeanetteImage = new JLabel("Jeanette");
     jeanetteImage.setIcon(jeanette);
-    jeanetteImage.setIconTextGap(5);
-    jeanetteImage.setHorizontalTextPosition(JLabel.CENTER);
-    jeanetteImage.setVerticalTextPosition(JLabel.BOTTOM);
-    jeanetteImage.setVerticalAlignment(JLabel.TOP);
-    jeanetteImage.setHorizontalAlignment(JLabel.CENTER);
+    positionImage(jeanetteImage);
+
     donteImage = new JLabel("Donte");
     donteImage.setIcon(donte);
-    donteImage.setIconTextGap(5);
-    donteImage.setHorizontalTextPosition(JLabel.CENTER);
-    donteImage.setVerticalTextPosition(JLabel.BOTTOM);
-    donteImage.setVerticalAlignment(JLabel.TOP);
-    donteImage.setHorizontalAlignment(JLabel.CENTER);
+    positionImage(donteImage);
+
     nellyImage = new JLabel("Nelly");
     nellyImage.setIcon(nelly);
-    nellyImage.setIconTextGap(5);
-    nellyImage.setHorizontalTextPosition(JLabel.CENTER);
-    nellyImage.setVerticalTextPosition(JLabel.BOTTOM);
-    nellyImage.setVerticalAlignment(JLabel.TOP);
-    nellyImage.setHorizontalAlignment(JLabel.CENTER);
+    positionImage(nellyImage);
+
     nickImage = new JLabel("Nick");
     nickImage.setIcon(nick);
-    nickImage.setIconTextGap(5);
-    nickImage.setHorizontalTextPosition(JLabel.CENTER);
-    nickImage.setVerticalTextPosition(JLabel.BOTTOM);
-    nickImage.setVerticalAlignment(JLabel.TOP);
-    nickImage.setHorizontalAlignment(JLabel.CENTER);
+    positionImage(nickImage);
+
     scottImage = new JLabel("Scott");
     scottImage.setIcon(scott);
-    scottImage.setIconTextGap(5);
-    scottImage.setHorizontalTextPosition(JLabel.CENTER);
-    scottImage.setVerticalTextPosition(JLabel.BOTTOM);
-    scottImage.setVerticalAlignment(JLabel.TOP);
-    scottImage.setHorizontalAlignment(JLabel.CENTER);
+    positionImage(scottImage);
+
     tomImage = new JLabel("Tom");
     tomImage.setIcon(tom);
-    tomImage.setIconTextGap(5);
-    tomImage.setHorizontalTextPosition(JLabel.CENTER);
-    tomImage.setVerticalTextPosition(JLabel.BOTTOM);
-    tomImage.setVerticalAlignment(JLabel.TOP);
-    tomImage.setHorizontalAlignment(JLabel.CENTER);
+    positionImage(tomImage);
+
     chadImage = new JLabel("Chad");
     chadImage.setIcon(chad);
     chadImage.setIconTextGap(5);
-    chadImage.setHorizontalTextPosition(JLabel.CENTER);
-    chadImage.setVerticalTextPosition(JLabel.BOTTOM);
-    chadImage.setVerticalAlignment(JLabel.TOP);
-    chadImage.setHorizontalAlignment(JLabel.CENTER);
+    positionImage(chadImage);
+
     sangImage = new JLabel("Sang");
     sangImage.setIcon(shang);
-    sangImage.setIconTextGap(5);
-    sangImage.setHorizontalTextPosition(JLabel.CENTER);
-    sangImage.setVerticalTextPosition(JLabel.BOTTOM);
-    sangImage.setVerticalAlignment(JLabel.TOP);
-    sangImage.setHorizontalAlignment(JLabel.CENTER);
+    positionImage(sangImage);
+
     richardImage = new JLabel("Richard");
     richardImage.setIcon(richard);
     richardImage.setIconTextGap(5);
-    richardImage.setHorizontalTextPosition(JLabel.CENTER);
-    richardImage.setVerticalTextPosition(JLabel.BOTTOM);
-    richardImage.setVerticalAlignment(JLabel.TOP);
-    richardImage.setHorizontalAlignment(JLabel.CENTER);
+    positionImage(richardImage);
+
     panel.setLayout(new FlowLayout());
     panel.add(jeanetteImage);
     panel.add(donteImage);
@@ -145,6 +120,14 @@ public class GraduationPanel extends JFrame {
     this.pack();
     this.setLocationRelativeTo(null);
     this.setVisible(true);
+  }
+
+  private void positionImage(JLabel label){
+    label.setIconTextGap(5);
+    label.setHorizontalTextPosition(JLabel.CENTER);
+    label.setVerticalTextPosition(JLabel.BOTTOM);
+    label.setVerticalAlignment(JLabel.TOP);
+    label.setHorizontalAlignment(JLabel.CENTER);
   }
 
   public static void main(String[] args) {
