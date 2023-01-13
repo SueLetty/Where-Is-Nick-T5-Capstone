@@ -33,9 +33,8 @@ public class GUIStart extends JFrame implements ActionListener {
 
       }
     };
-    mainPanel.intro.setText("Where is Nick?");
-
-    mainPanel.intro.setFont(new Font("MV Boli", Font.BOLD, 36));
+//    mainPanel.intro.setText("Where is Nick?");
+//    mainPanel.intro.setFont(new Font("MV Boli",Font.BOLD,36));
     mainPanel.setLayout(null);
 
     mainPanel.startButton.addActionListener(new ActionListener() {

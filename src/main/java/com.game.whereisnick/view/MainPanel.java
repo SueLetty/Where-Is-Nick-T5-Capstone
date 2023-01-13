@@ -3,9 +3,6 @@ package com.game.whereisnick.view;
 import com.game.whereisnick.model.ImageImport;
 
 import javax.swing.*;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 import java.awt.*;
 
 public class MainPanel extends JPanel {
@@ -14,6 +11,7 @@ public class MainPanel extends JPanel {
   JButton beginButton;
   JButton quitButton;
   JTextPane intro;
+  JLabel title;
 
   private Image backgroundImage;
 
@@ -21,14 +19,18 @@ public class MainPanel extends JPanel {
     this.setPreferredSize(new Dimension(1000, 600));
     this.setLayout(null);
 
+    title = new JLabel();
+    title.setIcon(ImageImport.importIcon("images/StartPage_WhereIsNick.png",800, 500));
+    title.setBounds(10,10,800,500);
+
     intro = new JTextPane();
-    intro.setEnabled(false);
-    intro.setBounds(0, 0, 1000, 600);
-    intro.setOpaque(false);
-    StyledDocument doc = intro.getStyledDocument();
-    SimpleAttributeSet center = new SimpleAttributeSet();
-    StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-    doc.setParagraphAttributes(0, doc.getLength(), center, false);
+//    intro.setEnabled(false);
+//    intro.setBounds(0, 0, 1000, 600);
+//    intro.setOpaque(false);
+//    StyledDocument doc = intro.getStyledDocument();
+//    SimpleAttributeSet center = new SimpleAttributeSet();
+//    StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+//    doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
     backgroundImage = ImageImport.importImage("images/intro.png");
 
@@ -41,7 +43,8 @@ public class MainPanel extends JPanel {
     startButton.setFocusable(false);
 
     this.add(startButton);
-    this.add(intro);
+//    this.add(intro);
+    this.add(title);
 
 
   }
