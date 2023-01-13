@@ -143,10 +143,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     introInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
     introInfo.setOpaque(false);
     introInfo.setBounds(100, 10, 500, 480);
-    StyledDocument doc = introInfo.getStyledDocument();
-    SimpleAttributeSet center = new SimpleAttributeSet();
-    StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-    doc.setParagraphAttributes(0, doc.getLength(), center, false);
+    centerText(introInfo);
     introInfo.setEditable(false);
     introInfo.setVisible(true);
     introInfo.revalidate();
@@ -189,10 +186,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionInfo.setBounds(0, 10, 680, 30);
     optionInfo.setBackground(new Color(255, 255, 255, 200));
     optionInfo.setOpaque(false);
-    StyledDocument doc1 = optionInfo.getStyledDocument();
-    SimpleAttributeSet center1 = new SimpleAttributeSet();
-    StyleConstants.setAlignment(center1, StyleConstants.ALIGN_CENTER);
-    doc1.setParagraphAttributes(0, doc1.getLength(), center1, false);
+    centerText(optionInfo);
     optionInfo.setVisible(true);
     optionInfo.setEditable(false);
     optionPanel.setLayout(null);
@@ -477,6 +471,12 @@ public class GUIDetail extends JFrame implements ActionListener {
   public void paint(Graphics g) {
     super.paint(g);
     Graphics2D g2d = (Graphics2D) g;
+  }
+  private void centerText(JTextPane textPane){
+    StyledDocument doc = textPane.getStyledDocument();
+    SimpleAttributeSet center1 = new SimpleAttributeSet();
+    StyleConstants.setAlignment(center1, StyleConstants.ALIGN_CENTER);
+    doc.setParagraphAttributes(0, doc.getLength(), center1, false);
   }
 
   private void changeRoom() {
