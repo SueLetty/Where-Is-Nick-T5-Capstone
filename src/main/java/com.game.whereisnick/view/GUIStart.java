@@ -5,6 +5,7 @@ import com.game.whereisnick.model.ImageImport;
 
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
@@ -33,8 +34,7 @@ public class GUIStart extends JFrame implements ActionListener {
 
       }
     };
-//    mainPanel.intro.setText("Where is Nick?");
-//    mainPanel.intro.setFont(new Font("MV Boli",Font.BOLD,36));
+
     mainPanel.setLayout(null);
 
     mainPanel.startButton.addActionListener(new ActionListener() {
@@ -50,6 +50,7 @@ public class GUIStart extends JFrame implements ActionListener {
         StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
         mainPanel.remove(mainPanel.startButton);
+        mainPanel.remove(mainPanel.title);
         mainPanel.add(mainPanel.beginButton);
         mainPanel.add(mainPanel.intro);
       }
