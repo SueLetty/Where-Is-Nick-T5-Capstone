@@ -11,12 +11,12 @@ public class RunGame {
     Game newGame = new Game();
 
     String input = "";
-    while(true){
+    while (true) {
       System.out.println("\n type your command: ");
 //      input = Game.getUserChoice();
       System.out.println(newGame.executeCommand(input));
 
-      if(input.equals("q") || input.equals("quit")){
+      if (input.equals("q") || input.equals("quit")) {
         break;
       }
     }
