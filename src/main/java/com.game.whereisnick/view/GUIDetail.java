@@ -51,12 +51,47 @@ public class GUIDetail extends JFrame implements ActionListener {
   private JRadioButton answer1 = new JRadioButton();
   private JRadioButton answer2 = new JRadioButton();
   private JRadioButton answer3 = new JRadioButton();
-  private JRadioButton answer4 = new JRadioButton();
+  private JRadioButton answer4 = new JRadioButton(){
+    @Override
+    protected void paintComponent(Graphics g) {
+      g.setColor(new Color(255, 255, 255, 180));
+      g.fillRect(0,0,getWidth(),getHeight());
+      super.paintComponent(g);
+    }
+  };
   private boolean condition = false;
-  private JTextArea examChoice1 = new JTextArea(25, 50);
-  private JTextArea examChoice2 = new JTextArea(25, 50);
-  private JTextArea examChoice3 = new JTextArea(25, 50);
-  private JTextArea examChoice4 = new JTextArea(25, 50);
+  private JTextArea examChoice1 = new JTextArea(25, 50){
+    @Override
+    protected void paintComponent(Graphics g) {
+      g.setColor(new Color(255, 255, 255, 180));
+      g.fillRect(0,0,getWidth(),getHeight());
+      super.paintComponent(g);
+    }
+  };
+  private JTextArea examChoice2 = new JTextArea(25, 50){
+    @Override
+    protected void paintComponent(Graphics g) {
+      g.setColor(new Color(255, 255, 255, 180));
+      g.fillRect(0,0,getWidth(),getHeight());
+      super.paintComponent(g);
+    }
+  };
+  private JTextArea examChoice3 = new JTextArea(25, 50){
+    @Override
+    protected void paintComponent(Graphics g) {
+      g.setColor(new Color(255, 255, 255, 180));
+      g.fillRect(0,0,getWidth(),getHeight());
+      super.paintComponent(g);
+    }
+  };
+  private JTextArea examChoice4 = new JTextArea(25, 50){
+    @Override
+    protected void paintComponent(Graphics g) {
+      g.setColor(new Color(255, 255, 255, 180));
+      g.fillRect(0,0,getWidth(),getHeight());
+      super.paintComponent(g);
+    }
+  };
   private ButtonGroup group = new ButtonGroup();
   private static int musicPanelCount = 0;
 
@@ -129,15 +164,31 @@ public class GUIDetail extends JFrame implements ActionListener {
     imageLabel.setBounds(700, -5, 280, 280);
     imageLabel.setVisible(true);
 
-    optionPanel = new JPanel();
+    optionPanel = new JPanel(){
+      @Override
+      protected void paintComponent(Graphics g) {
+        g.setColor(new Color(255, 255, 255, 100));
+        g.fillRect(0,0,getWidth(),getHeight());
+        super.paintComponent(g);
+      }
+    };
     optionPanel.setBounds(10, 320, 680, 235);
     optionPanel.setBackground(new Color(255, 255, 255, 100));
+    optionPanel.setOpaque(false);
 
-    optionInfo = new JTextPane();
+    optionInfo = new JTextPane(){
+      @Override
+      protected void paintComponent(Graphics g) {
+        g.setColor(new Color(255, 255, 255, 200));
+        g.fillRect(0,0,getWidth(),getHeight());
+        super.paintComponent(g);
+      }
+    };
     optionInfo.setText("Using the direction buttons, accesses a different room.");
     optionInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
     optionInfo.setBounds(0, 10, 680, 30);
     optionInfo.setBackground(new Color(255, 255, 255, 200));
+    optionInfo.setOpaque(false);
     StyledDocument doc1 = optionInfo.getStyledDocument();
     SimpleAttributeSet center1 = new SimpleAttributeSet();
     StyleConstants.setAlignment(center1, StyleConstants.ALIGN_CENTER);
@@ -584,10 +635,17 @@ public class GUIDetail extends JFrame implements ActionListener {
     optionInfo.revalidate();
     repaint();
 
-    answer1 = new JRadioButton();
+    answer1 = new JRadioButton(){
+      @Override
+      protected void paintComponent(Graphics g) {
+        g.setColor(new Color(255, 255, 255, 180));
+        g.fillRect(0,0,getWidth(),getHeight());
+        super.paintComponent(g);
+      }
+    };
+    answer1.setOpaque(false);
     answer1.setText("A:");
     answer1.setBounds(50, 50, 40, 30);
-    answer1.setBackground(new Color(255, 255, 255, 60));
 
     answer1.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
@@ -597,10 +655,17 @@ public class GUIDetail extends JFrame implements ActionListener {
       }
     });
 
-    answer2 = new JRadioButton();
+    answer2 = new JRadioButton(){
+      @Override
+      protected void paintComponent(Graphics g) {
+        g.setColor(new Color(255, 255, 255, 180));
+        g.fillRect(0,0,getWidth(),getHeight());
+        super.paintComponent(g);
+      }
+    };
+    answer2.setOpaque(false);
     answer2.setText("B:");
     answer2.setBounds(50, 100, 40, 30);
-    answer2.setBackground(new Color(255, 255, 255, 60));
     answer2.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
@@ -608,10 +673,17 @@ public class GUIDetail extends JFrame implements ActionListener {
         getQuestion(current);
       }
     });
-    answer3 = new JRadioButton();
+    answer3 = new JRadioButton(){
+      @Override
+      protected void paintComponent(Graphics g) {
+        g.setColor(new Color(255, 255, 255, 180));
+        g.fillRect(0,0,getWidth(),getHeight());
+        super.paintComponent(g);
+      }
+    };
+    answer3.setOpaque(false);
     answer3.setText("C:");
     answer3.setBounds(50, 150, 40, 30);
-    answer3.setBackground(new Color(255, 255, 255, 60));
     answer3.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
@@ -619,10 +691,17 @@ public class GUIDetail extends JFrame implements ActionListener {
         getQuestion(current);
       }
     });
-    answer4 = new JRadioButton();
+    answer4 = new JRadioButton(){
+      @Override
+      protected void paintComponent(Graphics g) {
+        g.setColor(new Color(255, 255, 255, 180));
+        g.fillRect(0,0,getWidth(),getHeight());
+        super.paintComponent(g);
+      }
+    };
+    answer4.setOpaque(false);
     answer4.setText("D:");
     answer4.setBounds(50, 200, 40, 30);
-    answer4.setBackground(new Color(255, 255, 255, 60));
     answer4.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
         Exam.correctCount = Exam.checkCorrectAnswerAndReturnCounter(Exam.correctCount,
@@ -670,6 +749,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice1.setVisible(true);
     examChoice1.setText(Exam.answer1.substring(3));
     examChoice1.setBackground(new Color(255, 255, 255, opacity));
+    examChoice1.setOpaque(false);
 
     examChoice2.setLineWrap(true);
     examChoice2.setEnabled(false);
@@ -679,6 +759,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice2.setVisible(true);
     examChoice2.setText(Exam.answer2.substring(3));
     examChoice2.setBackground(new Color(255, 255, 255, opacity));
+    examChoice2.setOpaque(false);
 
     examChoice3.setLineWrap(true);
     examChoice3.setEnabled(false);
@@ -688,6 +769,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice3.setVisible(true);
     examChoice3.setText(Exam.answer3.substring(3));
     examChoice3.setBackground(new Color(255, 255, 255, opacity));
+    examChoice3.setOpaque(false);
 
     examChoice4.setLineWrap(true);
     examChoice4.setEnabled(false);
@@ -697,6 +779,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     examChoice4.setVisible(true);
     examChoice4.setText(Exam.answer4.substring(3));
     examChoice4.setBackground(new Color(255, 255, 255, opacity));
+    examChoice4.setOpaque(false);
 
   }
 
