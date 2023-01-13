@@ -8,7 +8,8 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
 
-public class MainPanel extends JPanel{
+public class MainPanel extends JPanel {
+
   JButton startButton;
   JButton beginButton;
   JButton quitButton;
@@ -16,8 +17,8 @@ public class MainPanel extends JPanel{
 
   private Image backgroundImage;
 
-  public MainPanel(){
-    this.setPreferredSize(new Dimension(1000,600));
+  public MainPanel() {
+    this.setPreferredSize(new Dimension(1000, 600));
     this.setLayout(null);
 
     intro = new JTextPane();
@@ -29,15 +30,14 @@ public class MainPanel extends JPanel{
     StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
     doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
-
     backgroundImage = ImageImport.importImage("images/intro.png");
 
     startButton = new JButton("Start Game");
-    startButton.setBounds(450,530,100,30);
+    startButton.setBounds(450, 530, 100, 30);
     startButton.setFocusable(false);
 
     beginButton = new JButton("Begin");
-    beginButton.setBounds(450,530,100,30);
+    beginButton.setBounds(450, 530, 100, 30);
     startButton.setFocusable(false);
 
     this.add(startButton);
@@ -81,10 +81,9 @@ public class MainPanel extends JPanel{
   public void setPreferredSize(int width, int height) {
   }
 
-  public void paintComponent(Graphics g){
+  public void paintComponent(Graphics g) {
 
   }
-
 
 
 }
