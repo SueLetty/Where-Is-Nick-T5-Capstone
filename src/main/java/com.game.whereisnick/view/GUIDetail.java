@@ -638,7 +638,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     answer1 = new JRadioButton(){
       @Override
       protected void paintComponent(Graphics g) {
-        g.setColor(new Color(255, 255, 255, 180));
+        g.setColor(new Color(255, 255, 255));
         g.fillRect(0,0,getWidth(),getHeight());
         super.paintComponent(g);
       }
@@ -658,7 +658,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     answer2 = new JRadioButton(){
       @Override
       protected void paintComponent(Graphics g) {
-        g.setColor(new Color(255, 255, 255, 180));
+        g.setColor(new Color(255, 255, 255));
         g.fillRect(0,0,getWidth(),getHeight());
         super.paintComponent(g);
       }
@@ -676,7 +676,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     answer3 = new JRadioButton(){
       @Override
       protected void paintComponent(Graphics g) {
-        g.setColor(new Color(255, 255, 255, 180));
+        g.setColor(new Color(255, 255, 255));
         g.fillRect(0,0,getWidth(),getHeight());
         super.paintComponent(g);
       }
@@ -694,7 +694,7 @@ public class GUIDetail extends JFrame implements ActionListener {
     answer4 = new JRadioButton(){
       @Override
       protected void paintComponent(Graphics g) {
-        g.setColor(new Color(255, 255, 255, 180));
+        g.setColor(new Color(255, 255, 255));
         g.fillRect(0,0,getWidth(),getHeight());
         super.paintComponent(g);
       }
