@@ -5,6 +5,7 @@ import com.game.whereisnick.model.ImageImport;
 
 import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 public class GUIStart extends JFrame implements ActionListener {
+
   private Game game;
   private MainPanel mainPanel;
 
@@ -22,37 +24,35 @@ public class GUIStart extends JFrame implements ActionListener {
 
     this.setTitle("Where is Nick");
     this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-    this.setSize(1000,600);
+    this.setSize(1000, 600);
 
-    mainPanel = new MainPanel(){
+    mainPanel = new MainPanel() {
       @Override
-      public void paintComponent(Graphics g){
+      public void paintComponent(Graphics g) {
         Image backgroundImage = ImageImport.importImage("images/intro.png");
-        g.drawImage(backgroundImage,0,0,1000,600,null);
+        g.drawImage(backgroundImage, 0, 0, 1000, 600, null);
 
       }
     };
-    mainPanel.intro.setText("Where is Nick?");
-    mainPanel.intro.setFont(new Font("MV Boli",Font.BOLD,36));
+
     mainPanel.setLayout(null);
-
-
 
     mainPanel.startButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent evt) {
-      mainPanel.intro.setText(game.introduction());
-      mainPanel.intro.setAlignmentX(JLabel.CENTER);
-      mainPanel.intro.setVisible(true);
-      mainPanel.intro.setBounds(0, 0, 1000, 600);
-      mainPanel.intro.setFont(new Font("MV Boli",Font.BOLD,16));
-      mainPanel.intro.setOpaque(false);
-      StyledDocument doc = mainPanel.intro.getStyledDocument();
-      SimpleAttributeSet center = new SimpleAttributeSet();
-      StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-      doc.setParagraphAttributes(0, doc.getLength(), center, false);
-      mainPanel.remove(mainPanel.startButton);
-      mainPanel.add(mainPanel.beginButton);
-      mainPanel.add(mainPanel.intro);
+        mainPanel.intro.setText(game.introduction());
+        mainPanel.intro.setAlignmentX(JLabel.CENTER);
+        mainPanel.intro.setVisible(true);
+        mainPanel.intro.setBounds(0, 0, 1000, 600);
+        mainPanel.intro.setFont(new Font("MV Boli", Font.BOLD, 16));
+        mainPanel.intro.setOpaque(false);
+        StyledDocument doc = mainPanel.intro.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+        mainPanel.remove(mainPanel.startButton);
+        mainPanel.remove(mainPanel.title);
+        mainPanel.add(mainPanel.beginButton);
+        mainPanel.add(mainPanel.intro);
       }
     });
 
@@ -75,7 +75,6 @@ public class GUIStart extends JFrame implements ActionListener {
     this.setLocationRelativeTo(null);
     this.setVisible(true);
   }
-
 
 
   @Override

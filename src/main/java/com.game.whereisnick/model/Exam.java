@@ -85,10 +85,10 @@ public class Exam {
       answer3 = "c. " + jsonObject.get("c").toString().replaceAll("\"", "");
       answer4 = "d. " + jsonObject.get("d").toString().replaceAll("\"", "");
       System.out.println(count + ". " + question);
-      System.out.println(answer1);
-      System.out.println(answer2);
-      System.out.println(answer3);
-      System.out.println(answer4);
+//      System.out.println(answer1);
+//      System.out.println(answer2);
+//      System.out.println(answer3);
+//      System.out.println(answer4);
 
 //        System.out.println("\n  Enter your answer: ");
 //        answer = Game.getUserChoice();
@@ -99,7 +99,7 @@ public class Exam {
 //          break;
 //        }
       actualAnswer = jsonObject.get("answer").getAsString();
-      System.out.println(actualAnswer);
+//      System.out.println(actualAnswer);
     }
 //        correctAnswer = checkCorrectAnswerAndReturnCounter(correctAnswer, answer, actualAnswer);
 //      }
@@ -139,6 +139,7 @@ public class Exam {
         audio.play(WRONGAUDIO);
       }
     }
+    System.out.println(correctAnswer);
     return correctAnswer;
   }
 }
