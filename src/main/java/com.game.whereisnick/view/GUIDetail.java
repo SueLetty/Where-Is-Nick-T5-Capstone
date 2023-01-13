@@ -488,8 +488,6 @@ public class GUIDetail extends JFrame implements ActionListener {
         imageLabel.setVisible(true);
         if (game.isWentToJavaWithoutNick()) {
           introInfo.setText(game.greetingFromNick());
-//          game.getStudent().setLocation(game.getSchool().getRooms().get(5));
-//          currentRoom = game.getSchool().getRooms().get(5);
           confirmTakingExam(game.getSchool().getRooms().get(5));
           update(getGraphics());
 
@@ -565,6 +563,11 @@ public class GUIDetail extends JFrame implements ActionListener {
   }
 
   public void setQuestion(Room current) {
+    northButton.setEnabled(false);
+    southButton.setEnabled(false);
+    westButton.setEnabled(false);
+    eastButton.setEnabled(false);
+
     Exam.startQuiz(current);
     group.clearSelection();
 
