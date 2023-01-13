@@ -92,10 +92,17 @@ public class GUIDetail extends JFrame implements ActionListener {
     imagePanel.setBounds(0, 0, 1000, 600);
     imagePanel.setVisible(true);
 
-    introPanel = new JPanel();
+    introPanel = new JPanel(){
+      @Override
+      protected void paintComponent(Graphics g) {
+        g.setColor(new Color(255, 255, 255, 200));
+        g.fillRect(0,0,getWidth(),getHeight());
+        super.paintComponent(g);
+      }
+    };
     introPanel.setBounds(10, 10, 680, 300);
     introPanel.setBackground(new Color(255, 255, 255, 200));
-
+    introPanel.setOpaque(false);
     introInfo = new JTextPane();
     introInfo.setText(game.greetingFromJeanette());
     introInfo.setFont(new Font("MV Bole", Font.PLAIN, 14));
@@ -508,6 +515,7 @@ public class GUIDetail extends JFrame implements ActionListener {
 
     }
   }
+
 
   public void confirmTakingExam(Room current) {
 
